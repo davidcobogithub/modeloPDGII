@@ -10,8 +10,11 @@ import org.chocosolver.solver.variables.IntVar;
 public class SolverProject {
 	
 
-	//Constantes del Proyecto PDGII
+	//Constantes del Proyecto PDGII Cobo
 	//otra cosa X444
+	//otra cosa
+	//otra cosa2
+
 
 	public final static String TIPO_TICS="TICS";
 
