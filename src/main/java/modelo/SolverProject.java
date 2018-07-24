@@ -9,7 +9,7 @@ import org.chocosolver.solver.variables.IntVar;
 
 public class SolverProject {
 	
-	//Constantes del Proyecto PDG
+	//Constantes del Proyecto
 
 	public final static String TIPO_TICS="TICS";
 
