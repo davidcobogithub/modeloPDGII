@@ -9,7 +9,6 @@ import org.chocosolver.solver.variables.IntVar;
 
 public class SolverProject {
 	
-	//Constantes del Proyecto 1
 
 	public final static String TIPO_TICS="TICS";
 
