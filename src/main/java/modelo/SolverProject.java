@@ -10,6 +10,8 @@ import org.chocosolver.solver.variables.IntVar;
 public class SolverProject {
 	
 
+	//Constantes del Proyecto PDGII
+
 	public final static String TIPO_TICS="TICS";
 
 	public final static String PROCESADOR="Core i3";
