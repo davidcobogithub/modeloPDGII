@@ -8,6 +8,8 @@ import org.chocosolver.solver.Solution;
 import org.chocosolver.solver.variables.IntVar;
 
 public class SolverProject {
+	
+	//Hecho por cobito
 
 	public final static String TIPO_TICS="TICS";
 
@@ -31,7 +33,7 @@ public class SolverProject {
 	public static void main(String[] args) {
 
 		modeloInicial();
-		//restriccionArquitectura32Bits();
+
 	}
 
 	public static void constructorModelo() {
