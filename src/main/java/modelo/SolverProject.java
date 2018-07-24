@@ -12,6 +12,7 @@ public class SolverProject {
 
 	//Constantes del Proyecto PDGII
 	//otra cosa
+	//otra cosa2
 
 	public final static String TIPO_TICS="TICS";
 
