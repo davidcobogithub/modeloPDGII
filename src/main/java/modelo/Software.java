@@ -5,7 +5,6 @@ public class Software {
 	private String nombre;
 	private String tipo;
 	private String procesador;
-	private int velocidadProcesador;
 	private String arquitectura;
 	private String sistemaOperativo;
 	private int memoriaRAM;
@@ -19,7 +18,6 @@ public class Software {
 		nombre=nom;
 		tipo=tip;
 		procesador=proces;
-		velocidadProcesador=veloc;
 		arquitectura=arqui;
 		sistemaOperativo=sisOpe;
 		memoriaRAM=ram;
@@ -93,14 +91,6 @@ public class Software {
 
 	public void setVersion(String version) {
 		this.version = version;
-	}
-
-	public int getVelocidadProcesador() {
-		return velocidadProcesador;
-	}
-
-	public void setVelocidadProcesador(int velocidadProcesador) {
-		this.velocidadProcesador = velocidadProcesador;
 	}
 
 	public boolean isEjecutable() {

@@ -3,22 +3,19 @@ package modelo;
 public class Computador {
 
 	private String procesador;
-	private int velocidadProcesador;
 	private String arquitectura;
 	private String sistemaOperativo;
 	private int memoriaRAM;
 	private int discoDuro;
-	private int nucleos;
 
-	public Computador(String proces,int veloc, String arqui, String sisOpe, int ram, int disc, int nuc) {
+	public Computador(String proces, String arqui, String sisOpe, int ram, int disc) {
 
 		procesador=proces;
-		velocidadProcesador=veloc;
 		arquitectura=arqui;
 		sistemaOperativo=sisOpe;
 		memoriaRAM=ram;
 		discoDuro=disc;
-		nucleos=nuc;
+	
 
 	}
 
@@ -62,20 +59,5 @@ public class Computador {
 		this.discoDuro = discoDuro;
 	}
 
-	public int getNucleos() {
-		return nucleos;
-	}
-
-	public void setNucleos(int nucleos) {
-		this.nucleos = nucleos;
-	}
-
-	public int getVelocidadProcesador() {
-		return velocidadProcesador;
-	}
-
-	public void setVelocidadProcesador(int velocidadProcesador) {
-		this.velocidadProcesador = velocidadProcesador;
-	}
 
 }
