@@ -126,14 +126,12 @@ public class SolverProject {
 
 		Computador computador750GBHD_8GBRAM= new Computador(PROCESADOR_INTEL_CORE_I7, ARQUITECTURA_64_BITS, SIS_OP_WINDOWS10, RAM_8GB, DISCO_DURO_750GB);
 
-		
-
 		//Salas de Computo
-		salas.add(new Sala("Biblioteca", TIPO_BIBLIO_SALA_PROFESORES, 8 , computador250GBHD_4GBRAM));
-		salas.add(new Sala("Biblioteca", TIPO_BIBLIO_BASES_DATOS, 7 , computador250GBHD_2GBRAM));
-		salas.add(new Sala("Biblioteca", TIPO_BIBLIO_CONSULTAS, 8 , computador150GBHD_3GBRAM));
-		salas.add(new Sala("Biblioteca Equipos MAC", TIPO_MAC, 5 , computador500GBHD_4GBRAM_PROC_CORE2DUO));
-		salas.add(new Sala("Granja de Render", TIPO_GRANJA_RENDER, 23 , computador1TBHD_16GBRAM_PROC_XEON));
+		//		salas.add(new Sala("Biblioteca", TIPO_BIBLIO_SALA_PROFESORES, 8 , computador250GBHD_4GBRAM));
+		//		salas.add(new Sala("Biblioteca", TIPO_BIBLIO_BASES_DATOS, 7 , computador250GBHD_2GBRAM));
+		//		salas.add(new Sala("Biblioteca", TIPO_BIBLIO_CONSULTAS, 8 , computador150GBHD_3GBRAM));
+		//		salas.add(new Sala("Biblioteca Equipos MAC", TIPO_MAC, 5 , computador500GBHD_4GBRAM_PROC_CORE2DUO));
+		//		salas.add(new Sala("Granja de Render", TIPO_GRANJA_RENDER, 23 , computador1TBHD_16GBRAM_PROC_XEON));
 		salas.add(new Sala("Sala General Computo", TIPO_SALA_GENERAL, 61 , computador1TBHD_2GBRAM_PROC_COREI3));
 
 
@@ -144,24 +142,23 @@ public class SolverProject {
 		salas.add(new Sala("207C", TIPO_TICS, 30 , computador1TBHD_8GBRAM_PROC_COREI5));
 		salas.add(new Sala("208C", TIPO_TICS, 30 , computador500GBHD_8GBRAM_PROC_COREI5));
 		salas.add(new Sala("2011C", TIPO_IDIOMAS, 22 , computador250GBHD_4GBRAM));
-		
-		
-		salas.add(new Sala("301C", TIPO_DISEÑO, 25 , computador1TBHD_16GBRAM_PROC_COREI5));
-		salas.add(new Sala("302C", TIPO_FINANZAS, 36 , computador1TBHD_8GBRAM_PROC_COREI5));
-		salas.add(new Sala("303C", TIPO_INDUSTRIAL, 11 , computador500GBHD_8GBRAM_PROC_COREI3));
-		salas.add(new Sala("304C", TIPO_INDUSTRIAL, 36 , computador1TBHD_8GBRAM_PROC_COREI5));
-		salas.add(new Sala("305C", TIPO_SALA_GENERAL_DISEÑO, 18 , computador1TBHD_8GBRAM_PROC_CORE2DUO));
-		salas.add(new Sala("306C", TIPO_LABORATORIO_REDES, 12 , computador750GBHD_8GBRAM));
-		salas.add(new Sala("307C", TIPO_LABORATORIO_REDES, 12 , computador750GBHD_8GBRAM));
-		salas.add(new Sala("308C", TIPO_DISEÑO_INDUSTRIAL, 25 , computador1TBHD_16GBRAM_PROC_XEON));
-		salas.add(new Sala("309C", TIPO_DISEÑO, 25 , computador500GBHD_16GBRAM));
+
+
+		//		salas.add(new Sala("301C", TIPO_DISEÑO, 25 , computador1TBHD_16GBRAM_PROC_COREI5));
+		//		salas.add(new Sala("302C", TIPO_FINANZAS, 36 , computador1TBHD_8GBRAM_PROC_COREI5));
+		//		salas.add(new Sala("303C", TIPO_INDUSTRIAL, 11 , computador500GBHD_8GBRAM_PROC_COREI3));
+		//		salas.add(new Sala("304C", TIPO_INDUSTRIAL, 36 , computador1TBHD_8GBRAM_PROC_COREI5));
+		//		salas.add(new Sala("305C", TIPO_SALA_GENERAL_DISEÑO, 18 , computador1TBHD_8GBRAM_PROC_CORE2DUO));
+		//		salas.add(new Sala("306C", TIPO_LABORATORIO_REDES, 12 , computador750GBHD_8GBRAM));
+		//		salas.add(new Sala("307C", TIPO_LABORATORIO_REDES, 12 , computador750GBHD_8GBRAM));
+		//		salas.add(new Sala("308C", TIPO_DISEÑO_INDUSTRIAL, 25 , computador1TBHD_16GBRAM_PROC_XEON));
+		//		salas.add(new Sala("309C", TIPO_DISEÑO, 25 , computador500GBHD_16GBRAM));
 		salas.add(new Sala("310C", TIPO_DISEÑO, 25 , computador1TBHD_16GBRAM_PROC_COREI5));
 		salas.add(new Sala("311C", TIPO_SALA_DOCTORADO, 5 , computador500GBHD_4GBRAM_PROC_CORE2DUO));
 
 		cargarInfoSoftware();
 
 	}
-
 
 	public static void cargarInfoSoftware() {
 
@@ -199,7 +196,6 @@ public class SolverProject {
 					model.arithm(carrera[i][j], "=",1).post();
 				}
 
-
 			}
 		}
 
@@ -218,24 +214,7 @@ public class SolverProject {
 			for(Solution s:list){
 
 				System.out.println("Solución: " + nSol);
-				for (int i = 0; i < salas.size(); i++) {
-
-					for (int j = 0; j < toolSoftware.size(); j++) {
-
-						System.out.print(s.getIntVal(carrera[i][j]));
-
-					}
-					System.out.print(" "+salas.get(i).getNombre() + " Tipo "+ salas.get(i).getTipo());
-					System.out.println("");
-
-				}
-
-				for (int i = 0; i < toolSoftware.size(); i++) {
-
-					System.out.print(toolSoftware.get(i).getNombre().charAt(0));
-				}
-
-				System.out.println("\n");
+				imprimirMatrizConSolucion(carrera, s);
 				nSol++;
 			}
 
@@ -243,7 +222,7 @@ public class SolverProject {
 
 		System.out.println("0 = No se puede instalar"+"\n"+ "1 = Si instalar"+"\n"+"2 = Tiene ejecutable"+"\n");
 
-		//restriccionesDeDisco(carrera);
+		restriccionesDeDisco(carrera);
 
 	}
 
@@ -263,30 +242,93 @@ public class SolverProject {
 
 					matrizPesos[i][j]=matrizCarreras[i][j].mul(toolSoftware.get(j).getDiscoDuro()).intVar();
 
-					if (matrizPesos[i][j].getValue()==3) {
-						model.arithm(matrizPesos[i][j], "=", 1);
-					}
-
 				}
 
 			}
+		}
+
+		imprimirMatriz(matrizPesos);
+
+		IntVar[][] matrizResultado = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 2);
+		int pesoPorSala=0;
+
+		for (int i = 0; i < salas.size(); i++) {
+
+			for (int j = 0; j < toolSoftware.size(); j++) {
+
+				pesoPorSala+=matrizPesos[i][j].getValue();
+
+
+			}
+
+			for (int j = 0; j < toolSoftware.size(); j++) {
+
+				if (pesoPorSala>=8) {
+
+					model.arithm(matrizResultado[i][j], "=", 0).post();
+					System.out.println("Ojo, en la sala " +salas.get(i).getNombre()+" la cantidad de espacio de disco de software supera la capacidad de disco del computador ");
+				} 
+
+				else if (matrizPesos[i][j].getValue() != 0) {
+
+					model.arithm(matrizResultado[i][j], "=", 1).post();
+
+				}
+			}
+			pesoPorSala=0;
 		}
 
 		Solution solution = new Solution(model);
 		model.getSolver().solve();
 		solution.record();
 
+		imprimirMatrizConSolucion(matrizResultado, solution);
+
+	}
+
+
+	public static void imprimirMatriz(IntVar[][] matriz) {
+
+		System.out.println("Matriz....");
+
 		for (int i = 0; i < salas.size(); i++) {
 
 			for (int j = 0; j < toolSoftware.size(); j++) {
 
-				System.out.print(solution.getIntVal(matrizPesos[i][j]));
+				System.out.print(matriz[i][j].getValue());
 
 			}
-			System.out.print(" "+salas.get(i).getNombre());
+			System.out.print(" "+salas.get(i).getNombre()+ " Tipo "+ salas.get(i).getTipo());
 			System.out.println("");
 
 		}
+		for (int i = 0; i < toolSoftware.size(); i++) {
+
+			System.out.print(toolSoftware.get(i).getNombre().charAt(0));
+		}
+
+		System.out.println("\n");
+
+	}
+	public static void imprimirMatrizConSolucion(IntVar[][] matriz, Solution solut) {
+
+		for (int i = 0; i < salas.size(); i++) {
+
+			for (int j = 0; j < toolSoftware.size(); j++) {
+
+				System.out.print(solut.getIntVal(matriz[i][j]));
+
+			}
+			System.out.print(" "+salas.get(i).getNombre()+ " Tipo "+ salas.get(i).getTipo());
+			System.out.println("");
+
+		}
+		for (int i = 0; i < toolSoftware.size(); i++) {
+
+			System.out.print(toolSoftware.get(i).getNombre().charAt(0));
+		}
+
+		System.out.println("\n");
 
 	}
 
