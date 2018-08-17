@@ -200,6 +200,7 @@ public class SolverProject {
 		}
 
 		Solution solution = new Solution(model);
+		Solution solutionRecord= new Solution(model);
 		//Para que la última solución quede guardada
 		while(model.getSolver().solve()){
 
@@ -215,37 +216,52 @@ public class SolverProject {
 
 				System.out.println("Solución: " + nSol);
 				imprimirMatrizConSolucion(carrera, s);
+				solutionRecord=s;
 				nSol++;
 			}
+
 
 		}
 
 		System.out.println("0 = No se puede instalar"+"\n"+ "1 = Si instalar"+"\n"+"2 = Tiene ejecutable"+"\n");
 
-		restriccionesDeDisco(carrera);
+		restriccionesDeDisco(carrera,solutionRecord);
 
 	}
 
-	public static void restriccionesDeDisco(IntVar[][] matrizCarreras) {
+	public static void restriccionesDeDisco(IntVar[][] matrizCarreras, Solution solucionAnterior) {
 
 		System.out.println("Segunda parte"+"\n");
 
 		Model model= new Model();
 
 		IntVar[][] matrizPesos = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 2);
+		IntVar[][] matrizCopia = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 2);
+		matrizCopia=copiarMatriz(solucionAnterior, matrizCarreras);
+	
 
-		for (int i = 0; i < salas.size(); i++) {
+				for (int i = 0; i < salas.size(); i++) {
 
-			for (int j = 0; j < toolSoftware.size(); j++) {
+					for (int j = 0; j < toolSoftware.size(); j++) {
 
-				if (matrizCarreras[i][j].getValue()==1) {
+						if (matrizCopia[i][j].getValue()==1) {
 
-					matrizPesos[i][j]=matrizCarreras[i][j].mul(toolSoftware.get(j).getDiscoDuro()).intVar();
 
+							matrizPesos[i][j]=matrizCopia[i][j].mul(toolSoftware.get(j).getDiscoDuro()).intVar();
+
+						}
+
+						else if (matrizCopia[i][j].getValue()==2) {
+
+							System.out.println("Entra");
+
+							System.out.println(matrizCopia[i][j].mul(toolSoftware.get(j).getTamanoEjecutable()).div(2).intVar().getValue());
+
+							matrizPesos[i][j]=matrizCopia[i][j].mul(toolSoftware.get(j).getTamanoEjecutable()).div(2).intVar();
+						}
+
+					}
 				}
-
-			}
-		}
 
 		imprimirMatriz(matrizPesos);
 
@@ -257,7 +273,6 @@ public class SolverProject {
 			for (int j = 0; j < toolSoftware.size(); j++) {
 
 				pesoPorSala+=matrizPesos[i][j].getValue();
-
 
 			}
 
@@ -329,6 +344,30 @@ public class SolverProject {
 		}
 
 		System.out.println("\n");
+
+	}
+
+	public static IntVar[][] copiarMatriz(Solution solv, IntVar[][] matriz) {
+
+		Model model= new Model();
+
+		IntVar[][] matrizResul = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 2);
+		IntVar val=null;
+		int value=0;
+
+		for (int i = 0; i < salas.size(); i++) {
+
+			for (int j = 0; j < toolSoftware.size(); j++) {
+
+				value=solv.getIntVal(matriz[i][j].intVar());
+				val=model.intVar(value);
+				matrizResul[i][j]=val;
+
+			}
+
+		}
+
+		return matrizResul;
 
 	}
 
