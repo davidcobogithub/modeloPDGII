@@ -21,9 +21,9 @@ public class SolverProject {
 	//public final static String TIPO_LABORATORIO_REDES="Sala Redes";
 	public final static String TIPO_INDUSTRIAL="IND";
 	//public final static String TIPO_SALA_GENERAL="General";
-	//public final static String TIPO_SALA_GENERAL_DISEÑO="General Diseño";
-	public final static String TIPO_DISEÑO="DIS";
-	//public final static String TIPO_DISEÑO_INDUSTRIAL="Diseño Industrial";
+	//public final static String TIPO_SALA_GENERAL_DISEï¿½O="General Diseï¿½o";
+	public final static String TIPO_DISEÃ‘O="DIS";
+	//public final static String TIPO_DISEï¿½O_INDUSTRIAL="Diseï¿½o Industrial";
 	public final static String TIPO_IDIOMAS="IDI";
 	public final static String TIPO_FINANZAS="FIN";
 	//	public final static String TIPO_BIBLIO_SALA_PROFESORES="Biblioteca Sala Profesores";
@@ -57,11 +57,11 @@ public class SolverProject {
 
 
 	//Procesadores
-	public final static String PROCESADOR_INTEL_CORE_I3="Intel® Core™ i3";
-	public final static String PROCESADOR_INTEL_CORE_I5="Intel® Core™ i5";
-	public final static String PROCESADOR_INTEL_CORE_I7="Intel® Core™ i7";
-	public final static String PROCESADOR_INTEL_CORE_2DUO="Intel® Core™ 2 DUO";
-	public final static String PROCESADOR_INTEL_XEON="Intel® XEON";
+	public final static String PROCESADOR_INTEL_CORE_I3="Intelï¿½ Coreï¿½ i3";
+	public final static String PROCESADOR_INTEL_CORE_I5="Intelï¿½ Coreï¿½ i5";
+	public final static String PROCESADOR_INTEL_CORE_I7="Intelï¿½ Coreï¿½ i7";
+	public final static String PROCESADOR_INTEL_CORE_2DUO="Intelï¿½ Coreï¿½ 2 DUO";
+	public final static String PROCESADOR_INTEL_XEON="Intelï¿½ XEON";
 
 	//Sistema Operativo
 	public final static String SIS_OP_WINDOWS10="Windows 10";
@@ -78,8 +78,8 @@ public class SolverProject {
 	public static void main(String[] args) {
 
 
-		leerCSVSalas();
-		leerCSVSoftware();
+		//		leerCSVSalas();
+		//		leerCSVSoftware();
 		modeloInicial();
 
 		//		for (int j = 0; j < toolSoftware.size(); j++) {
@@ -90,14 +90,14 @@ public class SolverProject {
 		//
 		//		}
 
-//		for (int i = 0; i < salas.size(); i++) {
-//
-//			Sala sala=salas.get(i);
-//			System.out.println(sala.getNombre()+" | "+sala.getTipo()+" | "+sala.getCapacidad()+" | "+sala.getComputadores().getDiscoDuro());
-//			//System.out.println(sala.getComputadores().getDiscoDuro() +" | "+sala.getComputadores().getMemoriaRAM()+" | "+sala.getComputadores().getSistemaOperativo());
-//
-//
-//		}
+		//		for (int i = 0; i < salas.size(); i++) {
+		//
+		//			Sala sala=salas.get(i);
+		//			System.out.println(sala.getNombre()+" | "+sala.getTipo()+" | "+sala.getCapacidad()+" | "+sala.getComputadores().getDiscoDuro());
+		//			//System.out.println(sala.getComputadores().getDiscoDuro() +" | "+sala.getComputadores().getMemoriaRAM()+" | "+sala.getComputadores().getSistemaOperativo());
+		//
+		//
+		//		}
 	}
 
 	public static void leerCSVSoftware() {
@@ -350,16 +350,16 @@ public class SolverProject {
 		salas.add(new Sala("208C", TIPO_TICS, 30 , computador500GBHD_8GBRAM_PROC_COREI5));
 		salas.add(new Sala("211C", TIPO_IDIOMAS, 22 , computador250GBHD_4GBRAM));
 
-		salas.add(new Sala("302C", TIPO_DISEÑO, 36 , computador1TBHD_16GBRAM_PROC_COREI5));
+		salas.add(new Sala("302C", TIPO_DISEÃ‘O, 36 , computador1TBHD_16GBRAM_PROC_COREI5));
 		salas.add(new Sala("303C", TIPO_FINANZAS, 11 , computador1TBHD_16GBRAM_PROC_COREI5));
 		salas.add(new Sala("304C", TIPO_INDUSTRIAL, 36 , computador500GBHD_8GBRAM_PROC_COREI3));
 		salas.add(new Sala("305C", TIPO_INDUSTRIAL, 18 , computador1TBHD_8GBRAM_PROC_COREI5));
-		salas.add(new Sala("306C", TIPO_DISEÑO, 12 , computador1TBHD_16GBRAM_PROC_CORE2DUO));
-//		salas.add(new Sala("307C", TIPO_TICS, 12 , computador750GBHD_8GBRAM));
-//		salas.add(new Sala("308C", TIPO_TICS, 25 , computador1TBHD_16GBRAM_PROC_XEON));
+		salas.add(new Sala("306C", TIPO_DISEÃ‘O, 12 , computador1TBHD_16GBRAM_PROC_CORE2DUO));
+		//		salas.add(new Sala("307C", TIPO_TICS, 12 , computador750GBHD_8GBRAM));
+		//		salas.add(new Sala("308C", TIPO_TICS, 25 , computador1TBHD_16GBRAM_PROC_XEON));
 		salas.add(new Sala("309C", TIPO_INDUSTRIAL, 25 , computador1TBHD_16GBRAM_PROC_XEON));
-		salas.add(new Sala("310C", TIPO_DISEÑO, 25 , computador1TBHD_16GBRAM_PROC_XEON));
-		salas.add(new Sala("311C", TIPO_DISEÑO, 5 , computador1TBHD_16GBRAM_PROC_COREI5));
+		salas.add(new Sala("310C", TIPO_DISEÃ‘O, 25 , computador1TBHD_16GBRAM_PROC_XEON));
+		salas.add(new Sala("311C", TIPO_DISEÃ‘O, 5 , computador1TBHD_16GBRAM_PROC_COREI5));
 
 		//		cargarInfoSoftware();
 
@@ -370,17 +370,17 @@ public class SolverProject {
 		toolSoftware= new ArrayList<Software>();
 
 		toolSoftware.add(new Software("","",0,0,0,"Visual Paradigm", TIPO_TICS, "Intel Pentium 4", 1,ARQUITECTURA_32_BITS, "windows 10", 2, 4, "14.0",0,false,0));
-//		toolSoftware.add(new Software("","",0,0,0,"3ds Max Studio", TIPO_INDUSTRIAL, "Intel o AMD multi-core",1, ARQUITECTURA_64_BITS, "windows 10", 4, 6, "2017",0,false,0));
-//		toolSoftware.add(new Software("","",0,0,0,"Adobe Experience Design", TIPO_DISEÑO, "Intel o AMD multi-core",2, ARQUITECTURA_64_BITS, "windows 10", 4, 2, "0",0,false,0));
-//		toolSoftware.add(new Software("","",0,0,0,"Office", TIPO_TICS, "Intel",1, ARQUITECTURA_32_BITS, "windows 10", 4, 3, "2013",0,false,0));
-//		toolSoftware.add(new Software("","",0,0,0,"Matlab", TIPO_TICS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
-//		toolSoftware.add(new Software("","",0,0,0,"Rosseta", TIPO_IDIOMAS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
+		toolSoftware.add(new Software("","",0,0,0,"3ds Max Studio", TIPO_INDUSTRIAL, "Intel o AMD multi-core",1, ARQUITECTURA_64_BITS, "windows 10", 4, 6, "2017",0,false,0));
+		toolSoftware.add(new Software("","",0,0,0,"Adobe Experience Design", TIPO_DISEÃ‘O, "Intel o AMD multi-core",2, ARQUITECTURA_64_BITS, "windows 10", 4, 2, "0",0,false,0));
+		toolSoftware.add(new Software("","",0,0,0,"Office", TIPO_TICS, "Intel",1, ARQUITECTURA_32_BITS, "windows 10", 4, 3, "2013",0,false,0));
+		toolSoftware.add(new Software("","",0,0,0,"Matlab", TIPO_TICS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
+		//toolSoftware.add(new Software("","",0,0,0,"Rosseta", TIPO_IDIOMAS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
 	}
 
 	public static void modeloInicial() {
 
-		//constructorModelo();
-		//cargarInfoSoftware();
+		constructorModelo();
+		cargarInfoSoftware();
 
 		Model model= new Model();
 
@@ -410,26 +410,29 @@ public class SolverProject {
 
 		Solution solution = new Solution(model);
 		Solution solutionRecord= new Solution(model);
-		//Para que la última solución quede guardada
+		//Para que la ï¿½ltima soluciï¿½n quede guardada
 
-//		while(model.getSolver().solve()){
+		//		while(model.getSolver().solve()){
 
-			solution.record();
-			Criterion solcpt = new SolutionCounter(model, 1000);
-			List<Solution> list=model.getSolver().findAllSolutions(solcpt);
-			//List<Solution> list=model.getSolver().findAllSolutions();
 
-			System.out.println("Primera parte");
-			System.out.println("Soluciones encontradas: "+list.size());
+		//Mi PC 3000
+		//PC Liason 15000
+		solution.record();
+		Criterion solcpt = new SolutionCounter(model, 15000);
+		//List<Solution> list=model.getSolver().findAllSolutions(solcpt);
+		List<Solution> list=model.getSolver().findAllSolutions();
 
-			int nSol=1;
-			for(Solution s:list){
+		System.out.println("Primera parte");
+		System.out.println("Soluciones encontradas: "+list.size()+"\n");
 
-				System.out.println("Solución: " + nSol);
-				imprimirMatrizConSolucion(carrera, s);
-				solutionRecord=s;
-				nSol++;
-			}
+		int nSol=1;
+		for(Solution s:list){
+
+			System.out.println("Soluciï¿½n: " + nSol);
+			imprimirMatrizConSolucion(carrera, s);
+			solutionRecord=s;
+			nSol++;
+		}
 
 		//}
 
@@ -503,7 +506,7 @@ public class SolverProject {
 		model.getSolver().solve();
 		solution.record();
 
-		System.out.println("Matriz Resultado final");
+		System.out.println("------------------------Matriz Resultado final------------------------");
 		imprimirMatrizConSolucion(matrizResultado, solution);
 
 	}
@@ -516,8 +519,8 @@ public class SolverProject {
 			for (int j = 0; j < toolSoftware.size(); j++) {
 
 				System.out.print(matriz[i][j].getValue());
-
 			}
+			
 			System.out.print(" "+salas.get(i).getNombre()+ " Tipo "+ salas.get(i).getTipo());
 			System.out.println("");
 
@@ -532,23 +535,22 @@ public class SolverProject {
 	}
 	public static void imprimirMatrizConSolucion(IntVar[][] matriz, Solution solut) {
 
+
 		for (int i = 0; i < salas.size(); i++) {
+
+			System.out.println(salas.get(i).getNombre());
 
 			for (int j = 0; j < toolSoftware.size(); j++) {
 
-				System.out.print(solut.getIntVal(matriz[i][j]));
+
+				if (solut.getIntVal(matriz[i][j])==1) {
+					System.out.println(toolSoftware.get(j).getNombre());
+				}
 
 			}
-			System.out.print(" "+salas.get(i).getNombre()+ " Tipo "+ salas.get(i).getTipo());
 			System.out.println("");
 
 		}
-		for (int i = 0; i < toolSoftware.size(); i++) {
-
-			System.out.print(toolSoftware.get(i).getNombre().charAt(0));
-		}
-
-		System.out.println("\n");
 
 	}
 
