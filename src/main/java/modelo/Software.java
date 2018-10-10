@@ -2,27 +2,43 @@ package modelo;
 
 public class Software {
 
+	private String nombreMateria;
+	private String nombreSala;
+	private int numeroCursos;
+	private int demandaCurso;
+	private int ofertaCurso;
 	private String nombre;
 	private String tipo;
 	private String procesador;
+	private double velocidadProcesador;
 	private String arquitectura;
 	private String sistemaOperativo;
 	private int memoriaRAM;
 	private int discoDuro;
 	private String version;
+	private int cantLicencias;
 	private boolean ejecutable;
 	private int tamanoEjecutable;
 	
-	public Software(String nom, String tip, String proces, int veloc, String arqui, String sisOpe, int ram, int disc, String vers, boolean eje, int tamEjecu) {
+	public Software(String nomMateria, String nomSala, int numCurso, int demanCurso, int oferCurso,
+			String nombreSoft, String tipoSoft, String proces, double velProces, String arqui, String sisOpe, 
+			int ram, int disc, String vers, int cantLicen, boolean eje, int tamEjecu) {
 
-		nombre=nom;
-		tipo=tip;
+		nombreMateria=nomMateria;
+		nombreSala=nomSala;
+		numeroCursos=numCurso;
+		demandaCurso=demanCurso;
+		ofertaCurso=oferCurso;
+		nombre=nombreSoft;
+		tipo=tipoSoft;
 		procesador=proces;
+		velocidadProcesador=velProces;
 		arquitectura=arqui;
 		sistemaOperativo=sisOpe;
 		memoriaRAM=ram;
 		discoDuro=disc;
 		version=vers;
+		cantLicencias=cantLicen;
 		ejecutable=eje;
 		tamanoEjecutable=tamEjecu;
 		
@@ -107,5 +123,61 @@ public class Software {
 
 	public void setTamanoEjecutable(int tamanoEjecutable) {
 		this.tamanoEjecutable = tamanoEjecutable;
+	}
+
+	public String getNombreMateria() {
+		return nombreMateria;
+	}
+
+	public void setNombreMateria(String nombreMateria) {
+		this.nombreMateria = nombreMateria;
+	}
+
+	public double getVelocidadProcesador() {
+		return velocidadProcesador;
+	}
+
+	public void setVelocidadProcesador(double velocidadProcesador) {
+		this.velocidadProcesador = velocidadProcesador;
+	}
+
+	public int getCantLicencias() {
+		return cantLicencias;
+	}
+
+	public void setCantLicencias(int cantLicencias) {
+		this.cantLicencias = cantLicencias;
+	}
+
+	public String getNombreSala() {
+		return nombreSala;
+	}
+
+	public void setNombreSala(String nombreSala) {
+		this.nombreSala = nombreSala;
+	}
+
+	public int getNumeroCursos() {
+		return numeroCursos;
+	}
+
+	public void setNumeroCursos(int numeroCursos) {
+		this.numeroCursos = numeroCursos;
+	}
+
+	public int getDemandaCurso() {
+		return demandaCurso;
+	}
+
+	public void setDemandaCurso(int demandaCurso) {
+		this.demandaCurso = demandaCurso;
+	}
+
+	public int getOfertaCurso() {
+		return ofertaCurso;
+	}
+
+	public void setOfertaCurso(int ofertaCurso) {
+		this.ofertaCurso = ofertaCurso;
 	}
 }
