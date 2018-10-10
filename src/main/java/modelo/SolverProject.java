@@ -7,7 +7,9 @@ import java.util.List;
 
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
+import org.chocosolver.solver.search.limits.SolutionCounter;
 import org.chocosolver.solver.variables.IntVar;
+import org.chocosolver.util.criteria.Criterion;
 
 public class SolverProject {
 
@@ -77,7 +79,7 @@ public class SolverProject {
 
 
 		leerCSVSalas();
-		//leerCSVSoftware();
+		leerCSVSoftware();
 		modeloInicial();
 
 		//		for (int j = 0; j < toolSoftware.size(); j++) {
@@ -368,17 +370,17 @@ public class SolverProject {
 		toolSoftware= new ArrayList<Software>();
 
 		toolSoftware.add(new Software("","",0,0,0,"Visual Paradigm", TIPO_TICS, "Intel Pentium 4", 1,ARQUITECTURA_32_BITS, "windows 10", 2, 4, "14.0",0,false,0));
-		toolSoftware.add(new Software("","",0,0,0,"3ds Max Studio", TIPO_INDUSTRIAL, "Intel o AMD multi-core",1, ARQUITECTURA_64_BITS, "windows 10", 4, 6, "2017",0,false,0));
-		toolSoftware.add(new Software("","",0,0,0,"Adobe Experience Design", TIPO_DISEÑO, "Intel o AMD multi-core",2, ARQUITECTURA_64_BITS, "windows 10", 4, 2, "0",0,false,0));
-		toolSoftware.add(new Software("","",0,0,0,"Office", TIPO_TICS, "Intel",1, ARQUITECTURA_32_BITS, "windows 10", 4, 3, "2013",0,false,0));
-		toolSoftware.add(new Software("","",0,0,0,"Matlab", TIPO_TICS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
+//		toolSoftware.add(new Software("","",0,0,0,"3ds Max Studio", TIPO_INDUSTRIAL, "Intel o AMD multi-core",1, ARQUITECTURA_64_BITS, "windows 10", 4, 6, "2017",0,false,0));
+//		toolSoftware.add(new Software("","",0,0,0,"Adobe Experience Design", TIPO_DISEÑO, "Intel o AMD multi-core",2, ARQUITECTURA_64_BITS, "windows 10", 4, 2, "0",0,false,0));
+//		toolSoftware.add(new Software("","",0,0,0,"Office", TIPO_TICS, "Intel",1, ARQUITECTURA_32_BITS, "windows 10", 4, 3, "2013",0,false,0));
+//		toolSoftware.add(new Software("","",0,0,0,"Matlab", TIPO_TICS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
 //		toolSoftware.add(new Software("","",0,0,0,"Rosseta", TIPO_IDIOMAS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
 	}
 
 	public static void modeloInicial() {
 
 		//constructorModelo();
-		cargarInfoSoftware();
+		//cargarInfoSoftware();
 
 		Model model= new Model();
 
@@ -410,11 +412,12 @@ public class SolverProject {
 		Solution solutionRecord= new Solution(model);
 		//Para que la última solución quede guardada
 
-		while(model.getSolver().solve()){
+//		while(model.getSolver().solve()){
 
 			solution.record();
-
-			List<Solution> list=model.getSolver().findAllSolutions();
+			Criterion solcpt = new SolutionCounter(model, 1000);
+			List<Solution> list=model.getSolver().findAllSolutions(solcpt);
+			//List<Solution> list=model.getSolver().findAllSolutions();
 
 			System.out.println("Primera parte");
 			System.out.println("Soluciones encontradas: "+list.size());
@@ -428,8 +431,7 @@ public class SolverProject {
 				nSol++;
 			}
 
-
-		}
+		//}
 
 		System.out.println("0 = No se puede instalar"+"\n"+ "1 = Si instalar"+"\n"+"2 = Tiene ejecutable"+"\n");
 
