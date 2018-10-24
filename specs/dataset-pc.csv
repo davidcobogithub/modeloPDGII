@@ -1,0 +1,16 @@
+sala;departamento;disco duro;ram;procesador;arquitectura;sistema operativo;capacidad
+201C;IDI;500 GB;2 GB;Intel Core 2 DUO;64;Windows 10;22
+202C;TIC;1 TB;8 GB;Intel Core i5;64;Windows 10;25
+203C;TIC;1 TB;8 GB;Intel Core i5;64;Windows 10;30
+205C;IND;1 TB;8 GB;Intel Core i5;64;Windows 10;30
+207C;TIC;1 TB;8 GB;Intel Core i5;64;Windows 10;30
+208C;TIC;500 GB;8 GB;Intel Core i5;64;Windows 10;30
+211C;IDI;250 GB;4 GB;Intel Core 2 DUO;64;Windows 10;22
+302C;DIS;1 TB;16 GB;Intel Core i5;64;Mac OS;25
+303C;FIN;1 TB;16 GB;Intel Core i5;64;Windows 10;36
+304C;IND;500 GB;8 GB;Intel Core i3;64;Windows 10;11
+305C;IND;1 TB;8 GB;Intel Core i5;64;Windows 10;36
+306C;DIS;1 TB;16 GB;Intel Core 2 DUO;64;Windows 10;18
+309C;IND;1 TB;16 GB;Intel XEON;64;Windows 10;25
+310C;DIS;1 TB;16 GB;Intel XEON;64;Windows 10;25
+311C;DIS;1 TB;16 GB;Intel Core i5;64;Mac OS;25

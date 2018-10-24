@@ -3,7 +3,9 @@ package modelo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
@@ -62,14 +64,22 @@ public class SolverProject {
 	private static ArrayList<Sala> salas;
 	private static ArrayList<Software> toolSoftware;
 
+	private static ArrayList<String> nombreSoftware;
+
+	private String reporte;
+
 	public static final String SEPARATOR=";";
 
-	public static void main(String[] args) {
+	public SolverProject() {
 
+		reporte="\n";
 
 		leerCSVSalas();
-		leerCSVSoftware();
-		modeloInicial();
+
+		nombreSoftware=new ArrayList<String>();
+
+		//leerCSVSoftware();
+		//modeloInicial();
 
 		//		for (int j = 0; j < toolSoftware.size(); j++) {
 		//
@@ -89,7 +99,7 @@ public class SolverProject {
 		//		}
 	}
 
-	public static void leerCSVSoftware() {
+	public void leerCSVSoftware(String path) {
 
 		toolSoftware= new ArrayList<Software>();
 
@@ -97,13 +107,13 @@ public class SolverProject {
 
 		try {
 
-			br =new BufferedReader(new FileReader("docs/dataset-software-copia.csv"));
+			br =new BufferedReader(new FileReader(path));
 			//br =new BufferedReader(new FileReader("docs/dataset-software.csv"));
 			String line = br.readLine();
 			int numLine=1;
 			while (line != null) {
 
-				if (numLine > 2 && numLine < 692) {
+				if (numLine > 2) {
 
 					String [] fields = line.split(SEPARATOR);
 
@@ -123,6 +133,31 @@ public class SolverProject {
 						int memoriaRAM=0;
 						int discoDuro=0;
 						String version="";
+						int cantLicencias=0;
+						boolean ejecutable=false;
+						int tamanoEjecutable=0;
+
+						toolSoftware.add(new Software(nombreMateria, nombreSala, numeroCursos, demandaCurso, 
+								ofertaCurso, nombre, tipo, procesador, velocidadProcesador,arquitectura,sistemaOperativo,
+								memoriaRAM, discoDuro, version, cantLicencias,ejecutable,tamanoEjecutable));
+					}
+
+					else if (fields.length == 16) {
+
+						String nombreMateria=fields[3];
+						String nombreSala=fields[2];
+						int numeroCursos=Integer.parseInt(fields[10]);
+						int demandaCurso=Integer.parseInt(fields[11]);
+						int ofertaCurso=Integer.parseInt(fields[12]);
+						String nombre=fields[4];
+						String tipo=fields[1];
+						String procesador=fields[13];
+						double velocidadProcesador=0.0;
+						String arquitectura=fields[15];
+						String sistemaOperativo="";
+						int memoriaRAM=0;
+						int discoDuro=0;
+						String version=fields[6];
 						int cantLicencias=0;
 						boolean ejecutable=false;
 						int tamanoEjecutable=0;
@@ -210,7 +245,7 @@ public class SolverProject {
 
 	}
 
-	public static void leerCSVSalas() {
+	public void leerCSVSalas() {
 
 		salas= new ArrayList<Sala>();
 
@@ -218,7 +253,7 @@ public class SolverProject {
 
 		try {
 
-			br =new BufferedReader(new FileReader("docs/dataset-pc.csv"));
+			br =new BufferedReader(new FileReader("specs/dataset-pc.csv"));
 			String line = br.readLine();
 			int numLine=1;
 			while (line != null) {
@@ -288,14 +323,14 @@ public class SolverProject {
 
 	}
 
-	public static void modeloInicial() {
+	public void modeloInicial() {
 
-		//constructorModelo();
 		//cargarInfoSoftware();
 
 		Model model= new Model();
 
-		System.out.println(salas.size() + " | " + toolSoftware.size());
+		System.out.println(salas.size() + " | " + toolSoftware.size()+"\n");
+		reporte+=salas.size() + " | " + toolSoftware.size()+"\n"+"\n";
 
 		IntVar[][] carrera = model.intVarMatrix("carrera", salas.size(), toolSoftware.size(), 0, 1);
 
@@ -344,10 +379,14 @@ public class SolverProject {
 		System.out.println("Primera parte");
 		System.out.println("Soluciones encontradas: "+list.size()+"\n");
 
+		reporte+="Primera parte"+"\n";
+		reporte+="Soluciones encontradas: "+list.size()+"\n"+"\n";
+
 		int nSol=1;
 		for(Solution s:list){
 
 			System.out.println("Solución: " + nSol);
+			reporte+="Solución: " + nSol+"\n";
 			imprimirMatrizConSolucion(carrera, s);
 			solutionRecord=s;
 			nSol++;
@@ -356,15 +395,15 @@ public class SolverProject {
 		//}
 
 		System.out.println("0 = No se puede instalar"+"\n"+ "1 = Si instalar"+"\n");
-
+		reporte+="0 = No se puede instalar"+"\n"+ "1 = Si instalar"+"\n"+"\n";
 		restriccionesDeDisco(carrera,solutionRecord);
 
 	}
 
-	public static void restriccionesDeDisco(IntVar[][] matrizCarreras, Solution solucionAnterior) {
+	public void restriccionesDeDisco(IntVar[][] matrizCarreras, Solution solucionAnterior) {
 
 		System.out.println("Segunda parte"+"\n");
-
+		reporte+="Segunda parte"+"\n"+"\n";
 		Model model= new Model();
 
 		IntVar[][] matrizPesos = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
@@ -386,6 +425,7 @@ public class SolverProject {
 		}
 
 		System.out.println("Matriz de Pesos:");
+		reporte+="Matriz de Pesos:"+"\n";
 		imprimirMatriz(matrizPesos);
 
 		IntVar[][] matrizResultado = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
@@ -421,6 +461,7 @@ public class SolverProject {
 		solution.record();
 
 		System.out.println("Resultado parcial");
+		reporte+="Resultado parcial"+"\n";
 		//imprimirMatrizConSolucion(matrizResultado, solution);
 		imprimirMatriz(matrizResultado);
 
@@ -500,43 +541,58 @@ public class SolverProject {
 	//	}
 
 
-	public static void imprimirMatriz(IntVar[][] matriz) {
+	public void imprimirMatriz(IntVar[][] matriz) {
 
 		for (int i = 0; i < salas.size(); i++) {
 
 			for (int j = 0; j < toolSoftware.size(); j++) {
 
 				System.out.print(matriz[i][j].getValue());
+				reporte+=matriz[i][j].getValue();
 			}
 
 			System.out.print(" "+salas.get(i).getNombre()+ " Tipo "+ salas.get(i).getTipo());
 			System.out.println("");
 
+			reporte+=" "+salas.get(i).getNombre()+ " Tipo "+ salas.get(i).getTipo();
+			reporte+="\n";
 		}
 		for (int i = 0; i < toolSoftware.size(); i++) {
 
 			System.out.print(toolSoftware.get(i).getNombre().charAt(0));
+			reporte+=toolSoftware.get(i).getNombre().charAt(0);
 		}
 
 		System.out.println("\n");
+		reporte+="\n"+"\n";
 
 	}
-	public static void imprimirMatrizConSolucion(IntVar[][] matriz, Solution solut) {
+	public void imprimirMatrizConSolucion(IntVar[][] matriz, Solution solut) {
 
 
 		for (int i = 0; i < salas.size(); i++) {
 
 			System.out.println(salas.get(i).getNombre());
+			reporte+=salas.get(i).getNombre()+"\n";
 
 			for (int j = 0; j < toolSoftware.size(); j++) {
 
-
 				if (solut.getIntVal(matriz[i][j])==1) {
-					System.out.println(toolSoftware.get(j).getNombre());
+									
+					if (!nombreSoftware.contains(toolSoftware.get(j).getNombre())) {
+						
+						nombreSoftware.add(toolSoftware.get(j).getNombre());
+						
+						System.out.println(toolSoftware.get(j).getNombre());
+						reporte+=toolSoftware.get(j).getNombre()+"\n";
+					}
 				}
 
 			}
+
 			System.out.println("");
+			reporte+="\n";
+			nombreSoftware.clear();
 
 		}
 
@@ -580,5 +636,13 @@ public class SolverProject {
 
 	public void setToolSoftware(ArrayList<Software> toolSoftware) {
 		SolverProject.toolSoftware = toolSoftware;
+	}
+
+	public String getReporte() {
+		return reporte;
+	}
+
+	public void setReporte(String reporte) {
+		this.reporte = reporte;
 	}
 }
