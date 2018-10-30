@@ -3,10 +3,7 @@ package modelo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
 import org.chocosolver.solver.search.limits.SolutionCounter;
@@ -25,34 +22,14 @@ public class SolverProject {
 	public final static String TIPO_IDIOMAS="IDI";
 	public final static String TIPO_FINANZAS="FIN";
 
-
 	//Arquitectura de los computadores
 	public final static String ARQUITECTURA_64_BITS="64 bits";
 	public final static String ARQUITECTURA_32_BITS="32 bits";
 
 	//Caracteristicas de los computadores
-	//RAM
-	public final static int RAM_2GB=2;
-	public final static int RAM_3GB=3;
-	public final static int RAM_4GB=4;
-	public final static int RAM_8GB=8;
-	public final static int RAM_10GB=10;
-	public final static int RAM_16GB=16;
 
 	//Disco duro
-	public final static int DISCO_DURO_150GB=150;
-	public final static int DISCO_DURO_250GB=250;
-	public final static int DISCO_DURO_500GB=500;
-	public final static int DISCO_DURO_750GB=750;
 	public final static int DISCO_DURO_1TB=1000;
-
-
-	//Procesadores
-	//	public final static String PROCESADOR_INTEL_CORE_I3="Intel� Core� i3";
-	//	public final static String PROCESADOR_INTEL_CORE_I5="Intel� Core� i5";
-	//	public final static String PROCESADOR_INTEL_CORE_I7="Intel� Core� i7";
-	//	public final static String PROCESADOR_INTEL_CORE_2DUO="Intel� Core� 2 DUO";
-	//	public final static String PROCESADOR_INTEL_XEON="Intel� XEON";
 
 	//Sistema Operativo
 	public final static String SIS_OP_WINDOWS10="Windows 10";
@@ -78,9 +55,6 @@ public class SolverProject {
 
 		nombreSoftware=new ArrayList<String>();
 
-		//leerCSVSoftware();
-		//modeloInicial();
-
 		//		for (int j = 0; j < toolSoftware.size(); j++) {
 		//
 		//			Software soft=toolSoftware.get(j);
@@ -89,26 +63,26 @@ public class SolverProject {
 		//
 		//		}
 
-		//		for (int i = 0; i < salas.size(); i++) {
-		//
-		//			Sala sala=salas.get(i);
-		//			System.out.println(sala.getNombre()+" | "+sala.getTipo()+" | "+sala.getCapacidad()+" | "+sala.getComputadores().getDiscoDuro());
-		//			//System.out.println(sala.getComputadores().getDiscoDuro() +" | "+sala.getComputadores().getMemoriaRAM()+" | "+sala.getComputadores().getSistemaOperativo());
-		//
-		//
-		//		}
+//		for (int i = 0; i < salas.size(); i++) {
+//
+//			Sala sala=salas.get(i);
+//			System.out.println(sala.getNombre()+" | "+sala.getTipo()+" | "+sala.getCapacidad()+" | "+sala.getComputadores().getDiscoDuro()+" GB "+" | RAM "+sala.getComputadores().getMemoriaRAM());
+//			//System.out.println(sala.getComputadores().getDiscoDuro() +" | "+sala.getComputadores().getMemoriaRAM()+" | "+sala.getComputadores().getSistemaOperativo());
+//
+//
+//		}
 	}
 
 	public void leerCSVSoftware(String path) {
 
 		toolSoftware= new ArrayList<Software>();
+		reporte="";
 
 		BufferedReader br = null;
 
 		try {
 
 			br =new BufferedReader(new FileReader(path));
-			//br =new BufferedReader(new FileReader("docs/dataset-software.csv"));
 			String line = br.readLine();
 			int numLine=1;
 			while (line != null) {
@@ -269,20 +243,21 @@ public class SolverProject {
 					String procesador=fields[4];
 					String arquitectura=fields[5];
 					String sistemaOperativo=fields[6];
-					int memoriaRAM=Integer.parseInt(fields[3].trim().charAt(0)+"");
+					int memoriaRAM=Integer.parseInt(fields[3].trim().split(" ")[0]);
 					int discoDuro=0;
 
-					if (fields[4].trim().contains("TB")) {
+								
+					if (fields[2].trim().contains("TB")) {
 
-						discoDuro=Integer.parseInt(fields[2].trim().charAt(0)+"")*1000;
-
+						discoDuro=DISCO_DURO_1TB;
+					
 						Computador computadorSala= new Computador(procesador,arquitectura, sistemaOperativo, memoriaRAM, discoDuro);
 
 						salas.add(new Sala(nombreSala, tipo, capacidad , computadorSala));
 
 					}else {
 
-						discoDuro=Integer.parseInt(fields[2].trim().charAt(0)+"");
+						discoDuro=Integer.parseInt(fields[2].trim().split(" ")[0]);
 
 						Computador computadorSala= new Computador(procesador,arquitectura, sistemaOperativo, memoriaRAM, discoDuro);
 
@@ -315,22 +290,22 @@ public class SolverProject {
 		toolSoftware.add(new Software("","",0,0,0,"Matlab", TIPO_TICS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
 		toolSoftware.add(new Software("","",0,0,0,"Rosseta", TIPO_IDIOMAS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
 		toolSoftware.add(new Software("","",0,0,0,"Eclipse", TIPO_TICS, "Intel Pentium 4", 1,ARQUITECTURA_32_BITS, "windows 10", 2, 4, "14.0",0,false,0));
-		//		toolSoftware.add(new Software("","",0,0,0,"Age of Empires", TIPO_INDUSTRIAL, "Intel o AMD multi-core",1, ARQUITECTURA_64_BITS, "mac 10", 4, 6, "2017",0,false,0));
-		//		toolSoftware.add(new Software("","",0,0,0,"Creative Cloud", TIPO_DISENO, "Intel o AMD multi-core",2, ARQUITECTURA_64_BITS, "windows 10", 4, 2, "0",0,false,0));
-		//		toolSoftware.add(new Software("","",0,0,0,"SQL Developer", TIPO_TICS, "Intel",1, ARQUITECTURA_32_BITS, "windows 10", 4, 3, "2013",0,false,0));
-		//		toolSoftware.add(new Software("","",0,0,0,"Virtual Box", TIPO_TICS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
-		//		toolSoftware.add(new Software("","",0,0,0,"@Risk", TIPO_FINANZAS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
+		toolSoftware.add(new Software("","",0,0,0,"Age of Empires", TIPO_INDUSTRIAL, "Intel o AMD multi-core",1, ARQUITECTURA_64_BITS, "mac 10", 4, 6, "2017",0,false,0));
+		toolSoftware.add(new Software("","",0,0,0,"Creative Cloud", TIPO_DISENO, "Intel o AMD multi-core",2, ARQUITECTURA_64_BITS, "windows 10", 4, 2, "0",0,false,0));
+		toolSoftware.add(new Software("","",0,0,0,"SQL Developer", TIPO_TICS, "Intel",1, ARQUITECTURA_32_BITS, "windows 10", 4, 3, "2013",0,false,0));
+		toolSoftware.add(new Software("","",0,0,0,"Virtual Box", TIPO_TICS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
+		toolSoftware.add(new Software("","",0,0,0,"@Risk", TIPO_FINANZAS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
 
 	}
 
-	public void modeloInicial() {
+	public void modeloInicial(int numSoluciones) {
 
 		//cargarInfoSoftware();
 
 		Model model= new Model();
 
-		System.out.println(salas.size() + " | " + toolSoftware.size()+"\n");
-		reporte+=salas.size() + " | " + toolSoftware.size()+"\n"+"\n";
+//		System.out.println(salas.size() + " | " + toolSoftware.size()+"\n");
+//		reporte+=salas.size() + " | " + toolSoftware.size()+"\n"+"\n";
 
 		IntVar[][] carrera = model.intVarMatrix("carrera", salas.size(), toolSoftware.size(), 0, 1);
 
@@ -354,9 +329,14 @@ public class SolverProject {
 					model.arithm(carrera[i][j], "=",0).post();
 				}
 
-				else  if (toolSoftware.get(j).getMemoriaRAM() > salas.get(i).getComputadores().getMemoriaRAM()) {
+				else  if (toolSoftware.get(j).getMemoriaRAM() <= salas.get(i).getComputadores().getMemoriaRAM()) {
 
-					model.arithm(carrera[i][j], "=",0).post();
+					model.arithm(carrera[i][j], "=",1).post();
+				}
+
+				else if(toolSoftware.get(j).getNombreSala().equals(salas.get(i).getNombre())) {
+
+					model.arithm(carrera[i][j], "=",1).post();
 				}
 
 			}
@@ -364,24 +344,19 @@ public class SolverProject {
 
 		Solution solution = new Solution(model);
 		Solution solutionRecord= new Solution(model);
-		//Para que la �ltima soluci�n quede guardada
-
-		//		while(model.getSolver().solve()){
-
 
 		//Mi PC 3000
 		//PC Liason 15000
 		solution.record();
-		Criterion solcpt = new SolutionCounter(model, 100);
+		Criterion solcpt = new SolutionCounter(model, numSoluciones);
 		List<Solution> list=model.getSolver().findAllSolutions(solcpt);
-		//List<Solution> list=model.getSolver().findAllSolutions();
 
 		System.out.println("Primera parte");
 		System.out.println("Soluciones encontradas: "+list.size()+"\n");
 
 		reporte+="Primera parte"+"\n";
 		reporte+="Soluciones encontradas: "+list.size()+"\n"+"\n";
-
+		
 		int nSol=1;
 		for(Solution s:list){
 
@@ -391,8 +366,6 @@ public class SolverProject {
 			solutionRecord=s;
 			nSol++;
 		}
-
-		//}
 
 		System.out.println("0 = No se puede instalar"+"\n"+ "1 = Si instalar"+"\n");
 		reporte+="0 = No se puede instalar"+"\n"+ "1 = Si instalar"+"\n"+"\n";
@@ -424,9 +397,9 @@ public class SolverProject {
 			}
 		}
 
-		System.out.println("Matriz de Pesos:");
-		reporte+="Matriz de Pesos:"+"\n";
-		imprimirMatriz(matrizPesos);
+//		System.out.println("Matriz de Pesos:");
+//		reporte+="Matriz de Pesos:"+"\n";
+		//imprimirMatriz(matrizPesos);
 
 		IntVar[][] matrizResultado = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
 		int pesoPorSala=0;
@@ -441,10 +414,10 @@ public class SolverProject {
 
 			for (int j = 0; j < toolSoftware.size(); j++) {
 
-				if (pesoPorSala>=20) {
+				if (pesoPorSala>=salas.get(i).getComputadores().getDiscoDuro()) {
 
 					model.arithm(matrizResultado[i][j], "=", 0).post();
-					//System.out.println("Ojo, en la sala " +salas.get(i).getNombre()+" la cantidad de espacio de disco de software supera la capacidad de disco del computador ");
+					System.out.println(pesoPorSala + " | "+ salas.get(i).getComputadores().getDiscoDuro()+" Ojo, en la sala " +salas.get(i).getNombre()+" la cantidad de espacio de disco de software supera la capacidad de disco del computador ");
 				} 
 
 				else if (matrizPesos[i][j].getValue() != 0) {
@@ -462,8 +435,8 @@ public class SolverProject {
 
 		System.out.println("Resultado parcial");
 		reporte+="Resultado parcial"+"\n";
-		//imprimirMatrizConSolucion(matrizResultado, solution);
-		imprimirMatriz(matrizResultado);
+		imprimirMatrizConSolucion(matrizResultado, solution);
+		//imprimirMatriz(matrizResultado);
 
 		//restriccionesDeRAM(matrizResultado, solution);
 
@@ -578,11 +551,11 @@ public class SolverProject {
 			for (int j = 0; j < toolSoftware.size(); j++) {
 
 				if (solut.getIntVal(matriz[i][j])==1) {
-									
+
 					if (!nombreSoftware.contains(toolSoftware.get(j).getNombre())) {
-						
+
 						nombreSoftware.add(toolSoftware.get(j).getNombre());
-						
+
 						System.out.println(toolSoftware.get(j).getNombre());
 						reporte+=toolSoftware.get(j).getNombre()+"\n";
 					}

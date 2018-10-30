@@ -4,8 +4,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
-
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
@@ -42,6 +41,11 @@ public class VentanaPpal extends JFrame {
 	private JCheckBox chkRest3;
 	private JCheckBox chkRest4;
 	private JCheckBox chkRest5;
+	private JCheckBox chkRest6;
+	private JCheckBox chkRest7;
+	private JCheckBox chkRest8;
+	private JCheckBox chkRest9;
+	private JCheckBox chkRest10;
 	private JButton btnGenerar;
 	private JButton btnLimpiar;
 	//private JButton btnOrganizarRegistros;
@@ -50,9 +54,9 @@ public class VentanaPpal extends JFrame {
 	private JButton btnExportPdf;
 	private JButton btnExportCsv;
 	private JTextArea txtAreaVista;
+	private JLabel img;
 
 	private static SolverProject solver;
-
 	private static VentanaPpal frame;
 
 	/**
@@ -72,7 +76,7 @@ public class VentanaPpal extends JFrame {
 	public VentanaPpal() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(200, 50, 1000, 660);
+		setBounds(100, 50, 1200, 660);
 		contentPane = new JPanel();
 		contentPane.setLocation(20, -50);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -86,22 +90,22 @@ public class VentanaPpal extends JFrame {
 		contentPane.add(panelParametros);
 		panelParametros.setLayout(null);
 
-		JLabel lblLimsolu = new JLabel("L\u00edmite de Soluciones: ");
-		lblLimsolu.setBounds(15, 77, 130, 14);
+		JLabel lblLimsolu = new JLabel("N° Soluciones Parciales: ");
+		lblLimsolu.setBounds(15, 77, 150, 14);
 		panelParametros.add(lblLimsolu);
 
 		txtFldLimSoluciones = new JTextField();
-		txtFldLimSoluciones.setBounds(147, 74, 186, 20);
+		txtFldLimSoluciones.setBounds(180, 74, 150, 20);
 		panelParametros.add(txtFldLimSoluciones);
 		txtFldLimSoluciones.setColumns(10);
 
 		JLabel lblPorcDisco = new JLabel("Porcentaje de Disco: ");
-		lblPorcDisco.setBounds(15, 102, 130, 14);
+		lblPorcDisco.setBounds(15, 102, 150, 14);
 		panelParametros.add(lblPorcDisco);
 
 		txtFldPorcDisco = new JTextField();
 		txtFldPorcDisco.setColumns(10);
-		txtFldPorcDisco.setBounds(147, 99, 186, 20);
+		txtFldPorcDisco.setBounds(180, 99, 150, 20);
 		panelParametros.add(txtFldPorcDisco);
 
 		//		JLabel lblCiudad = new JLabel("*Ciudad:");
@@ -166,7 +170,7 @@ public class VentanaPpal extends JFrame {
 		JLabel lblTitulo = new JLabel("Distribuci\u00F3n de Software Icesi");
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC,
 				14));
-		lblTitulo.setBounds(400, 11, 397, 14);
+		lblTitulo.setBounds(550, 20, 397, 14);
 		contentPane.add(lblTitulo);
 
 		JPanel panelRestricciones = new JPanel();
@@ -177,36 +181,56 @@ public class VentanaPpal extends JFrame {
 		panelRestricciones.setLayout(null);
 
 		chkRestSelecTodas =  new JCheckBox("Seleccionar Todas");
-		chkRestSelecTodas.setBounds(15, 25, 155, 23);
+		chkRestSelecTodas.setBounds(15, 25, 300, 23);
 		panelRestricciones.add(chkRestSelecTodas);
 
-		chkRest1 =  new JCheckBox("Restricci\u00F3n 1");
-		chkRest1.setBounds(15, 50, 155, 23);
+		chkRest1 =  new JCheckBox("Software y Salas de un Departamento");
+		chkRest1.setBounds(15, 50, 300, 23);
 		panelRestricciones.add(chkRest1);
 
-		chkRest2 =  new JCheckBox("Restricci\u00F3n 2");
-		chkRest2.setBounds(15, 70, 155, 23);
+		chkRest2 =  new JCheckBox("Software y Salas con mismo Sistema Operativo");
+		chkRest2.setBounds(15, 70, 300, 23);
 		panelRestricciones.add(chkRest2);
 
-		chkRest3 =  new JCheckBox("Restricci\u00F3n 3");
-		chkRest3.setBounds(15, 90, 155, 23);
+		chkRest3 =  new JCheckBox("Capacidad de Memoria RAM");
+		chkRest3.setBounds(15, 90, 300, 23);
 		panelRestricciones.add(chkRest3);
 
-		chkRest4 =  new JCheckBox("Restricci\u00F3n 4");
-		chkRest4.setBounds(15, 110, 155, 23);
+		chkRest4 =  new JCheckBox("Capacidad de Velocidad del Procesador");
+		chkRest4.setBounds(15, 110, 300, 23);
 		panelRestricciones.add(chkRest4);
 
-		chkRest5 =  new JCheckBox("Restricci\u00F3n 5");
-		chkRest5.setBounds(15, 130, 155, 23);
+		chkRest5 =  new JCheckBox("Capacidad de Disco Duro");
+		chkRest5.setBounds(15, 130, 300, 23);
 		panelRestricciones.add(chkRest5);
+		
+		chkRest6 =  new JCheckBox("Capacidad de las Salas");
+		chkRest6.setBounds(15, 150, 300, 23);
+		panelRestricciones.add(chkRest6);
+		
+//		chkRest7 =  new JCheckBox("Capacidad de Disco Duro");
+//		chkRest7.setBounds(15, 170, 300, 23);
+//		panelRestricciones.add(chkRest7);
+//		
+//		chkRest8 =  new JCheckBox("Capacidad de Disco Duro");
+//		chkRest8.setBounds(15, 190, 300, 23);
+//		panelRestricciones.add(chkRest8);
+//		
+//		chkRest9 =  new JCheckBox("Capacidad de Disco Duro");
+//		chkRest9.setBounds(15, 210, 300, 23);
+//		panelRestricciones.add(chkRest9);
+//		
+//		chkRest10 =  new JCheckBox("Capacidad de Disco Duro");
+//		chkRest10.setBounds(15, 230, 300, 23);
+//		panelRestricciones.add(chkRest10);
 
 		btnGenerar = new JButton("Generar Distribuci\u00F3n");
-		btnGenerar.setBounds(15, 200, 155, 23);
+		btnGenerar.setBounds(15, 270, 155, 23);
 		panelRestricciones.add(btnGenerar);
 
 		btnLimpiar = new JButton("Limpiar");
-		btnLimpiar.setBounds(185, 200, 155, 23);
-		panelRestricciones.add(btnLimpiar);
+		btnLimpiar.setBounds(185, 270, 155, 23);
+		panelRestricciones.add(btnLimpiar);		
 
 		//		JLabel lblRutaDelArchivo = new JLabel("Ruta del archivo:");
 		//		lblRutaDelArchivo.setBounds(21, 39, 108, 14);
@@ -251,13 +275,18 @@ public class VentanaPpal extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
-		panel.setBounds(366, 55, 610, 560);
+		panel.setBounds(366, 55, 810, 560);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
+		img=new JLabel(new ImageIcon("img/cargando.gif"));
+		img.setBounds(270, 150, 300, 300);
+		img.setVisible(false);
+		panel.add(img);
+
+
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 10, 590, 538);
-		
+		scrollPane.setBounds(10, 10, 790, 538);
 		panel.add(scrollPane);
 
 		txtAreaVista = new JTextArea();
@@ -266,10 +295,49 @@ public class VentanaPpal extends JFrame {
 		txtAreaVista.setEditable(false);
 
 		adicionarEventos();
+
+		inhabilitarComponentes();
+	}
+
+	public void habilitarComponentes() {
+
+		txtFldLimSoluciones.setEditable(true);
+		txtFldPorcDisco.setEditable(true);
+		chkRestSelecTodas.setEnabled(true);
+		chkRest1.setEnabled(true);
+		chkRest2.setEnabled(true);
+		chkRest3.setEnabled(true);
+		chkRest4.setEnabled(true);
+		chkRest5.setEnabled(true);
+		chkRest6.setEnabled(true);
+		btnGenerar.setEnabled(true);
+		btnLimpiar.setEnabled(true);
+		btnExportCsv.setEnabled(true);
+		btnExportPdf.setEnabled(true);
+		btnExportTxt.setEnabled(true);
+	}
+
+	public void inhabilitarComponentes() {
+
+		txtFldLimSoluciones.setEditable(false);
+		txtFldPorcDisco.setEditable(false);
+		chkRestSelecTodas.setEnabled(false);
+		chkRest1.setEnabled(false);
+		chkRest2.setEnabled(false);
+		chkRest3.setEnabled(false);
+		chkRest4.setEnabled(false);
+		chkRest5.setEnabled(false);
+		chkRest6.setEnabled(false);
+		btnGenerar.setEnabled(false);
+		btnLimpiar.setEnabled(false);
+		btnExportCsv.setEnabled(false);
+		btnExportPdf.setEnabled(false);
+		btnExportTxt.setEnabled(false);
 	}
 
 	public void adicionarEventos() {
 
+		//solver.modeloInicial();
 
 		btnLimpiar.addActionListener(new ActionListener() {
 			@Override
@@ -285,6 +353,13 @@ public class VentanaPpal extends JFrame {
 				//				txtFldRutaImportacion.setText("");
 				//				txtFldRutaExportacion.setText("");
 				txtAreaVista.setText("");
+				chkRestSelecTodas.setSelected(false);
+				chkRest1.setSelected(false);
+				chkRest2.setSelected(false);
+				chkRest3.setSelected(false);
+				chkRest4.setSelected(false);
+				chkRest5.setSelected(false);
+				chkRest6.setSelected(false);
 
 			}
 		});
@@ -292,42 +367,37 @@ public class VentanaPpal extends JFrame {
 		btnGenerar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				txtAreaVista.setText(" ");
 
-				String tipoOferta=txtFldLimSoluciones.getText();
-				String tipoInmueble=txtFldPorcDisco.getText();
-				//				String ciudad=txtFldCiudad.getText();
-				//				String barrio=txtFldBarrio.getText();
-				//				String direccion=txtFldDireccion.getText();
-				//				String telefono= txtFldTelefono.getText();
-				//				String tamanio=txtFldTamanio.getText();
-				//				double tama= Double.parseDouble(tamanio);
-				//				
-				//				String precio=txtFldPrecio.getText();
-				//				double prec=Double.parseDouble(precio);
+				new Thread() {
 
-				//				Inmueble nuevo = new Inmueble(tipoOferta, tipoInmueble, ciudad, tama, prec);
-				//				nuevo.setBarrio(barrio);
-				//				nuevo.setDirección(direccion);
-				//				nuevo.setTelefono(telefono);
-				//				
-				//				finca.agregarInmueble(nuevo);
+					@Override
+					public void run() {
 
+						img.setVisible(true);
+						
+						if (!txtFldLimSoluciones.getText().equals("")) {
 
-				// Se muestra la lista de inmuebles actualizada
+							int numSol=Integer.parseInt(txtFldLimSoluciones.getText());
+							solver.modeloInicial(numSol);
+						}else {
+							int numSol=10;
+							solver.modeloInicial(numSol);
+						}
 
+						try {
+							Thread.sleep(100);
 
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 
-				txtAreaVista
-				.setText("La lista de inmuebles se ha actualizado a:\n");
-
-				//				ArrayList<Inmueble> lista = finca.getInmuebles();
-				//
-				//				Inmueble temp;
-				//				for (int i = 0; i < lista.size(); i++) {
-				//					temp = (Inmueble) lista.get(i);
-				//					txtAreaVista.append(temp.toString() + "\n");
-				//				}
+						img.setVisible(false);
+						JOptionPane.showMessageDialog(null, "Distribuci\u00f3n generada satisfactoriamente",
+								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
+						txtAreaVista.append(solver.getReporte());
+					}
+				}.start();
 			}
 		});
 
@@ -344,16 +414,16 @@ public class VentanaPpal extends JFrame {
 				int respuesta = directorio.showOpenDialog(frame);
 				if (respuesta == JFileChooser.APPROVE_OPTION) {
 					File escogido = directorio.getSelectedFile();
-					//txtFldRutaImportacion.setText(escogido.getAbsolutePath());
 
 					try {
-					
+
 						solver.leerCSVSoftware(escogido.getAbsolutePath());
-						solver.modeloInicial();
-						txtAreaVista.append(solver.getReporte());
 
 						JOptionPane.showMessageDialog(null, "Se ha importado correctamente el archivo",
 								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
+
+						habilitarComponentes();
+
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						JOptionPane.showMessageDialog(null, "No se ha importado correctamente el archivo",
@@ -363,17 +433,6 @@ public class VentanaPpal extends JFrame {
 
 				}
 
-				// Se muestra la lista de inmuebles actualizada
-				//				txtAreaVista
-				//				.setText("La lista de inmuebles se ha actualizado a:\n");
-
-				//				ArrayList<Inmueble> lista = finca.getInmuebles();
-				//
-				//				Inmueble temp;
-				//				for (int i = 0; i < lista.size(); i++) {
-				//					temp = (Inmueble) lista.get(i);
-				//					txtAreaVista.append(temp.toString() + "\n");
-				//				}
 			}
 		});
 
@@ -409,6 +468,47 @@ public class VentanaPpal extends JFrame {
 				.append("Se ha generado el reporte de Inmuebles en la ruta\n"
 						+ ruta);
 
+			}
+		});
+
+		btnExportPdf.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+
+			}
+		});
+
+		btnExportCsv.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
+		chkRestSelecTodas.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+				if (chkRestSelecTodas.isSelected()) {
+					chkRest1.setSelected(true);
+					chkRest2.setSelected(true);
+					chkRest3.setSelected(true);
+					chkRest4.setSelected(true);
+					chkRest5.setSelected(true);
+					chkRest6.setSelected(true);
+				}
+				else {
+
+					chkRest1.setSelected(false);
+					chkRest2.setSelected(false);
+					chkRest3.setSelected(false);
+					chkRest4.setSelected(false);
+					chkRest5.setSelected(false);
+					chkRest6.setSelected(false);
+				}
 			}
 		});
 	}
