@@ -3,6 +3,8 @@ package modelo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
@@ -40,7 +42,7 @@ public class SolverProject {
 
 	private static ArrayList<Sala> salas;
 	private static ArrayList<Software> toolSoftware;
-
+	private static ArrayList<Software> toolSoftwareBasico;
 	private static ArrayList<String> nombreSoftware;
 
 	private String reporte;
@@ -52,8 +54,18 @@ public class SolverProject {
 		reporte="\n";
 
 		leerCSVSalas();
+		leerSoftwareBasico();
 
 		nombreSoftware=new ArrayList<String>();
+
+		//		for (int j = 0; j < toolSoftwareBasico.size(); j++) {
+		//		
+		//					Software soft=toolSoftwareBasico.get(j);
+		//		
+		//					System.out.println(soft.getArquitectura()+" | "+soft.getNombre()+ " | "+soft.getDiscoDuro()+" | ");
+		//		
+		//				}
+
 
 		//		for (int j = 0; j < toolSoftware.size(); j++) {
 		//
@@ -63,14 +75,14 @@ public class SolverProject {
 		//
 		//		}
 
-//		for (int i = 0; i < salas.size(); i++) {
-//
-//			Sala sala=salas.get(i);
-//			System.out.println(sala.getNombre()+" | "+sala.getTipo()+" | "+sala.getCapacidad()+" | "+sala.getComputadores().getDiscoDuro()+" GB "+" | RAM "+sala.getComputadores().getMemoriaRAM());
-//			//System.out.println(sala.getComputadores().getDiscoDuro() +" | "+sala.getComputadores().getMemoriaRAM()+" | "+sala.getComputadores().getSistemaOperativo());
-//
-//
-//		}
+		//		for (int i = 0; i < salas.size(); i++) {
+		//
+		//			Sala sala=salas.get(i);
+		//			System.out.println(sala.getNombre()+" | "+sala.getTipo()+" | "+sala.getCapacidad()+" | "+sala.getComputadores().getDiscoDuro()+" GB "+" | RAM "+sala.getComputadores().getMemoriaRAM());
+		//			//System.out.println(sala.getComputadores().getDiscoDuro() +" | "+sala.getComputadores().getMemoriaRAM()+" | "+sala.getComputadores().getSistemaOperativo());
+		//
+		//
+		//		}
 	}
 
 	public void leerCSVSoftware(String path) {
@@ -246,11 +258,11 @@ public class SolverProject {
 					int memoriaRAM=Integer.parseInt(fields[3].trim().split(" ")[0]);
 					int discoDuro=0;
 
-								
+
 					if (fields[2].trim().contains("TB")) {
 
 						discoDuro=DISCO_DURO_1TB;
-					
+
 						Computador computadorSala= new Computador(procesador,arquitectura, sistemaOperativo, memoriaRAM, discoDuro);
 
 						salas.add(new Sala(nombreSala, tipo, capacidad , computadorSala));
@@ -263,6 +275,56 @@ public class SolverProject {
 
 						salas.add(new Sala(nombreSala, tipo, capacidad , computadorSala));
 					}
+
+				}
+
+				numLine++;
+				line = br.readLine();
+			}
+
+			br.close();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+
+	}
+
+	public void leerSoftwareBasico() {
+
+		toolSoftwareBasico= new ArrayList<Software>();
+
+		BufferedReader br = null;
+
+		try {
+
+			br =new BufferedReader(new FileReader("specs/software-oficinas.csv"));
+			String line = br.readLine();
+			int numLine=1;
+			while (line != null) {
+
+				if (numLine > 1) {
+
+					String [] fields = line.split(SEPARATOR);
+
+					String nombre=fields[0];
+					String procesador=fields[2];
+					String arquitectura=fields[4];
+					String sistemaOperativo=fields[5];
+
+					double velocidadProcesador=Double.parseDouble(fields[3].trim());
+					int memoriaRAM=Integer.parseInt(fields[6].trim());
+					int discoDuro=Integer.parseInt(fields[7].trim());
+
+					String version=fields[1];
+					int cantLicencias=0;
+					boolean ejecutable=false;
+					int tamanoEjecutable=0;
+
+					toolSoftwareBasico.add(new Software("", "", 0, 0, 
+							0, nombre, "", procesador, velocidadProcesador,arquitectura,sistemaOperativo,
+							memoriaRAM, discoDuro, version, cantLicencias,ejecutable,tamanoEjecutable));
 
 				}
 
@@ -304,8 +366,8 @@ public class SolverProject {
 
 		Model model= new Model();
 
-//		System.out.println(salas.size() + " | " + toolSoftware.size()+"\n");
-//		reporte+=salas.size() + " | " + toolSoftware.size()+"\n"+"\n";
+		//		System.out.println(salas.size() + " | " + toolSoftware.size()+"\n");
+		//		reporte+=salas.size() + " | " + toolSoftware.size()+"\n"+"\n";
 
 		IntVar[][] carrera = model.intVarMatrix("carrera", salas.size(), toolSoftware.size(), 0, 1);
 
@@ -356,7 +418,7 @@ public class SolverProject {
 
 		reporte+="Primera parte"+"\n";
 		reporte+="Soluciones encontradas: "+list.size()+"\n"+"\n";
-		
+
 		int nSol=1;
 		for(Solution s:list){
 
@@ -397,8 +459,8 @@ public class SolverProject {
 			}
 		}
 
-//		System.out.println("Matriz de Pesos:");
-//		reporte+="Matriz de Pesos:"+"\n";
+		//		System.out.println("Matriz de Pesos:");
+		//		reporte+="Matriz de Pesos:"+"\n";
 		//imprimirMatriz(matrizPesos);
 
 		IntVar[][] matrizResultado = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
@@ -438,81 +500,82 @@ public class SolverProject {
 		imprimirMatrizConSolucion(matrizResultado, solution);
 		//imprimirMatriz(matrizResultado);
 
-		//restriccionesDeRAM(matrizResultado, solution);
+		//restriccionDemandaCapacidadSalas(matrizResultado, solution);
 
 	}
 
-	//	public static void restriccionesDeRAM(IntVar[][] matrizCarreras, Solution solucionAnterior) {
-	//
-	//		System.out.println("Tercera parte"+"\n");
-	//
-	//		Model model= new Model();
-	//
-	//		IntVar[][] matrizPesosRam = model.intVarMatrix("pesosRam", salas.size(), toolSoftware.size(), 0, 1);
-	//		IntVar[][] matrizCopiaRam = model.intVarMatrix("pesosRam", salas.size(), toolSoftware.size(), 0, 1);
-	//		
-	//		matrizCopiaRam=copiarMatriz(solucionAnterior, matrizCarreras);
-	//
-	//		int count=0;
-	//
-	//		for (int i = 0; i < salas.size(); i++) {
-	//
-	//			for (int j = 0; j < toolSoftware.size(); j++) {
-	//
-	//					
-	//				if (matrizCopiaRam[i][j].getValue()==1) {
-	//
-	//					count++;
-	//					
-	//					matrizPesosRam[i][j]=matrizCopiaRam[i][j].mul(toolSoftware.get(j).getMemoriaRAM()).intVar();
-	//
-	//				}
-	//
-	//			}
-	//		}
-	//
-	//		System.out.println(count);
-	//		
-	//		System.out.println("Matriz de Pesos Memoria RAM:");
-	//		imprimirMatriz(matrizPesosRam);
-	//
-	////		IntVar[][] matrizResultado = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
-	////		int pesoPorSala=0;
-	////
-	////		for (int i = 0; i < salas.size(); i++) {
-	////
-	////			for (int j = 0; j < toolSoftware.size(); j++) {
-	////
-	////				pesoPorSala+=matrizPesosRam[i][j].getValue();
-	////
-	////			}
-	////
-	////			for (int j = 0; j < toolSoftware.size(); j++) {
-	////
-	////				if (pesoPorSala>=20) {
-	////
-	////					model.arithm(matrizResultado[i][j], "=", 0).post();
-	////					//System.out.println("Ojo, en la sala " +salas.get(i).getNombre()+" la cantidad de espacio de disco de software supera la capacidad de disco del computador ");
-	////				} 
-	////
-	////				else if (matrizPesosRam[i][j].getValue() != 0) {
-	////
-	////					model.arithm(matrizResultado[i][j], "=", 1).post();
-	////
-	////				}
-	////			}
-	////			pesoPorSala=0;
-	////		}
-	////
-	////		Solution solution = new Solution(model);
-	////		model.getSolver().solve();
-	////		solution.record();
-	////
-	////		System.out.println("------------------------Matriz Resultado final------------------------");
-	////		imprimirMatrizConSolucion(matrizResultado, solution);
-	//
-	//	}
+	public void restriccionDemandaCapacidadSalas(IntVar[][] matrizCarreras, Solution solucionAnterior) {
 
+		System.out.println("Tercera parte"+"\n");
+
+		Model model= new Model();
+
+		IntVar[][] matrizDemandaCapacidad = model.intVarMatrix("pesosDemandaCapacidad", salas.size(), toolSoftware.size(), 0, 1);
+		IntVar[][] matrizCopiaDemanda = model.intVarMatrix("pesosDemandaCapacidad", salas.size(), toolSoftware.size(), 0, 1);
+
+		matrizCopiaDemanda=copiarMatriz(solucionAnterior, matrizCarreras);
+
+		int count=0;
+
+
+
+		for (int i = 0; i < salas.size(); i++) {
+
+			for (int j = 0; j < toolSoftware.size(); j++) {
+
+
+				if (matrizCopiaDemanda[i][j].getValue()==1) {
+
+					count++;
+
+					matrizDemandaCapacidad[i][j]=matrizCopiaDemanda[i][j].mul(toolSoftware.get(j).getMemoriaRAM()).intVar();
+
+				}
+
+			}
+		}
+
+		System.out.println(count);
+
+		System.out.println("Matriz de Demanda Capacidad:");
+		imprimirMatriz(matrizDemandaCapacidad);
+
+		////		IntVar[][] matrizResultado = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
+		////		int pesoPorSala=0;
+		////
+		////		for (int i = 0; i < salas.size(); i++) {
+		////
+		////			for (int j = 0; j < toolSoftware.size(); j++) {
+		////
+		////				pesoPorSala+=matrizPesosRam[i][j].getValue();
+		////
+		////			}
+		////
+		////			for (int j = 0; j < toolSoftware.size(); j++) {
+		////
+		////				if (pesoPorSala>=20) {
+		////
+		////					model.arithm(matrizResultado[i][j], "=", 0).post();
+		////					//System.out.println("Ojo, en la sala " +salas.get(i).getNombre()+" la cantidad de espacio de disco de software supera la capacidad de disco del computador ");
+		////				} 
+		////
+		////				else if (matrizPesosRam[i][j].getValue() != 0) {
+		////
+		////					model.arithm(matrizResultado[i][j], "=", 1).post();
+		////
+		////				}
+		////			}
+		////			pesoPorSala=0;
+		////		}
+		////
+		////		Solution solution = new Solution(model);
+		////		model.getSolver().solve();
+		////		solution.record();
+		////
+		////		System.out.println("------------------------Matriz Resultado final------------------------");
+		////		imprimirMatrizConSolucion(matrizResultado, solution);
+
+	}
 
 	public void imprimirMatriz(IntVar[][] matriz) {
 
@@ -542,24 +605,44 @@ public class SolverProject {
 	}
 	public void imprimirMatrizConSolucion(IntVar[][] matriz, Solution solut) {
 
+			for (int i = 0; i < salas.size(); i++) {
 
-		for (int i = 0; i < salas.size(); i++) {
+				System.out.println(salas.get(i).getNombre());
+				reporte+=salas.get(i).getNombre()+"\n";
+				
+				for (int k = 0; k < toolSoftwareBasico.size(); k++) {
 
-			System.out.println(salas.get(i).getNombre());
-			reporte+=salas.get(i).getNombre()+"\n";
+					if (toolSoftwareBasico.get(k).getSistemaOperativo().toUpperCase().contains("MAC")
+							&& salas.get(i).getComputadores().getSistemaOperativo().toUpperCase().contains("MAC")) {
 
-			for (int j = 0; j < toolSoftware.size(); j++) {
-
-				if (solut.getIntVal(matriz[i][j])==1) {
-
-					if (!nombreSoftware.contains(toolSoftware.get(j).getNombre())) {
-
-						nombreSoftware.add(toolSoftware.get(j).getNombre());
-
-						System.out.println(toolSoftware.get(j).getNombre());
-						reporte+=toolSoftware.get(j).getNombre()+"\n";
+						System.out.println(toolSoftwareBasico.get(k).getNombre()+" | "+toolSoftwareBasico.get(k).getSistemaOperativo());
+						reporte+=toolSoftwareBasico.get(k).getNombre()+" | "+toolSoftwareBasico.get(k).getSistemaOperativo()+"\n";
 					}
+					else {
+						
+						if (!toolSoftwareBasico.get(k).getSistemaOperativo().toUpperCase().contains("MAC")
+								&& !salas.get(i).getComputadores().getSistemaOperativo().toUpperCase().contains("MAC")) {
+
+							System.out.println(toolSoftwareBasico.get(k).getNombre()+" | "+toolSoftwareBasico.get(k).getSistemaOperativo());
+							reporte+=toolSoftwareBasico.get(k).getNombre()+" | "+toolSoftwareBasico.get(k).getSistemaOperativo()+"\n";
+						}
+										
+					}
+					
 				}
+
+				for (int j = 0; j < toolSoftware.size(); j++) {
+
+					if (solut.getIntVal(matriz[i][j])==1) {
+
+						if (!nombreSoftware.contains(toolSoftware.get(j).getNombre())) {
+
+							nombreSoftware.add(toolSoftware.get(j).getNombre());
+
+							System.out.println(toolSoftware.get(j).getNombre()+" | "+toolSoftware.get(j).getSistemaOperativo());
+							reporte+=toolSoftware.get(j).getNombre()+" | "+toolSoftware.get(j).getSistemaOperativo()+"\n";
+						}
+					}
 
 			}
 
