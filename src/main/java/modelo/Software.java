@@ -8,7 +8,7 @@ public class Software {
 	private int demandaCurso;
 	private int ofertaCurso;
 	private String nombre;
-	private String tipo;
+	private String tipoDepartamento;
 	private String procesador;
 	private double velocidadProcesador;
 	private String arquitectura;
@@ -30,7 +30,7 @@ public class Software {
 		demandaCurso=demanCurso;
 		ofertaCurso=oferCurso;
 		nombre=nombreSoft;
-		tipo=tipoSoft;
+		tipoDepartamento=tipoSoft;
 		procesador=proces;
 		velocidadProcesador=velProces;
 		arquitectura=arqui;
@@ -93,12 +93,12 @@ public class Software {
 		this.nombre = nombre;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getTipoDepartamento() {
+		return tipoDepartamento;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setTipoDepartamento(String tipo) {
+		this.tipoDepartamento = tipo;
 	}
 
 	public String getVersion() {

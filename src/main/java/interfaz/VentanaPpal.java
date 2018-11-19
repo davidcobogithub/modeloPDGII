@@ -4,9 +4,12 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,7 +29,7 @@ public class VentanaPpal extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtFldLimSoluciones;
-	private JTextField txtFldPorcDisco;
+	private JComboBox<String> comboBoxFldPorcDisco;
 	//	private JTextField txtFldCiudad;
 	//	private JTextField txtFldBarrio;
 	//	private JTextField txtFldDireccion;
@@ -95,7 +98,7 @@ public class VentanaPpal extends JFrame {
 		panelParametros.add(lblLimsolu);
 
 		txtFldLimSoluciones = new JTextField();
-		txtFldLimSoluciones.setBounds(180, 74, 150, 20);
+		txtFldLimSoluciones.setBounds(160, 74, 170, 20);
 		panelParametros.add(txtFldLimSoluciones);
 		txtFldLimSoluciones.setColumns(10);
 
@@ -103,10 +106,20 @@ public class VentanaPpal extends JFrame {
 		lblPorcDisco.setBounds(15, 102, 150, 14);
 		panelParametros.add(lblPorcDisco);
 
-		txtFldPorcDisco = new JTextField();
-		txtFldPorcDisco.setColumns(10);
-		txtFldPorcDisco.setBounds(180, 99, 150, 20);
-		panelParametros.add(txtFldPorcDisco);
+		comboBoxFldPorcDisco = new JComboBox<>();
+		comboBoxFldPorcDisco.setBounds(160, 99, 170, 20);
+		comboBoxFldPorcDisco.addItem("Seleccione Porcentaje");
+		comboBoxFldPorcDisco.addItem("10%");
+		comboBoxFldPorcDisco.addItem("20%");
+		comboBoxFldPorcDisco.addItem("30%");
+		comboBoxFldPorcDisco.addItem("40%");
+		comboBoxFldPorcDisco.addItem("50%");
+		comboBoxFldPorcDisco.addItem("60%");
+		comboBoxFldPorcDisco.addItem("70%");
+		comboBoxFldPorcDisco.addItem("80%");
+		comboBoxFldPorcDisco.addItem("90%");
+		comboBoxFldPorcDisco.addItem("100%");
+		panelParametros.add(comboBoxFldPorcDisco);
 
 		//		JLabel lblCiudad = new JLabel("*Ciudad:");
 		//		lblCiudad.setBounds(31, 129, 105, 14);
@@ -203,26 +216,26 @@ public class VentanaPpal extends JFrame {
 		chkRest5 =  new JCheckBox("Capacidad de Disco Duro");
 		chkRest5.setBounds(15, 130, 300, 23);
 		panelRestricciones.add(chkRest5);
-		
+
 		chkRest6 =  new JCheckBox("Capacidad de las Salas");
 		chkRest6.setBounds(15, 150, 300, 23);
 		panelRestricciones.add(chkRest6);
-		
-//		chkRest7 =  new JCheckBox("Capacidad de Disco Duro");
-//		chkRest7.setBounds(15, 170, 300, 23);
-//		panelRestricciones.add(chkRest7);
-//		
-//		chkRest8 =  new JCheckBox("Capacidad de Disco Duro");
-//		chkRest8.setBounds(15, 190, 300, 23);
-//		panelRestricciones.add(chkRest8);
-//		
-//		chkRest9 =  new JCheckBox("Capacidad de Disco Duro");
-//		chkRest9.setBounds(15, 210, 300, 23);
-//		panelRestricciones.add(chkRest9);
-//		
-//		chkRest10 =  new JCheckBox("Capacidad de Disco Duro");
-//		chkRest10.setBounds(15, 230, 300, 23);
-//		panelRestricciones.add(chkRest10);
+
+		//		chkRest7 =  new JCheckBox("Capacidad de Disco Duro");
+		//		chkRest7.setBounds(15, 170, 300, 23);
+		//		panelRestricciones.add(chkRest7);
+		//		
+		//		chkRest8 =  new JCheckBox("Capacidad de Disco Duro");
+		//		chkRest8.setBounds(15, 190, 300, 23);
+		//		panelRestricciones.add(chkRest8);
+		//		
+		//		chkRest9 =  new JCheckBox("Capacidad de Disco Duro");
+		//		chkRest9.setBounds(15, 210, 300, 23);
+		//		panelRestricciones.add(chkRest9);
+		//		
+		//		chkRest10 =  new JCheckBox("Capacidad de Disco Duro");
+		//		chkRest10.setBounds(15, 230, 300, 23);
+		//		panelRestricciones.add(chkRest10);
 
 		btnGenerar = new JButton("Generar Distribuci\u00F3n");
 		btnGenerar.setBounds(15, 270, 155, 23);
@@ -302,7 +315,7 @@ public class VentanaPpal extends JFrame {
 	public void habilitarComponentes() {
 
 		txtFldLimSoluciones.setEditable(true);
-		txtFldPorcDisco.setEditable(true);
+		comboBoxFldPorcDisco.setEnabled(true);
 		chkRestSelecTodas.setEnabled(true);
 		chkRest1.setEnabled(true);
 		chkRest2.setEnabled(true);
@@ -320,7 +333,7 @@ public class VentanaPpal extends JFrame {
 	public void inhabilitarComponentes() {
 
 		txtFldLimSoluciones.setEditable(false);
-		txtFldPorcDisco.setEditable(false);
+		comboBoxFldPorcDisco.setEnabled(false);
 		chkRestSelecTodas.setEnabled(false);
 		chkRest1.setEnabled(false);
 		chkRest2.setEnabled(false);
@@ -337,13 +350,13 @@ public class VentanaPpal extends JFrame {
 
 	public void adicionarEventos() {
 
-		//solver.modeloInicial();
+		//solver.modeloInicial(10);
 
 		btnLimpiar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				txtFldLimSoluciones.setText("");
-				txtFldPorcDisco.setText("");
+				comboBoxFldPorcDisco.setSelectedIndex(0);
 				//				txtFldCiudad.setText("");
 				//				txtFldBarrio.setText("");
 				//				txtFldDireccion.setText("");
@@ -374,7 +387,7 @@ public class VentanaPpal extends JFrame {
 					public void run() {
 
 						img.setVisible(true);
-						
+
 						if (!txtFldLimSoluciones.getText().equals("")) {
 
 							int numSol=Integer.parseInt(txtFldLimSoluciones.getText());
@@ -404,8 +417,7 @@ public class VentanaPpal extends JFrame {
 		btnImportar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				txtAreaVista.setText(" ");
-
+				
 				JFileChooser directorio = new JFileChooser("docs/");
 				FileNameExtensionFilter filtro = new FileNameExtensionFilter(
 						"CVS", "csv");
@@ -418,7 +430,7 @@ public class VentanaPpal extends JFrame {
 					try {
 
 						solver.leerCSVSoftware(escogido.getAbsolutePath());
-
+						txtAreaVista.setText(" ");
 						JOptionPane.showMessageDialog(null, "Se ha importado correctamente el archivo",
 								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
 
@@ -439,7 +451,6 @@ public class VentanaPpal extends JFrame {
 		btnExportTxt.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				txtAreaVista.setText(" ");
 
 				JFileChooser directorio = new JFileChooser();
 				FileNameExtensionFilter filtro = new FileNameExtensionFilter(
@@ -451,23 +462,23 @@ public class VentanaPpal extends JFrame {
 				if (respuesta == JFileChooser.APPROVE_OPTION) {
 					File escogido = directorio.getSelectedFile();
 					ruta = escogido.getAbsolutePath();
-					//txtFldRutaExportacion.setText(ruta);
+
 					try {
-						//						finca.generarReporte(ruta);
-						//					} catch (FileNotFoundException e1) {
-						//						// TODO Auto-generated catch block
-						//						e1.printStackTrace();
-						//					}
+						solver.exportarReporteTxt(ruta);
+						
+						JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
+								+ruta,
+								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
+						
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
-
-				txtAreaVista
-				.append("Se ha generado el reporte de Inmuebles en la ruta\n"
-						+ ruta);
-
 			}
 		});
 
@@ -475,6 +486,33 @@ public class VentanaPpal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				JFileChooser directorio = new JFileChooser();
+				FileNameExtensionFilter filtro = new FileNameExtensionFilter(
+						"pdf", "pdf");
+				directorio.setFileFilter(filtro);
+
+				String ruta = "";
+				int respuesta = directorio.showOpenDialog(frame);
+				if (respuesta == JFileChooser.APPROVE_OPTION) {
+					File escogido = directorio.getSelectedFile();
+					ruta = escogido.getAbsolutePath();
+
+//					try {
+//						solver.exportarReporteTxt(ruta);
+//						
+//						JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
+//								+ruta,
+//								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
+//						
+//					} catch (FileNotFoundException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//
+//					} catch (Exception e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
+				}
 
 			}
 		});

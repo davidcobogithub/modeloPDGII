@@ -1,16 +1,18 @@
 package modelo;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
 import org.chocosolver.solver.search.limits.SolutionCounter;
 import org.chocosolver.solver.variables.IntVar;
 import org.chocosolver.util.criteria.Criterion;
+
 
 public class SolverProject {
 
@@ -67,13 +69,15 @@ public class SolverProject {
 		//				}
 
 
-		//		for (int j = 0; j < toolSoftware.size(); j++) {
-		//
-		//			Software soft=toolSoftware.get(j);
-		//
-		//			System.out.println(soft.getArquitectura()+" | "+soft.getCantLicencias()+" | "+soft.getDiscoDuro()+" | "+soft.getNombreSala());
-		//
-		//		}
+		//				for (int j = 0; j < toolSoftware.size(); j++) {
+		//		
+		//					Software soft=toolSoftware.get(j);
+		//		
+		//					System.out.println(soft.getArquitectura()+" | "
+		//					+soft.getCantLicencias()+" | "+soft.getDiscoDuro()+" | "+soft.getNombreSala()
+		//					+" | "+soft.getNombre()+" | "+soft.getNombreMateria());
+		//		
+		//				}
 
 		//		for (int i = 0; i < salas.size(); i++) {
 		//
@@ -345,24 +349,39 @@ public class SolverProject {
 
 		toolSoftware= new ArrayList<Software>();
 
-		toolSoftware.add(new Software("","",0,0,0,"Visual Paradigm", TIPO_TICS, "Intel Pentium 4", 1,ARQUITECTURA_32_BITS, "windows 10", 2, 4, "14.0",0,false,0));
-		toolSoftware.add(new Software("","",0,0,0,"3ds Max Studio", TIPO_INDUSTRIAL, "Intel o AMD multi-core",1, ARQUITECTURA_64_BITS, "mac 10", 4, 6, "2017",0,false,0));
-		toolSoftware.add(new Software("","",0,0,0,"Adobe Experience Design", TIPO_DISENO, "Intel o AMD multi-core",2, ARQUITECTURA_64_BITS, "windows 10", 4, 2, "0",0,false,0));
-		toolSoftware.add(new Software("","",0,0,0,"Office", TIPO_TICS, "Intel",1, ARQUITECTURA_32_BITS, "windows 10", 4, 3, "2013",0,false,0));
-		toolSoftware.add(new Software("","",0,0,0,"Matlab", TIPO_TICS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
-		toolSoftware.add(new Software("","",0,0,0,"Rosseta", TIPO_IDIOMAS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
-		toolSoftware.add(new Software("","",0,0,0,"Eclipse", TIPO_TICS, "Intel Pentium 4", 1,ARQUITECTURA_32_BITS, "windows 10", 2, 4, "14.0",0,false,0));
-		toolSoftware.add(new Software("","",0,0,0,"Age of Empires", TIPO_INDUSTRIAL, "Intel o AMD multi-core",1, ARQUITECTURA_64_BITS, "mac 10", 4, 6, "2017",0,false,0));
-		toolSoftware.add(new Software("","",0,0,0,"Creative Cloud", TIPO_DISENO, "Intel o AMD multi-core",2, ARQUITECTURA_64_BITS, "windows 10", 4, 2, "0",0,false,0));
-		toolSoftware.add(new Software("","",0,0,0,"SQL Developer", TIPO_TICS, "Intel",1, ARQUITECTURA_32_BITS, "windows 10", 4, 3, "2013",0,false,0));
-		toolSoftware.add(new Software("","",0,0,0,"Virtual Box", TIPO_TICS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
-		toolSoftware.add(new Software("","",0,0,0,"@Risk", TIPO_FINANZAS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
+		toolSoftware.add(new Software("Ingenieria de software","202C",0,0,0,"Visual Paradigm", TIPO_TICS, "Intel Pentium 4", 1,ARQUITECTURA_32_BITS, "windows 10", 2, 4, "14.0",0,false,0));
+		toolSoftware.add(new Software("Diseño 3D","302C",0,0,0,"3ds Max Studio", TIPO_INDUSTRIAL, "Intel o AMD multi-core",1, ARQUITECTURA_64_BITS, "mac 10", 4, 6, "2017",0,false,0));
+		toolSoftware.add(new Software("Diseño 3D","302C",0,0,0,"Adobe Experience Design", TIPO_DISENO, "Intel o AMD multi-core",2, ARQUITECTURA_64_BITS, "windows 10", 4, 2, "0",0,false,0));
+		toolSoftware.add(new Software("COE 1","203C",0,0,0,"Office", TIPO_TICS, "Intel",1, ARQUITECTURA_32_BITS, "windows 10", 4, 3, "2013",0,false,0));
+		toolSoftware.add(new Software("Arquitectura de HardWare","208C",0,0,0,"Matlab", TIPO_TICS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
+		toolSoftware.add(new Software("Ingles","201C",0,0,0,"Rosseta", TIPO_IDIOMAS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
+		toolSoftware.add(new Software("Algoritmos 1","203C",0,0,0,"Eclipse", TIPO_TICS, "Intel Pentium 4", 1,ARQUITECTURA_32_BITS, "windows 10", 2, 4, "14.0",0,false,0));
+		toolSoftware.add(new Software("Pensamiento Sistemico","305C",0,0,0,"Age of Empires", TIPO_INDUSTRIAL, "Intel o AMD multi-core",1, ARQUITECTURA_64_BITS, "mac 10", 4, 6, "2017",0,false,0));
+		toolSoftware.add(new Software("Diseño de medio","310C",0,0,0,"Creative Cloud", TIPO_DISENO, "Intel o AMD multi-core",2, ARQUITECTURA_64_BITS, "windows 10", 4, 2, "0",0,false,0));
+		toolSoftware.add(new Software("Bases de Datos","202C",0,0,0,"SQL Developer", TIPO_TICS, "Intel",1, ARQUITECTURA_32_BITS, "windows 10", 4, 3, "2013",0,false,0));
+		toolSoftware.add(new Software("Sistemas operativos","202C",0,0,0,"Virtual Box", TIPO_TICS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
+		toolSoftware.add(new Software("Econometria","303C",0,0,0,"@Risk", TIPO_FINANZAS, " Intel o AMD x86-64", 1, ARQUITECTURA_64_BITS, "windows 10", 2, 2, "R2017a",0,false,0));
 
 	}
 
 	public void modeloInicial(int numSoluciones) {
 
 		//cargarInfoSoftware();
+
+//		for (int j = 0; j < toolSoftware.size(); j++) {
+//
+//			Software soft=toolSoftware.get(j);
+//
+//			System.out.println(soft.getCantLicencias()+" | "+soft.getNumeroCursos()+" | "+soft.getNombre());
+//
+//		}
+//		
+//		for (int j = 0; j < salas.size(); j++) {
+//
+//			System.out.println(salas.get(j).getCapacidad()+" | "+salas.get(j).getNombre());
+//
+//		}
+
 
 		Model model= new Model();
 
@@ -386,7 +405,7 @@ public class SolverProject {
 					model.arithm(carrera[i][j], "=",1).post();
 				}
 
-				else  if (!toolSoftware.get(j).getTipo().equals(salas.get(i).getTipo())) {
+				else  if (!salas.get(i).getTipo().contains(toolSoftware.get(j).getTipoDepartamento())) {
 
 					model.arithm(carrera[i][j], "=",0).post();
 				}
@@ -397,6 +416,12 @@ public class SolverProject {
 				}
 
 				else if(toolSoftware.get(j).getNombreSala().equals(salas.get(i).getNombre())) {
+
+					model.arithm(carrera[i][j], "=",1).post();
+				}
+				
+				else if(toolSoftware.get(j).getCantLicencias() != 0 && 
+						toolSoftware.get(j).getCantLicencias()<= salas.get(i).getCapacidad()) {
 
 					model.arithm(carrera[i][j], "=",1).post();
 				}
@@ -476,10 +501,19 @@ public class SolverProject {
 
 			for (int j = 0; j < toolSoftware.size(); j++) {
 
-				if (pesoPorSala>=salas.get(i).getComputadores().getDiscoDuro()) {
+				//System.out.println(pesoPorSala + " | "+(salas.get(i).getComputadores().getDiscoDuro()*PORCENTAJE_DISPONIBLE)/100);
+
+				if (pesoPorSala>=(salas.get(i).getComputadores().getDiscoDuro()*PORCENTAJE_DISPONIBLE)/100) {
 
 					model.arithm(matrizResultado[i][j], "=", 0).post();
-					System.out.println(pesoPorSala + " | "+ salas.get(i).getComputadores().getDiscoDuro()+" Ojo, en la sala " +salas.get(i).getNombre()+" la cantidad de espacio de disco de software supera la capacidad de disco del computador ");
+
+					System.out.println(pesoPorSala + " | "+ (salas.get(i).getComputadores().getDiscoDuro()*PORCENTAJE_DISPONIBLE)/100
+							+" Ojo, en la sala " +salas.get(i).getNombre()
+							+" la cantidad de espacio de disco de software supera la capacidad de disco del computador ");
+
+					reporte+=pesoPorSala + " | "+ (salas.get(i).getComputadores().getDiscoDuro()*PORCENTAJE_DISPONIBLE)/100
+							+" Ojo, en la sala " +salas.get(i).getNombre()
+							+" la cantidad de espacio de disco de software supera la capacidad de disco del computador "+"\n";
 				} 
 
 				else if (matrizPesos[i][j].getValue() != 0) {
@@ -516,8 +550,6 @@ public class SolverProject {
 		matrizCopiaDemanda=copiarMatriz(solucionAnterior, matrizCarreras);
 
 		int count=0;
-
-
 
 		for (int i = 0; i < salas.size(); i++) {
 
@@ -605,44 +637,44 @@ public class SolverProject {
 	}
 	public void imprimirMatrizConSolucion(IntVar[][] matriz, Solution solut) {
 
-			for (int i = 0; i < salas.size(); i++) {
+		for (int i = 0; i < salas.size(); i++) {
 
-				System.out.println(salas.get(i).getNombre());
-				reporte+=salas.get(i).getNombre()+"\n";
-				
-				for (int k = 0; k < toolSoftwareBasico.size(); k++) {
+			System.out.println(salas.get(i).getNombre());
+			reporte+=salas.get(i).getNombre()+"\n";
 
-					if (toolSoftwareBasico.get(k).getSistemaOperativo().toUpperCase().contains("MAC")
-							&& salas.get(i).getComputadores().getSistemaOperativo().toUpperCase().contains("MAC")) {
+			for (int k = 0; k < toolSoftwareBasico.size(); k++) {
 
-						System.out.println(toolSoftwareBasico.get(k).getNombre()+" | "+toolSoftwareBasico.get(k).getSistemaOperativo());
-						reporte+=toolSoftwareBasico.get(k).getNombre()+" | "+toolSoftwareBasico.get(k).getSistemaOperativo()+"\n";
+				if (toolSoftwareBasico.get(k).getSistemaOperativo().toUpperCase().contains("MAC")
+						&& salas.get(i).getComputadores().getSistemaOperativo().toUpperCase().contains("MAC")) {
+
+					System.out.println(toolSoftwareBasico.get(k).getNombre());
+					reporte+=toolSoftwareBasico.get(k).getNombre()+"\n";
+				}
+				else {
+
+					if (!toolSoftwareBasico.get(k).getSistemaOperativo().toUpperCase().contains("MAC")
+							&& !salas.get(i).getComputadores().getSistemaOperativo().toUpperCase().contains("MAC")) {
+
+						System.out.println(toolSoftwareBasico.get(k).getNombre());
+						reporte+=toolSoftwareBasico.get(k).getNombre()+"\n";
 					}
-					else {
-						
-						if (!toolSoftwareBasico.get(k).getSistemaOperativo().toUpperCase().contains("MAC")
-								&& !salas.get(i).getComputadores().getSistemaOperativo().toUpperCase().contains("MAC")) {
 
-							System.out.println(toolSoftwareBasico.get(k).getNombre()+" | "+toolSoftwareBasico.get(k).getSistemaOperativo());
-							reporte+=toolSoftwareBasico.get(k).getNombre()+" | "+toolSoftwareBasico.get(k).getSistemaOperativo()+"\n";
-						}
-										
-					}
-					
 				}
 
-				for (int j = 0; j < toolSoftware.size(); j++) {
+			}
 
-					if (solut.getIntVal(matriz[i][j])==1) {
+			for (int j = 0; j < toolSoftware.size(); j++) {
 
-						if (!nombreSoftware.contains(toolSoftware.get(j).getNombre())) {
+				if (solut.getIntVal(matriz[i][j])==1) {
 
-							nombreSoftware.add(toolSoftware.get(j).getNombre());
+					if (!nombreSoftware.contains(toolSoftware.get(j).getNombre())) {
 
-							System.out.println(toolSoftware.get(j).getNombre()+" | "+toolSoftware.get(j).getSistemaOperativo());
-							reporte+=toolSoftware.get(j).getNombre()+" | "+toolSoftware.get(j).getSistemaOperativo()+"\n";
-						}
+						nombreSoftware.add(toolSoftware.get(j).getNombre());
+
+						System.out.println(toolSoftware.get(j).getNombre());
+						reporte+=toolSoftware.get(j).getNombre()+"\n";
 					}
+				}
 
 			}
 
@@ -675,6 +707,19 @@ public class SolverProject {
 		}
 
 		return matrizResul;
+
+	}
+	
+	public void exportarReporteTxt(String ruta) throws FileNotFoundException {
+		// TO-DO: Desarrollar el método que genera el reporte.
+
+		File archivo= new File(ruta);
+
+		PrintWriter escritor= new PrintWriter(archivo);
+
+		escritor.println(reporte);
+
+		escritor.close();
 
 	}
 

@@ -1,0 +1,380 @@
+;SOFTWARE REQUERIDO PREGRADO 2018-20;;;;;;;;;;;;;;;;;
+;DPTO;SALA;MATERIA_NOMBRE;SOFTWARE REQUERIDO;Licencia;Versión 2018-1;Softw único;Tipo Licencia;cuantas;Nº de cursos;Nº de alumnos;Nº de alumnos Oferta;Procesador;velocidad del procesador;arquitectura;sistema operativo;memoria ram(GB);disco duro(GB)
+;GES;303C/305C/309C;Análisis estratégico;Office;Licenciado-anual;2013;;Ilimitada;;3;83;105; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;GES;203C;Gerencia de proyectos;Microsoft Office Project Profesional;Licenciado-anual;2013;;Contrato Microsoft;;2;18;70; with SSE2 instruction set.;1Ghz;64-bit ;>=Windows 7;2;3
+;GES;207C;Gerencia de calidad;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;31;35; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;GES;205C;Gerencia integral;Simulador Capstone;#N/A;#N/A;;#N/A;;1;20;29; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;GES;304C/305C;Modelamiento para la toma decisiones;HiView;Licenciado-anual;3.2.0.8;;Ilimitada Facultad Administración;;0;0;0;x86 compatible CPU;1 GHz;64 bits;>=Windows XP;2;0.3
+;GES;304C/305C;Modelamiento para la toma decisiones;Equity;Licenciado-anual;3.4.0.6;;Ilimitada Facultad Administración;;0;0;0;;;64 bits;;;
+;GES;304C/305C;Modelamiento para la toma decisiones;OpenSolver - complemento de excel;Aplicación gratuita;Complemento;;Libre;;0;0;0;;;64 bits;;;
+;GES;304C/305C;Modelamiento para la toma decisiones;Lingo Student;Mantenimiento-anual;17.0;;Ilimitada;;3;59;80;;;64 bits;;;
+;GES;304C/305C;Modelamiento para la toma decisiones;Mathematica;Mantenimiento-anual;10.0.1.0;;Limitada a cantidad Concurrente;;3;59;80; Intel Pentium 4;2.4 GHz;64 bits;>=windows7;2;13
+;FIN;304C/305C;Modelamiento para la toma decisiones;@Risk;Mantenimiento-anual;7.5.1;;Limitada a cantidad Concurrente;;3;59;80; with SSE2 instruction set.;2 GHz;64 bits;>= windows 7;2;1
+;GES;304C/305C;Modelamiento para la toma decisiones;TreePlan;Licenciado-perpetuo;Perpetua;;Limitada a cantidad Concurrente;;3;59;80;;;64 bits;;;
+;HUM;108F;Materias - Programa de música;Protools;Licenciado-perpetuo;Perpetua;;Limitada a cantidad;;0;0;0;Intel Core i5 ;2,66 GHz ;64 bits;Windows 10;8;15
+;MER;207C;Investigación De Mercados;SPSS;Licenciado-anual;24;;Limitada a cantidad Concurrente;;4;114;128; with SSE2 instruction set.;2 GHz;64 bits;Windows 10;8;2
+;MER;208C/SCM;Investigación De Mercados;Euromonitor;#N/A;#N/A;;#N/A;;4;114;128;Pentium;200 MHz;64 bits;>=Windows 7 ;0.512;0.4
+;MER;207C/302C;Estrategias de mercadeo en Internet;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;18;32; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;0.512;3
+;MER;207C/302C;Estrategias de mercadeo en Internet;Respondus LockDown Browser;Licenciado-anual;2.0.2.07;;Ilimitada;;1;18;32;;;64 bits;>=Windows7;0.032;0.010
+;MER;207C/302C;Estrategias de mercadeo en Internet;VLC Media Player;Aplicación gratuita;2.2.6;;Libre;;1;18;32;64-bit x86 Intel Core;1.3GHz;64 bits;Windows;4;0.7
+;MER;302C;Estrategias de mercadeo en Internet;IHMC CmapTools;Aplicación gratuita;6.03;;Libre;;1;18;32;;;64 bits;;;
+;MER;SCM1;Investigación cualitativa de mercados;Atlas TI;Licenciado-anual;8.1;;Ilimitada;;2;60;64;Intel/AMD;1GHz;64 bits;>=Windows 7;0.5;0.050
+;MER;203C/208C;Investigación Cuantitativa De Mercados;SPSS;Licenciado-anual;24;;Limitada a cantidad Concurrente;;2;63;64; with SSE2 instruction set.;2 GHz;64 bits;Windows 10;8;2
+;MER;202C;Mercadeo digital;Notepad++;Aplicación gratuita;7.5.1;;Libre;;1;23;24;intel;1Ghz;64 bits;>=Windows XP;2;1
+;MER;202C;Mercadeo digital;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;23;24; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;MER;202C;Mercadeo digital;VLC Media Player;Aplicación gratuita;2.2.6;;Libre;;1;23;24;64-bit x86 Intel Core;1.3GHz;64 bits;Windows;4;0.7
+;MER;207C;Mercadeo en redes sociales;Respondus LockDown Browser;Licenciado-anual;2.0.2.07;;Ilimitada;;1;29;29;;;64 bits;;;
+;MER;207C;Mercadeo en redes sociales;VLC Media Player;Aplicación gratuita;2.2.6;;Libre;;1;29;29;64-bit x86 Intel Core;1.3GHz;64 bits;Windows;4;0.7
+;MER;2047C;Mercadeo en redes sociales;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;29;29; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;MER;202C;Marketing sensorial;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;19;30; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;MER;202C;Marketing sensorial;SPSS;Licenciado-anual;24;;Limitada a cantidad Concurrente;;1;19;30; with SSE2 instruction set.;2 GHz;64 bits;Windows 10;8;2
+;FIN;202C/203C/303C;Ingeniería económica;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;5;125;127;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;FIN;202C/203C/303C;Ingeniería económica;Office;Licenciado-anual;2013;;Contrato Microsoft;;5;125;127; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;FIN;202C/203C/208C/SCM3;Teoría de Inversión;Office;Licenciado-anual;2013;;Contrato Microsoft;;6;145;149; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;FIN;202C/203C/208C/304C/305C;Administración financiera;Office;Licenciado-anual;2013;;Contrato Microsoft;;7;200;174; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;FIN;303C;Burkenroad reports: Modelos y reportes en Finanzas;@Risk;Mantenimiento-anual;7.5.1;;Limitada a cantidad Concurrente;;0;0;0; with SSE2 instruction set.;2 GHz;64 bits;>= windows 7;2;1
+;FIN;302C;Burkenroad reports: Modelos y reportes en Finanzas;Office;Licenciado-anual;2013;;Contrato Microsoft;;0;0;0; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;FIN;202C;Contabilidad financiera II;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;25;30; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;FIN;303C;Estrategias de financiamiento;@Risk;Mantenimiento-anual;7.5.1;;Limitada a cantidad Concurrente;;1;13;30; with SSE2 instruction set.;2 GHz;64 bits;>= windows 7;2;1
+;FIN;303C;Estrategias de financiamiento;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;13;30; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;FIN;205C;Contabilidad de consolidación empresarial;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;25;24; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;FIN;303C;Reestructuración y valoración de empresas;@Risk;Mantenimiento-anual;7.5.1;;Limitada a cantidad Concurrente;;1;7;30; with SSE2 instruction set.;2 GHz;64 bits;>= windows 7;2;1
+;FIN;303C;Reestructuración y valoración de empresas;Forecast Pro XE;Licenciado-anual;6.0.1.3;SI;Limitada a cantidad;36;1;7;30;;;64 bits;;;
+;FIN;303C;Reestructuración y valoración de empresas;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;7;30; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;FIN;303C;Finanzas internacionales I;Office;Licenciado-anual;2013;;Contrato Microsoft;;3;92;84; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;FIN;202C/203C/205C;Contabilidad financiera I;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;15;35; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;FIN;208C;Mercado Internacional de capitales;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;25;29; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;FIN;303C;Fundamentos de derivados;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;6;30; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;FIN;303C;Fundamentos de derivados;@Risk;Mantenimiento-anual;7.5.1;;Limitada a cantidad Concurrente;;1;6;30; with SSE2 instruction set.;2 GHz;64 bits;>= windows 7;2;1
+;FIN;203C;Presupuestos;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;16;25; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;FIN;208C;Gerencia de riesgos financieros;Office;Licenciado-anual;2013;;Contrato Microsoft;;0;0;0; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;FIN;202C/205C;Análisis financiero y Proyectos de Inversión;Office;Licenciado-anual;2013;;Contrato Microsoft;;3;67;84; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;IND;304C;Planeación y control de las operaciones;Office;Licenciado-anual;2013;;Contrato Microsoft;;2;51;40; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;IND;;Distribución de planta e instalaciones;SolidWorks;Licenciado-anual;5.0;;Limitada a cantidad Concurrente;;1;39;35;;;64 bits;;;
+;IND;;Distribución de planta e instalaciones;AutoCAD;Convenio;2018;;Limitada a cantidad;;1;39;35;64-bit (x64) processor;1 GHz ;64 bits;Windows 10;8;16
+;IND;207C;Calidad en Las operaciones;Minitab;Licenciado-anual;18.1.0.0;;Limitada a cantidad Concurrente;;2;48;58;Processor Intel Pentium 4;2Ghz;64 bits;>=Windows 7;2;2
+;IND;207C;Calidad en Las operaciones;Office;Licenciado-anual;2013;;Contrato Microsoft;;2;48;58; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;IND;305C;Investigación de operaciones;Office;Licenciado-anual;2013;;Contrato Microsoft;;3;68;84; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;IND;305C;Investigación de operaciones;WEKA;Aplicación gratuita;3.8.1;;Libre;;3;68;84;;;64 bits;;;
+;IND;305C;Investigación de operaciones;Máquina Virtual Ing,Industrial, XP,LOGWARE,WinQSB,EasyReg,Rstudio,Software R;#N/A;#N/A;;#N/A;;3;68;84;Core 2 Duo;3Ghz;64 bits; >=Windows 7;4;40
+;IND;305C;Investigación de operaciones;OpenSolver - complemento de excel;Aplicación gratuita;Complemento;;Libre;;3;68;84;;;64 bits;;;
+;IND;305C;Investigación de operaciones;SolverStudio - Complemento de Excel;Aplicación gratuita;Complemento;;Libre;;3;68;84;;;64 bits;;;
+;IND;305C;Investigación de operaciones;Lingo Student;Mantenimiento-anual;17.0;;Ilimitada;;3;68;84;;;64 bits;;;
+;IND;201H/304C;Procesos y procedimientos;Office;Licenciado-anual;2013;;Contrato Microsoft;;3;55;60; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;IND;201H/304C;Procesos y procedimientos;Microsoft Office Visio Professional;Licenciado-anual;2013;;Contrato Microsoft;;3;55;60; with SSE2 instruction set.;1Ghz;64 bits;>=Windows 7;2;3
+;IND;304C;Ingeniería del ciclo de vida;SimaPro Multi;Licenciado-anual;8.3.0.0;;Departamental License;;2;32;40; with SSE2 instruction set.;1.4 Ghz;64 bits;>=Windows 7;8;12
+;IND;304C;Ingeniería del ciclo de vida;SolidWorks;Licenciado-anual;5.0;;Limitada a cantidad Concurrente;;2;32;40;;;64 bits;;;
+;IND;305C;Gerencia de proyectos en Ingeniería;Microsoft Office Project Profesional;Licenciado-anual;2013;;Contrato Microsoft;;2;69;70; with SSE2 instruction set.;1Ghz;64 bits;>=Windows 7;2;3
+;IND;101C/205C;Pensamiento sistémico;Rise of Nations;Licenciado-perpetuo;#¡REF!;SI;Limitada a cantidad;7;2;60;60;compatible processor with SSE3 support.;1.4 GHz;64 bits;>=Windows XP.;0.256;3.3
+;IND;101C/205C;Pensamiento sistémico;Age of Empires III;Licenciado-perpetuo;Online;SI;Limitada a cantidad;31;2;60;60; with SSE2 instruction set.;1.4 Ghz;64 bits;>=WindowsXP.;0.256;2
+;IND;101C/205C;Pensamiento sistémico;OffWorld Traiding Company;Licenciado-perpetuo;Online;SI;Limitada a cantidad;31;2;60;60;;;64 bits;;;
+;IND;101C/205C;Pensamiento sistémico;Factorio;Licenciado-perpetuo;Online;SI;Limitada a cantidad;31;2;60;60;;;64 bits;;;
+;IND;101C/205C;Pensamiento sistémico;Vensim® PLE;#¡REF!;7.1;;Libre;;2;60;60;;;64 bits;;;
+;IND;101C/205C;Pensamiento sistémico;IHMC CmapTools;Aplicación gratuita;6.03;;Libre;;2;60;60;;;64 bits;;;
+;IND;205C;Dinámica de sistemas;Vensim® PLE;#¡REF!;7.1;;Libre;;1;19;30;;;64 bits;;;
+;IND;303C/304C;Dinámica de sistemas;Stella Architect;Mantenimiento-anual;1.5;;Limitada a cantidad Concurrente;;1;19;30;;;64 bits;;;
+;IND;303C/304C;Dinámica de sistemas;I see Player;Aplicación gratuita;1.5;;Libre;;1;19;30;;;64 bits;;;
+;IND;205C;Atención y asesoría a estudiantes;Rise of Nations;Licenciado-perpetuo;#¡REF!;;Limitada a cantidad;;0;0;0;Pentium 3;1.4 GHz;64 bits;>=Windows XP.;0.256;3.3
+;IND;305C;Atención y asesoría a estudiantes;Age of Empires III;Licenciado-perpetuo;Online;SI;Limitada a cantidad;31;0;0;0; with SSE2 instruction set.;1.4 Ghz;64 bits;>=WindowsXP.;0.256;2
+;IND;202H;Introducción a la Ingeniería Industrial;Office;Licenciado-anual;2013;;Contrato Microsoft;;3;43;48; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;IND;202H;Introducción a la Ingeniería Industrial;Microsoft Office Visio Professional;Licenciado-anual;2013;;Contrato Microsoft;;3;43;48; with SSE2 instruction set.;1Ghz;64 bits;>=Windows 7;2;3
+;IND;205C;Curso intermedio de Microsoft Excel;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;17;30; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;IND;205C;Curso intermedio de Microsoft Excel;PowerBi Desktop;Aplicación gratuita;2.52.4921.682;;Libre;;1;17;30; with SSE2 instruction set.;2 GHz;64 bits;>= windows XP;2;3
+;IND;305C;Curso avanzado de Microsoft Excel;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;17;30; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;IND;305C;Curso avanzado de Microsoft Excel;PowerBi Desktop;Aplicación gratuita;2.52.4921.682;;Libre;;1;17;30; with SSE2 instruction set.;2 GHz;64 bits;>= windows XP;2;3
+;IND;SALÓN;Cadenas de abastecimiento;Office;Licenciado-anual;2013;;Contrato Microsoft;;2;65;70; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;IND;SALÓN;Cadenas de abastecimiento;Rise of Nations;Licenciado-perpetuo;#¡REF!;SI;Limitada a cantidad;7;2;65;70;Pentium 3;1.4 GHz;64 bits;>=Windows XP.;0.256;3.3
+;IND;SALÓN;Cadenas de abastecimiento;OffWorld Traiding Company;Licenciado-perpetuo;Online;SI;Limitada a cantidad;31;2;65;70;;;64 bits;;;
+;IND;SALÓN;Cadenas de abastecimiento;Factorio;Licenciado-perpetuo;Online;SI;Limitada a cantidad;31;2;65;70;;;64 bits;;;
+;IND;207C / 304C;Análisis de decisiones;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;33;38; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;FIN;207C / 303C;Análisis de decisiones;@Risk;Mantenimiento-anual;7.5.1;;Limitada a cantidad Concurrente;;1;33;38; with SSE2 instruction set.;2 GHz;64 bits;>= windows 7;2;1
+;IND;201H;Automatización industrial;RoboPro;Licenciado-perpetuo;4.2.3;;Limitada a cantidad Concurrente;;0;0;0;;;64 bits;;;
+;IND;305C;Simulación discreta;Office;Licenciado-anual;2013;;Contrato Microsoft;;2;47;56; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;IND;305C;Simulación discreta;Promodel;Mantenimiento-anual;Perpetua (9.1.0.1639);;Limitada a cantidad Concurrente;;2;47;56;>=Pentium 4 ; 3.0 GHz ;64 bits;Windows 7 or 8;2;1.5
+;IND;305C;Simulación discreta;Lingo Student;Mantenimiento-anual;17.0;;Ilimitada;;2;47;56;;;64 bits;;;
+;IND;305C;Simulación discreta;Máquina Virtual Ing,Industrial, XP,LOGWARE,WinQSB,EasyReg,Rstudio,Software R;#N/A;#N/A;;#N/A;;2;47;56;Core 2 Duo;3Ghz;64 bits; >=Windows 7;4;40
+;FIN;305C;Simulación discreta;@Risk;Mantenimiento-anual;7.5.1;;Limitada a cantidad Concurrente;;2;47;56; with SSE2 instruction set.;2 GHz;64 bits;>= windows 7;2;1
+;IND;201H;Scheduling;Matlab;Licenciado-anual;9.3.0.713579;;Limitada a cantidad Concurrente;;0;0;0;Intel o AMD X86-64;1 GHz;64 bits;>=Windows 7;2;2
+;IND;205C;Modelación en Excel;SQL Server;Licenciado-anual;2014.0120.2000.08;;Convenio;;1;8;30;x64 Processor; 2.0 GHz ;64 bits;Windows 10 ;2;8
+;IND;205C;Introducción a visual basic for applications;Office;Licenciado-anual;2013;;Contrato Microsoft;;0;0;0; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;ECO;303C;Econometría;Office;Licenciado-anual;2013;;Contrato Microsoft;;3;87;90; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;ECO;303C;Econometría;TexNicCenter Latex;Aplicación gratuita;2.02;SI;Libre;;3;87;90;;;64 bits;;;
+;ECO;303C;Econometría;Miktex;Aplicación gratuita;2.9.6515;SI;Libre;;3;87;90;;;64 bits;;;
+;ECO;303C;Econometría;Stata SE ;Licenciado-anual;15.1;SI;Limitada a cantidad;36;3;87;90; 64-bit processor;2 GHz;64 bits;Windows 8;2;1
+#¡REF!;ECO;303C;Econometría II;Miktex;Aplicación gratuita;2.9.6515;;Libre;;0;0;0;;;64 bits;;;
+;ECO;207C/302C;Econometría II;EViews ;Licenciado-anual;10;;Limitada a cantidad Concurrente;;0;0;0;;;64 bits;;;
+;ECO;207C/302c;Econometría II;TexNicCenter Latex;Aplicación gratuita;2.02;;Libre;;0;0;0;;;64 bits;;;
+;ECO;303C/203C;Medición económica;Office;Licenciado-anual;2013;;Contrato Microsoft;;3;77;88; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;ECO;303C;Econometría Avanzada I;Miktex;Aplicación gratuita;2.9.6515;;Libre;;0;0;0;;;64 bits;;;
+;ECO;303C;Econometría Avanzada I;Stata SE ;Licenciado-anual;15.1;SI;Limitada a cantidad;36;0;0;0; 64-bit processor;2 GHz;64 bits;Windows 8;2;1
+;ECO;303C;Econometría Avanzada I;TexNicCenter Latex;Aplicación gratuita;2.02;;Libre;;0;0;0;;;64 bits;;;
+;ECO;303C;Excel avanzado;Office;Licenciado-anual;2013;;Contrato Microsoft;;5;169;170; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;ECO;304C;Introducción al data analytics para la toma de decisiones;Software R;Aplicación gratuita;#¡REF!;;Libre;;1;17;20;Intel Core 2 Duo;2.4GHz;64 bits; Windows 10;16;5
+;ECO;304C;Introducción al data analytics para la toma de decisiones;Rstudio;Aplicación gratuita;1.1.383;;Libre;;1;17;20;;;64 bits;;;
+;IDI;201C/211C;Alemán;Rosetta Stone;Licenciado-perpetuo;Perpetua;SI;Limitada a cantidad;22;2;41;44;Intel Atom;2.33GHz ;64 bits;>=Windows 7;1;3
+;IDI;201C/211C;Alemán;Software para exámenes TOEFL;Licenciado-perpetuo;Perpetua;SI;Limitada a cantidad;22;2;41;44;>= Intel pentium 3;1 GHz;64 bits;>=Windows 7;0.128;0.150
+;IDI;201C/211C;Francés;Rosetta Stone;Licenciado-perpetuo;Perpetua;SI;Limitada a cantidad;22;6;115;132;Intel Atom;2.33GHz ;64 bits;>=Windows 7;1;3
+;IDI;201C/211C;Francés;Software para exámenes TOEFL;Licenciado-perpetuo;Perpetua;SI;Limitada a cantidad;22;6;115;132;>= Intel pentium 3;1 GHz;64 bits;>=Windows 7;0.128;0.150
+;IDI;201C/211C;Portugués;Rosetta Stone;Licenciado-perpetuo;Perpetua;SI;Limitada a cantidad;22;9;147;198;Intel Atom;2.33GHz ;64 bits;>=Windows 7;1;3
+;IDI;201C/211C;Portugués;Software para exámenes TOEFL;Licenciado-perpetuo;Perpetua;SI;Limitada a cantidad;22;9;147;198;>= Intel pentium 3;1 GHz;64 bits;>=Windows 7;0.128;0.150
+;IDI;201C/211C;Inglés;Rosetta Stone;Licenciado-perpetuo;Perpetua;SI;Limitada a cantidad;22;16;165;372;Intel Atom;2.33GHz ;64 bits;>=Windows 7;1;3
+;IDI;201C/211C;Inglés;Software para exámenes TOEFL;Licenciado-perpetuo;Perpetua;SI;Limitada a cantidad;22;16;165;372;>= Intel pentium 3;1 GHz;64 bits;>=Windows 7;0.128;0.150
+;IDI;201C/211C;Italiano;Rosetta Stone;Licenciado-perpetuo;Perpetua;SI;Limitada a cantidad;22;9;161;198;Intel Atom;2.33GHz ;64 bits;>=Windows 7;1;3
+;IDI;201C/211C;Italiano;Software para exámenes TOEFL;Licenciado-perpetuo;Perpetua;SI;Limitada a cantidad;22;9;161;198;>= Intel pentium 3;1 GHz;64 bits;>=Windows 7;0.128;0.150
+;IDI;201C/211C;Mandarín;Rosetta Stone;Licenciado-perpetuo;Perpetua;SI;Limitada a cantidad;22;3;26;66;Intel Atom;2.33GHz ;64 bits;>=Windows 7;1;3
+;IDI;201C/211C;Mandarín;Software para exámenes TOEFL;Licenciado-perpetuo;Perpetua;SI;Limitada a cantidad;22;3;26;66;>= Intel pentium 3;1 GHz;64 bits;>=Windows 7;0.128;0.150
+;IDI;201C;Inglés I Y Laboratorio;Rosetta Stone;Licenciado-perpetuo;Perpetua;SI;Limitada a cantidad;22;16;182;372;Intel Atom;2.33GHz ;64 bits;>=Windows 7;1;3
+;IDI;211C;Inglés Ii Y Laboratorio;Rosetta Stone;Licenciado-perpetuo;Perpetua;SI;Limitada a cantidad;22;12;265;284;Intel Atom;2.33GHz ;64 bits;>=Windows 7;1;3
+;IDI;201C;Inglés III  - Escrito;Rosetta Stone;Licenciado-perpetuo;Perpetua;SI;Limitada a cantidad;22;14;316;330;Intel Atom;2.33GHz ;64 bits;>=Windows 7;1;3
+;IDI;211C;Inglés III  - Oral;Rosetta Stone;Licenciado-perpetuo;Perpetua;SI;Limitada a cantidad;22;14;316;330;Intel Atom;2.33GHz ;64 bits;>=Windows 7;1;3
+;MAT;;Matemática discreta;Lambda calculator;Aplicación gratuita;#¡REF!;;Libre;;1;34;36;;;64 bits;;;
+;MAT;207C;Regresión y muestreo;SPSS;Licenciado-anual;24;;Limitada a cantidad Concurrente;;5;121;129; with SSE2 instruction set.;2 GHz;64 bits;Windows 10;8;2
+;MAT;207C;Regresión y muestreo;MegaStat - Complemento de excel;Aplicación gratuita;Complemento;;Libre;;5;121;129;;;64 bits;;;
+;MAT;207C;Regresión y muestreo;Matlab;Licenciado-anual;9.3.0.713579;;Limitada a cantidad Concurrente;;5;121;129;Intel o AMD X86-64;1 GHz;64 bits;>=Windows 7;2;2
+;MAT;207C;Regresión y muestreo;Software R;Aplicación gratuita;#¡REF!;;Libre;;5;121;129;Intel Core 2 Duo;2.4GHz;64 bits; Windows 10;16;5
+;MAT;207C;Regresión y muestreo;Minitab;Licenciado-anual;18.1.0.0;;Limitada a cantidad Concurrente;;5;121;129;Processor Intel Pentium 4;2Ghz;64 bits;>=Windows 7;2;2
+;MAT;207C;Regresión y muestreo;Office;Licenciado-anual;2013;;Contrato Microsoft;;5;121;129; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;MAT;;Informática teórica;CFG Experimenter;Aplicación gratuita;1.0;;Libre;;1;23;30;;;;;;
+;MAT;;Informática teórica;Visual Turing Machine;Aplicación gratuita;2.0;;Libre;;1;23;30;;;64 bits;;;
+;MAT;203C/303C;Fundamentos De Probabilidad Y Estadística;Office;Licenciado-anual;2013;;Contrato Microsoft;;3;90;108; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;MAT;205C/207/305C;Diseño de experimentos;Minitab;Licenciado-anual;18.1.0.0;;Limitada a cantidad Concurrente;;2;52;48;Processor Intel Pentium 4;2Ghz;64 bits;>=Windows 7;2;2
+;MAT;205C/207/305C;Diseño de experimentos;Matlab;Licenciado-anual;9.3.0.713579;;Limitada a cantidad Concurrente;;2;52;48;Intel o AMD X86-64;1 GHz;64 bits;>=Windows 7;2;2
+;MAT;205C/207/305C;Diseño de experimentos;Software R;Aplicación gratuita;#¡REF!;;Libre;;2;52;48;Intel Core 2 Duo;2.4GHz;64 bits; Windows 10;16;5
+;MAT;205C/207/305C;Diseño de experimentos;MegaStat - Complemento de excel;Aplicación gratuita;Complemento;;Libre;;2;52;48;;;64 bits;;;
+;MAT;205C/207/305C;Diseño de experimentos;Office;Licenciado-anual;2013;;Contrato Microsoft;;2;52;48; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;MAT;;Cálculo CN;Mathematica;Mantenimiento-anual;10.0.1.0;;Limitada a cantidad Concurrente;;2;58;72; Intel Pentium 4;2.4 GHz;64 bits;>=windows7;2;13
+;MAT;;Álgebra y Funciones / Cálculo de una variable / Cálculo de varias variables / Ecuaciones diferenciales / Álgebra lineal;Geogebra;Aplicación gratuita;6.0.400.0;;Libre;;24;623;644;Intel Pentium 4;1 ghz;64 bits;>=Windows  7;0.512;0.050
+;TIC;;Gerencia de Proyectos de T.I.;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;9;260;270;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;;Gerencia de Proyectos de T.I.;Microsoft Office Project Profesional;Licenciado-anual;2013;;Contrato Microsoft;;5;178;180; with SSE2 instruction set.;1Ghz;64 bits;>=Windows 7;2;3
+;TIC;;Ingeniería de procesos;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;4;141;144;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;102B;Bases de datos;Oracle Database;Aplicación gratuita;#¡REF!;;Libre;;7;217;210;Intel Pentium;1Ghz;64 bits;>=Windows 7;4;10
+;TIC;102B;Bases de datos;Oracle SQL Developer;Aplicación gratuita;#¡REF!;;Libre;;1;16;35;Pentium IV;2 GHz;64 bits;Windows;1;0.042
+;TIC;102B;Bases de datos;Oracle SQL Developer Datamodeler;Aplicación gratuita;#¡REF!;;Libre;;1;16;35;;;64 bits;;;
+;TIC;102B;Bases de datos;JRE Y JDK ;Aplicación gratuita;#¡REF!;;Libre;;1;24;30;;;64 bits;;;
+;TIC;;Proyecto de grado II-SIS;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;1;20;19;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;202C;Sistemas operacionales;VMware Player;Aplicación gratuita;14.0;;Libre;;1;20;19;;;64 bits;;;
+;TIC;202C;Sistemas operacionales;VirtualBox;Aplicación gratuita;5.1.30;;Libre;;1;20;19;Core 2 Duo;3Ghz;64 bits; >=Windows 7;2;10
+;TIC;202C;Sistemas operacionales;Maquina Virtual,Programaci¢n Red, W7:,Netbeans,Mr. Bayes,Garli,PartitionFinder,Python 3.6,Pycharm;#N/A;#N/A;;#N/A;;1;20;19;Core 2 Duo;3Ghz;64 bits; >=Windows 7;4;40
+;TIC;202C;Sistemas operacionales;JRE Y JDK ;Aplicación gratuita;#¡REF!;;Libre;;1;13;25;;;64 bits;;;
+;TIC;202C;Sistemas operacionales;Python;Aplicación gratuita;3.6.3;;Libre;;1;22;24;Intel Atom; 2.60 GHz;64 bits;Window 10;8;3
+;TIC;;Proyecto de grado I - SIS;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;1;22;24;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;202C/203C;Habilidades básicas en computación;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;22;24; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;TIC;202C /203C /207C /208C/303C;Habilidades básicas en hojas electrónicas;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;22;24; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;TIC;202C /203C /207C /208C/303C;Habilidades básicas en hojas electrónicas;Turning Point;Licenciado-perpetuo;5.3 (Perpetua);;Limitada a cantidad Concurrente;;1;22;24;;;64 bits;;;
+;TIC;202C /203C /207C /208C/303C;Habilidades básicas en hojas electrónicas;7zip;Aplicación gratuita;17.01;;Libre;;1;13;25;>= Intel pentium 3;1 GHz;64 bits;>= windows XP;0.064;0.128
+;TIC;310C;Diseñando con Algoritmos;Processing + librerías;Aplicación gratuita;3.3.6;;Libre;;10;268;270;Intel i5;3 ghz;64 bits; Windows 10;16;64
+;TIC;310C;Diseñando con Algoritmos;GIT (Windows-MAC);Aplicación gratuita;0.9.3;;Libre;;10;278;282;;;;;;
+;TIC;310C;Diseñando con Algoritmos;Reactivision;Aplicación gratuita;1.5.1;;Libre;;10;278;282;;;;;;
+;TIC;310C;Diseñando con Algoritmos;SDK Kinect;Aplicación gratuita;#¡REF!;;Libre;;10;278;282;64-bit processor.;3.1 GHz;64 bits;>=Windows 7;2;1
+;TIC;310C;Diseñando con Algoritmos;NodeJS;Aplicación gratuita;#¡REF!;;Libre;;1;20;20;;;64 bits;;;
+;TIC;310C;Diseñando con Algoritmos;Visual Studio Code;Convenio;1.18.1;;Contrato Microsoft;;1;20;20; with SSE2 instruction set.;1.6 GHz;64 bits;>=Windows 7;1;0.2
+;TIC;310C;Diseñando con Algoritmos;SDK Leapmotion;Aplicación gratuita;2.3.1;;Libre;;1;20;20;Intel i5;3.70 GHz;64 bits;>=Windows 7;8;3
+;TIC;310C;Diseñando con Algoritmos;Creative Cloud;Licenciado-anual;Creative Coud (crear paquete);;Limitada a cantidad;;1;20;20;Intel Core 2 Duo;3,33GHz;64 bits;>=Windows 7;4;10.5
+;TIC;203C/208C;Programación Web;Brackets;Aplicación gratuita;1.11.0.175.24;;Libre;;1;20;20;Multicore Intel processor.;1 Ghz;64 bits;Mac OSX 10.6.8;2;0.2
+;TIC;203C/208C;Programación Web;Visual Studio Code;Convenio;1.18.1;;Contrato Microsoft;;1;20;20; with SSE2 instruction set.;1.6 GHz;64 bits;>=Windows 7;1;0.2
+;TIC;203C/208C;Programación Web;NodeJS;Aplicación gratuita;#¡REF!;;Libre;;1;20;20;;;64 bits;;;
+;TIC;203C/208C;Programación Web;MongoDB Community Server;Aplicación gratuita;#¡REF!;;Libre;;1;20;20;;;;;;
+;TIC;203C/208C;Programación Web;Enide;Aplicación gratuita;Mars (4.5.0);;Libre;;1;25;25;;;64 bits;Windows 10;;
+;TIC;203C/208C;Programación Web;MySQL Workbench;Aplicación gratuita;6.2.5.0;;Libre;;1;25;25;;;;;;
+;TIC;203C/208C;Programación Web;RoboMongo;Aplicación gratuita;3.4;;Libre;;1;25;25;;;64 bits;;;
+;TIC;203C/208C;Programación Web;Atom;#¡REF!;#¡REF!;;Libre;;1;25;25;>=Pentium 4;1.8 GHz;64 bits;>=Windows 7;2;10
+;TIC;203C/208C;Programación Web;Creative Cloud;Licenciado-anual;Creative Coud (crear paquete);;Limitada a cantidad;;1;25;25;Intel Core 2 Duo;3,33GHz;64 bits;>=Windows 7;4;10.5
+;TIC;203C/208C;Programación Web;GIT (Windows-MAC);Aplicación gratuita;0.9.3;;Libre;;1;25;25;Intel Core 2;1 GHz;64 bits;>=Windows Vista;1;0.2
+;TIC;203C/208C;Programación Web;JRE Y JDK ;Aplicación gratuita;#¡REF!;;Libre;;1;25;25;;;64 bits;;;
+;TIC;501L;Procesamiento digital de señales;Matlab;Licenciado-anual;9.3.0.713579;;Limitada a cantidad Concurrente;;1;25;25;Intel o AMD X86-64;1 GHz;64 bits;>=Windows 7;2;2
+;TIC;501L;Procesamiento digital de señales;J-DSP;Aplicación gratuita;#¡REF!;;Libre;;1;25;25;;;64 bits;;;
+;TIC;;Proyecto de grado I - TEL;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;1;25;25;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;;Proyecto de grado II - TEL;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;1;25;25;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;203C;Comunicaciones digitales;Matlab;Licenciado-anual;9.3.0.713579;;Limitada a cantidad Concurrente;;0;0;0;Intel o AMD X86-64;1 GHz;64 bits;>=Windows 7;2;2
+;TIC;203C;Comunicaciones digitales;Microsoft Office Visio Professional;Licenciado-anual;2013;;Contrato Microsoft;;0;0;0; with SSE2 instruction set.;1Ghz;64 bits;>=Windows 7;2;3
+;TIC;501L;Internet de las Cosas;Arduino;Aplicación gratuita;1.8.5;;Libre;;1;13;25; with SSE2 instruction set.;1Ghz;64 bits;>=Windows7;1;0.103
+;TIC;501L;#¡REF!;Fritzing;Aplicación gratuita;0.9.3;;Libre;;1;13;25;;;64 bits;;;
+;TIC;501L;#¡REF!;Intel Galileo;Aplicación gratuita;#¡REF!;;Libre;;1;14;24;;;64 bits;;;
+;TIC;501L;#¡REF!;J-DSP;Aplicación gratuita;#¡REF!;;Libre;;1;14;24;;;64 bits;;;
+;TIC;501L;#¡REF!;JRE Y JDK ;Aplicación gratuita;#¡REF!;;Libre;;1;4;24;;;64 bits;;;
+;TIC;501L;#¡REF!;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;0;0;0;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;310C/311C;Ecosistemas de aplicaciones;Eclipse Oxygen;Aplicación gratuita;4.7.1;;Libre;;0;0;0;With SEE ;1.5 Ghz;64 bits;>=Windows 7;2;1
+;TIC;310C/311C;Ecosistemas de aplicaciones;Android Studio + paquetes SDK;Aplicación gratuita;3.0.1;;Libre;;0;0;0;intel;2Ghz;64 bits;Windows 10;9;6
+;TIC;310C/311C;Ecosistemas de aplicaciones;Processing + librerías;Aplicación gratuita;3.3.6;;Libre;;0;0;0;Intel i5;3 ghz;64 bits; Windows 10;16;64
+;TIC;310C/311C;Ecosistemas de aplicaciones;SDK Android;Aplicación gratuita;36.4111454;;Libre;;0;0;0;;;64 bits;;;
+;TIC;310C/311C;Ecosistemas de aplicaciones;Visual Studio Code;Convenio;1.18.1;;Contrato Microsoft;;2;34;44; with SSE2 instruction set.;1.6 GHz;64 bits;>=Windows 7;1;0.2
+;TIC;310C/311C;Ecosistemas de aplicaciones;NodeJS;Aplicación gratuita;#¡REF!;;Libre;;2;34;44;;;64 bits;;;
+;TIC;310C/311C;Ecosistemas de aplicaciones;Google USB Driver;Aplicación gratuita;#¡REF!;;Libre;;2;34;44;Pentium 4;1Ghz;64 bits;>=Windows 7;0.128;0.1
+;TIC;310C/311C;Ecosistemas de aplicaciones;GIT (Windows-MAC);Aplicación gratuita;0.9.3;;Libre;;2;34;44;Intel Core 2;1 GHz;64 bits;>=Windows Vista;1;0.2
+;TIC;310C/311C;Ecosistemas de aplicaciones;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;2;34;44;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;310C/311C;Ecosistemas de aplicaciones;Creative Cloud;Licenciado-anual;Creative Coud (crear paquete);;Limitada a cantidad;;2;34;44;Intel Core 2 Duo;3,33GHz;64 bits;>=Windows 7;4;10.5
+;TIC;311C;Fundamentos De Programación Para Diseño;Processing + librerías;Aplicación gratuita;3.3.6;;Libre;;2;34;44;Intel i5;3 ghz;64 bits; Windows 10;16;64
+;TIC;311C;Fundamentos De Programación Para Diseño;NodeJS;Aplicación gratuita;#¡REF!;;Libre;;2;34;44;;;64 bits;;;
+;TIC;311C;Fundamentos De Programación Para Diseño;Visual Studio Code;Convenio;1.18.1;;Contrato Microsoft;;2;34;44; with SSE2 instruction set.;1.6 GHz;64 bits;>=Windows 7;1;0.2
+;TIC;311C;Fundamentos De Programación Para Diseño;Creative Cloud;Licenciado-anual;Creative Coud (crear paquete);;Limitada a cantidad;;2;34;44;Intel Core 2 Duo;3,33GHz;64 bits;>=Windows 7;4;10.5
+;TIC;202C/203C;Algoritmos y Estructuras de datos;Eclipse Oxygen;Aplicación gratuita;4.7.1;;Libre;;1;21;25;With SEE ;1.5 Ghz;64 bits;>=Windows 7;2;1
+;TIC;202C/203C;Algoritmos y Estructuras de datos;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;1;21;25;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;202C/203C;Algoritmos y Estructuras de datos;The objectAid UML Explorer for Eclipse;Aplicación gratuita;#¡REF!;;Libre;;1;21;25;;;64 bits;;;
+;TIC;202C/203C;Algoritmos y Estructuras de datos;Adobe Reader;Aplicación gratuita;2018.009.20044;;Libre;;1;21;25;Intel; 1,3 GHz;64 bits;>=Windows 7;0.256;0.320
+;TIC;202C/203C;Algoritmos y Estructuras de datos;Process Dashboard with PSP and TSP Process Extensions;Aplicación gratuita;2.4;;Libre;;2;36;49;;;64 bits;;;
+;TIC;202C/203C;Algoritmos y Estructuras de datos;JRE Y JDK ;Aplicación gratuita;#¡REF!;;Libre;;2;36;49;;;64 bits;;;
+;TIC;202C/203C;Algoritmos y Estructuras de datos;Consola de Windows (CMD);Aplicación gratuita;6.1.7601;;libre;;2;36;49;;;64 bits;;;
+;TIC;202C/203C;Algoritmos y Estructuras de datos;Intellij IDEA Community;Aplicación gratuita;2017.2.6;;Libre;;2;36;49;;;64 bits;;;
+;TIC;310C;Diseño de videojuegos;Unity 3D;Aplicación gratuita;2017.2.0;;Libre;;2;36;49;instrucciones SSE2;3.4 GHz;64 bits;>=Windows 7;8;4.1
+;TIC;310C;Diseño de videojuegos;3ds Max Studio;Convenio;2018(20.0.0.966);;Limitada a cantidad Concurrente;;2;36;49;Intel o AMD multicore;1 GHz;64 bits;>=Windows 7;4;6
+;TIC;310C;Construcción de videojuegos;Unity 3D;Aplicación gratuita;2017.2.0;;Libre;;2;36;49;instrucciones SSE2;3.4 GHz;64 bits;>=Windows 7;8;4.1
+;TIC;310C;Construcción de videojuegos;3ds Max Studio;Convenio;2018(20.0.0.966);;Limitada a cantidad Concurrente;;2;36;49;Intel o AMD multicore;1 GHz;64 bits;>=Windows 7;4;6
+;TIC;504L;Introducción a la Ingeniería y TIC;FreeDFD ;Aplicación gratuita;1.1;;Libre;;1;8;20;;;64 bits;;;
+;TIC;504L;Introducción a la Ingeniería y TIC;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;1;8;20;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;504L;Introducción a la Ingeniería y TIC;J-DSP;Aplicación gratuita;#¡REF!;;Libre;;1;6;20;;;64 bits;;;
+;TIC;504L;Introducción a la Ingeniería y TIC;Emulador Windows Phone SDK;Aplicación gratuita;#¡REF!;;Libre;;1;6;20;Intel Core 2;2.33 GHz;64 bits;>=Windows 8;4;6.5
+;TIC;504L;Introducción a la Ingeniería y TIC;AiStarter;Aplicación gratuita;Complemento;;Libre;;2;39;48;Intel o AMD multicore;1 GHz;64 bits;>=WindowsXP ;2;1
+;TIC;202C;Algoritmos y programación I;Eclipse Oxygen;Aplicación gratuita;4.7.1;;Libre;;2;39;48;With SEE ;1.5 Ghz;64 bits;>=Windows 7;2;1
+;TIC;202C;Algoritmos y programación I;JRE Y JDK ;Aplicación gratuita;#¡REF!;;Libre;;2;39;48;;;64 bits;;;
+;TIC;202C;Algoritmos y programación I;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;2;39;48;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;202C;Algoritmos y programación I;Process Dashboard with PSP and TSP Process Extensions;Aplicación gratuita;2.4;;Libre;;2;39;48;;;64 bits;;;
+;TIC;202C;Algoritmos y programación I;The objectAid UML Explorer for Eclipse;Aplicación gratuita;#¡REF!;;Libre;;2;47;48;;;64 bits;;;
+;TIC;202C;Algoritmos y programación I;Adobe Reader;Aplicación gratuita;2018.009.20044;;Libre;;2;47;48;Intel; 1,3 GHz;64 bits;>=Windows 7;0.256;0.320
+;TIC;202C;Algoritmos y programación I;Consola de Windows (CMD);Aplicación gratuita;6.1.7601;;libre;;2;47;48;;;64 bits;;;
+;TIC;202C;Algoritmos y programación I;Win bash;Aplicación gratuita;#¡REF!;;libre;;2;47;48;;;64 bits;;;
+;TIC;202C/207C/208C;Algoritmos y programación II;Eclipse Oxygen;Aplicación gratuita;4.7.1;;Libre;;2;47;48;With SEE ;1.5 Ghz;64 bits;>=Windows 7;2;1
+;TIC;202C/207C/208C;Algoritmos y programación II;JRE Y JDK ;Aplicación gratuita;#¡REF!;;Libre;;2;47;48;;;64 bits;;;
+;TIC;202C/207C/208C;Algoritmos y programación II;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;2;47;48;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;202C/207C/208C;Algoritmos y programación II;Process Dashboard with PSP and TSP Process Extensions;Aplicación gratuita;2.4;;Libre;;2;47;48;;;64 bits;;;
+;TIC;202C/207C/208C;Algoritmos y programación II;The objectAid UML Explorer for Eclipse;Aplicación gratuita;#¡REF!;;Libre;;3;71;73;;;64 bits;;;
+;TIC;202C/207C/208C;Algoritmos y programación II;Adobe Reader;Aplicación gratuita;2018.009.20044;;Libre;;3;71;73;Intel; 1,3 GHz;64 bits;>=Windows 7;0.256;0.320
+;TIC;202C/207C/208C;Algoritmos y programación II;Consola de Windows (CMD);Aplicación gratuita;6.1.7601;;libre;;3;71;73;;;64 bits;;;
+;TIC;202C/207C/208C;Algoritmos y programación II;Win bash;Aplicación gratuita;#¡REF!;;libre;;3;71;73;;;64 bits;;;
+;TIC;202C/207C/208C;Algoritmos y programación II;Intellij IDEA Community;Aplicación gratuita;2017.2.6;;Libre;;3;71;73;;;64 bits;;;
+;TIC;103B;Ingeniería de Software;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;3;71;73;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;103B;Ingeniería de Software;Office;Licenciado-anual;2013;;Contrato Microsoft;;3;71;73; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;TIC;103B;Ingeniería de Software;Adobe Reader;Aplicación gratuita;2018.009.20044;;Libre;;3;71;73;Intel; 1,3 GHz;64 bits;>=Windows 7;0.256;0.320
+;TIC;SCM;Modelado de sistemas de información;Visual Studio (VC++) ;Convenio;2017(15.5.0);;Contrato Microsoft;;3;71;73;Dual-core;1.8 GHz;64 bits;Windows 10;4;130
+;TIC;SCM;Modelado de sistemas de información;Oracle SQL Developer Datamodeler;Aplicación gratuita;#¡REF!;;Libre;;1;20;30;;;64 bits;;;
+;TIC;SCM;Modelado de sistemas de información;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;1;20;30;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;203C;Proyecto integrador I;Microsoft Visual Studio Enterprise;Licenciado-anual;conservar la versión 2017;;Contrato Microsoft;;1;20;30;Dual-core;1.8 GHz;64 bits;>=Windows 7;4;130
+;TIC;203C;Proyecto integrador I;Process Dashboard with PSP and TSP Process Extensions;Aplicación gratuita;2.4;;Libre;;1;31;30;;;64 bits;;;
+;TIC;203C;Proyecto integrador I;GIT (Windows-MAC);Aplicación gratuita;0.9.3;;Libre;;1;31;30;Intel Core 2;1 GHz;64 bits;>=Windows Vista;1;0.2
+;TIC;203C;Proyecto integrador I;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;1;31;30;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;203C;Proyecto integrador I;Microsoft Office Project Profesional;Licenciado-anual;2013;;Contrato Microsoft;;2;55;73; with SSE2 instruction set.;1Ghz;64 bits;>=Windows 7;2;3
+;TIC;;Arquitectura de software;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;2;55;73;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;;Arquitectura de software;JRE Y JDK ;Aplicación gratuita;#¡REF!;;Libre;;2;55;73;;;64 bits;;;
+;TIC;;Arquitectura de software;Frascati;Aplicación gratuita;#¡REF!;;Libre;;2;55;73;;;64 bits;;;
+;TIC;;Arquitectura de software;Tortoise SVN;Aplicación gratuita;1.9.7.27907;;Libre;;2;55;73;;;64 bits;;;
+;TIC;307C;Redes-comunicaciones y Laboratorio;VirtualBox;Aplicación gratuita;5.1.30;;Libre;;1;13;30;Core 2 Duo;3Ghz;64 bits; >=Windows 7;2;10
+;TIC;307C;Redes-comunicaciones y Laboratorio;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;1;13;30;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;102B;Proyecto integrador II;Oracle Database;Aplicación gratuita;#¡REF!;;Libre;;1;13;30;Intel Pentium;1Ghz;64 bits;>=Windows 7;4;10
+;TIC;102B;Proyecto integrador II;JRE Y JDK ;Aplicación gratuita;#¡REF!;;Libre;;1;13;30;;;64 bits;;;
+;TIC;102B;Proyecto integrador II;Oracle SQL Developer;Aplicación gratuita;#¡REF!;;Libre;;3;26;36;Pentium IV;2 GHz;64 bits;Windows;1;0.042
+;TIC;102B;Proyecto integrador II;Oracle SQL Developer Datamodeler;Aplicación gratuita;#¡REF!;;Libre;;3;26;36;;;64 bits;;;
+;TIC;102B;Proyecto integrador II;Maquina Virtual,Programaci¢n Red, W7:,Netbeans,Mr. Bayes,Garli,PartitionFinder,Python 3.6,Pycharm;#N/A;#N/A;;#N/A;;1;8;17;Core 2 Duo;3Ghz;64 bits; >=Windows 7;4;40
+;TIC;102B;Proyecto integrador II;GIT (Windows-MAC);Aplicación gratuita;0.9.3;;Libre;;1;8;17;Intel Core 2;1 GHz;64 bits;>=Windows Vista;1;0.2
+;TIC;102B;Proyecto integrador II;Tortoise SVN;Aplicación gratuita;1.9.7.27907;;Libre;;1;8;17;;;64 bits;;;
+;TIC;102B;Proyecto integrador II;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;1;8;17;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;102B;Proyecto integrador II;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;8;17; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;TIC;102B;Proyecto integrador II;GlassFish Server Open Source Edition;Aplicación gratuita;#¡REF!;;Libre;;1;8;17;;;64 bits;;;
+;TIC;309C/311C;Espacio de Fundamentos de Programación para Diseño;Processing + librerías;Aplicación gratuita;3.3.6;;Libre;;1;8;17;Intel i5;3 ghz;64 bits; Windows 10;16;64
+;TIC;309C/311C;Espacio de Fundamentos de Programación para Diseño;Creative Cloud;Licenciado-anual;Creative Coud (crear paquete);;Limitada a cantidad;;1;8;17;Intel Core 2 Duo;3,33GHz;64 bits;>=Windows 7;4;10.5
+;TIC;310C;Espacio de práctica de Diseñando con Algoritmos;Processing + librerías;Aplicación gratuita;3.3.6;;Libre;;1;8;17;Intel i5;3 ghz;64 bits; Windows 10;16;64
+;TIC;310C;Espacio de práctica de Diseñando con Algoritmos;Creative Cloud;Licenciado-anual;Creative Coud (crear paquete);;Limitada a cantidad;;1;8;17;Intel Core 2 Duo;3,33GHz;64 bits;>=Windows 7;4;10.5
+;TIC;310C;Espacio de práctica de Diseñando con Algoritmos;SDK kinect;Aplicación gratuita;#¡REF!;;Libre;;0;0;0;64-bit processor.;3.1 GHz;64 bits;>=Windows 7;2;1
+;TIC;310C;Espacio de práctica de Diseñando con Algoritmos;Glove PIE;Aplicación gratuita;0.93;;Libre;;0;0;0;;;64 bits;;;
+;TIC;310C;Espacio de práctica de Diseñando con Algoritmos;Osculator;Aplicación gratuita;3.1.1;;Libre;;0;0;0;;;64 bits;;;
+;TIC;310C;Espacio de práctica de Diseñando con Algoritmos;Reactivision;Aplicación gratuita;1.5.1;;Libre;;0;0;0;;;64 bits;;;
+;TIC;309C/310C;Espacio de práctica de Programación en Red;Processing + librerías;Aplicación gratuita;3.3.6;;Libre;;0;0;0;Intel i5;3 ghz;64 bits; Windows 10;16;64
+;TIC;309C/310C;Espacio de práctica de Programación en Red;Creative Cloud;Licenciado-anual;Creative Coud (crear paquete);;Limitada a cantidad;;0;0;0;Intel Core 2 Duo;3,33GHz;64 bits;>=Windows 7;4;10.5
+;TIC;309C/310C;Espacio de práctica de Programación en Red;Maquina Virtual,Programaci¢n Red, W7:,Netbeans,Mr. Bayes,Garli,PartitionFinder,Python 3.6,Pycharm;#N/A;#N/A;;#N/A;;0;0;0;Core 2 Duo;3Ghz;64 bits; >=Windows 7;4;40
+;TIC;309C/310C;Espacio de práctica de Programación en Red;Apache tomcat;Aplicación gratuita;#¡REF!;;libre;;0;0;0; with SSE2 instruction set.;1 GHz;64 bits; Windows;2;0.5
+;TIC;309C/310C;Espacio de práctica de Programación en Red;SDK Android;Aplicación gratuita;36.4111454;;Libre;;0;0;0;;;64 bits;;;
+;TIC;309C/310C;Espacio de práctica de Programación en Red;Google USB Driver;Aplicación gratuita;#¡REF!;;Libre;;0;0;0;Pentium 4;1Ghz;64 bits;>=Windows 7;0.128;0.1
+;TIC;309C/310C;Espacio de práctica de Programación en Red;Android Studio + paquetes SDK;Aplicación gratuita;3.0.1;;Libre;;0;0;0;intel;2Ghz;64 bits;Windows 10;9;6
+;TIC;203C;Seminario sobre nuevas tecnologías;Visual Studio (VC++) ;Convenio;2017(15.5.0);;Contrato Microsoft;;0;0;0;Dual-core;1.8 GHz;64 bits;Windows 10;4;130
+;TIC;203C;Seminario sobre nuevas tecnologías;Emulador Windows Phone SDK;Aplicación gratuita;#¡REF!;;Libre;;0;0;0;Intel Core 2;2.33 GHz;64 bits;>=Windows 8;4;6.5
+;TIC;102B;Patrones de diseño de software;JRE Y JDK ;Aplicación gratuita;#¡REF!;;Libre;;0;0;0;;;64 bits;;;
+;TIC;102B;Patrones de diseño de software;Eclipse Oxygen;Aplicación gratuita;4.7.1;;Libre;;0;0;0;With SEE ;1.5 Ghz;64 bits;>=Windows 7;2;1
+;TIC;102B;Patrones de diseño de software;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;0;0;0;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;;Introducción a las TIC;Python;Aplicación gratuita;3.6.3;;Libre;;0;0;0;Intel Core i5 ; 2.60 GHz;64 bits;Window 10;8;3
+;TIC;207C/503L;Introducción a las TIC;Lego Mindstorm NXT ;Licenciado-perpetuo;No tengo información;;Limitada a cantidad;;0;0;0;;;64 bits;;;
+;TIC;501L;Señales y sistemas;Matlab;Licenciado-anual;9.3.0.713579;;Limitada a cantidad Concurrente;;0;0;0;Intel o AMD X86-64;1 GHz;64 bits;>=Windows 7;2;2
+;TIC;501L;Señales y sistemas;Audacity;Aplicación gratuita;2.2.0;;Libre;;0;0;0;SSE2 support;2 GHz;64 bits;>= Windows 7;4;55
+;TIC;501L;Señales y sistemas;Eagle;Aplicación gratuita;8.4.1;;Libre;;1;12;30;Intel Core 2;2.33 GHz;64 bits;>=Windows 7 ;4;0.650
+;TIC;501L;Señales y sistemas;Eclipse Oxygen;Aplicación gratuita;4.7.1;;Libre;;1;12;30;With SEE ;1.5 Ghz;64 bits;>=Windows 7;2;1
+;TIC;501L;Señales y sistemas;J-DSP;Aplicación gratuita;#¡REF!;;Libre;;1;7;24;;;64 bits;;;
+;TIC;501L;Señales y sistemas;Waveforms;Aplicación gratuita;#¡REF!;;Libre;;1;7;24;;;64 bits;;;
+;TIC;307C;Programación en red;Eclipse Oxygen;Aplicación gratuita;4.7.1;;Libre;;1;7;24;With SEE ;1.5 Ghz;64 bits;>=Windows 7;2;1
+;TIC;306C;Programación en red;Mozilla Firefox;Aplicación gratuita;57.0.1;;Libre;;1;7;24;;;64 bits;;;
+;TIC;306C;Programación en red;Google Chrome;Aplicación gratuita;63.0.3239.84;;Libre;;1;7;24;Pentium 4;1Ghz;64 bits;>=Windows 7;0.128;0.1
+;TIC;306C;Programación en red;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;7;24; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;TIC;306C;Programación en red;Notepad++;Aplicación gratuita;7.5.1;;Libre;;1;12;12;intel;1Ghz;64 bits;>=Windows XP;2;1
+;TIC;306C;Programación en red;7zip;Aplicación gratuita;17.01;;Libre;;1;12;12;>= Intel pentium 3;1 GHz;64 bits;>= windows XP;0.064;0.128
+;TIC;306C;Programación en red;JRE Y JDK ;Aplicación gratuita;#¡REF!;;Libre;;1;12;12;;;64 bits;;;
+;TIC;307C/501L;Espacio de Laboratorio de Redes de computadores II;VMWare Player;Aplicación gratuita;14.0;;Libre;;1;12;12;;;64 bits;;;
+;TIC;307C/501L;Espacio de Laboratorio de Redes de computadores II;Packet Tracer;Aplicación gratuita;7.0;;Libre;;1;12;12;Intel Pentium 4;2.53 GHz;64 bits;>=Windows 7;2;1.4
+;TIC;307C/501L;Espacio de Laboratorio de Redes de computadores II;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;1;12;12;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;307C/501L;Espacio de Laboratorio de Redes de computadores II;Mozilla Firefox;Aplicación gratuita;57.0.1;;Libre;;1;12;12;;;64 bits;;;
+;TIC;307C/501L;Espacio de Laboratorio de Redes de computadores II;Google Chrome;Aplicación gratuita;63.0.3239.84;;Libre;;0;0;0;Pentium 4;1Ghz;64 bits;>=Windows 7;0.128;0.1
+;TIC;307C/501L;Espacio de Laboratorio de Redes de computadores II;Office;Licenciado-anual;2013;;Contrato Microsoft;;0;0;0; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;TIC;307C/501L;Espacio de Laboratorio de Redes de computadores II;Notepad++;Aplicación gratuita;7.5.1;;Libre;;0;0;0;intel;1Ghz;64 bits;>=Windows XP;2;1
+;TIC;307C/501L;Espacio de Laboratorio de Redes de computadores II;7zip;Aplicación gratuita;17.01;;Libre;;0;0;0;>= Intel pentium 3;1 GHz;64 bits;>= windows XP;0.064;0.128
+;TIC;307C;Espacio de Laboratorio de Redes de computadores I;Packet Tracer;Aplicación gratuita;7.0;;Libre;;0;0;0;Intel Pentium 4;2.53 GHz;64 bits;>=Windows 7;2;1.4
+;TIC;307C;Espacio de Laboratorio de Redes de computadores I;Wireshark;Aplicación gratuita;#¡REF!;;Libre;;0;0;0;x86 processor;Windows10;64 bits;>=Windows 7;0.4;0.3
+;TIC;307C;Espacio de Laboratorio de Redes de computadores I;Hyperterminal;Aplicación gratuita;#¡REF!;;Libre;;0;0;0;;;64 bits;;;
+;TIC;307C;Espacio de Laboratorio de Redes de computadores I;Mozilla Firefox;Aplicación gratuita;57.0.1;;Libre;;0;0;0;;;64 bits;;;
+;TIC;307C;Espacio de Laboratorio de Redes de computadores I;Google Chrome;Aplicación gratuita;63.0.3239.84;;Libre;;0;0;0;Pentium 4;1Ghz;64 bits;>=Windows 7;0.128;0.1
+;TIC;307C;Espacio de Laboratorio de Redes de computadores I;Office;Licenciado-anual;2013;;Contrato Microsoft;;0;0;0; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;TIC;307C;Espacio de Laboratorio de Redes de computadores I;Notepad++;Aplicación gratuita;7.5.1;;Libre;;0;0;0;intel;1Ghz;64 bits;>=Windows XP;2;1
+;TIC;307C;Espacio de Laboratorio de Redes de computadores I;7zip;Aplicación gratuita;17.01;;Libre;;0;0;0;>= Intel pentium 3;1 GHz;64 bits;>= windows XP;0.064;0.128
+;TIC;308C;Sistemas distribuidos;VirtualBox;Aplicación gratuita;5.1.30;;Libre;;0;0;0;Core 2 Duo;3Ghz;64 bits; >=Windows 7;2;10
+;TIC;308C;Sistemas distribuidos;Atom;#¡REF!;#¡REF!;;Libre;;0;0;0;>=Pentium 4;1.8 GHz;64 bits;>=Windows 7;2;10
+;TIC;308C;Sistemas distribuidos;Python;Aplicación gratuita;3.6.3;;Libre;;0;0;0;Intel Core i5 ; 2.60 GHz;64 bits;Window 10;8;3
+;TIC;308C;Sistemas distribuidos;Mozilla Firefox;Aplicación gratuita;57.0.1;;Libre;;0;0;0;;;64 bits;;;
+;TIC;308C;Sistemas distribuidos;Google Chrome;Aplicación gratuita;63.0.3239.84;;Libre;;1;7;12;Pentium 4;1Ghz;64 bits;>=Windows 7;0.128;0.1
+;TIC;308C;Sistemas distribuidos;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;7;12; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;TIC;308C;Sistemas distribuidos;Notepad++;Aplicación gratuita;7.5.1;;Libre;;1;7;12;intel;1Ghz;64 bits;>=Windows XP;2;1
+;TIC;308C;Sistemas distribuidos;7zip;Aplicación gratuita;17.01;;Libre;;1;7;12;>= Intel pentium 3;1 GHz;64 bits;>= windows XP;0.064;0.128
+;TIC;307C;Redes convergentes;VMWare Player;Aplicación gratuita;14.0;;Libre;;1;7;12;;;64 bits;;;
+;TIC;307C;Redes convergentes;VirtualBox;Aplicación gratuita;5.1.30;;Libre;;1;7;12;Core 2 Duo;3Ghz;64 bits; >=Windows 7;2;10
+;TIC;308C;Aplicaciones móviles;Android Studio + paquetes SDK;Aplicación gratuita;3.0.1;;Libre;;1;7;12;intel;2Ghz;64 bits;Windows 10;9;6
+;TIC;308C;Aplicaciones móviles;Mozilla Firefox;Aplicación gratuita;57.0.1;;Libre;;1;7;12;;;64 bits;;;
+;TIC;308C;Aplicaciones móviles;Google Chrome;Aplicación gratuita;63.0.3239.84;;Libre;;1;2;12;Pentium 4;1Ghz;64 bits;>=Windows 7;0.128;0.1
+;TIC;308C;Aplicaciones móviles;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;2;12; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;TIC;308C;Aplicaciones móviles;Notepad++;Aplicación gratuita;7.5.1;;Libre;;1;10;12;intel;1Ghz;64 bits;>=Windows XP;2;1
+;TIC;308C;Aplicaciones móviles;7zip;Aplicación gratuita;17.01;;Libre;;1;10;12;>= Intel pentium 3;1 GHz;64 bits;>= windows XP;0.064;0.128
+;TIC;102B;Computación en internet;Eclipse Oxygen;Aplicación gratuita;4.7.1;;Libre;;1;10;12;With SEE ;1.5 Ghz;64 bits;>=Windows 7;2;1
+;TIC;102B;Computación en internet;STS - Spring Tool Suite;Aplicación gratuita;#¡REF!;;Libre;;1;10;12;;;64 bits;;;
+;TIC;102B;Computación en internet;JRE Y JDK ;Aplicación gratuita;#¡REF!;;Libre;;1;10;12;;;64 bits;;;
+;TIC;102B;Computación en internet;GlassFish Server Open Source Edition;Aplicación gratuita;#¡REF!;;Libre;;1;15;17;;;64 bits;;;
+;TIC;102B;Computación en internet;Apache tomcat;Aplicación gratuita;#¡REF!;;libre;;1;15;17; with SSE2 instruction set.;1 GHz;64 bits; Windows;2;0.5
+;TIC;102B;Computación en internet;Visual Paradigm comunity edition ;Convenio;14.2;;Ilimitada Facultad de Ingeniería;;1;15;17;>= Intel pentium 4;1 GHz;64 bits;>= windows XP;4;4
+;TIC;102B;Computación en internet;Postgress SQL;Aplicación gratuita;2.0;;Libre;;1;15;17;;;64 bits;;;
+;TIC;202C;Técnicas de evaluación de calidad de software;Cucumber;Aplicación gratuita;#¡REF!;;Libre;;1;15;17;Intel Core i5;2Ghz;64 bits;>=Windows 7;0.256;6
+;TIC;202C;Técnicas de evaluación de calidad de software;FitNesse;Aplicación gratuita;#¡REF!;;Libre;;1;15;17;;;64 bits;;;
+;TIC;202C;Técnicas de evaluación de calidad de software;Robot Framework;Aplicación gratuita;2.7.5;;Libre;;1;15;17;;;64 bits;;;
+;TIC;202C;Técnicas de evaluación de calidad de software;Robotium;Aplicación gratuita;#¡REF!;;Libre;;1;15;17;;;64 bits;;;
+;TIC;202C;Técnicas de evaluación de calidad de software;Selenium;Aplicación gratuita;Plugin;;Libre;;1;8;24;;;64 bits;;;
+;TIC;202C;Técnicas de evaluación de calidad de software;Sikuli;Aplicación gratuita;1.1.1;;Libre;;1;8;24;;;64 bits;;;
+;TIC;202C;Técnicas de evaluación de calidad de software;Watir;Aplicación gratuita;#¡REF!;;Libre;;1;8;24;;;64 bits;;;
+;TIC;202C;Técnicas de evaluación de calidad de software;CubicTest;Aplicación gratuita;1.0.0.M2;;Libre;;1;8;24;Core 2 Duo;2.0 GHz;64 bits;>=Windows 7;4;1.5
+;TIC;310C;Ambientes inteligentes;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;8;24; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;TIC;310C;Ambientes inteligentes;Arduino;Aplicación gratuita;1.8.5;;Libre;;1;8;24; with SSE2 instruction set.;1Ghz;64 bits;>=Windows7;1;0.103
+;TIC;307C;Administración de plataformas y seguridad;VMWare Player;Aplicación gratuita;14.0;;Libre;;1;8;24;;;64 bits;;;
+;TIC;307C;Administración de plataformas y seguridad;Mozilla Firefox;Aplicación gratuita;57.0.1;;Libre;;1;8;24;;;64 bits;;;
+;TIC;307C;Administración de plataformas y seguridad;Google Chrome;Aplicación gratuita;63.0.3239.84;;Libre;;1;5;20;Pentium 4;1Ghz;64 bits;>=Windows 7;0.128;0.1
+;TIC;307C;Administración de plataformas y seguridad;Office;Licenciado-anual;2013;;Contrato Microsoft;;1;5;20; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;TIC;307C;Administración de plataformas y seguridad;Notepad++;Aplicación gratuita;7.5.1;;Libre;;1;10;12;intel;1Ghz;64 bits;>=Windows XP;2;1
+;TIC;307C;Administración de plataformas y seguridad;7zip;Aplicación gratuita;17.01;;Libre;;1;10;12;>= Intel pentium 3;1 GHz;64 bits;>= windows XP;0.064;0.128
+;TIC;203C;Programación web avanzada;MYSQL workbench;Aplicación gratuita;6.2.5.0;;Libre;;1;10;12;;;64 bits;;;
+;TIC;203C/208C/304C;Pensamiento algorítmico;Python;Aplicación gratuita;3.6.3;;Libre;;1;10;12;Intel Core  i5 ; 2.60 GHz;64 bits;Window 10;8;3
+;TIC;203C/208C/304C;Pensamiento algorítmico;PSeInt;Aplicación gratuita;Versión de instalación 2017.0523;;Libre;;1;10;12;;;64 bits;;;
+;TIC;203C/208C/304C;Pensamiento algorítmico;Scratch;Aplicación gratuita;458.0.1;;Libre;;1;10;12;;;64 bits;;;
+;TIC;102B;Análisis y visualización de grandes conjuntos de datos;Weka;Aplicación gratuita;3.8.1;;Libre;;1;13;17;;;64 bits;;;
+;TIC;102B;Análisis y visualización de grandes conjuntos de datos;Software R;Aplicación gratuita;#¡REF!;;Libre;;4;81;104;Intel Core 2 Duo;2.4GHz;64 bits; Windows 10;16;5
+;TIC;102B;Análisis y visualización de grandes conjuntos de datos;RStudio;Aplicación gratuita;1.1.383;;Libre;;4;81;104;;;64 bits;;;
+;TIC;310C;Fotografía computacional;Processing + librerías;Aplicación gratuita;3.3.6;;Libre;;4;81;104;Intel i5;3 ghz;64 bits; Windows 10;16;64
+;TIC;307C;Electiva en Infraestructura I;Packet Tracer;Aplicación gratuita;7.0;;Libre;;0;0;0;Intel Pentium 4;2.53 GHz;64 bits;>=Windows 7;2;1.4
+;TIC;307C;Electiva en Infraestructura I;Wireshark;Aplicación gratuita;#¡REF!;;Libre;;0;0;0;x86 processor;1Ghz;64 bits;>=Windows 7;0.4;0.3
+;TIC;307C;Electiva en Infraestructura I;Mozilla Firefox;Aplicación gratuita;57.0.1;;Libre;;0;0;0;;;64 bits;;;
+;TIC;307C;Electiva en Infraestructura I;Google Chrome;Aplicación gratuita;63.0.3239.84;;Libre;;1;21;24;Pentium 4;1Ghz;64 bits;>=Windows 7;0.128;0.1
+;TIC;307C;Electiva en Infraestructura I;Office;Licenciado-anual;2013;;Contrato Microsoft;;0;0;0; with SSE2 instruction set.;1 GHz;64 bits;>= windows XP;2;3
+;TIC;307C;Electiva en Infraestructura I;Notepad++;Aplicación gratuita;7.5.1;;Libre;;0;0;0;intel;1Ghz;64 bits;>=Windows XP;2;1
+;TIC;307C;Electiva en Infraestructura I;7zip;Aplicación gratuita;17.01;;Libre;;0;0;0;>= Intel pentium 3;1 GHz;64 bits;>= windows XP;0.064;0.128
+;TIC;;Club de Programación Competitiva (Maratones de Programación);Eclipse Oxygen;Aplicación gratuita;4.7.1;;Libre;;0;0;0;With SEE ;1.5 Ghz;64 bits;>=Windows 7;2;1
+;TIC;;Club de Programación Competitiva (Maratones de Programación);Code Blocks;Aplicación gratuita;16.01;;Libre;;0;0;0;Intel Core 2;1 ghz;64 bits;>=Windows  7;0.512;0.3
+;TIC;;Club de Programación Competitiva (Maratones de Programación);Dev-C++;Aplicación gratuita;5.11;;Libre;;0;0;0;Intel Pentium;2.0 GHz;64 bits;>=Windows 7;2;0.2
+;TIC;;Club de Programación Competitiva (Maratones de Programación);(No software) Java 8 API Classes Documentation;#N/A;#N/A;;#N/A;;0;0;0;;;64 bits;;;
+;TIC;;Club de Programación Competitiva (Maratones de Programación);JRE Y JDK ;Aplicación gratuita;#¡REF!;;Libre;;0;0;0;;;64 bits;;;
