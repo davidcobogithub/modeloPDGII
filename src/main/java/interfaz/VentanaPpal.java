@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -285,28 +286,43 @@ public class VentanaPpal extends JFrame {
 		btnExportCsv.setBounds(240, 30, 90, 23);
 		panelExportacion.add(btnExportCsv);
 
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
+		JPanel panelContenedor = new JPanel();
+		panelContenedor.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
-		panel.setBounds(366, 55, 810, 560);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		panelContenedor.setBounds(366, 55, 810, 560);
+		panelContenedor.setLayout(null);
+		contentPane.add(panelContenedor);
 
+		JTabbedPane pestanas = new JTabbedPane(JTabbedPane.TOP);
+		pestanas.setBounds(0, 0, 810, 560);
+		panelContenedor.add(pestanas);
+		
+		JPanel panelContentDistribucion = new JPanel();
+		panelContentDistribucion.setBounds(366, 55, 810, 560);
+		panelContentDistribucion.setLayout(null);
+		pestanas.addTab("panel 1", panelContentDistribucion);
+		
 		img=new JLabel(new ImageIcon("img/cargando.gif"));
 		img.setBounds(270, 150, 300, 300);
 		img.setVisible(false);
-		panel.add(img);
-
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 10, 790, 538);
-		panel.add(scrollPane);
-
+		panelContentDistribucion.add(img);
+		
+		JScrollPane scrollPaneTxtDistribucion = new JScrollPane();
+		scrollPaneTxtDistribucion.setBounds(3, 3, 800, 528);
+		panelContentDistribucion.add(scrollPaneTxtDistribucion);
+		
 		txtAreaVista = new JTextArea();
 		txtAreaVista.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC,14));
-		scrollPane.setViewportView(txtAreaVista);
+		scrollPaneTxtDistribucion.setViewportView(txtAreaVista);
 		txtAreaVista.setEditable(false);
 
+
+		JPanel panel2 = new JPanel();
+		panelContenedor.setBounds(366, 55, 810, 560);
+		pestanas.addTab("panel 2", panel2);
+		panel2.add(new JLabel("Panel 2222"));
+		
+		
 		adicionarEventos();
 
 		inhabilitarComponentes();
@@ -406,8 +422,6 @@ public class VentanaPpal extends JFrame {
 						}
 
 						img.setVisible(false);
-						JOptionPane.showMessageDialog(null, "Distribuci\u00f3n generada satisfactoriamente",
-								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
 						txtAreaVista.append(solver.getReporte());
 					}
 				}.start();
