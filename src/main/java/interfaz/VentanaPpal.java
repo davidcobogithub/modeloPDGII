@@ -1,10 +1,13 @@
 package interfaz;
 
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -59,6 +62,12 @@ public class VentanaPpal extends JFrame {
 	private JButton btnExportCsv;
 	private JTextArea txtAreaVista;
 	private JLabel img;
+	
+	private JComboBox<String> comboSala;
+	private JTextArea  consultaSala;
+	
+	private JComboBox<String> comboSoft;
+	private JTextArea  consultaSoft;
 
 	private static SolverProject solver;
 	private static VentanaPpal frame;
@@ -316,11 +325,49 @@ public class VentanaPpal extends JFrame {
 		scrollPaneTxtDistribucion.setViewportView(txtAreaVista);
 		txtAreaVista.setEditable(false);
 
-
+		JLabel conSal=new JLabel("Consultar Salas");
+		JLabel conSof=new JLabel("Consultar Software");
+		conSal.setAlignmentX(CENTER_ALIGNMENT);
+		conSof.setAlignmentX(CENTER_ALIGNMENT);
+		GridLayout experimentLayout = new GridLayout(10,3);
+		ArrayList<String> nombreSal=new ArrayList<>();
+				
+		comboSala=new JComboBox<String>();
+		consultaSala=new JTextArea();
+		consultaSala.setPreferredSize( new Dimension( 200, 240 ) );
+		consultaSala.setEditable(false);
+		
+		comboSoft=new JComboBox<String>();
+		consultaSoft=new JTextArea();
+		consultaSoft.setPreferredSize( new Dimension( 200, 240 ) );
+		consultaSoft.setEditable(false);
+		
+		
+		nombreSal=solver.getNombreSalas();
+		comboSala.addItem("Seleccione una Sala");
+		comboSoft.addItem("Seleccionar un Software");
+		
 		JPanel panel2 = new JPanel();
 		panelContenedor.setBounds(366, 55, 810, 560);
 		pestanas.addTab("panel 2", panel2);
-		panel2.add(new JLabel("Panel 2222"));
+		panel2.setLayout(experimentLayout);
+		
+		for (int i = 0; i < nombreSal.size(); i++) {
+			comboSala.addItem(nombreSal.get(i).toString());
+		}
+		
+		for (int i = 0; i < solver.getNombreSoftware().size(); i++) {
+			comboSoft.addItem(solver.getNombreSoftware().get(i).toString());
+		}
+		panel2.add(conSal);
+		panel2.add(comboSala);
+		panel2.add(consultaSala);
+		panel2.add(conSof);
+		panel2.add(comboSoft);
+		panel2.add(consultaSoft);
+		
+	
+	
 		
 		
 		adicionarEventos();
@@ -373,14 +420,7 @@ public class VentanaPpal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				txtFldLimSoluciones.setText("");
 				comboBoxFldPorcDisco.setSelectedIndex(0);
-				//				txtFldCiudad.setText("");
-				//				txtFldBarrio.setText("");
-				//				txtFldDireccion.setText("");
-				//				txtFldTelefono.setText("");
-				//				txtFldTamanio.setText("");
-				//				txtFldPrecio.setText("");
-				//				txtFldRutaImportacion.setText("");
-				//				txtFldRutaExportacion.setText("");
+			
 				txtAreaVista.setText("");
 				chkRestSelecTodas.setSelected(false);
 				chkRest1.setSelected(false);
@@ -393,6 +433,24 @@ public class VentanaPpal extends JFrame {
 			}
 		});
 
+		comboSala.addActionListener(new ActionListener() {
+			   @Override
+			   public void actionPerformed(ActionEvent e) {
+				   String item_seleccionado = comboSala.getSelectedItem().toString();
+					if (item_seleccionado.equals("Seleccione una Sala")) {
+						consultaSala.setText("Por favor seleccione una sala");
+					}else {
+						for (int i = 0; i < solver.getSalas().size(); i++) {
+							if(item_seleccionado.equals(solver.getSalas().get(i).getNombre())) {
+								consultaSala.setText("Nombre de la Sala: "+ solver.getSalas().get(i).getNombre()+"\n"+
+										"Departamento de la Sala: "+ solver.getSalas().get(i).getTipo()+"\n"+
+										"Nº de computadores de la Sala: "+ solver.getSalas().get(i).getCapacidad());
+							}
+						}
+					}
+			   }
+		});
+		
 		btnGenerar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

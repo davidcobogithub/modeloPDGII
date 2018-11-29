@@ -6,7 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
 import org.chocosolver.solver.search.limits.SolutionCounter;
@@ -30,6 +33,13 @@ public class SolverProject {
 	public final static String ARQUITECTURA_64_BITS="64 bits";
 	public final static String ARQUITECTURA_32_BITS="32 bits";
 
+	public final static double PORCENTAJE_MAX_DEMANDA_ALTO=1;
+	public final static double PORCENTAJE_MIN_DEMANDA_ALTO=0.71;
+	public final static double PORCENTAJE_MAX_DEMANDA_MEDIO=0.7;
+	public final static double PORCENTAJE_MIN_DEMANDA_MEDIO=0.41;
+	public final static double PORCENTAJE_MAX_DEMANDA_BAJO=0.4;
+	public final static double PORCENTAJE_MIN_DEMANDA_BAJO=0.1;
+
 	//Caracteristicas de los computadores
 
 	//Disco duro
@@ -46,6 +56,7 @@ public class SolverProject {
 	private static ArrayList<Software> toolSoftware;
 	private static ArrayList<Software> toolSoftwareBasico;
 	private static ArrayList<String> nombreSoftware;
+	private static ArrayList<Software> toolSoftwareBasicoOrdenado;
 
 	private String reporte;
 
@@ -59,25 +70,15 @@ public class SolverProject {
 		leerSoftwareBasico();
 
 		nombreSoftware=new ArrayList<String>();
-
-		//		for (int j = 0; j < toolSoftwareBasico.size(); j++) {
-		//		
-		//					Software soft=toolSoftwareBasico.get(j);
-		//		
-		//					System.out.println(soft.getArquitectura()+" | "+soft.getNombre()+ " | "+soft.getDiscoDuro()+" | ");
-		//		
-		//				}
+		toolSoftwareBasicoOrdenado= new ArrayList<Software>();
 
 
-		//				for (int j = 0; j < toolSoftware.size(); j++) {
-		//		
-		//					Software soft=toolSoftware.get(j);
-		//		
-		//					System.out.println(soft.getArquitectura()+" | "
-		//					+soft.getCantLicencias()+" | "+soft.getDiscoDuro()+" | "+soft.getNombreSala()
-		//					+" | "+soft.getNombre()+" | "+soft.getNombreMateria());
-		//		
-		//				}
+
+		//	    for (int j = 0; j < escalaProcesadores.size(); j++) {
+		//
+		//			System.out.println(escalaProcesadores.indexOf(escalaProcesadores.get(j)) + " | " +escalaProcesadores.get(j));
+		//
+		//		}
 
 		//		for (int i = 0; i < salas.size(); i++) {
 		//
@@ -364,23 +365,17 @@ public class SolverProject {
 
 	}
 
+
 	public void modeloInicial(int numSoluciones) {
 
 		//cargarInfoSoftware();
 
-//		for (int j = 0; j < toolSoftware.size(); j++) {
-//
-//			Software soft=toolSoftware.get(j);
-//
-//			System.out.println(soft.getCantLicencias()+" | "+soft.getNumeroCursos()+" | "+soft.getNombre());
-//
-//		}
-//		
-//		for (int j = 0; j < salas.size(); j++) {
-//
-//			System.out.println(salas.get(j).getCapacidad()+" | "+salas.get(j).getNombre());
-//
-//		}
+		//		
+		//		for (int j = 0; j < salas.size(); j++) {
+		//
+		//			System.out.println(salas.get(j).getCapacidad()+" | "+salas.get(j).getNombre());
+		//
+		//		}
 
 
 		Model model= new Model();
@@ -416,12 +411,6 @@ public class SolverProject {
 				}
 
 				else if(toolSoftware.get(j).getNombreSala().equals(salas.get(i).getNombre())) {
-
-					model.arithm(carrera[i][j], "=",1).post();
-				}
-				
-				else if(toolSoftware.get(j).getCantLicencias() != 0 && 
-						toolSoftware.get(j).getCantLicencias()<= salas.get(i).getCapacidad()) {
 
 					model.arithm(carrera[i][j], "=",1).post();
 				}
@@ -534,7 +523,7 @@ public class SolverProject {
 		imprimirMatrizConSolucion(matrizResultado, solution);
 		//imprimirMatriz(matrizResultado);
 
-		//restriccionDemandaCapacidadSalas(matrizResultado, solution);
+		restriccionDemandaCapacidadSalas(matrizResultado, solution);
 
 	}
 
@@ -544,70 +533,123 @@ public class SolverProject {
 
 		Model model= new Model();
 
-		IntVar[][] matrizDemandaCapacidad = model.intVarMatrix("pesosDemandaCapacidad", salas.size(), toolSoftware.size(), 0, 1);
-		IntVar[][] matrizCopiaDemanda = model.intVarMatrix("pesosDemandaCapacidad", salas.size(), toolSoftware.size(), 0, 1);
+		IntVar[][] matrizPesosDemandaCapacidad = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
+		IntVar[][] matrizCopia = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
+		matrizCopia=copiarMatriz(solucionAnterior, matrizCarreras);
+	
+		Collections.sort(toolSoftware, new Comparator<Software>() {
+			public int compare(Software obj1, Software obj2) {
 
-		matrizCopiaDemanda=copiarMatriz(solucionAnterior, matrizCarreras);
-
-		int count=0;
-
+				if(obj1.getDemandaCurso() == obj2.getDemandaCurso()){
+					return 0;
+				}
+				else if(obj1.getDemandaCurso() <= obj2.getDemandaCurso()){
+					return 1;
+				}
+				else{
+					return -1;
+				}
+			}
+		});
+		
 		for (int i = 0; i < salas.size(); i++) {
 
 			for (int j = 0; j < toolSoftware.size(); j++) {
 
+				if (matrizCopia[i][j].getValue()==1) {
 
-				if (matrizCopiaDemanda[i][j].getValue()==1) {
-
-					count++;
-
-					matrizDemandaCapacidad[i][j]=matrizCopiaDemanda[i][j].mul(toolSoftware.get(j).getMemoriaRAM()).intVar();
+					matrizPesosDemandaCapacidad[i][j]=matrizCopia[i][j].mul(toolSoftware.get(j).getDemandaCurso()).intVar();
 
 				}
 
 			}
 		}
 
-		System.out.println(count);
+		//		System.out.println("Matriz de Pesos:");
+		//		reporte+="Matriz de Pesos:"+"\n";
+		//imprimirMatriz(matrizPesos);
 
-		System.out.println("Matriz de Demanda Capacidad:");
-		imprimirMatriz(matrizDemandaCapacidad);
+		IntVar[][] matrizResultadoDemanda = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
+		
+		int pesoPorSala=0;
+		int limiteDelArreglo=toolSoftware.size()/3;
+		
+		for (int i = 0; i < salas.size(); i++) {
 
-		////		IntVar[][] matrizResultado = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
-		////		int pesoPorSala=0;
-		////
-		////		for (int i = 0; i < salas.size(); i++) {
-		////
-		////			for (int j = 0; j < toolSoftware.size(); j++) {
-		////
-		////				pesoPorSala+=matrizPesosRam[i][j].getValue();
-		////
-		////			}
-		////
-		////			for (int j = 0; j < toolSoftware.size(); j++) {
-		////
-		////				if (pesoPorSala>=20) {
-		////
-		////					model.arithm(matrizResultado[i][j], "=", 0).post();
-		////					//System.out.println("Ojo, en la sala " +salas.get(i).getNombre()+" la cantidad de espacio de disco de software supera la capacidad de disco del computador ");
-		////				} 
-		////
-		////				else if (matrizPesosRam[i][j].getValue() != 0) {
-		////
-		////					model.arithm(matrizResultado[i][j], "=", 1).post();
-		////
-		////				}
-		////			}
-		////			pesoPorSala=0;
-		////		}
-		////
-		////		Solution solution = new Solution(model);
-		////		model.getSolver().solve();
-		////		solution.record();
-		////
-		////		System.out.println("------------------------Matriz Resultado final------------------------");
-		////		imprimirMatrizConSolucion(matrizResultado, solution);
+			for (int j = 0; j < toolSoftware.size(); j++) {
+
+				pesoPorSala+=matrizResultadoDemanda[i][j].getValue();
+
+			}
+
+			for (int j = 0; j < toolSoftware.size(); j++) {
+
+				if (pesoPorSala>=0) {
+
+					model.arithm(matrizResultadoDemanda[i][j], "=", 0).post();
+
+				} 
+
+				else if (pesoPorSala < 0) {
+
+					model.arithm(matrizResultadoDemanda[i][j], "=", 1).post();
+
+				}
+				
+				else if (pesoPorSala == 0) {
+
+					model.arithm(matrizResultadoDemanda[i][j], "=", 1).post();
+
+				}
+			}
+			pesoPorSala=0;
+		}
+		
+//		Solution solution = new Solution(model);
+//		model.getSolver().solve();
+//		solution.record();
+//
+//		System.out.println("------------------------Matriz Resultado final------------------------");
+//		imprimirMatrizConSolucion(matrizDemandaCapacidad, solution);
+
 
 	}
+
+
+	public void matrizDeLicencias(IntVar[][] matrizCarreras, Solution solucionAnterior) {
+
+		System.out.println("Cuarta parte"+"\n");
+		reporte+="Cuarta parte"+"\n"+"\n";
+		Model model= new Model();
+
+		IntVar[][] matrizPesosLicencias = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
+		matrizPesosLicencias=copiarMatriz(solucionAnterior, matrizCarreras);
+
+
+		for (int i = 0; i < salas.size(); i++) {
+
+			for (int j = 0; j < toolSoftware.size(); j++) {
+
+				if(toolSoftware.get(j).getCantLicencias() != 0 && 
+						toolSoftware.get(j).getCantLicencias()<= salas.get(i).getCapacidad()) {
+
+					model.arithm(matrizPesosLicencias[i][j], "=",1).post();
+				}
+
+			}
+		}
+
+		Solution solution = new Solution(model);
+		model.getSolver().solve();
+		solution.record();
+
+		System.out.println("Resultado parcial");
+		reporte+="Resultado parcial"+"\n";
+		imprimirMatrizConSolucion(matrizPesosLicencias, solution);
+		//imprimirMatriz(matrizPesosLicencias);
+
+	}
+
 
 	public void imprimirMatriz(IntVar[][] matriz) {
 
@@ -709,7 +751,7 @@ public class SolverProject {
 		return matrizResul;
 
 	}
-	
+
 	public void exportarReporteTxt(String ruta) throws FileNotFoundException {
 		// TO-DO: Desarrollar el método que genera el reporte.
 
@@ -726,6 +768,16 @@ public class SolverProject {
 	public ArrayList<Sala> getSalas() {
 		return salas;
 	}
+
+	public ArrayList<String> getNombreSalas() {
+		
+		ArrayList<String> nombresSalas=new ArrayList<>();
+		for (int i = 0; i < salas.size(); i++) {
+			nombresSalas.add(salas.get(i).getNombre().toString());
+		}
+		return nombresSalas;
+	}
+
 
 	public void setSalas(ArrayList<Sala> salas) {
 		SolverProject.salas = salas;
@@ -745,5 +797,13 @@ public class SolverProject {
 
 	public void setReporte(String reporte) {
 		this.reporte = reporte;
+	}
+	
+	public static ArrayList<String> getNombreSoftware() {
+		return nombreSoftware;
+	}
+
+	public static void setNombreSoftware(ArrayList<String> nombreSoftware) {
+		SolverProject.nombreSoftware = nombreSoftware;
 	}
 }
