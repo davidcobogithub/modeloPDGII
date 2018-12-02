@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,6 +29,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import modelo.Software;
 import modelo.SolverProject;
 
 public class VentanaPpal extends JFrame {
@@ -34,14 +37,6 @@ public class VentanaPpal extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtFldLimSoluciones;
 	private JComboBox<String> comboBoxFldPorcDisco;
-	//	private JTextField txtFldCiudad;
-	//	private JTextField txtFldBarrio;
-	//	private JTextField txtFldDireccion;
-	//	private JTextField txtFldTelefono;
-	//	private JTextField txtFldTamanio;
-	//	private JTextField txtFldPrecio;
-	//	private JTextField txtFldRutaImportacion;
-	//	private JTextField txtFldRutaExportacion;
 	private JCheckBox chkRestSelecTodas;
 	private JCheckBox chkRest1;
 	private JCheckBox chkRest2;
@@ -62,10 +57,8 @@ public class VentanaPpal extends JFrame {
 	private JButton btnExportCsv;
 	private JTextArea txtAreaVista;
 	private JLabel img;
-	
 	private JComboBox<String> comboSala;
 	private JTextArea  consultaSala;
-	
 	private JComboBox<String> comboSoft;
 	private JTextArea  consultaSoft;
 
@@ -131,63 +124,10 @@ public class VentanaPpal extends JFrame {
 		comboBoxFldPorcDisco.addItem("100%");
 		panelParametros.add(comboBoxFldPorcDisco);
 
-		//		JLabel lblCiudad = new JLabel("*Ciudad:");
-		//		lblCiudad.setBounds(31, 129, 105, 14);
-		//		panelAgregar.add(lblCiudad);
-
-		//		JLabel lblBarrio = new JLabel("Barrio:");
-		//		lblBarrio.setBounds(31, 154, 105, 14);
-		//		panelAgregar.add(lblBarrio);
-		//
-		//		JLabel lblDireccin = new JLabel("Direcci\u00F3n:");
-		//		lblDireccin.setBounds(31, 179, 105, 14);
-		//		panelAgregar.add(lblDireccin);
-		//
-		//		JLabel lblTelefono = new JLabel("Telefono:");
-		//		lblTelefono.setBounds(31, 206, 105, 14);
-		//		panelAgregar.add(lblTelefono);
-		//
-		//		JLabel lblTamao = new JLabel("*Tama\u00F1o:");
-		//		lblTamao.setBounds(31, 231, 105, 14);
-		//		panelAgregar.add(lblTamao);
-		//
-		//		JLabel lblPrecio = new JLabel("*Precio:");
-		//		lblPrecio.setBounds(31, 256, 105, 14);
-		//		panelAgregar.add(lblPrecio);
 
 		btnImportar = new JButton("Importar");
 		btnImportar.setBounds(147, 35, 89, 23);
 		panelParametros.add(btnImportar);
-
-		//		txtFldCiudad = new JTextField();
-		//		txtFldCiudad.setColumns(10);
-		//		txtFldCiudad.setBounds(146, 126, 186, 20);
-		//		panelAgregar.add(txtFldCiudad);
-		//
-		//		txtFldBarrio = new JTextField();
-		//		txtFldBarrio.setColumns(10);
-		//		txtFldBarrio.setBounds(147, 151, 186, 20);
-		//		panelAgregar.add(txtFldBarrio);
-		//
-		//		txtFldDireccion = new JTextField();
-		//		txtFldDireccion.setColumns(10);
-		//		txtFldDireccion.setBounds(147, 176, 186, 20);
-		//		panelAgregar.add(txtFldDireccion);
-		//
-		//		txtFldTelefono = new JTextField();
-		//		txtFldTelefono.setColumns(10);
-		//		txtFldTelefono.setBounds(147, 203, 186, 20);
-		//		panelAgregar.add(txtFldTelefono);
-		//
-		//		txtFldTamanio = new JTextField();
-		//		txtFldTamanio.setColumns(10);
-		//		txtFldTamanio.setBounds(147, 228, 186, 20);
-		//		panelAgregar.add(txtFldTamanio);
-		//
-		//		txtFldPrecio = new JTextField();
-		//		txtFldPrecio.setColumns(10);
-		//		txtFldPrecio.setBounds(147, 253, 186, 20);
-		//		panelAgregar.add(txtFldPrecio);
 
 
 		JLabel lblTitulo = new JLabel("Distribuci\u00F3n de Software Icesi");
@@ -255,16 +195,6 @@ public class VentanaPpal extends JFrame {
 		btnLimpiar.setBounds(185, 270, 155, 23);
 		panelRestricciones.add(btnLimpiar);		
 
-		//		JLabel lblRutaDelArchivo = new JLabel("Ruta del archivo:");
-		//		lblRutaDelArchivo.setBounds(21, 39, 108, 14);
-		//		panelImportacion.add(lblRutaDelArchivo);
-
-		//		txtFldRutaImportacion = new JTextField();
-		//		txtFldRutaImportacion.setEnabled(false);
-		//		txtFldRutaImportacion.setBounds(139, 36, 196, 20);
-		//		panelImportacion.add(txtFldRutaImportacion);
-		//		txtFldRutaImportacion.setColumns(10);
-
 		JPanel panelExportacion = new JPanel();
 		panelExportacion.setBorder(new TitledBorder(UIManager
 				.getBorder("TitledBorder.border"), "Exportar",
@@ -272,16 +202,6 @@ public class VentanaPpal extends JFrame {
 		panelExportacion.setBounds(5, 552, 355, 65);
 		contentPane.add(panelExportacion);
 		panelExportacion.setLayout(null);
-
-		//		txtFldRutaExportacion = new JTextField();
-		//		txtFldRutaExportacion.setEnabled(false);
-		//		txtFldRutaExportacion.setColumns(10);
-		//		txtFldRutaExportacion.setBounds(139, 28, 196, 20);
-		//		panelExportacion.add(txtFldRutaExportacion);
-		//
-		//		JLabel label = new JLabel("Ruta del archivo:");
-		//		label.setBounds(21, 31, 108, 14);
-		//		panelExportacion.add(label);
 
 		btnExportTxt = new JButton("TXT");
 		btnExportTxt.setBounds(20, 30, 90, 23);
@@ -305,71 +225,71 @@ public class VentanaPpal extends JFrame {
 		JTabbedPane pestanas = new JTabbedPane(JTabbedPane.TOP);
 		pestanas.setBounds(0, 0, 810, 560);
 		panelContenedor.add(pestanas);
-		
+
 		JPanel panelContentDistribucion = new JPanel();
 		panelContentDistribucion.setBounds(366, 55, 810, 560);
 		panelContentDistribucion.setLayout(null);
-		pestanas.addTab("panel 1", panelContentDistribucion);
-		
+		pestanas.addTab("Distribución", panelContentDistribucion);
+
 		img=new JLabel(new ImageIcon("img/cargando.gif"));
 		img.setBounds(270, 150, 300, 300);
 		img.setVisible(false);
 		panelContentDistribucion.add(img);
-		
+
 		JScrollPane scrollPaneTxtDistribucion = new JScrollPane();
 		scrollPaneTxtDistribucion.setBounds(3, 3, 800, 528);
 		panelContentDistribucion.add(scrollPaneTxtDistribucion);
-		
+
 		txtAreaVista = new JTextArea();
 		txtAreaVista.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC,14));
 		scrollPaneTxtDistribucion.setViewportView(txtAreaVista);
 		txtAreaVista.setEditable(false);
 
-		JLabel conSal=new JLabel("Consultar Salas");
-		JLabel conSof=new JLabel("Consultar Software");
-		conSal.setAlignmentX(CENTER_ALIGNMENT);
-		conSof.setAlignmentX(CENTER_ALIGNMENT);
-		GridLayout experimentLayout = new GridLayout(10,3);
-		ArrayList<String> nombreSal=new ArrayList<>();
-				
-		comboSala=new JComboBox<String>();
-		consultaSala=new JTextArea();
-		consultaSala.setPreferredSize( new Dimension( 200, 240 ) );
-		consultaSala.setEditable(false);
-		
-		comboSoft=new JComboBox<String>();
-		consultaSoft=new JTextArea();
-		consultaSoft.setPreferredSize( new Dimension( 200, 240 ) );
-		consultaSoft.setEditable(false);
-		
-		
-		nombreSal=solver.getNombreSalas();
-		comboSala.addItem("Seleccione una Sala");
-		comboSoft.addItem("Seleccionar un Software");
-		
 		JPanel panel2 = new JPanel();
 		panelContenedor.setBounds(366, 55, 810, 560);
-		pestanas.addTab("panel 2", panel2);
-		panel2.setLayout(experimentLayout);
-		
+		pestanas.addTab("Consultas", panel2);
+		panel2.setLayout(null);
+
+		JLabel conSal=new JLabel("Consultar Salas");
+		conSal.setBounds(0, 0, 810, 50);
+		panel2.add(conSal);
+
+		ArrayList<String> nombreSal=new ArrayList<>();
+		comboSala=new JComboBox<String>();
+		nombreSal=solver.getNombreSalas();
+		comboSala.setBounds(0, 50, 805, 50);
+		comboSala.addItem("Seleccione una Sala");
+
 		for (int i = 0; i < nombreSal.size(); i++) {
 			comboSala.addItem(nombreSal.get(i).toString());
 		}
-		
-		for (int i = 0; i < solver.getNombreSoftware().size(); i++) {
-			comboSoft.addItem(solver.getNombreSoftware().get(i).toString());
-		}
-		panel2.add(conSal);
+
 		panel2.add(comboSala);
+
+		consultaSala=new JTextArea();
+		consultaSala.setBounds(0, 100, 805, 80);
+		consultaSala.setEditable(false);
 		panel2.add(consultaSala);
+
+
+		JLabel conSof=new JLabel("Consultar Software");
+		conSof.setBounds(0, 180, 810, 50);
 		panel2.add(conSof);
+
+		comboSoft=new JComboBox<String>();
+		comboSoft.setBounds(0, 230, 805, 50);
 		panel2.add(comboSoft);
-		panel2.add(consultaSoft);
-		
-	
-	
-		
-		
+
+		JScrollPane scrollPaneConsultaSoft = new JScrollPane();
+		scrollPaneConsultaSoft.setBounds(0, 280, 805, 190);
+
+		consultaSoft=new JTextArea();
+		consultaSoft.setEditable(false);
+		scrollPaneConsultaSoft.setViewportView(consultaSoft);
+		comboSoft.addItem("Seleccionar un Software");
+
+		panel2.add(scrollPaneConsultaSoft);
+
 		adicionarEventos();
 
 		inhabilitarComponentes();
@@ -409,6 +329,7 @@ public class VentanaPpal extends JFrame {
 		btnExportCsv.setEnabled(false);
 		btnExportPdf.setEnabled(false);
 		btnExportTxt.setEnabled(false);
+		comboSoft.setEnabled(false);
 	}
 
 	public void adicionarEventos() {
@@ -420,7 +341,7 @@ public class VentanaPpal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				txtFldLimSoluciones.setText("");
 				comboBoxFldPorcDisco.setSelectedIndex(0);
-			
+
 				txtAreaVista.setText("");
 				chkRestSelecTodas.setSelected(false);
 				chkRest1.setSelected(false);
@@ -434,192 +355,263 @@ public class VentanaPpal extends JFrame {
 		});
 
 		comboSala.addActionListener(new ActionListener() {
-			   @Override
-			   public void actionPerformed(ActionEvent e) {
-				   String item_seleccionado = comboSala.getSelectedItem().toString();
-					if (item_seleccionado.equals("Seleccione una Sala")) {
-						consultaSala.setText("Por favor seleccione una sala");
-					}else {
-						for (int i = 0; i < solver.getSalas().size(); i++) {
-							if(item_seleccionado.equals(solver.getSalas().get(i).getNombre())) {
-								consultaSala.setText("Nombre de la Sala: "+ solver.getSalas().get(i).getNombre()+"\n"+
-										"Departamento de la Sala: "+ solver.getSalas().get(i).getTipo()+"\n"+
-										"Nº de computadores de la Sala: "+ solver.getSalas().get(i).getCapacidad());
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String item_seleccionado = comboSala.getSelectedItem().toString();
+				if (item_seleccionado.equals("Seleccione una Sala")) {
+					consultaSala.setText("Por favor seleccione una sala");
+				}else {
+					for (int i = 0; i < solver.getSalas().size(); i++) {
+						if(item_seleccionado.equals(solver.getSalas().get(i).getNombre())) {
+							consultaSala.setText("Nombre de la Sala: "+ solver.getSalas().get(i).getNombre()+"\n"+
+									"Departamento de la Sala: "+ solver.getSalas().get(i).getTipo()+"\n"+
+									"Nº de computadores de la Sala: "+ solver.getSalas().get(i).getCapacidad());
+						}
+					}
+				}
+			}
+		});
+
+		comboSoft.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String item_seleccionado = comboSoft.getSelectedItem().toString();
+				if (item_seleccionado.equals("Seleccionar un Software")) {
+					consultaSoft.setText("Por favor seleccione una herramienta de software");
+				}else {
+					ArrayList<String> materias=new ArrayList<>();
+					ArrayList<String> salas=new ArrayList<>();
+					String nombre="";
+					String dpto="";
+					String sisOpe="";
+					String report="";
+					for (int i = 0; i < solver.getSalas().size(); i++) {
+						for (int j = 0; j < solver.getToolSoftware().size(); j++) {
+
+							if(item_seleccionado.equals(solver.getToolSoftware().get(j).getNombre())) {
+
+								nombre=solver.getToolSoftware().get(j).getNombre();
+								dpto=solver.getToolSoftware().get(j).getTipoDepartamento();
+								sisOpe=solver.getToolSoftware().get(j).getSistemaOperativo();
+
+								if (!materias.contains(solver.getToolSoftware().get(j).getNombreMateria())){
+									materias.add(solver.getToolSoftware().get(j).getNombreMateria());
+								}
+
+								if (!salas.contains(solver.getToolSoftware().get(j).getNombreSala())){
+									salas.add(solver.getToolSoftware().get(j).getNombreSala());
+								}
 							}
 						}
 					}
-			   }
-		});
-		
-		btnGenerar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
 
-				new Thread() {
+					report+="Nombre del software: "+ nombre+"\n"+
+							"Departamento asociado: "+ dpto+"\n"+
+							"Sistema Operativo: "+ sisOpe+"\n"+
+							"Materia que la utiliza:"+"\n";
 
-					@Override
-					public void run() {
-
-						img.setVisible(true);
-
-						if (!txtFldLimSoluciones.getText().equals("")) {
-
-							int numSol=Integer.parseInt(txtFldLimSoluciones.getText());
-							solver.modeloInicial(numSol);
-						}else {
-							int numSol=10;
-							solver.modeloInicial(numSol);
-						}
-
-						try {
-							Thread.sleep(100);
-
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-
-						img.setVisible(false);
-						txtAreaVista.append(solver.getReporte());
+					int cont=1;
+					for (int i = 0; i < materias.size(); i++) {
+						report+=" "+cont+". "+materias.get(i)+"\n";
+						cont++;
 					}
-				}.start();
-			}
-		});
+					cont=1;
+					report+="Salas en que se encuentra:"+"\n";
 
-		btnImportar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				JFileChooser directorio = new JFileChooser("docs/");
-				FileNameExtensionFilter filtro = new FileNameExtensionFilter(
-						"CVS", "csv");
-				directorio.setFileFilter(filtro);
-
-				int respuesta = directorio.showOpenDialog(frame);
-				if (respuesta == JFileChooser.APPROVE_OPTION) {
-					File escogido = directorio.getSelectedFile();
-
-					try {
-
-						solver.leerCSVSoftware(escogido.getAbsolutePath());
-						txtAreaVista.setText(" ");
-						JOptionPane.showMessageDialog(null, "Se ha importado correctamente el archivo",
-								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
-
-						habilitarComponentes();
-
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						JOptionPane.showMessageDialog(null, "No se ha importado correctamente el archivo",
-								"Error", JOptionPane.ERROR_MESSAGE);
-						e1.printStackTrace();
+					for (int j = 0; j < salas.size(); j++) {
+						report+=" "+cont+". "+salas.get(j)+"\n";
+						cont++;
 					}
-
-				}
-
-			}
-		});
-
-		btnExportTxt.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				JFileChooser directorio = new JFileChooser();
-				FileNameExtensionFilter filtro = new FileNameExtensionFilter(
-						"txt", "txt");
-				directorio.setFileFilter(filtro);
-
-				String ruta = "";
-				int respuesta = directorio.showOpenDialog(frame);
-				if (respuesta == JFileChooser.APPROVE_OPTION) {
-					File escogido = directorio.getSelectedFile();
-					ruta = escogido.getAbsolutePath();
-
-					try {
-						solver.exportarReporteTxt(ruta);
-						
-						JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
-								+ruta,
-								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
-						
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					consultaSoft.setText(report);
 				}
 			}
 		});
 
-		btnExportPdf.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+								btnGenerar.addActionListener(new ActionListener() {
+									@Override
+									public void actionPerformed(ActionEvent e) {
 
-				JFileChooser directorio = new JFileChooser();
-				FileNameExtensionFilter filtro = new FileNameExtensionFilter(
-						"pdf", "pdf");
-				directorio.setFileFilter(filtro);
+										new Thread() {
 
-				String ruta = "";
-				int respuesta = directorio.showOpenDialog(frame);
-				if (respuesta == JFileChooser.APPROVE_OPTION) {
-					File escogido = directorio.getSelectedFile();
-					ruta = escogido.getAbsolutePath();
+											@Override
+											public void run() {
 
-//					try {
-//						solver.exportarReporteTxt(ruta);
-//						
-//						JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
-//								+ruta,
-//								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
-//						
-//					} catch (FileNotFoundException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//
-//					} catch (Exception e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					}
-				}
+												img.setVisible(true);
 
-			}
-		});
+												if (!txtFldLimSoluciones.getText().equals("")) {
 
-		btnExportCsv.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+													int numSol=Integer.parseInt(txtFldLimSoluciones.getText());
+													solver.modeloInicial(numSol);
+												}else {
+													int numSol=10;
+													solver.modeloInicial(numSol);
+												}
 
-			}
-		});
+												try {
+													Thread.sleep(100);
 
-		chkRestSelecTodas.addActionListener(new ActionListener() {
+												} catch (InterruptedException e) {
+													// TODO Auto-generated catch block
+													e.printStackTrace();
+												}
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+												img.setVisible(false);
+												txtAreaVista.append(solver.getReporte());
+												comboSoft.setEnabled(true);
 
-				if (chkRestSelecTodas.isSelected()) {
-					chkRest1.setSelected(true);
-					chkRest2.setSelected(true);
-					chkRest3.setSelected(true);
-					chkRest4.setSelected(true);
-					chkRest5.setSelected(true);
-					chkRest6.setSelected(true);
-				}
-				else {
+												//												Collections.sort(solver.getNombreSoftware(), new Comparator<Software>() {
+												//													public int compare(Software obj1, Software obj2) {
+												//													
+												//															return obj1.getNombre().compareTo(obj2.getNombre());								
+												//														
+												//													}
+												//												});
 
-					chkRest1.setSelected(false);
-					chkRest2.setSelected(false);
-					chkRest3.setSelected(false);
-					chkRest4.setSelected(false);
-					chkRest5.setSelected(false);
-					chkRest6.setSelected(false);
-				}
-			}
-		});
+
+												Collections.sort(solver.getNombreSoftware()); 
+
+												for (int i = 0; i < solver.getNombreSoftware().size(); i++) {
+													comboSoft.addItem(solver.getNombreSoftware().get(i).toString());
+												}
+											}
+										}.start();
+									}
+								});
+
+								btnImportar.addActionListener(new ActionListener() {
+									@Override
+									public void actionPerformed(ActionEvent e) {
+
+										JFileChooser directorio = new JFileChooser("docs/");
+										FileNameExtensionFilter filtro = new FileNameExtensionFilter(
+												"CVS", "csv");
+										directorio.setFileFilter(filtro);
+
+										int respuesta = directorio.showOpenDialog(frame);
+										if (respuesta == JFileChooser.APPROVE_OPTION) {
+											File escogido = directorio.getSelectedFile();
+
+											try {
+
+												solver.leerCSVSoftware(escogido.getAbsolutePath());
+												txtAreaVista.setText(" ");
+												JOptionPane.showMessageDialog(null, "Se ha importado correctamente el archivo",
+														"Mensaje", JOptionPane.INFORMATION_MESSAGE);
+
+												habilitarComponentes();
+
+											} catch (Exception e1) {
+												// TODO Auto-generated catch block
+												JOptionPane.showMessageDialog(null, "No se ha importado correctamente el archivo",
+														"Error", JOptionPane.ERROR_MESSAGE);
+												e1.printStackTrace();
+											}
+
+										}
+
+									}
+								});
+
+								btnExportTxt.addActionListener(new ActionListener() {
+									@Override
+									public void actionPerformed(ActionEvent e) {
+
+										JFileChooser directorio = new JFileChooser();
+										FileNameExtensionFilter filtro = new FileNameExtensionFilter(
+												"txt", "txt");
+										directorio.setFileFilter(filtro);
+
+										String ruta = "";
+										int respuesta = directorio.showOpenDialog(frame);
+										if (respuesta == JFileChooser.APPROVE_OPTION) {
+											File escogido = directorio.getSelectedFile();
+											ruta = escogido.getAbsolutePath();
+
+											try {
+												solver.exportarReporteTxt(ruta);
+
+												JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
+														+ruta,
+														"Mensaje", JOptionPane.INFORMATION_MESSAGE);
+
+											} catch (FileNotFoundException e1) {
+												// TODO Auto-generated catch block
+												e1.printStackTrace();
+
+											} catch (Exception e1) {
+												// TODO Auto-generated catch block
+												e1.printStackTrace();
+											}
+										}
+									}
+								});
+
+								btnExportPdf.addActionListener(new ActionListener() {
+									@Override
+									public void actionPerformed(ActionEvent e) {
+
+										JFileChooser directorio = new JFileChooser();
+										FileNameExtensionFilter filtro = new FileNameExtensionFilter(
+												"pdf", "pdf");
+										directorio.setFileFilter(filtro);
+
+										String ruta = "";
+										int respuesta = directorio.showOpenDialog(frame);
+										if (respuesta == JFileChooser.APPROVE_OPTION) {
+											File escogido = directorio.getSelectedFile();
+											ruta = escogido.getAbsolutePath();
+
+											//					try {
+											//						solver.exportarReporteTxt(ruta);
+											//						
+											//						JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
+											//								+ruta,
+											//								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
+											//						
+											//					} catch (FileNotFoundException e1) {
+											//						// TODO Auto-generated catch block
+											//						e1.printStackTrace();
+											//
+											//					} catch (Exception e1) {
+											//						// TODO Auto-generated catch block
+											//						e1.printStackTrace();
+											//					}
+										}
+
+									}
+								});
+
+								btnExportCsv.addActionListener(new ActionListener() {
+									@Override
+									public void actionPerformed(ActionEvent e) {
+
+									}
+								});
+
+								chkRestSelecTodas.addActionListener(new ActionListener() {
+
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										// TODO Auto-generated method stub
+
+										if (chkRestSelecTodas.isSelected()) {
+											chkRest1.setSelected(true);
+											chkRest2.setSelected(true);
+											chkRest3.setSelected(true);
+											chkRest4.setSelected(true);
+											chkRest5.setSelected(true);
+											chkRest6.setSelected(true);
+										}
+										else {
+
+											chkRest1.setSelected(false);
+											chkRest2.setSelected(false);
+											chkRest3.setSelected(false);
+											chkRest4.setSelected(false);
+											chkRest5.setSelected(false);
+											chkRest6.setSelected(false);
+										}
+									}
+								});
 	}
 }

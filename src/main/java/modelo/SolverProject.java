@@ -56,6 +56,7 @@ public class SolverProject {
 	private static ArrayList<Software> toolSoftware;
 	private static ArrayList<Software> toolSoftwareBasico;
 	private static ArrayList<String> nombreSoftware;
+	private static ArrayList<String> softwareComboBox;
 	private static ArrayList<Software> toolSoftwareBasicoOrdenado;
 
 	private String reporte;
@@ -71,7 +72,7 @@ public class SolverProject {
 
 		nombreSoftware=new ArrayList<String>();
 		toolSoftwareBasicoOrdenado= new ArrayList<Software>();
-
+		softwareComboBox=new ArrayList<String>();
 
 
 		//	    for (int j = 0; j < escalaProcesadores.size(); j++) {
@@ -467,7 +468,7 @@ public class SolverProject {
 				if (matrizCopia[i][j].getValue()==1) {
 
 					matrizPesos[i][j]=matrizCopia[i][j].mul(toolSoftware.get(j).getDiscoDuro()).intVar();
-
+	
 				}
 
 			}
@@ -704,17 +705,24 @@ public class SolverProject {
 				}
 
 			}
-
+			
+			//softwareComboBox=toolSoftwareBasico;
+		
 			for (int j = 0; j < toolSoftware.size(); j++) {
-
+				
 				if (solut.getIntVal(matriz[i][j])==1) {
-
+		
 					if (!nombreSoftware.contains(toolSoftware.get(j).getNombre())) {
 
 						nombreSoftware.add(toolSoftware.get(j).getNombre());
-
+						
 						System.out.println(toolSoftware.get(j).getNombre());
 						reporte+=toolSoftware.get(j).getNombre()+"\n";
+						
+					}
+					if (!softwareComboBox.contains(toolSoftware.get(j).getNombre())) {
+						softwareComboBox.add(toolSoftware.get(j).getNombre());
+					
 					}
 				}
 
@@ -799,11 +807,11 @@ public class SolverProject {
 		this.reporte = reporte;
 	}
 	
-	public static ArrayList<String> getNombreSoftware() {
-		return nombreSoftware;
+	public ArrayList<String> getNombreSoftware() {
+		return softwareComboBox;
 	}
 
-	public static void setNombreSoftware(ArrayList<String> nombreSoftware) {
-		SolverProject.nombreSoftware = nombreSoftware;
+	public void setNombreSoftware(ArrayList<String> nombreSoftware) {
+		softwareComboBox = nombreSoftware;
 	}
 }
