@@ -364,7 +364,7 @@ public class SolverProject {
 	public void modeloInicial(int numSoluciones, boolean restrSoftDepartamento,
 			boolean restrSoftRAM, boolean restrSistemaOperativo, boolean restrDiscoDuro, 
 			boolean restrDemandaCapacidad, boolean restrSoftBasico, boolean restrNumLicencias,
-			boolean restrSoftwareSalaNombre) {
+			boolean restrSoftwareSalaNombre, int porcDisco) {
 
 		//cargarInfoSoftware();
 
@@ -442,12 +442,14 @@ public class SolverProject {
 
 		System.out.println("0 = No se puede instalar"+"\n"+ "1 = Si instalar"+"\n");
 		reporte+="0 = No se puede instalar"+"\n"+ "1 = Si instalar"+"\n"+"\n";
-		restriccionesDeDisco(carrera,solutionRecord, restrDiscoDuro, restrDemandaCapacidad, restrNumLicencias, restrSoftBasico);
+		restriccionesDeDisco(carrera,solutionRecord, restrDiscoDuro, restrDemandaCapacidad, 
+				restrNumLicencias, restrSoftBasico, porcDisco);
 
 	}
 
 	public void restriccionesDeDisco(IntVar[][] matrizCarreras, Solution solucionAnterior, 
-			boolean restrDisco , boolean demandaCapacidad, boolean licenciasSoftware, boolean softBasic) {
+			boolean restrDisco , boolean demandaCapacidad, boolean licenciasSoftware, boolean softBasic,
+			int porcentajeDisco) {
 
 		if (restrDisco == true) {
 
@@ -494,7 +496,7 @@ public class SolverProject {
 
 				//System.out.println(pesoPorSala + " | "+(salas.get(i).getComputadores().getDiscoDuro()*PORCENTAJE_DISPONIBLE)/100);
 
-				if (pesoPorSala>=(salas.get(i).getComputadores().getDiscoDuro()*PORCENTAJE_DISPONIBLE)/100 &&
+				if (pesoPorSala>=(salas.get(i).getComputadores().getDiscoDuro()*porcentajeDisco)/100 &&
 						restrDisco == true) {
 
 					model.arithm(matrizResultado[i][j], "=", 0).post();

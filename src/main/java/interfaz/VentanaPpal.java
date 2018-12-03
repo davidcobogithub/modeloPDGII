@@ -343,8 +343,8 @@ public class VentanaPpal extends JFrame {
 				chkRestSoftwareDemandaCapacidad.setSelected(false);
 				chkRestSoftwareDiscoDuro.setSelected(false);
 				chkRestSoftwareBasico.setSelected(false);
-				chkRestSoftwareNumeroLicencias.setEnabled(false);
-				chkRestSoftwareSalaNombre.setEnabled(false);
+				chkRestSoftwareNumeroLicencias.setSelected(false);
+				chkRestSoftwareSalaNombre.setSelected(false);
 
 			}
 		});
@@ -414,19 +414,49 @@ public class VentanaPpal extends JFrame {
 						txtAreaVista.setText(" ");
 						img.setVisible(true);
 
-						if (!txtFldLimSoluciones.getText().equals("")) {
+						if (!txtFldLimSoluciones.getText().equals("") &&
+								!comboBoxFldPorcDisco.getSelectedItem().toString().equals("Seleccione Porcentaje")) {
 
 							int numSol=Integer.parseInt(txtFldLimSoluciones.getText());
+							int porc=Integer.parseInt(comboBoxFldPorcDisco.getSelectedItem().toString().split("%")[0]);
+							
 							solver.modeloInicial(numSol, chkRestSoftwareDepartamento.isSelected(), 
 									chkRestSoftwareRAM.isSelected(), chkRestSostwareSistemaOperativo.isSelected(),
 									chkRestSoftwareDiscoDuro.isSelected(), chkRestSoftwareDemandaCapacidad.isSelected(),
-									chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), chkRestSoftwareSalaNombre.isSelected());
+									chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), 
+									chkRestSoftwareSalaNombre.isSelected(), porc);
+						}
+						else if (!txtFldLimSoluciones.getText().equals("") &&
+								comboBoxFldPorcDisco.getSelectedItem().toString().equals("Seleccione Porcentaje")) {
+
+							int numSol=Integer.parseInt(txtFldLimSoluciones.getText());
+							int porc=70;
+						
+							solver.modeloInicial(numSol, chkRestSoftwareDepartamento.isSelected(), 
+									chkRestSoftwareRAM.isSelected(), chkRestSostwareSistemaOperativo.isSelected(),
+									chkRestSoftwareDiscoDuro.isSelected(), chkRestSoftwareDemandaCapacidad.isSelected(),
+									chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), 
+									chkRestSoftwareSalaNombre.isSelected(), porc);
+						}
+						else if (txtFldLimSoluciones.getText().equals("") &&
+								!comboBoxFldPorcDisco.getSelectedItem().toString().equals("Seleccione Porcentaje")) {
+
+							int numSol=10;
+							int porc=Integer.parseInt(comboBoxFldPorcDisco.getSelectedItem().toString().split("%")[0]);
+						
+							solver.modeloInicial(numSol, chkRestSoftwareDepartamento.isSelected(), 
+									chkRestSoftwareRAM.isSelected(), chkRestSostwareSistemaOperativo.isSelected(),
+									chkRestSoftwareDiscoDuro.isSelected(), chkRestSoftwareDemandaCapacidad.isSelected(),
+									chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), 
+									chkRestSoftwareSalaNombre.isSelected(), porc);
 						}else {
 							int numSol=10;
+							int porc=70;
 							solver.modeloInicial(numSol, chkRestSoftwareDepartamento.isSelected(), 
 									chkRestSoftwareRAM.isSelected(), chkRestSostwareSistemaOperativo.isSelected(),
 									chkRestSoftwareDiscoDuro.isSelected(), chkRestSoftwareDemandaCapacidad.isSelected(),
-									chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(),chkRestSoftwareSalaNombre.isSelected());
+									chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(),
+									chkRestSoftwareSalaNombre.isSelected(), porc);
 						}
 
 						try {
