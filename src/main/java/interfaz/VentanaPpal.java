@@ -38,19 +38,16 @@ public class VentanaPpal extends JFrame {
 	private JTextField txtFldLimSoluciones;
 	private JComboBox<String> comboBoxFldPorcDisco;
 	private JCheckBox chkRestSelecTodas;
-	private JCheckBox chkRest1;
-	private JCheckBox chkRest2;
-	private JCheckBox chkRest3;
-	private JCheckBox chkRest4;
-	private JCheckBox chkRest5;
-	private JCheckBox chkRest6;
-	private JCheckBox chkRest7;
-	private JCheckBox chkRest8;
-	private JCheckBox chkRest9;
-	private JCheckBox chkRest10;
+	private JCheckBox chkRestSoftwareDepartamento;
+	private JCheckBox chkRestSostwareSistemaOperativo;
+	private JCheckBox chkRestSoftwareRAM;
+	private JCheckBox chkRestSoftwareDemandaCapacidad;
+	private JCheckBox chkRestSoftwareDiscoDuro;
+	private JCheckBox chkRestSoftwareBasico;
+	private JCheckBox chkRestSoftwareNumeroLicencias;
+	private JCheckBox chkRestSoftwareSalaNombre;
 	private JButton btnGenerar;
 	private JButton btnLimpiar;
-	//private JButton btnOrganizarRegistros;
 	private JButton btnImportar;
 	private JButton btnExportTxt;
 	private JButton btnExportPdf;
@@ -147,45 +144,37 @@ public class VentanaPpal extends JFrame {
 		chkRestSelecTodas.setBounds(15, 25, 300, 23);
 		panelRestricciones.add(chkRestSelecTodas);
 
-		chkRest1 =  new JCheckBox("Software y Salas de un Departamento");
-		chkRest1.setBounds(15, 50, 300, 23);
-		panelRestricciones.add(chkRest1);
+		chkRestSoftwareDepartamento =  new JCheckBox("Software y Salas de un Departamento");
+		chkRestSoftwareDepartamento.setBounds(15, 50, 300, 23);
+		panelRestricciones.add(chkRestSoftwareDepartamento);
 
-		chkRest2 =  new JCheckBox("Software y Salas con mismo Sistema Operativo");
-		chkRest2.setBounds(15, 70, 300, 23);
-		panelRestricciones.add(chkRest2);
+		chkRestSostwareSistemaOperativo =  new JCheckBox("Software y Salas con mismo Sistema Operativo");
+		chkRestSostwareSistemaOperativo.setBounds(15, 70, 300, 23);
+		panelRestricciones.add(chkRestSostwareSistemaOperativo);
 
-		chkRest3 =  new JCheckBox("Capacidad de Memoria RAM");
-		chkRest3.setBounds(15, 90, 300, 23);
-		panelRestricciones.add(chkRest3);
+		chkRestSoftwareSalaNombre =  new JCheckBox("Software Instalado en Salas Específicas");
+		chkRestSoftwareSalaNombre.setBounds(15, 90, 300, 23);
+		panelRestricciones.add(chkRestSoftwareSalaNombre);
 
-		chkRest4 =  new JCheckBox("Capacidad de Velocidad del Procesador");
-		chkRest4.setBounds(15, 110, 300, 23);
-		panelRestricciones.add(chkRest4);
+		chkRestSoftwareDiscoDuro =  new JCheckBox("Capacidad de Disco Duro");
+		chkRestSoftwareDiscoDuro.setBounds(15, 110, 300, 23);
+		panelRestricciones.add(chkRestSoftwareDiscoDuro);
 
-		chkRest5 =  new JCheckBox("Capacidad de Disco Duro");
-		chkRest5.setBounds(15, 130, 300, 23);
-		panelRestricciones.add(chkRest5);
+		chkRestSoftwareRAM=  new JCheckBox("Capacidad de Memoria RAM");
+		chkRestSoftwareRAM.setBounds(15, 130, 300, 23);
+		panelRestricciones.add(chkRestSoftwareRAM);
 
-		chkRest6 =  new JCheckBox("Capacidad de las Salas");
-		chkRest6.setBounds(15, 150, 300, 23);
-		panelRestricciones.add(chkRest6);
+		chkRestSoftwareDemandaCapacidad =  new JCheckBox("Demanda y Capacidad de las Salas");
+		chkRestSoftwareDemandaCapacidad.setBounds(15, 150, 300, 23);
+		panelRestricciones.add(chkRestSoftwareDemandaCapacidad);
 
-		//		chkRest7 =  new JCheckBox("Capacidad de Disco Duro");
-		//		chkRest7.setBounds(15, 170, 300, 23);
-		//		panelRestricciones.add(chkRest7);
-		//		
-		//		chkRest8 =  new JCheckBox("Capacidad de Disco Duro");
-		//		chkRest8.setBounds(15, 190, 300, 23);
-		//		panelRestricciones.add(chkRest8);
-		//		
-		//		chkRest9 =  new JCheckBox("Capacidad de Disco Duro");
-		//		chkRest9.setBounds(15, 210, 300, 23);
-		//		panelRestricciones.add(chkRest9);
-		//		
-		//		chkRest10 =  new JCheckBox("Capacidad de Disco Duro");
-		//		chkRest10.setBounds(15, 230, 300, 23);
-		//		panelRestricciones.add(chkRest10);
+		chkRestSoftwareBasico =  new JCheckBox("Instalación de Software Básico");
+		chkRestSoftwareBasico.setBounds(15, 170, 300, 23);
+		panelRestricciones.add(chkRestSoftwareBasico);
+
+		chkRestSoftwareNumeroLicencias =  new JCheckBox("Cantidad de Licencias de Software");
+		chkRestSoftwareNumeroLicencias.setBounds(15, 190, 300, 23);
+		panelRestricciones.add(chkRestSoftwareNumeroLicencias);
 
 		btnGenerar = new JButton("Generar Distribuci\u00F3n");
 		btnGenerar.setBounds(15, 270, 155, 23);
@@ -286,7 +275,7 @@ public class VentanaPpal extends JFrame {
 		consultaSoft=new JTextArea();
 		consultaSoft.setEditable(false);
 		scrollPaneConsultaSoft.setViewportView(consultaSoft);
-		comboSoft.addItem("Seleccionar un Software");
+		//comboSoft.addItem("Seleccionar un Software");
 
 		panel2.add(scrollPaneConsultaSoft);
 
@@ -300,12 +289,14 @@ public class VentanaPpal extends JFrame {
 		txtFldLimSoluciones.setEditable(true);
 		comboBoxFldPorcDisco.setEnabled(true);
 		chkRestSelecTodas.setEnabled(true);
-		chkRest1.setEnabled(true);
-		chkRest2.setEnabled(true);
-		chkRest3.setEnabled(true);
-		chkRest4.setEnabled(true);
-		chkRest5.setEnabled(true);
-		chkRest6.setEnabled(true);
+		chkRestSoftwareDepartamento.setEnabled(true);
+		chkRestSostwareSistemaOperativo.setEnabled(true);
+		chkRestSoftwareRAM.setEnabled(true);
+		chkRestSoftwareDemandaCapacidad.setEnabled(true);
+		chkRestSoftwareDiscoDuro.setEnabled(true);
+		chkRestSoftwareBasico.setEnabled(true);
+		chkRestSoftwareNumeroLicencias.setEnabled(true);
+		chkRestSoftwareSalaNombre.setEnabled(true);
 		btnGenerar.setEnabled(true);
 		btnLimpiar.setEnabled(true);
 		btnExportCsv.setEnabled(true);
@@ -318,12 +309,14 @@ public class VentanaPpal extends JFrame {
 		txtFldLimSoluciones.setEditable(false);
 		comboBoxFldPorcDisco.setEnabled(false);
 		chkRestSelecTodas.setEnabled(false);
-		chkRest1.setEnabled(false);
-		chkRest2.setEnabled(false);
-		chkRest3.setEnabled(false);
-		chkRest4.setEnabled(false);
-		chkRest5.setEnabled(false);
-		chkRest6.setEnabled(false);
+		chkRestSoftwareDepartamento.setEnabled(false);
+		chkRestSostwareSistemaOperativo.setEnabled(false);
+		chkRestSoftwareRAM.setEnabled(false);
+		chkRestSoftwareDemandaCapacidad.setEnabled(false);
+		chkRestSoftwareDiscoDuro.setEnabled(false);
+		chkRestSoftwareBasico.setEnabled(false);
+		chkRestSoftwareNumeroLicencias.setEnabled(false);
+		chkRestSoftwareSalaNombre.setEnabled(false);
 		btnGenerar.setEnabled(false);
 		btnLimpiar.setEnabled(false);
 		btnExportCsv.setEnabled(false);
@@ -344,12 +337,14 @@ public class VentanaPpal extends JFrame {
 
 				txtAreaVista.setText("");
 				chkRestSelecTodas.setSelected(false);
-				chkRest1.setSelected(false);
-				chkRest2.setSelected(false);
-				chkRest3.setSelected(false);
-				chkRest4.setSelected(false);
-				chkRest5.setSelected(false);
-				chkRest6.setSelected(false);
+				chkRestSoftwareDepartamento.setSelected(false);
+				chkRestSostwareSistemaOperativo.setSelected(false);
+				chkRestSoftwareRAM.setSelected(false);
+				chkRestSoftwareDemandaCapacidad.setSelected(false);
+				chkRestSoftwareDiscoDuro.setSelected(false);
+				chkRestSoftwareBasico.setSelected(false);
+				chkRestSoftwareNumeroLicencias.setEnabled(false);
+				chkRestSoftwareSalaNombre.setEnabled(false);
 
 			}
 		});
@@ -372,9 +367,114 @@ public class VentanaPpal extends JFrame {
 			}
 		});
 
+		btnImportar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				JFileChooser directorio = new JFileChooser("docs/");
+				FileNameExtensionFilter filtro = new FileNameExtensionFilter(
+						"CVS", "csv");
+				directorio.setFileFilter(filtro);
+
+				int respuesta = directorio.showOpenDialog(frame);
+				if (respuesta == JFileChooser.APPROVE_OPTION) {
+					File escogido = directorio.getSelectedFile();
+
+					try {
+
+						solver.leerCSVSoftware(escogido.getAbsolutePath());
+						txtAreaVista.setText(" ");
+						JOptionPane.showMessageDialog(null, "Se ha importado correctamente el archivo",
+								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
+
+						habilitarComponentes();
+						chkRestSoftwareDepartamento.setSelected(true);
+
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, "No se ha importado correctamente el archivo",
+								"Error", JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					}
+
+				}
+
+			}
+		});
+
+		btnGenerar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				new Thread() {
+
+					@Override
+					public void run() {
+
+						txtAreaVista.setText(" ");
+						img.setVisible(true);
+
+						if (!txtFldLimSoluciones.getText().equals("")) {
+
+							int numSol=Integer.parseInt(txtFldLimSoluciones.getText());
+							solver.modeloInicial(numSol, chkRestSoftwareDepartamento.isSelected(), 
+									chkRestSoftwareRAM.isSelected(), chkRestSostwareSistemaOperativo.isSelected(),
+									chkRestSoftwareDiscoDuro.isSelected(), chkRestSoftwareDemandaCapacidad.isSelected(),
+									chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), chkRestSoftwareSalaNombre.isSelected());
+						}else {
+							int numSol=10;
+							solver.modeloInicial(numSol, chkRestSoftwareDepartamento.isSelected(), 
+									chkRestSoftwareRAM.isSelected(), chkRestSostwareSistemaOperativo.isSelected(),
+									chkRestSoftwareDiscoDuro.isSelected(), chkRestSoftwareDemandaCapacidad.isSelected(),
+									chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(),chkRestSoftwareSalaNombre.isSelected());
+						}
+
+						try {
+							Thread.sleep(100);
+
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+						img.setVisible(false);
+						txtAreaVista.append(solver.getReporte());
+						comboSoft.setEnabled(true);
+
+						//												Collections.sort(solver.getNombreSoftware(), new Comparator<Software>() {
+						//													public int compare(Software obj1, Software obj2) {
+						//													
+						//															return obj1.getNombre().compareTo(obj2.getNombre());								
+						//														
+						//													}
+						//												});
+
+						if (comboSoft.getItemCount() > 1) {
+
+							comboSoft.removeAllItems();
+					
+						}
+						
+						Collections.sort(solver.getNombreSoftware());
+						
+							comboSoft.addItem("Seleccionar un Software");
+							for (int i = 0; i < solver.getNombreSoftware().size(); i++) {
+								comboSoft.addItem(solver.getNombreSoftware().get(i).toString());
+
+							}
+							
+							solver.getNombreSoftware().clear();
+
+						}
+					}.start();
+				}
+			});
+
 		comboSoft.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				try {
+					
 				String item_seleccionado = comboSoft.getSelectedItem().toString();
 				if (item_seleccionado.equals("Seleccionar un Software")) {
 					consultaSoft.setText("Por favor seleccione una herramienta de software");
@@ -384,6 +484,8 @@ public class VentanaPpal extends JFrame {
 					String nombre="";
 					String dpto="";
 					String sisOpe="";
+					int disco=0;
+					int ram=0;
 					String report="";
 					for (int i = 0; i < solver.getSalas().size(); i++) {
 						for (int j = 0; j < solver.getToolSoftware().size(); j++) {
@@ -393,6 +495,8 @@ public class VentanaPpal extends JFrame {
 								nombre=solver.getToolSoftware().get(j).getNombre();
 								dpto=solver.getToolSoftware().get(j).getTipoDepartamento();
 								sisOpe=solver.getToolSoftware().get(j).getSistemaOperativo();
+								disco=solver.getToolSoftware().get(j).getDiscoDuro();
+								ram=solver.getToolSoftware().get(j).getMemoriaRAM();
 
 								if (!materias.contains(solver.getToolSoftware().get(j).getNombreMateria())){
 									materias.add(solver.getToolSoftware().get(j).getNombreMateria());
@@ -406,8 +510,10 @@ public class VentanaPpal extends JFrame {
 					}
 
 					report+="Nombre del software: "+ nombre+"\n"+
-							"Departamento asociado: "+ dpto+"\n"+
-							"Sistema Operativo: "+ sisOpe+"\n"+
+							"Departamento asociado: "+ dpto+"\n"+"\n"+
+							"Disco Duro: "+ disco+" GB"+"\n"+
+							"Memoria RAM: "+ ram+" GB"+"\n"+
+							"Sistema Operativo: "+ sisOpe+"\n"+"\n"+
 							"Materia que la utiliza:"+"\n";
 
 					int cont=1;
@@ -416,202 +522,125 @@ public class VentanaPpal extends JFrame {
 						cont++;
 					}
 					cont=1;
-					report+="Salas en que se encuentra:"+"\n";
+					report+="\n"+"Salas en que se encuentra:"+"\n";
 
 					for (int j = 0; j < salas.size(); j++) {
 						report+=" "+cont+". "+salas.get(j)+"\n";
 						cont++;
 					}
 					consultaSoft.setText(report);
+					
+				}
+				} catch (Exception e2) {
+					// TODO: handle exception
 				}
 			}
 		});
 
-								btnGenerar.addActionListener(new ActionListener() {
-									@Override
-									public void actionPerformed(ActionEvent e) {
+		btnExportTxt.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
-										new Thread() {
+				JFileChooser directorio = new JFileChooser();
+				FileNameExtensionFilter filtro = new FileNameExtensionFilter(
+						"txt", "txt");
+				directorio.setFileFilter(filtro);
 
-											@Override
-											public void run() {
+				String ruta = "";
+				int respuesta = directorio.showOpenDialog(frame);
+				if (respuesta == JFileChooser.APPROVE_OPTION) {
+					File escogido = directorio.getSelectedFile();
+					ruta = escogido.getAbsolutePath();
 
-												img.setVisible(true);
+					try {
+						solver.exportarReporteTxt(ruta);
 
-												if (!txtFldLimSoluciones.getText().equals("")) {
+						JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
+								+ruta,
+								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
 
-													int numSol=Integer.parseInt(txtFldLimSoluciones.getText());
-													solver.modeloInicial(numSol);
-												}else {
-													int numSol=10;
-													solver.modeloInicial(numSol);
-												}
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 
-												try {
-													Thread.sleep(100);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
 
-												} catch (InterruptedException e) {
-													// TODO Auto-generated catch block
-													e.printStackTrace();
-												}
+		btnExportPdf.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
-												img.setVisible(false);
-												txtAreaVista.append(solver.getReporte());
-												comboSoft.setEnabled(true);
+				JFileChooser directorio = new JFileChooser();
+				FileNameExtensionFilter filtro = new FileNameExtensionFilter(
+						"pdf", "pdf");
+				directorio.setFileFilter(filtro);
 
-												//												Collections.sort(solver.getNombreSoftware(), new Comparator<Software>() {
-												//													public int compare(Software obj1, Software obj2) {
-												//													
-												//															return obj1.getNombre().compareTo(obj2.getNombre());								
-												//														
-												//													}
-												//												});
+				String ruta = "";
+				int respuesta = directorio.showOpenDialog(frame);
+				if (respuesta == JFileChooser.APPROVE_OPTION) {
+					File escogido = directorio.getSelectedFile();
+					ruta = escogido.getAbsolutePath();
 
+					//					try {
+					//						solver.exportarReporteTxt(ruta);
+					//						
+					//						JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
+					//								+ruta,
+					//								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
+					//						
+					//					} catch (FileNotFoundException e1) {
+					//						// TODO Auto-generated catch block
+					//						e1.printStackTrace();
+					//
+					//					} catch (Exception e1) {
+					//						// TODO Auto-generated catch block
+					//						e1.printStackTrace();
+					//					}
+				}
 
-												Collections.sort(solver.getNombreSoftware()); 
+			}
+		});
 
-												for (int i = 0; i < solver.getNombreSoftware().size(); i++) {
-													comboSoft.addItem(solver.getNombreSoftware().get(i).toString());
-												}
-											}
-										}.start();
-									}
-								});
+		btnExportCsv.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
-								btnImportar.addActionListener(new ActionListener() {
-									@Override
-									public void actionPerformed(ActionEvent e) {
+			}
+		});
 
-										JFileChooser directorio = new JFileChooser("docs/");
-										FileNameExtensionFilter filtro = new FileNameExtensionFilter(
-												"CVS", "csv");
-										directorio.setFileFilter(filtro);
+		chkRestSelecTodas.addActionListener(new ActionListener() {
 
-										int respuesta = directorio.showOpenDialog(frame);
-										if (respuesta == JFileChooser.APPROVE_OPTION) {
-											File escogido = directorio.getSelectedFile();
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
 
-											try {
+				if (chkRestSelecTodas.isSelected()) {
+					chkRestSoftwareDepartamento.setSelected(true);
+					chkRestSostwareSistemaOperativo.setSelected(true);
+					chkRestSoftwareRAM.setSelected(true);
+					chkRestSoftwareDemandaCapacidad.setSelected(true);
+					chkRestSoftwareDiscoDuro.setSelected(true);
+					chkRestSoftwareBasico.setSelected(true);
+					chkRestSoftwareNumeroLicencias.setEnabled(true);
+					chkRestSoftwareSalaNombre.setEnabled(true);
+				}
+				else {
 
-												solver.leerCSVSoftware(escogido.getAbsolutePath());
-												txtAreaVista.setText(" ");
-												JOptionPane.showMessageDialog(null, "Se ha importado correctamente el archivo",
-														"Mensaje", JOptionPane.INFORMATION_MESSAGE);
-
-												habilitarComponentes();
-
-											} catch (Exception e1) {
-												// TODO Auto-generated catch block
-												JOptionPane.showMessageDialog(null, "No se ha importado correctamente el archivo",
-														"Error", JOptionPane.ERROR_MESSAGE);
-												e1.printStackTrace();
-											}
-
-										}
-
-									}
-								});
-
-								btnExportTxt.addActionListener(new ActionListener() {
-									@Override
-									public void actionPerformed(ActionEvent e) {
-
-										JFileChooser directorio = new JFileChooser();
-										FileNameExtensionFilter filtro = new FileNameExtensionFilter(
-												"txt", "txt");
-										directorio.setFileFilter(filtro);
-
-										String ruta = "";
-										int respuesta = directorio.showOpenDialog(frame);
-										if (respuesta == JFileChooser.APPROVE_OPTION) {
-											File escogido = directorio.getSelectedFile();
-											ruta = escogido.getAbsolutePath();
-
-											try {
-												solver.exportarReporteTxt(ruta);
-
-												JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
-														+ruta,
-														"Mensaje", JOptionPane.INFORMATION_MESSAGE);
-
-											} catch (FileNotFoundException e1) {
-												// TODO Auto-generated catch block
-												e1.printStackTrace();
-
-											} catch (Exception e1) {
-												// TODO Auto-generated catch block
-												e1.printStackTrace();
-											}
-										}
-									}
-								});
-
-								btnExportPdf.addActionListener(new ActionListener() {
-									@Override
-									public void actionPerformed(ActionEvent e) {
-
-										JFileChooser directorio = new JFileChooser();
-										FileNameExtensionFilter filtro = new FileNameExtensionFilter(
-												"pdf", "pdf");
-										directorio.setFileFilter(filtro);
-
-										String ruta = "";
-										int respuesta = directorio.showOpenDialog(frame);
-										if (respuesta == JFileChooser.APPROVE_OPTION) {
-											File escogido = directorio.getSelectedFile();
-											ruta = escogido.getAbsolutePath();
-
-											//					try {
-											//						solver.exportarReporteTxt(ruta);
-											//						
-											//						JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
-											//								+ruta,
-											//								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
-											//						
-											//					} catch (FileNotFoundException e1) {
-											//						// TODO Auto-generated catch block
-											//						e1.printStackTrace();
-											//
-											//					} catch (Exception e1) {
-											//						// TODO Auto-generated catch block
-											//						e1.printStackTrace();
-											//					}
-										}
-
-									}
-								});
-
-								btnExportCsv.addActionListener(new ActionListener() {
-									@Override
-									public void actionPerformed(ActionEvent e) {
-
-									}
-								});
-
-								chkRestSelecTodas.addActionListener(new ActionListener() {
-
-									@Override
-									public void actionPerformed(ActionEvent e) {
-										// TODO Auto-generated method stub
-
-										if (chkRestSelecTodas.isSelected()) {
-											chkRest1.setSelected(true);
-											chkRest2.setSelected(true);
-											chkRest3.setSelected(true);
-											chkRest4.setSelected(true);
-											chkRest5.setSelected(true);
-											chkRest6.setSelected(true);
-										}
-										else {
-
-											chkRest1.setSelected(false);
-											chkRest2.setSelected(false);
-											chkRest3.setSelected(false);
-											chkRest4.setSelected(false);
-											chkRest5.setSelected(false);
-											chkRest6.setSelected(false);
-										}
-									}
-								});
+					chkRestSoftwareDepartamento.setSelected(false);
+					chkRestSostwareSistemaOperativo.setSelected(false);
+					chkRestSoftwareRAM.setSelected(false);
+					chkRestSoftwareDemandaCapacidad.setSelected(false);
+					chkRestSoftwareDiscoDuro.setSelected(false);
+					chkRestSoftwareBasico.setSelected(false);
+					chkRestSoftwareNumeroLicencias.setEnabled(false);
+					chkRestSoftwareSalaNombre.setEnabled(false);
+				}
+			}
+		});
+		}
 	}
-}
