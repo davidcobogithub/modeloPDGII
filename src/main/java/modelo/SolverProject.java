@@ -8,7 +8,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
@@ -527,7 +530,7 @@ public class SolverProject {
 			System.out.println("Resultado parcial");
 			reporte+="Resultado parcial"+"\n";
 			imprimirMatrizConSolucion(matrizResultado, solution, softBasic);
-			//imprimirMatriz(matrizResultado);	
+			imprimirMatriz(matrizResultado);	
 		}
 
 		restriccionDemandaCapacidadSalas(matrizResultado, solution, demandaCapacidad, licenciasSoftware, softBasic);
@@ -541,11 +544,21 @@ public class SolverProject {
 
 		Model model= new Model();
 
-		IntVar[][] matrizPesosDemandaCapacidad = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
-		IntVar[][] matrizCopia = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
-		matrizCopia=copiarMatriz(solucionAnterior, matrizCarreras);
+		//		IntVar[][] matrizCopia = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
+		//		matrizCopia=copiarMatriz(solucionAnterior, matrizCarreras);
 
-		Collections.sort(toolSoftware, new Comparator<Software>() {
+		Map<String, Software> map = new HashMap<String, Software>();
+
+		for(Software p : toolSoftware) {
+			map.put(p.getNombre(), p);
+		}
+
+		for(Entry<String, Software> p : map.entrySet()) {
+			toolSoftwareBasicoOrdenado.add(p.getValue());
+
+		}
+
+		Collections.sort(toolSoftwareBasicoOrdenado, new Comparator<Software>() {
 			public int compare(Software obj1, Software obj2) {
 
 				if(obj1.getDemandaCurso() == obj2.getDemandaCurso()){
@@ -560,65 +573,65 @@ public class SolverProject {
 			}
 		});
 
-		for (int i = 0; i < salas.size(); i++) {
-
-			for (int j = 0; j < toolSoftware.size(); j++) {
-
-				if (matrizCopia[i][j].getValue()==1) {
-
-					matrizPesosDemandaCapacidad[i][j]=matrizCopia[i][j].mul(toolSoftware.get(j).getDemandaCurso()).intVar();
-
-				}
-
-			}
-		}
-
-		//		System.out.println("Matriz de Pesos:");
-		//		reporte+="Matriz de Pesos:"+"\n";
-		//imprimirMatriz(matrizPesos);
+		int limiteDelArreglo=toolSoftwareBasicoOrdenado.size()/3;
 
 		IntVar[][] matrizResultadoDemanda = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
 
-		int pesoPorSala=0;
-		int limiteDelArreglo=toolSoftware.size()/3;
-
 		for (int i = 0; i < salas.size(); i++) {
 
-			for (int j = 0; j < toolSoftware.size(); j++) {
+			//Alta Demanda
+			for (int j = 0; j < limiteDelArreglo; j++) {
 
-				pesoPorSala+=matrizResultadoDemanda[i][j].getValue();
+				int max= (int)Math.ceil(salas.size()*PORCENTAJE_MAX_DEMANDA_ALTO);
+				int min= (int)Math.floor(salas.size()*PORCENTAJE_MIN_DEMANDA_ALTO);
 
-			}
-
-			for (int j = 0; j < toolSoftware.size(); j++) {
-
-				if (pesoPorSala>=0) {
-
-					model.arithm(matrizResultadoDemanda[i][j], "=", 0).post();
-
-				} 
-
-				else if (pesoPorSala < 0) {
+				if (i >= min && i <= max) {
 
 					model.arithm(matrizResultadoDemanda[i][j], "=", 1).post();
 
 				}
 
-				else if (pesoPorSala == 0) {
+			}
+
+			//Media Demanda
+			for (int j = limiteDelArreglo; j < limiteDelArreglo*2; j++) {
+
+				int max= (int)Math.ceil(salas.size()*PORCENTAJE_MAX_DEMANDA_MEDIO);
+				int min= (int)Math.floor(salas.size()*PORCENTAJE_MIN_DEMANDA_MEDIO);
+
+				if (i >= min && i <= max) {
 
 					model.arithm(matrizResultadoDemanda[i][j], "=", 1).post();
 
 				}
 			}
-			pesoPorSala=0;
+
+			//Baja Demanda
+			for (int j = limiteDelArreglo*2; j < toolSoftwareBasicoOrdenado.size(); j++) {
+
+				int max= (int)Math.ceil(salas.size()*PORCENTAJE_MAX_DEMANDA_BAJO);
+				int min= (int)Math.floor(salas.size()*PORCENTAJE_MIN_DEMANDA_BAJO);
+
+				if (i >= min && i <= max) {
+
+					model.arithm(matrizResultadoDemanda[i][j], "=", 1).post();
+
+				}
+
+			}
 		}
 
-		//		Solution solution = new Solution(model);
-		//		model.getSolver().solve();
-		//		solution.record();
-		//
+		Solution solution = new Solution(model);
+		model.getSolver().solve();
+		solution.record();
+		
+			System.out.println("Resultado parcial");
+			reporte+="Resultado parcial"+"\n";
+			imprimirMatrizConSolucion(matrizResultadoDemanda, solution, softwareBasico);
+			imprimirMatriz(matrizResultadoDemanda);	
+		
 
-		//	matrizDeLicencias(matrizCarreras, solucionAnterior, licenciaSoft,softwareBasico);
+		matrizDeLicencias(matrizCarreras, solucionAnterior, licenciaSoft,softwareBasico);
 
 	}
 
