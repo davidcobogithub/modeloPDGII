@@ -30,6 +30,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
@@ -59,6 +60,7 @@ public class VentanaPpal extends JFrame {
 	private JButton btnExportCsv;
 	private JTextArea txtAreaVista;
 	private JLabel img;
+	private JLabel tiempoDeCarga;
 	private JComboBox<String> comboSala;
 	private JTextArea  consultaSala;
 	private JComboBox<String> comboSoft;
@@ -73,7 +75,7 @@ public class VentanaPpal extends JFrame {
 	public static void main(String[] args) {
 
 		solver = new SolverProject();
-		//Application.launch(args);
+//		Application.launch(args);
 		frame = new VentanaPpal();
 		frame.setVisible(true);
 
@@ -84,209 +86,215 @@ public class VentanaPpal extends JFrame {
 	 */
 	public VentanaPpal() {
 
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				setBounds(100, 50, 1200, 660);
-				contentPane = new JPanel();
-				contentPane.setLocation(20, -50);
-				contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-				setContentPane(contentPane);
-				contentPane.setLayout(null);
-		
-				JPanel panelParametros = new JPanel();
-				panelParametros.setBorder(new TitledBorder(null, "Cambiar Par\u00e1metros",
-						TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				panelParametros.setBounds(5, 47, 355, 200);
-				contentPane.add(panelParametros);
-				panelParametros.setLayout(null);
-		
-				JLabel lblLimsolu = new JLabel("N° Soluciones Parciales: ");
-				lblLimsolu.setBounds(15, 77, 150, 14);
-				panelParametros.add(lblLimsolu);
-		
-				txtFldLimSoluciones = new JTextField();
-				txtFldLimSoluciones.setBounds(160, 74, 170, 20);
-				panelParametros.add(txtFldLimSoluciones);
-				txtFldLimSoluciones.setColumns(10);
-		
-				JLabel lblPorcDisco = new JLabel("Porcentaje de Disco: ");
-				lblPorcDisco.setBounds(15, 102, 150, 14);
-				panelParametros.add(lblPorcDisco);
-		
-				comboBoxFldPorcDisco = new JComboBox<>();
-				comboBoxFldPorcDisco.setBounds(160, 99, 170, 20);
-				comboBoxFldPorcDisco.addItem("Seleccione Porcentaje");
-				comboBoxFldPorcDisco.addItem("10%");
-				comboBoxFldPorcDisco.addItem("20%");
-				comboBoxFldPorcDisco.addItem("30%");
-				comboBoxFldPorcDisco.addItem("40%");
-				comboBoxFldPorcDisco.addItem("50%");
-				comboBoxFldPorcDisco.addItem("60%");
-				comboBoxFldPorcDisco.addItem("70%");
-				comboBoxFldPorcDisco.addItem("80%");
-				comboBoxFldPorcDisco.addItem("90%");
-				comboBoxFldPorcDisco.addItem("100%");
-				panelParametros.add(comboBoxFldPorcDisco);
-		
-		
-				btnImportar = new JButton("Importar");
-				btnImportar.setBounds(147, 35, 89, 23);
-				panelParametros.add(btnImportar);
-		
-		
-				JLabel lblTitulo = new JLabel("Distribuci\u00F3n de Software Icesi");
-				lblTitulo.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC,
-						14));
-				lblTitulo.setBounds(550, 20, 397, 14);
-				contentPane.add(lblTitulo);
-		
-				JPanel panelRestricciones = new JPanel();
-				panelRestricciones.setBorder(new TitledBorder(null, "Selecci\u00F3n de Restricciones",
-						TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				panelRestricciones.setBounds(5, 250, 355, 300);
-				contentPane.add(panelRestricciones);
-				panelRestricciones.setLayout(null);
-		
-				chkRestSelecTodas =  new JCheckBox("Seleccionar Todas");
-				chkRestSelecTodas.setBounds(15, 25, 300, 23);
-				panelRestricciones.add(chkRestSelecTodas);
-		
-				chkRestSoftwareDepartamento =  new JCheckBox("Software y Salas de un Departamento");
-				chkRestSoftwareDepartamento.setBounds(15, 50, 300, 23);
-				panelRestricciones.add(chkRestSoftwareDepartamento);
-		
-				chkRestSostwareSistemaOperativo =  new JCheckBox("Software y Salas con mismo Sistema Operativo");
-				chkRestSostwareSistemaOperativo.setBounds(15, 70, 300, 23);
-				panelRestricciones.add(chkRestSostwareSistemaOperativo);
-		
-				chkRestSoftwareSalaNombre =  new JCheckBox("Software Instalado en Salas Específicas");
-				chkRestSoftwareSalaNombre.setBounds(15, 90, 300, 23);
-				panelRestricciones.add(chkRestSoftwareSalaNombre);
-		
-				chkRestSoftwareDiscoDuro =  new JCheckBox("Capacidad de Disco Duro");
-				chkRestSoftwareDiscoDuro.setBounds(15, 110, 300, 23);
-				panelRestricciones.add(chkRestSoftwareDiscoDuro);
-		
-				chkRestSoftwareRAM=  new JCheckBox("Capacidad de Memoria RAM");
-				chkRestSoftwareRAM.setBounds(15, 130, 300, 23);
-				panelRestricciones.add(chkRestSoftwareRAM);
-		
-				chkRestSoftwareDemandaCapacidad =  new JCheckBox("Demanda y Capacidad de las Salas");
-				chkRestSoftwareDemandaCapacidad.setBounds(15, 150, 300, 23);
-				panelRestricciones.add(chkRestSoftwareDemandaCapacidad);
-		
-				chkRestSoftwareBasico =  new JCheckBox("Instalación de Software Básico");
-				chkRestSoftwareBasico.setBounds(15, 170, 300, 23);
-				panelRestricciones.add(chkRestSoftwareBasico);
-		
-				chkRestSoftwareNumeroLicencias =  new JCheckBox("Cantidad de Licencias de Software");
-				chkRestSoftwareNumeroLicencias.setBounds(15, 190, 300, 23);
-				panelRestricciones.add(chkRestSoftwareNumeroLicencias);
-		
-				btnGenerar = new JButton("Generar Distribuci\u00F3n");
-				btnGenerar.setBounds(15, 270, 155, 23);
-				panelRestricciones.add(btnGenerar);
-		
-				btnLimpiar = new JButton("Limpiar");
-				btnLimpiar.setBounds(185, 270, 155, 23);
-				panelRestricciones.add(btnLimpiar);		
-		
-				JPanel panelExportacion = new JPanel();
-				panelExportacion.setBorder(new TitledBorder(UIManager
-						.getBorder("TitledBorder.border"), "Exportar",
-						TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				panelExportacion.setBounds(5, 552, 355, 65);
-				contentPane.add(panelExportacion);
-				panelExportacion.setLayout(null);
-		
-				btnExportTxt = new JButton("TXT");
-				btnExportTxt.setBounds(20, 30, 90, 23);
-				panelExportacion.add(btnExportTxt);
-		
-				btnExportPdf = new JButton("PDF");
-				btnExportPdf.setBounds(130, 30, 90, 23);
-				panelExportacion.add(btnExportPdf);
-		
-				btnExportCsv = new JButton("CSV");
-				btnExportCsv.setBounds(240, 30, 90, 23);
-				panelExportacion.add(btnExportCsv);
-		
-				JPanel panelContenedor = new JPanel();
-				panelContenedor.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
-						TitledBorder.TOP, null, null));
-				panelContenedor.setBounds(366, 55, 810, 560);
-				panelContenedor.setLayout(null);
-				contentPane.add(panelContenedor);
-		
-				JTabbedPane pestanas = new JTabbedPane(JTabbedPane.TOP);
-				pestanas.setBounds(0, 0, 810, 560);
-				panelContenedor.add(pestanas);
-		
-				JPanel panelContentDistribucion = new JPanel();
-				panelContentDistribucion.setBounds(366, 55, 810, 560);
-				panelContentDistribucion.setLayout(null);
-				pestanas.addTab("Distribución", panelContentDistribucion);
-		
-				img=new JLabel(new ImageIcon("img/cargando.gif"));
-				img.setBounds(270, 150, 300, 300);
-				img.setVisible(false);
-				panelContentDistribucion.add(img);
-		
-				JScrollPane scrollPaneTxtDistribucion = new JScrollPane();
-				scrollPaneTxtDistribucion.setBounds(3, 3, 800, 528);
-				panelContentDistribucion.add(scrollPaneTxtDistribucion);
-		
-				txtAreaVista = new JTextArea();
-				txtAreaVista.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC,14));
-				scrollPaneTxtDistribucion.setViewportView(txtAreaVista);
-				txtAreaVista.setEditable(false);
-		
-				JPanel panel2 = new JPanel();
-				panelContenedor.setBounds(366, 55, 810, 560);
-				pestanas.addTab("Consultas", panel2);
-				panel2.setLayout(null);
-		
-				JLabel conSal=new JLabel("Consultar Salas");
-				conSal.setBounds(0, 0, 810, 50);
-				panel2.add(conSal);
-		
-				ArrayList<String> nombreSal=new ArrayList<>();
-				comboSala=new JComboBox<String>();
-				nombreSal=solver.getNombreSalas();
-				comboSala.setBounds(0, 50, 805, 50);
-				comboSala.addItem("Seleccione una Sala");
-		
-				for (int i = 0; i < nombreSal.size(); i++) {
-					comboSala.addItem(nombreSal.get(i).toString());
-				}
-		
-				panel2.add(comboSala);
-		
-				consultaSala=new JTextArea();
-				consultaSala.setBounds(0, 100, 805, 80);
-				consultaSala.setEditable(false);
-				panel2.add(consultaSala);
-		
-		
-				JLabel conSof=new JLabel("Consultar Software");
-				conSof.setBounds(0, 180, 810, 50);
-				panel2.add(conSof);
-		
-				comboSoft=new JComboBox<String>();
-				comboSoft.setBounds(0, 230, 805, 50);
-				panel2.add(comboSoft);
-		
-				JScrollPane scrollPaneConsultaSoft = new JScrollPane();
-				scrollPaneConsultaSoft.setBounds(0, 280, 805, 190);
-		
-				consultaSoft=new JTextArea();
-				consultaSoft.setEditable(false);
-				scrollPaneConsultaSoft.setViewportView(consultaSoft);
-	
-				panel2.add(scrollPaneConsultaSoft);
-		
-				adicionarEventos();
-		
-				inhabilitarComponentes();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 50, 1200, 660);
+		contentPane = new JPanel();
+		contentPane.setLocation(20, -50);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JPanel panelParametros = new JPanel();
+		panelParametros.setBorder(new TitledBorder(null, "Cambiar Par\u00e1metros",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelParametros.setBounds(5, 47, 355, 200);
+		contentPane.add(panelParametros);
+		panelParametros.setLayout(null);
+
+		JLabel lblLimsolu = new JLabel("N° Soluciones Parciales: ");
+		lblLimsolu.setBounds(15, 77, 150, 14);
+		panelParametros.add(lblLimsolu);
+
+		txtFldLimSoluciones = new JTextField();
+		txtFldLimSoluciones.setBounds(160, 74, 170, 20);
+		panelParametros.add(txtFldLimSoluciones);
+		txtFldLimSoluciones.setColumns(10);
+
+		JLabel lblPorcDisco = new JLabel("Porcentaje de Disco: ");
+		lblPorcDisco.setBounds(15, 102, 150, 14);
+		panelParametros.add(lblPorcDisco);
+
+		comboBoxFldPorcDisco = new JComboBox<>();
+		comboBoxFldPorcDisco.setBounds(160, 99, 170, 20);
+		comboBoxFldPorcDisco.addItem("Seleccione Porcentaje");
+		comboBoxFldPorcDisco.addItem("10%");
+		comboBoxFldPorcDisco.addItem("20%");
+		comboBoxFldPorcDisco.addItem("30%");
+		comboBoxFldPorcDisco.addItem("40%");
+		comboBoxFldPorcDisco.addItem("50%");
+		comboBoxFldPorcDisco.addItem("60%");
+		comboBoxFldPorcDisco.addItem("70%");
+		comboBoxFldPorcDisco.addItem("80%");
+		comboBoxFldPorcDisco.addItem("90%");
+		comboBoxFldPorcDisco.addItem("100%");
+		panelParametros.add(comboBoxFldPorcDisco);
+
+
+		btnImportar = new JButton("Importar");
+		btnImportar.setBounds(147, 35, 89, 23);
+		panelParametros.add(btnImportar);
+
+
+		JLabel lblTitulo = new JLabel("Distribuci\u00F3n de Software Icesi");
+		lblTitulo.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC,
+				14));
+		lblTitulo.setBounds(550, 20, 397, 14);
+		contentPane.add(lblTitulo);
+
+		JPanel panelRestricciones = new JPanel();
+		panelRestricciones.setBorder(new TitledBorder(null, "Selecci\u00F3n de Restricciones",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelRestricciones.setBounds(5, 250, 355, 300);
+		contentPane.add(panelRestricciones);
+		panelRestricciones.setLayout(null);
+
+		chkRestSelecTodas =  new JCheckBox("Seleccionar Todas");
+		chkRestSelecTodas.setBounds(15, 25, 300, 23);
+		panelRestricciones.add(chkRestSelecTodas);
+
+		chkRestSoftwareDepartamento =  new JCheckBox("Software y Salas de un Departamento");
+		chkRestSoftwareDepartamento.setBounds(15, 50, 300, 23);
+		panelRestricciones.add(chkRestSoftwareDepartamento);
+
+		chkRestSostwareSistemaOperativo =  new JCheckBox("Software y Salas con mismo Sistema Operativo");
+		chkRestSostwareSistemaOperativo.setBounds(15, 70, 300, 23);
+		panelRestricciones.add(chkRestSostwareSistemaOperativo);
+
+		chkRestSoftwareSalaNombre =  new JCheckBox("Software Instalado en Salas Específicas");
+		chkRestSoftwareSalaNombre.setBounds(15, 90, 300, 23);
+		panelRestricciones.add(chkRestSoftwareSalaNombre);
+
+		chkRestSoftwareDiscoDuro =  new JCheckBox("Capacidad de Disco Duro");
+		chkRestSoftwareDiscoDuro.setBounds(15, 110, 300, 23);
+		panelRestricciones.add(chkRestSoftwareDiscoDuro);
+
+		chkRestSoftwareRAM=  new JCheckBox("Capacidad de Memoria RAM");
+		chkRestSoftwareRAM.setBounds(15, 130, 300, 23);
+		panelRestricciones.add(chkRestSoftwareRAM);
+
+		chkRestSoftwareDemandaCapacidad =  new JCheckBox("Demanda y Capacidad de las Salas");
+		chkRestSoftwareDemandaCapacidad.setBounds(15, 150, 300, 23);
+		panelRestricciones.add(chkRestSoftwareDemandaCapacidad);
+
+		chkRestSoftwareBasico =  new JCheckBox("Instalación de Software Básico");
+		chkRestSoftwareBasico.setBounds(15, 170, 300, 23);
+		panelRestricciones.add(chkRestSoftwareBasico);
+
+		chkRestSoftwareNumeroLicencias =  new JCheckBox("Cantidad de Licencias de Software");
+		chkRestSoftwareNumeroLicencias.setBounds(15, 190, 300, 23);
+		panelRestricciones.add(chkRestSoftwareNumeroLicencias);
+
+		btnGenerar = new JButton("Generar Distribuci\u00F3n");
+		btnGenerar.setBounds(15, 270, 155, 23);
+		panelRestricciones.add(btnGenerar);
+
+		btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.setBounds(185, 270, 155, 23);
+		panelRestricciones.add(btnLimpiar);		
+
+		JPanel panelExportacion = new JPanel();
+		panelExportacion.setBorder(new TitledBorder(UIManager
+				.getBorder("TitledBorder.border"), "Exportar",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelExportacion.setBounds(5, 552, 355, 65);
+		contentPane.add(panelExportacion);
+		panelExportacion.setLayout(null);
+
+		btnExportTxt = new JButton("TXT");
+		btnExportTxt.setBounds(20, 30, 90, 23);
+		panelExportacion.add(btnExportTxt);
+
+		btnExportPdf = new JButton("PDF");
+		btnExportPdf.setBounds(130, 30, 90, 23);
+		panelExportacion.add(btnExportPdf);
+
+		btnExportCsv = new JButton("CSV");
+		btnExportCsv.setBounds(240, 30, 90, 23);
+		panelExportacion.add(btnExportCsv);
+
+		JPanel panelContenedor = new JPanel();
+		panelContenedor.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
+				TitledBorder.TOP, null, null));
+		panelContenedor.setBounds(366, 55, 810, 560);
+		panelContenedor.setLayout(null);
+		contentPane.add(panelContenedor);
+
+		JTabbedPane pestanas = new JTabbedPane(JTabbedPane.TOP);
+		pestanas.setBounds(0, 0, 810, 500);
+		panelContenedor.add(pestanas);
+
+		JPanel panelContentDistribucion = new JPanel();
+		panelContentDistribucion.setBounds(366, 55, 810, 500);
+		panelContentDistribucion.setLayout(null);
+		pestanas.addTab("Distribución", panelContentDistribucion);
+
+		img=new JLabel(new ImageIcon("img/cargando.gif"));
+		img.setBounds(270, 150, 300, 300);
+		img.setVisible(false);
+		panelContentDistribucion.add(img);
+
+		tiempoDeCarga=new JLabel("");
+		tiempoDeCarga.setBounds(3, 510, 800, 50);
+		panelContenedor.add(tiempoDeCarga);
+
+		JScrollPane scrollPaneTxtDistribucion = new JScrollPane();
+		scrollPaneTxtDistribucion.setBounds(3, 3, 800, 470);
+		panelContentDistribucion.add(scrollPaneTxtDistribucion);
+
+		txtAreaVista = new JTextArea();
+		txtAreaVista.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC,14));
+		scrollPaneTxtDistribucion.setViewportView(txtAreaVista);
+		txtAreaVista.setEditable(false);
+
+		JPanel panel2 = new JPanel();
+		panelContenedor.setBounds(366, 55, 810, 560);
+		pestanas.addTab("Consultas", panel2);
+		panel2.setLayout(null);
+
+		JLabel conSal=new JLabel("Consultar Salas");
+		conSal.setBounds(0, 0, 810, 50);
+		panel2.add(conSal);
+
+		ArrayList<String> nombreSal=new ArrayList<>();
+		comboSala=new JComboBox<String>();
+		nombreSal=solver.getNombreSalas();
+		comboSala.setBounds(0, 50, 805, 50);
+		comboSala.addItem("Seleccione una Sala");
+
+		for (int i = 0; i < nombreSal.size(); i++) {
+			comboSala.addItem(nombreSal.get(i).toString());
+		}
+
+		panel2.add(comboSala);
+
+		JScrollPane scrollPaneConsultaSalas = new JScrollPane();
+		scrollPaneConsultaSalas.setBounds(0, 100, 805, 80);
+
+		consultaSala=new JTextArea();
+		consultaSala.setEditable(false);
+		scrollPaneConsultaSalas.setViewportView(consultaSala);
+		panel2.add(scrollPaneConsultaSalas);
+
+		JLabel conSof=new JLabel("Consultar Software");
+		conSof.setBounds(0, 180, 810, 50);
+		panel2.add(conSof);
+
+		comboSoft=new JComboBox<String>();
+		comboSoft.setBounds(0, 230, 805, 50);
+		panel2.add(comboSoft);
+
+		JScrollPane scrollPaneConsultaSoft = new JScrollPane();
+		scrollPaneConsultaSoft.setBounds(0, 280, 805, 190);
+
+		consultaSoft=new JTextArea();
+		consultaSoft.setEditable(false);
+		scrollPaneConsultaSoft.setViewportView(consultaSoft);
+
+		panel2.add(scrollPaneConsultaSoft);
+
+		adicionarEventos();
+
+		inhabilitarComponentes();
 	}
 
 	public void habilitarComponentes() {
@@ -365,9 +373,22 @@ public class VentanaPpal extends JFrame {
 						if(item_seleccionado.equals(solver.getSalas().get(i).getNombre())) {
 							consultaSala.setText("Nombre de la Sala: "+ solver.getSalas().get(i).getNombre()+"\n"+
 									"Departamento de la Sala: "+ solver.getSalas().get(i).getTipo()+"\n"+
-									"Nº de computadores de la Sala: "+ solver.getSalas().get(i).getCapacidad());
+									"Nº de computadores de la Sala: "+ solver.getSalas().get(i).getCapacidad()+"\n"+
+									"Sistema Operativo de Computadores: "+ solver.getSalas().get(i).getComputadores().getSistemaOperativo()+"\n"+
+									"Disco Duro de Computadores: "+ solver.getSalas().get(i).getComputadores().getDiscoDuro()+" GB"+"\n"+
+									"Memoria RAM de Computadores: "+ solver.getSalas().get(i).getComputadores().getMemoriaRAM()+" GB"+"\n");
 						}
 					}
+				}
+			}
+		});
+		
+		comboBoxFldPorcDisco.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String item_seleccionado = comboSala.getSelectedItem().toString();
+				if (!item_seleccionado.equals("Seleccione Porcentaje")) {
+					chkRestSoftwareDiscoDuro.setSelected(true);
 				}
 			}
 		});
@@ -376,33 +397,33 @@ public class VentanaPpal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-								JFileChooser directorio = new JFileChooser("docs/");
-								FileNameExtensionFilter filtro = new FileNameExtensionFilter(
-										"CVS", "csv");
-								directorio.setFileFilter(filtro);
-				
-								int respuesta = directorio.showOpenDialog(frame);
-								if (respuesta == JFileChooser.APPROVE_OPTION) {
-									File escogido = directorio.getSelectedFile();
-				
-									try {
-				
-										solver.leerCSVSoftware(escogido.getAbsolutePath());
-										txtAreaVista.setText(" ");
-										JOptionPane.showMessageDialog(null, "Se ha importado correctamente el archivo",
-												"Mensaje", JOptionPane.INFORMATION_MESSAGE);
-				
-										habilitarComponentes();
-										chkRestSoftwareDepartamento.setSelected(true);
-				
-									} catch (Exception e1) {
-										// TODO Auto-generated catch block
-										JOptionPane.showMessageDialog(null, "No se ha importado correctamente el archivo",
-												"Error", JOptionPane.ERROR_MESSAGE);
-										e1.printStackTrace();
-									}
-				
-								}
+				JFileChooser directorio = new JFileChooser("docs/");
+				FileNameExtensionFilter filtro = new FileNameExtensionFilter(
+						"CVS", "csv");
+				directorio.setFileFilter(filtro);
+
+				int respuesta = directorio.showOpenDialog(frame);
+				if (respuesta == JFileChooser.APPROVE_OPTION) {
+					File escogido = directorio.getSelectedFile();
+
+					try {
+
+						solver.leerCSVSoftware(escogido.getAbsolutePath());
+						txtAreaVista.setText(" ");
+						JOptionPane.showMessageDialog(null, "Se ha importado correctamente el archivo",
+								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
+
+						habilitarComponentes();
+						chkRestSoftwareDepartamento.setSelected(true);
+
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, "No se ha importado correctamente el archivo",
+								"Error", JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					}
+
+				}
 
 			}
 		});
@@ -417,7 +438,10 @@ public class VentanaPpal extends JFrame {
 					public void run() {
 
 						txtAreaVista.setText(" ");
+						tiempoDeCarga.setText(" ");
 						img.setVisible(true);
+
+						long startTime = System.currentTimeMillis();
 
 						if (!txtFldLimSoluciones.getText().equals("") &&
 								!comboBoxFldPorcDisco.getSelectedItem().toString().equals("Seleccione Porcentaje")) {
@@ -473,7 +497,21 @@ public class VentanaPpal extends JFrame {
 						}
 
 						img.setVisible(false);
-						txtAreaVista.append(solver.getReporte());
+						
+						long endTime = System.currentTimeMillis() - startTime;
+						int tiempoSegundos = (int) (endTime/1000.0); 
+						int tiempoMinutos = (int) (tiempoSegundos/60.0);
+
+						if (tiempoMinutos != 0) {
+							int diferenciaSegundos = (int) (tiempoSegundos - 60.0); 
+							tiempoDeCarga.setText("Tiempo de Carga: 0"+tiempoMinutos+":"+diferenciaSegundos);							
+						}else {
+
+							tiempoDeCarga.setText("Tiempo de Carga: 0"+tiempoMinutos+":"+tiempoSegundos);
+						}
+
+						txtAreaVista.append(solver.getReporte()+"\n"+tiempoDeCarga.getText());
+						
 						comboSoft.setEnabled(true);
 
 						//												Collections.sort(solver.getNombreSoftware(), new Comparator<Software>() {
@@ -537,7 +575,8 @@ public class VentanaPpal extends JFrame {
 										materias.add(solver.getToolSoftware().get(j).getNombreMateria());
 									}
 
-									if (!salas.contains(solver.getToolSoftware().get(j).getNombreSala())){
+									if (!salas.contains(solver.getToolSoftware().get(j).getNombreSala()) && 
+											!solver.getToolSoftware().get(j).getNombreSala().contains("L")){
 										salas.add(solver.getToolSoftware().get(j).getNombreSala());
 									}
 								}
@@ -576,33 +615,33 @@ public class VentanaPpal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-								JFileChooser directorio = new JFileChooser();
-								FileNameExtensionFilter filtro = new FileNameExtensionFilter(
-										"txt", "txt");
-								directorio.setFileFilter(filtro);
-				
-								String ruta = "";
-								int respuesta = directorio.showOpenDialog(frame);
-								if (respuesta == JFileChooser.APPROVE_OPTION) {
-									File escogido = directorio.getSelectedFile();
-									ruta = escogido.getAbsolutePath();
-				
-									try {
-										solver.exportarReporteTxt(ruta);
-				
-										JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
-												+ruta,
-												"Mensaje", JOptionPane.INFORMATION_MESSAGE);
-				
-									} catch (FileNotFoundException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-				
-									} catch (Exception e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
-								}
+				JFileChooser directorio = new JFileChooser();
+				FileNameExtensionFilter filtro = new FileNameExtensionFilter(
+						"txt", "txt");
+				directorio.setFileFilter(filtro);
+
+				String ruta = "";
+				int respuesta = directorio.showOpenDialog(frame);
+				if (respuesta == JFileChooser.APPROVE_OPTION) {
+					File escogido = directorio.getSelectedFile();
+					ruta = escogido.getAbsolutePath();
+
+					try {
+						solver.exportarReporteTxt(ruta);
+
+						JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
+								+ruta,
+								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
+
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
 
@@ -610,33 +649,33 @@ public class VentanaPpal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-								JFileChooser directorio = new JFileChooser();
-								FileNameExtensionFilter filtro = new FileNameExtensionFilter(
-										"pdf", "pdf");
-								directorio.setFileFilter(filtro);
-				
-								String ruta = "";
-								int respuesta = directorio.showOpenDialog(frame);
-								if (respuesta == JFileChooser.APPROVE_OPTION) {
-									File escogido = directorio.getSelectedFile();
-									ruta = escogido.getAbsolutePath();
-				
-									//					try {
-									//						solver.exportarReporteTxt(ruta);
-									//						
-									//						JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
-									//								+ruta,
-									//								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
-									//						
-									//					} catch (FileNotFoundException e1) {
-									//						// TODO Auto-generated catch block
-									//						e1.printStackTrace();
-									//
-									//					} catch (Exception e1) {
-									//						// TODO Auto-generated catch block
-									//						e1.printStackTrace();
-									//					}
-								}
+				JFileChooser directorio = new JFileChooser();
+				FileNameExtensionFilter filtro = new FileNameExtensionFilter(
+						"pdf", "pdf");
+				directorio.setFileFilter(filtro);
+
+				String ruta = "";
+				int respuesta = directorio.showOpenDialog(frame);
+				if (respuesta == JFileChooser.APPROVE_OPTION) {
+					File escogido = directorio.getSelectedFile();
+					ruta = escogido.getAbsolutePath();
+
+					//					try {
+					//						solver.exportarReporteTxt(ruta);
+					//						
+					//						JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
+					//								+ruta,
+					//								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
+					//						
+					//					} catch (FileNotFoundException e1) {
+					//						// TODO Auto-generated catch block
+					//						e1.printStackTrace();
+					//
+					//					} catch (Exception e1) {
+					//						// TODO Auto-generated catch block
+					//						e1.printStackTrace();
+					//					}
+				}
 
 			}
 		});
@@ -661,8 +700,8 @@ public class VentanaPpal extends JFrame {
 					chkRestSoftwareDemandaCapacidad.setSelected(true);
 					chkRestSoftwareDiscoDuro.setSelected(true);
 					chkRestSoftwareBasico.setSelected(true);
-					chkRestSoftwareNumeroLicencias.setEnabled(true);
-					chkRestSoftwareSalaNombre.setEnabled(true);
+					chkRestSoftwareNumeroLicencias.setSelected(true);
+					chkRestSoftwareSalaNombre.setSelected(true);
 				}
 				else {
 
@@ -672,44 +711,49 @@ public class VentanaPpal extends JFrame {
 					chkRestSoftwareDemandaCapacidad.setSelected(false);
 					chkRestSoftwareDiscoDuro.setSelected(false);
 					chkRestSoftwareBasico.setSelected(false);
-					chkRestSoftwareNumeroLicencias.setEnabled(false);
-					chkRestSoftwareSalaNombre.setEnabled(false);
+					chkRestSoftwareNumeroLicencias.setSelected(false);
+					chkRestSoftwareSalaNombre.setSelected(false);
 				}
 			}
 		});
 	}
 
-//	@Override
-//	public void start(Stage stage) throws Exception {
-//		// TODO Auto-generated method stub
-//	     TitledPane firstTitledPane = new TitledPane();
-//	      firstTitledPane.setText("Java");
-//	 
-//	      VBox content1 = new VBox();
-//	      content1.getChildren().add(new Label("Java Swing Tutorial"));
-//	      content1.getChildren().add(new Label("JavaFx Tutorial"));
-//	      content1.getChildren().add(new Label("Java IO Tutorial"));
-//	 
-//	      firstTitledPane.setContent(content1);
-//	 
-//	      // Create Second TitledPane.
-//	      TitledPane secondTitledPane = new TitledPane();
-//	      secondTitledPane.setText("CShape");
-//	 
-//	      VBox content2 = new VBox();
-//	      content2.getChildren().add(new Label("CShape Tutorial for Beginners"));
-//	      content2.getChildren().add(new Label("CShape Enums Tutorial"));
-//	 
-//	      secondTitledPane.setContent(content2);
-//	 
-//	    
-//	      Accordion root= new Accordion();      
-//	      root.getPanes().addAll(firstTitledPane, secondTitledPane);
-//	    
-//	      Scene scene = new Scene(root, 300, 200);
-//	      stage.setTitle("Accordion (o7planning.org)");
-//	      stage.setScene(scene);
-//	      stage.show();
-//		
-//	}
+//		@Override
+//		public void start(Stage stage) throws Exception {
+//			// TODO Auto-generated method stub
+//		     TitledPane firstTitledPane = new TitledPane();
+//		      firstTitledPane.setText("Java");
+//		 
+//		      VBox content1 = new VBox();
+//		      content1.getChildren().add(new Label("Java Swing Tutorial"));
+//		      content1.getChildren().add(new Label("JavaFx Tutorial"));
+//		      content1.getChildren().add(new Label("Java IO Tutorial"));
+//		 
+//		      firstTitledPane.setContent(content1);
+//		 
+//		      // Create Second TitledPane.
+//		      TitledPane secondTitledPane = new TitledPane();
+//		      secondTitledPane.setText("CShape");
+//		 
+//		      VBox content2 = new VBox();
+//		      content2.getChildren().add(new Label("CShape Tutorial for Beginners"));
+//		      content2.getChildren().add(new Label("CShape Enums Tutorial"));
+//		      Button buttonAccept = new Button("Accept");
+//		      buttonAccept.getStyleClass().add("boton");
+//		      content2.getChildren().add(buttonAccept);
+//		 
+//		      secondTitledPane.setContent(content2);
+//		 
+//		    
+//		      Accordion root= new Accordion();      
+//		      root.getPanes().addAll(firstTitledPane, secondTitledPane);
+//		    
+//		      Scene scene = new Scene(root, 300, 200);
+//		      File f = new File("css/styles.css");
+//		      scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+//		      stage.setTitle("Accordion (o7planning.org)");
+//		      stage.setScene(scene);
+//		      stage.show();
+//			
+//		}
 }

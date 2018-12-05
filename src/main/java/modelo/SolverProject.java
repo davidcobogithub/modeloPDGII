@@ -427,10 +427,7 @@ public class SolverProject {
 		Criterion solcpt = new SolutionCounter(model, numSoluciones);
 		List<Solution> list=model.getSolver().findAllSolutions(solcpt);
 
-		System.out.println("Primera parte");
 		System.out.println("Soluciones encontradas: "+list.size()+"\n");
-
-		reporte+="Primera parte"+"\n";
 		reporte+="Soluciones encontradas: "+list.size()+"\n"+"\n";
 
 		int nSol=1;
@@ -438,6 +435,7 @@ public class SolverProject {
 
 			System.out.println("Solución: " + nSol);
 			reporte+="Solución: " + nSol+"\n";
+			
 			imprimirMatrizConSolucion(carrera, s, restrSoftBasico);
 			solutionRecord=s;
 			nSol++;
@@ -456,8 +454,8 @@ public class SolverProject {
 
 		if (restrDisco == true) {
 
-			System.out.println("Segunda parte"+"\n");
-			reporte+="Segunda parte"+"\n"+"\n";	
+			System.out.println("--------------------------------------------	Restricción de Disco	--------------------------------------------"+"\n");
+			reporte+="--------------------------------------------	Restricción de Disco	--------------------------------------------"+"\n"+"\n";	
 		}
 
 		Model model= new Model();
@@ -480,10 +478,6 @@ public class SolverProject {
 			}
 		}
 
-		//		System.out.println("Matriz de Pesos:");
-		//		reporte+="Matriz de Pesos:"+"\n";
-		//imprimirMatriz(matrizPesos);
-
 		IntVar[][] matrizResultado = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
 		int pesoPorSala=0;
 
@@ -496,8 +490,6 @@ public class SolverProject {
 			}
 
 			for (int j = 0; j < toolSoftware.size(); j++) {
-
-				//System.out.println(pesoPorSala + " | "+(salas.get(i).getComputadores().getDiscoDuro()*PORCENTAJE_DISPONIBLE)/100);
 
 				if (pesoPorSala>=(salas.get(i).getComputadores().getDiscoDuro()*porcentajeDisco)/100 &&
 						restrDisco == true) {
@@ -527,21 +519,25 @@ public class SolverProject {
 		solution.record();
 
 		if (restrDisco == true) {
-			System.out.println("Resultado parcial");
-			reporte+="Resultado parcial"+"\n";
+		
 			imprimirMatrizConSolucion(matrizResultado, solution, softBasic);
-			imprimirMatriz(matrizResultado);	
+			//imprimirMatriz(matrizResultado);	
 		}
 
-		restriccionDemandaCapacidadSalas(matrizResultado, solution, demandaCapacidad, licenciasSoftware, softBasic);
+		restriccionDemandaCapacidadSalas(matrizResultado, solution, demandaCapacidad, 
+				licenciasSoftware, softBasic);
 
 	}
 
 	public void restriccionDemandaCapacidadSalas(IntVar[][] matrizCarreras, Solution solucionAnterior, 
 			boolean demanda, boolean licenciaSoft, boolean softwareBasico) {
 
-		System.out.println("Tercera parte"+"\n");
+		if (demanda == true) {
 
+			System.out.println("--------------------------------------------	Restricción de Demanda y Capacidad		--------------------------------------------"+"\n");
+			reporte+="--------------------------------------------	Restricción de Demanda y Capacidad 	--------------------------------------------"+"\n"+"\n";	
+		}
+	
 		Model model= new Model();
 
 		//		IntVar[][] matrizCopia = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
@@ -585,7 +581,7 @@ public class SolverProject {
 				int max= (int)Math.ceil(salas.size()*PORCENTAJE_MAX_DEMANDA_ALTO);
 				int min= (int)Math.floor(salas.size()*PORCENTAJE_MIN_DEMANDA_ALTO);
 
-				if (i >= min && i <= max) {
+				if (i >= min && i <= max && demanda == true) {
 
 					model.arithm(matrizResultadoDemanda[i][j], "=", 1).post();
 
@@ -599,7 +595,7 @@ public class SolverProject {
 				int max= (int)Math.ceil(salas.size()*PORCENTAJE_MAX_DEMANDA_MEDIO);
 				int min= (int)Math.floor(salas.size()*PORCENTAJE_MIN_DEMANDA_MEDIO);
 
-				if (i >= min && i <= max) {
+				if (i >= min && i <= max && demanda == true) {
 
 					model.arithm(matrizResultadoDemanda[i][j], "=", 1).post();
 
@@ -612,7 +608,7 @@ public class SolverProject {
 				int max= (int)Math.ceil(salas.size()*PORCENTAJE_MAX_DEMANDA_BAJO);
 				int min= (int)Math.floor(salas.size()*PORCENTAJE_MIN_DEMANDA_BAJO);
 
-				if (i >= min && i <= max) {
+				if (i >= min && i <= max && demanda == true) {
 
 					model.arithm(matrizResultadoDemanda[i][j], "=", 1).post();
 
@@ -624,12 +620,13 @@ public class SolverProject {
 		Solution solution = new Solution(model);
 		model.getSolver().solve();
 		solution.record();
-		
-			System.out.println("Resultado parcial");
-			reporte+="Resultado parcial"+"\n";
+
+
+		if (demanda == true) {
+			
 			imprimirMatrizConSolucion(matrizResultadoDemanda, solution, softwareBasico);
 			imprimirMatriz(matrizResultadoDemanda);	
-		
+		}
 
 		matrizDeLicencias(matrizCarreras, solucionAnterior, licenciaSoft,softwareBasico);
 
@@ -639,20 +636,24 @@ public class SolverProject {
 	public void matrizDeLicencias(IntVar[][] matrizCarreras, Solution solucionAnterior, boolean licencias,
 			boolean softwareBasi) {
 
-		System.out.println("Cuarta parte"+"\n");
-		reporte+="Cuarta parte"+"\n"+"\n";
+		if (licencias == true) {
+			
+			System.out.println("--------------------------------------------	Restricción de Licencias	--------------------------------------------"+"\n");
+			reporte+="--------------------------------------------	Restricción de Licencias 	--------------------------------------------"+"\n"+"\n";	
+		}
+		
 		Model model= new Model();
 
 		IntVar[][] matrizPesosLicencias = model.intVarMatrix("pesos", salas.size(), toolSoftware.size(), 0, 1);
 		matrizPesosLicencias=copiarMatriz(solucionAnterior, matrizCarreras);
-
 
 		for (int i = 0; i < salas.size(); i++) {
 
 			for (int j = 0; j < toolSoftware.size(); j++) {
 
 				if(toolSoftware.get(j).getCantLicencias() != 0 && 
-						toolSoftware.get(j).getCantLicencias()<= salas.get(i).getCapacidad()) {
+						toolSoftware.get(j).getCantLicencias()<= salas.get(i).getCapacidad() &&
+						licencias == true) {
 
 					model.arithm(matrizPesosLicencias[i][j], "=",1).post();
 				}
@@ -664,17 +665,16 @@ public class SolverProject {
 		model.getSolver().solve();
 		solution.record();
 
-		//		System.out.println("Resultado parcial");
-		//		reporte+="Resultado parcial"+"\n";
-		//imprimirMatrizConSolucion(matrizPesosLicencias, solution);
 		//imprimirMatriz(matrizPesosLicencias);
 
-		System.out.println("------------------------Matriz Resultado final------------------------");
-		reporte+="------------------------Matriz Resultado final------------------------"+"\n";
-		imprimirMatrizConSolucion(matrizPesosLicencias, solution, softwareBasi);
-
+		if (licencias == true) {
+			
+//			System.out.println("------------------------Matriz Resultado final------------------------");
+//			reporte+="------------------------Matriz Resultado final------------------------"+"\n";
+			imprimirMatrizConSolucion(matrizPesosLicencias, solution, softwareBasi);	
+		}
+		
 	}
-
 
 	public void imprimirMatriz(IntVar[][] matriz) {
 
@@ -703,7 +703,9 @@ public class SolverProject {
 
 	}
 	public void imprimirMatrizConSolucion(IntVar[][] matriz, Solution solut, boolean softBasico) {
-
+		
+		ArrayList<String> arreglo=new ArrayList<>();
+		
 		for (int i = 0; i < salas.size(); i++) {
 
 			System.out.println(salas.get(i).getNombre());
@@ -717,6 +719,7 @@ public class SolverProject {
 
 					System.out.println(toolSoftwareBasico.get(k).getNombre());
 					reporte+=toolSoftwareBasico.get(k).getNombre()+"\n";
+					arreglo.add(toolSoftwareBasico.get(k).getNombre());
 				}
 				else {
 
@@ -726,6 +729,7 @@ public class SolverProject {
 
 						System.out.println(toolSoftwareBasico.get(k).getNombre());
 						reporte+=toolSoftwareBasico.get(k).getNombre()+"\n";
+						arreglo.add(toolSoftwareBasico.get(k).getNombre());
 					}
 
 				}
@@ -733,7 +737,7 @@ public class SolverProject {
 			}
 
 			//softwareComboBox=toolSoftwareBasico;
-
+			
 			for (int j = 0; j < toolSoftware.size(); j++) {
 
 				if (solut.getIntVal(matriz[i][j])==1) {
@@ -741,7 +745,7 @@ public class SolverProject {
 					if (!nombreSoftware.contains(toolSoftware.get(j).getNombre())) {
 
 						nombreSoftware.add(toolSoftware.get(j).getNombre());
-
+						arreglo.add(toolSoftware.get(j).getNombre());
 						System.out.println(toolSoftware.get(j).getNombre());
 						reporte+=toolSoftware.get(j).getNombre()+"\n";
 
@@ -753,10 +757,16 @@ public class SolverProject {
 				}
 
 			}
-
+			
+			System.out.println("Cantidad total de Software a instalar en la sala "
+			+salas.get(i).getNombre()+": "+arreglo.size());
+			reporte+="Cantidad total de Software a instalar en la sala "
+					+salas.get(i).getNombre()+": "+arreglo.size()+"\n";
+			
 			System.out.println("");
 			reporte+="\n";
 			nombreSoftware.clear();
+			arreglo.clear();
 
 		}
 
