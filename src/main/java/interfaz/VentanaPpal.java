@@ -1,70 +1,71 @@
 package interfaz;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Accordion;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import modelo.Software;
 import modelo.SolverProject;
 
-public class VentanaPpal extends JFrame {
+public class VentanaPpal extends Application {
 
-	private JPanel contentPane;
-	private JTextField txtFldLimSoluciones;
-	private JComboBox<String> comboBoxFldPorcDisco;
-	private JCheckBox chkRestSelecTodas;
-	private JCheckBox chkRestSoftwareDepartamento;
-	private JCheckBox chkRestSostwareSistemaOperativo;
-	private JCheckBox chkRestSoftwareRAM;
-	private JCheckBox chkRestSoftwareDemandaCapacidad;
-	private JCheckBox chkRestSoftwareDiscoDuro;
-	private JCheckBox chkRestSoftwareBasico;
-	private JCheckBox chkRestSoftwareNumeroLicencias;
-	private JCheckBox chkRestSoftwareSalaNombre;
-	private JButton btnGenerar;
-	private JButton btnLimpiar;
-	private JButton btnImportar;
-	private JButton btnExportTxt;
-	private JButton btnExportPdf;
-	private JButton btnExportCsv;
-	private JTextArea txtAreaVista;
-	private JLabel img;
-	private JLabel tiempoDeCarga;
-	private JComboBox<String> comboSala;
-	private JTextArea  consultaSala;
-	private JComboBox<String> comboSoft;
-	private JTextArea  consultaSoft;
+	private TextField txtFldLimSoluciones;
+	private ComboBox<String> comboBoxFldPorcDisco;
+	private CheckBox chkRestSelecTodas;
+	private CheckBox chkRestSoftwareDepartamento;
+	private CheckBox chkRestSostwareSistemaOperativo;
+	private CheckBox chkRestSoftwareRAM;
+	private CheckBox chkRestSoftwareDemandaCapacidad;
+	private CheckBox chkRestSoftwareDiscoDuro;
+	private CheckBox chkRestSoftwareBasico;
+	private CheckBox chkRestSoftwareNumeroLicencias;
+	private CheckBox chkRestSoftwareSalaNombre;
+	private Button btnGenerar;
+	private Button btnLimpiar;
+	private Button btnImportar;
+	private Button btnExportTxt;
+	private Button btnExportPdf;
+	private Button btnExportCsv;
+	private TextArea txtAreaVista;
+	private ImageView imageView;
+	private Label tiempoDeCarga;
+	private ComboBox<String> comboSala;
+	private TextArea  consultaSala;
+	private ComboBox<String> comboSoft;
+	private TextArea  consultaSoft;
 
 	private static SolverProject solver;
 	private static VentanaPpal frame;
@@ -75,278 +76,318 @@ public class VentanaPpal extends JFrame {
 	public static void main(String[] args) {
 
 		solver = new SolverProject();
-//		Application.launch(args);
-		frame = new VentanaPpal();
-		frame.setVisible(true);
+		Application.launch(args);
 
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public VentanaPpal() {
+	@Override
+	public void start(Stage stage) throws Exception {
+		// TODO Auto-generated method stub
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 50, 1200, 660);
-		contentPane = new JPanel();
-		contentPane.setLocation(20, -50);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		stage.setTitle("Distribución de Software Icesi"); 
+		Scene scene = new Scene(new Group(), 1200, 660);
+		scene.setFill(Color.GHOSTWHITE);
+		File f = new File("css/styles.css");
+		scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
 
-		JPanel panelParametros = new JPanel();
-		panelParametros.setBorder(new TitledBorder(null, "Cambiar Par\u00e1metros",
-				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelParametros.setBounds(5, 47, 355, 200);
-		contentPane.add(panelParametros);
-		panelParametros.setLayout(null);
+		Label lblTitulo = new Label("Distribuci\u00F3n de Software Icesi");
+		lblTitulo.getStyleClass().add("titulo");
+		lblTitulo.setLayoutX(550);
+		lblTitulo.setLayoutY(20);
+		lblTitulo.setPrefWidth(397);
+		lblTitulo.setPrefHeight(15);
 
-		JLabel lblLimsolu = new JLabel("N° Soluciones Parciales: ");
-		lblLimsolu.setBounds(15, 77, 150, 14);
-		panelParametros.add(lblLimsolu);
+		TitledPane panelParametros = new TitledPane();
+		panelParametros.setCollapsible(false);
+		panelParametros.setText("Cambiar Par\u00e1metros");
+		panelParametros.setLayoutX(10);
+		panelParametros.setLayoutY(55);
+		panelParametros.setPrefWidth(355);
+		panelParametros.setPrefHeight(170);
 
-		txtFldLimSoluciones = new JTextField();
-		txtFldLimSoluciones.setBounds(160, 74, 170, 20);
-		panelParametros.add(txtFldLimSoluciones);
-		txtFldLimSoluciones.setColumns(10);
+		VBox vBox = new VBox(20);
+		HBox hBox = new HBox();
 
-		JLabel lblPorcDisco = new JLabel("Porcentaje de Disco: ");
-		lblPorcDisco.setBounds(15, 102, 150, 14);
-		panelParametros.add(lblPorcDisco);
+		btnImportar  = new Button("Importar");
+		//btnImportar.getStyleClass().add("boton");
+		btnImportar.setPrefWidth(90);
+		btnImportar.setPrefHeight(23);
+		hBox.setMargin(btnImportar, new Insets(10, 0, 0, 135));
+		hBox.getChildren().add(btnImportar);
 
-		comboBoxFldPorcDisco = new JComboBox<>();
-		comboBoxFldPorcDisco.setBounds(160, 99, 170, 20);
-		comboBoxFldPorcDisco.addItem("Seleccione Porcentaje");
-		comboBoxFldPorcDisco.addItem("10%");
-		comboBoxFldPorcDisco.addItem("20%");
-		comboBoxFldPorcDisco.addItem("30%");
-		comboBoxFldPorcDisco.addItem("40%");
-		comboBoxFldPorcDisco.addItem("50%");
-		comboBoxFldPorcDisco.addItem("60%");
-		comboBoxFldPorcDisco.addItem("70%");
-		comboBoxFldPorcDisco.addItem("80%");
-		comboBoxFldPorcDisco.addItem("90%");
-		comboBoxFldPorcDisco.addItem("100%");
-		panelParametros.add(comboBoxFldPorcDisco);
+		txtFldLimSoluciones = new TextField();		
+		comboBoxFldPorcDisco = new ComboBox<>();
+		comboBoxFldPorcDisco.setPromptText("Seleccione Porcentaje");
+		comboBoxFldPorcDisco.getItems().addAll("Seleccione Porcentaje","10%","20%","30%","40%","50%",
+				"60%","70%","80%","90%","100%");
 
+		GridPane grid = new GridPane();
+		grid.setLayoutY(35);
+		grid.setVgap(4);
+		grid.setPadding(new Insets(5, 5, 5, 5));
+		grid.add(new Label("N° Soluciones Parciales: "), 0, 0);
+		grid.add(txtFldLimSoluciones, 1, 0);
+		grid.add(new Label("Porcentaje de Disco: "), 0, 1);
+		grid.add(comboBoxFldPorcDisco, 1, 1);
 
-		btnImportar = new JButton("Importar");
-		btnImportar.setBounds(147, 35, 89, 23);
-		panelParametros.add(btnImportar);
+		vBox.getChildren().add(hBox);
+		vBox.getChildren().add(grid);
 
+		panelParametros.setContent(vBox);
 
-		JLabel lblTitulo = new JLabel("Distribuci\u00F3n de Software Icesi");
-		lblTitulo.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC,
-				14));
-		lblTitulo.setBounds(550, 20, 397, 14);
-		contentPane.add(lblTitulo);
+		TitledPane panelRestricciones = new TitledPane();
+		panelRestricciones.setCollapsible(false);
+		panelRestricciones.setText("Selecci\u00F3n de Restricciones");
+		panelRestricciones.setLayoutX(10);
+		panelRestricciones.setLayoutY(230);
+		panelRestricciones.setPrefWidth(355);
+		panelRestricciones.setPrefHeight(300);
 
-		JPanel panelRestricciones = new JPanel();
-		panelRestricciones.setBorder(new TitledBorder(null, "Selecci\u00F3n de Restricciones",
-				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelRestricciones.setBounds(5, 250, 355, 300);
-		contentPane.add(panelRestricciones);
-		panelRestricciones.setLayout(null);
+		VBox vBoxRestricciones = new VBox(5);
+		chkRestSelecTodas =  new CheckBox("Seleccionar Todas");
+		vBoxRestricciones.getChildren().add(chkRestSelecTodas);
 
-		chkRestSelecTodas =  new JCheckBox("Seleccionar Todas");
-		chkRestSelecTodas.setBounds(15, 25, 300, 23);
-		panelRestricciones.add(chkRestSelecTodas);
+		chkRestSoftwareDepartamento =  new CheckBox("Software y Salas de un Departamento");
+		vBoxRestricciones.getChildren().add(chkRestSoftwareDepartamento);
 
-		chkRestSoftwareDepartamento =  new JCheckBox("Software y Salas de un Departamento");
-		chkRestSoftwareDepartamento.setBounds(15, 50, 300, 23);
-		panelRestricciones.add(chkRestSoftwareDepartamento);
+		chkRestSostwareSistemaOperativo =  new CheckBox("Software y Salas con mismo Sistema Operativo");
+		vBoxRestricciones.getChildren().add(chkRestSostwareSistemaOperativo);
 
-		chkRestSostwareSistemaOperativo =  new JCheckBox("Software y Salas con mismo Sistema Operativo");
-		chkRestSostwareSistemaOperativo.setBounds(15, 70, 300, 23);
-		panelRestricciones.add(chkRestSostwareSistemaOperativo);
+		chkRestSoftwareSalaNombre =  new CheckBox("Software Instalado en Salas Específicas");
+		vBoxRestricciones.getChildren().add(chkRestSoftwareSalaNombre);
 
-		chkRestSoftwareSalaNombre =  new JCheckBox("Software Instalado en Salas Específicas");
-		chkRestSoftwareSalaNombre.setBounds(15, 90, 300, 23);
-		panelRestricciones.add(chkRestSoftwareSalaNombre);
+		chkRestSoftwareDiscoDuro =  new CheckBox("Capacidad de Disco Duro");
+		vBoxRestricciones.getChildren().add(chkRestSoftwareDiscoDuro);
 
-		chkRestSoftwareDiscoDuro =  new JCheckBox("Capacidad de Disco Duro");
-		chkRestSoftwareDiscoDuro.setBounds(15, 110, 300, 23);
-		panelRestricciones.add(chkRestSoftwareDiscoDuro);
+		chkRestSoftwareRAM=  new CheckBox("Capacidad de Memoria RAM");
+		vBoxRestricciones.getChildren().add(chkRestSoftwareRAM);
 
-		chkRestSoftwareRAM=  new JCheckBox("Capacidad de Memoria RAM");
-		chkRestSoftwareRAM.setBounds(15, 130, 300, 23);
-		panelRestricciones.add(chkRestSoftwareRAM);
+		chkRestSoftwareDemandaCapacidad =  new CheckBox("Demanda y Capacidad de las Salas");
+		vBoxRestricciones.getChildren().add(chkRestSoftwareDemandaCapacidad);
 
-		chkRestSoftwareDemandaCapacidad =  new JCheckBox("Demanda y Capacidad de las Salas");
-		chkRestSoftwareDemandaCapacidad.setBounds(15, 150, 300, 23);
-		panelRestricciones.add(chkRestSoftwareDemandaCapacidad);
+		chkRestSoftwareBasico =  new CheckBox("Instalación de Software Básico");
+		vBoxRestricciones.getChildren().add(chkRestSoftwareBasico);
 
-		chkRestSoftwareBasico =  new JCheckBox("Instalación de Software Básico");
-		chkRestSoftwareBasico.setBounds(15, 170, 300, 23);
-		panelRestricciones.add(chkRestSoftwareBasico);
+		chkRestSoftwareNumeroLicencias =  new CheckBox("Cantidad de Licencias de Software");
+		vBoxRestricciones.getChildren().add(chkRestSoftwareNumeroLicencias);
 
-		chkRestSoftwareNumeroLicencias =  new JCheckBox("Cantidad de Licencias de Software");
-		chkRestSoftwareNumeroLicencias.setBounds(15, 190, 300, 23);
-		panelRestricciones.add(chkRestSoftwareNumeroLicencias);
+		HBox hBoxBotonesRestricciones = new HBox(15);
 
-		btnGenerar = new JButton("Generar Distribuci\u00F3n");
-		btnGenerar.setBounds(15, 270, 155, 23);
-		panelRestricciones.add(btnGenerar);
+		btnGenerar = new Button("Generar Distribuci\u00F3n");
+		btnGenerar.setPrefWidth(155);
+		hBoxBotonesRestricciones.getChildren().add(btnGenerar);
 
-		btnLimpiar = new JButton("Limpiar");
-		btnLimpiar.setBounds(185, 270, 155, 23);
-		panelRestricciones.add(btnLimpiar);		
+		btnLimpiar = new Button("Limpiar");
+		btnLimpiar.setPrefWidth(155);
+		hBoxBotonesRestricciones.getChildren().add(btnLimpiar);	
 
-		JPanel panelExportacion = new JPanel();
-		panelExportacion.setBorder(new TitledBorder(UIManager
-				.getBorder("TitledBorder.border"), "Exportar",
-				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelExportacion.setBounds(5, 552, 355, 65);
-		contentPane.add(panelExportacion);
-		panelExportacion.setLayout(null);
+		hBoxBotonesRestricciones.setMargin(btnGenerar, new Insets(20, 0, 0, 0));
+		hBoxBotonesRestricciones.setMargin(btnLimpiar, new Insets(20, 0, 0, 0));
 
-		btnExportTxt = new JButton("TXT");
-		btnExportTxt.setBounds(20, 30, 90, 23);
-		panelExportacion.add(btnExportTxt);
+		vBoxRestricciones.getChildren().add(hBoxBotonesRestricciones);
+		panelRestricciones.setContent(vBoxRestricciones);
 
-		btnExportPdf = new JButton("PDF");
-		btnExportPdf.setBounds(130, 30, 90, 23);
-		panelExportacion.add(btnExportPdf);
+		TitledPane panelExportacion = new TitledPane();
+		panelExportacion.setCollapsible(false);
+		panelExportacion.setText("Exportar");
+		panelExportacion.setLayoutX(10);
+		panelExportacion.setLayoutY(535);
+		panelExportacion.setPrefWidth(355);
+		panelExportacion.setPrefHeight(90);
 
-		btnExportCsv = new JButton("CSV");
-		btnExportCsv.setBounds(240, 30, 90, 23);
-		panelExportacion.add(btnExportCsv);
+		HBox hBoxExportar = new HBox(25);
 
-		JPanel panelContenedor = new JPanel();
-		panelContenedor.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
-				TitledBorder.TOP, null, null));
-		panelContenedor.setBounds(366, 55, 810, 560);
-		panelContenedor.setLayout(null);
-		contentPane.add(panelContenedor);
+		btnExportTxt = new Button("TXT");
+		btnExportTxt.setPrefWidth(90);
+		hBoxExportar.getChildren().add(btnExportTxt);
 
-		JTabbedPane pestanas = new JTabbedPane(JTabbedPane.TOP);
-		pestanas.setBounds(0, 0, 810, 500);
-		panelContenedor.add(pestanas);
+		btnExportPdf = new Button("PDF");
+		btnExportPdf.setPrefWidth(90);
+		hBoxExportar.getChildren().add(btnExportPdf);
 
-		JPanel panelContentDistribucion = new JPanel();
-		panelContentDistribucion.setBounds(366, 55, 810, 500);
-		panelContentDistribucion.setLayout(null);
-		pestanas.addTab("Distribución", panelContentDistribucion);
+		btnExportCsv = new Button("CSV");
+		btnExportCsv.setPrefWidth(90);
+		hBoxExportar.getChildren().add(btnExportCsv);
 
-		img=new JLabel(new ImageIcon("img/cargando.gif"));
-		img.setBounds(270, 150, 300, 300);
-		img.setVisible(false);
-		panelContentDistribucion.add(img);
+		hBoxExportar.setMargin(btnExportTxt, new Insets(10, 0, 0, 0));
+		hBoxExportar.setMargin(btnExportPdf, new Insets(10, 0, 0, 0));
+		hBoxExportar.setMargin(btnExportCsv, new Insets(10, 0, 0, 0));
 
-		tiempoDeCarga=new JLabel("");
-		tiempoDeCarga.setBounds(3, 510, 800, 50);
-		panelContenedor.add(tiempoDeCarga);
+		panelExportacion.setContent(hBoxExportar);
 
-		JScrollPane scrollPaneTxtDistribucion = new JScrollPane();
-		scrollPaneTxtDistribucion.setBounds(3, 3, 800, 470);
-		panelContentDistribucion.add(scrollPaneTxtDistribucion);
+		TitledPane panelContenedor = new TitledPane();
+		panelContenedor.setCollapsible(false);
+		panelContenedor.setLayoutX(370);
+		panelContenedor.setLayoutY(55);
+		panelContenedor.setPrefWidth(810);
+		panelContenedor.setPrefHeight(570);
 
-		txtAreaVista = new JTextArea();
-		txtAreaVista.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC,14));
-		scrollPaneTxtDistribucion.setViewportView(txtAreaVista);
+		VBox vBoxContent = new VBox();
+		vBoxContent.setLayoutX(0);
+		vBoxContent.setLayoutY(0);
+
+		TabPane tabPane = new TabPane();
+
+		Tab tab1 = new Tab();
+		tab1.setText("Distribución");
+		tab1.setClosable(false);
+
+		VBox vBoxDistribucion = new VBox();
+		txtAreaVista = new TextArea();
+		//		txtAreaVista.setPrefWidth(700);
+		txtAreaVista.setPrefHeight(450);
 		txtAreaVista.setEditable(false);
 
-		JPanel panel2 = new JPanel();
-		panelContenedor.setBounds(366, 55, 810, 560);
-		pestanas.addTab("Consultas", panel2);
-		panel2.setLayout(null);
+		vBoxDistribucion.getChildren().add(txtAreaVista);
 
-		JLabel conSal=new JLabel("Consultar Salas");
-		conSal.setBounds(0, 0, 810, 50);
-		panel2.add(conSal);
+		tab1.setContent(vBoxDistribucion);
+
+		Tab tab2 = new Tab();
+		tab2.setText("Consultas");
+		tab2.setClosable(false);
+
+		VBox vBoxConsultas = new VBox();
+
+		Label conSal=new Label("Consultar Salas");
+		conSal.setPrefWidth(800);
+		conSal.setPrefHeight(30);
+		vBoxConsultas.getChildren().add(conSal);
+
+		vBoxConsultas.setMargin(conSal, new Insets(10, 0, 0, 0));
 
 		ArrayList<String> nombreSal=new ArrayList<>();
-		comboSala=new JComboBox<String>();
+		comboSala=new ComboBox<String>();
 		nombreSal=solver.getNombreSalas();
-		comboSala.setBounds(0, 50, 805, 50);
-		comboSala.addItem("Seleccione una Sala");
+		comboSala.setPrefWidth(810);
+		comboSala.setPrefHeight(50);
+		comboSala.setPromptText("Seleccione una Sala");
+		comboSala.getItems().add("Seleccione una Sala");
 
 		for (int i = 0; i < nombreSal.size(); i++) {
-			comboSala.addItem(nombreSal.get(i).toString());
+			comboSala.getItems().add(nombreSal.get(i).toString());
 		}
 
-		panel2.add(comboSala);
+		vBoxConsultas.getChildren().add(comboSala);
 
-		JScrollPane scrollPaneConsultaSalas = new JScrollPane();
-		scrollPaneConsultaSalas.setBounds(0, 100, 805, 80);
-
-		consultaSala=new JTextArea();
+		consultaSala=new TextArea();
 		consultaSala.setEditable(false);
-		scrollPaneConsultaSalas.setViewportView(consultaSala);
-		panel2.add(scrollPaneConsultaSalas);
+		consultaSala.setPrefWidth(810);
+		consultaSala.setPrefHeight(80);
 
-		JLabel conSof=new JLabel("Consultar Software");
-		conSof.setBounds(0, 180, 810, 50);
-		panel2.add(conSof);
+		vBoxConsultas.getChildren().add(consultaSala);
 
-		comboSoft=new JComboBox<String>();
-		comboSoft.setBounds(0, 230, 805, 50);
-		panel2.add(comboSoft);
+		Label conSof=new Label("Consultar Software");
+		conSof.setPrefWidth(810);
+		conSof.setPrefHeight(30);
+		vBoxConsultas.getChildren().add(conSof);
 
-		JScrollPane scrollPaneConsultaSoft = new JScrollPane();
-		scrollPaneConsultaSoft.setBounds(0, 280, 805, 190);
+		vBoxConsultas.setMargin(conSof, new Insets(10, 0, 0, 0));
 
-		consultaSoft=new JTextArea();
+		comboSoft=new ComboBox<String>();
+		comboSoft.setPrefWidth(810);
+		comboSoft.setPrefHeight(50);
+		comboSoft.setPromptText("Seleccione un Software");
+		//comboSoft.getItems().add("Seleccione un Software");
+
+		vBoxConsultas.getChildren().add(comboSoft);
+
+		consultaSoft=new TextArea();
 		consultaSoft.setEditable(false);
-		scrollPaneConsultaSoft.setViewportView(consultaSoft);
+		consultaSoft.setPrefWidth(810);
+		consultaSoft.setPrefHeight(190);
 
-		panel2.add(scrollPaneConsultaSoft);
+		vBoxConsultas.getChildren().add(consultaSoft);
 
-		adicionarEventos();
+		tab2.setContent(vBoxConsultas);
+
+		tabPane.getTabs().addAll(tab1, tab2);
+
+		tiempoDeCarga=new Label("");
+
+		FileInputStream inputstream = new FileInputStream("img/cargando.gif");
+		Image image = new Image(inputstream);
+		imageView = new ImageView(image); 
+		imageView.setFitWidth(350); 
+		imageView.setFitHeight(70); 
+		imageView.setVisible(false);
+
+		vBoxContent.getChildren().add(tabPane);
+		vBoxContent.getChildren().add(tiempoDeCarga);
+		vBoxContent.getChildren().add(imageView);
+		vBoxContent.setMargin(imageView, new Insets(0, 0, 0, 230));
+		panelContenedor.setContent(vBoxContent);
+
+		Group root = (Group)scene.getRoot();
+		root.getChildren().add(lblTitulo);
+		root.getChildren().add(panelParametros);
+		root.getChildren().add(panelRestricciones);
+		root.getChildren().add(panelExportacion);
+		root.getChildren().add(panelContenedor);
+
+		stage.setScene(scene);
+		stage.show();
+
+
+		adicionarEventos(stage);
 
 		inhabilitarComponentes();
+
 	}
 
 	public void habilitarComponentes() {
 
 		txtFldLimSoluciones.setEditable(true);
-		comboBoxFldPorcDisco.setEnabled(true);
-		chkRestSelecTodas.setEnabled(true);
-		chkRestSoftwareDepartamento.setEnabled(true);
-		chkRestSostwareSistemaOperativo.setEnabled(true);
-		chkRestSoftwareRAM.setEnabled(true);
-		chkRestSoftwareDemandaCapacidad.setEnabled(true);
-		chkRestSoftwareDiscoDuro.setEnabled(true);
-		chkRestSoftwareBasico.setEnabled(true);
-		chkRestSoftwareNumeroLicencias.setEnabled(true);
-		chkRestSoftwareSalaNombre.setEnabled(true);
-		btnGenerar.setEnabled(true);
-		btnLimpiar.setEnabled(true);
-		btnExportCsv.setEnabled(true);
-		btnExportPdf.setEnabled(true);
-		btnExportTxt.setEnabled(true);
+		comboBoxFldPorcDisco.setDisable(false);
+		chkRestSelecTodas.setDisable(false);
+		chkRestSoftwareDepartamento.setDisable(false);
+		chkRestSostwareSistemaOperativo.setDisable(false);
+		chkRestSoftwareRAM.setDisable(false);
+		chkRestSoftwareDemandaCapacidad.setDisable(false);
+		chkRestSoftwareDiscoDuro.setDisable(false);
+		chkRestSoftwareBasico.setDisable(false);
+		chkRestSoftwareNumeroLicencias.setDisable(false);
+		chkRestSoftwareSalaNombre.setDisable(false);
+		btnGenerar.setDisable(false);
+		btnLimpiar.setDisable(false);
+		btnExportCsv.setDisable(false);
+		btnExportPdf.setDisable(false);
+		btnExportTxt.setDisable(false);
 	}
 
 	public void inhabilitarComponentes() {
 
 		txtFldLimSoluciones.setEditable(false);
-		comboBoxFldPorcDisco.setEnabled(false);
-		chkRestSelecTodas.setEnabled(false);
-		chkRestSoftwareDepartamento.setEnabled(false);
-		chkRestSostwareSistemaOperativo.setEnabled(false);
-		chkRestSoftwareRAM.setEnabled(false);
-		chkRestSoftwareDemandaCapacidad.setEnabled(false);
-		chkRestSoftwareDiscoDuro.setEnabled(false);
-		chkRestSoftwareBasico.setEnabled(false);
-		chkRestSoftwareNumeroLicencias.setEnabled(false);
-		chkRestSoftwareSalaNombre.setEnabled(false);
-		btnGenerar.setEnabled(false);
-		btnLimpiar.setEnabled(false);
-		btnExportCsv.setEnabled(false);
-		btnExportPdf.setEnabled(false);
-		btnExportTxt.setEnabled(false);
-		comboSoft.setEnabled(false);
+		comboBoxFldPorcDisco.setDisable(true);
+		chkRestSelecTodas.setDisable(true);
+		chkRestSoftwareDepartamento.setDisable(true);
+		chkRestSostwareSistemaOperativo.setDisable(true);
+		chkRestSoftwareRAM.setDisable(true);
+		chkRestSoftwareDemandaCapacidad.setDisable(true);
+		chkRestSoftwareDiscoDuro.setDisable(true);
+		chkRestSoftwareBasico.setDisable(true);
+		chkRestSoftwareNumeroLicencias.setDisable(true);
+		chkRestSoftwareSalaNombre.setDisable(true);
+		btnGenerar.setDisable(true);
+		btnLimpiar.setDisable(true);
+		btnExportCsv.setDisable(true);
+		btnExportPdf.setDisable(true);
+		btnExportTxt.setDisable(true);
+		comboSoft.setDisable(true);
 	}
 
-	public void adicionarEventos() {
+	public void adicionarEventos(Stage stage) {
 
-		//solver.modeloInicial(10);
+		//			solver.modeloInicial(10);
 
-		btnLimpiar.addActionListener(new ActionListener() {
+
+		btnLimpiar.setOnAction(new EventHandler<ActionEvent>() {
+
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+
 				txtFldLimSoluciones.setText("");
-				comboBoxFldPorcDisco.setSelectedIndex(0);
+				comboBoxFldPorcDisco.setValue("Seleccione Porcentaje");
 
 				txtAreaVista.setText("");
 				chkRestSelecTodas.setSelected(false);
@@ -362,10 +403,11 @@ public class VentanaPpal extends JFrame {
 			}
 		});
 
-		comboSala.addActionListener(new ActionListener() {
+
+		comboSala.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				String item_seleccionado = comboSala.getSelectedItem().toString();
+			public void handle(ActionEvent event) {
+				String item_seleccionado = comboSala.getValue().toString();
 				if (item_seleccionado.equals("Seleccione una Sala")) {
 					consultaSala.setText("Por favor seleccione una sala");
 				}else {
@@ -382,44 +424,44 @@ public class VentanaPpal extends JFrame {
 				}
 			}
 		});
-		
-		comboBoxFldPorcDisco.addActionListener(new ActionListener() {
+
+		comboBoxFldPorcDisco.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				String item_seleccionado = comboSala.getSelectedItem().toString();
+			public void handle(ActionEvent event) {
+				String item_seleccionado = comboBoxFldPorcDisco.getValue().toString(); 
 				if (!item_seleccionado.equals("Seleccione Porcentaje")) {
 					chkRestSoftwareDiscoDuro.setSelected(true);
 				}
 			}
 		});
 
-		btnImportar.addActionListener(new ActionListener() {
+		btnImportar.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void handle(ActionEvent event) {
 
-				JFileChooser directorio = new JFileChooser("docs/");
-				FileNameExtensionFilter filtro = new FileNameExtensionFilter(
-						"CVS", "csv");
-				directorio.setFileFilter(filtro);
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Abrir Archivo");
+				fileChooser.setInitialDirectory(new File("docs/")); 
+				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
+				File escogido = fileChooser.showOpenDialog(stage);
 
-				int respuesta = directorio.showOpenDialog(frame);
-				if (respuesta == JFileChooser.APPROVE_OPTION) {
-					File escogido = directorio.getSelectedFile();
+				if (escogido != null) {
 
 					try {
 
 						solver.leerCSVSoftware(escogido.getAbsolutePath());
 						txtAreaVista.setText(" ");
-						JOptionPane.showMessageDialog(null, "Se ha importado correctamente el archivo",
-								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
-
+						Alert alert = new Alert(AlertType.INFORMATION, 
+								"Se ha importado correctamente el archivo");
+						alert.show();
 						habilitarComponentes();
 						chkRestSoftwareDepartamento.setSelected(true);
 
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
-						JOptionPane.showMessageDialog(null, "No se ha importado correctamente el archivo",
-								"Error", JOptionPane.ERROR_MESSAGE);
+						Alert alert = new Alert(AlertType.ERROR, 
+								"No se ha importado correctamente el archivo");
+						alert.show();
 						e1.printStackTrace();
 					}
 
@@ -428,26 +470,27 @@ public class VentanaPpal extends JFrame {
 			}
 		});
 
-		btnGenerar.addActionListener(new ActionListener() {
+		btnGenerar.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void handle(ActionEvent event) {
 
+				txtAreaVista.setText(" ");
+				tiempoDeCarga.setText(" ");
+				imageView.setVisible(true);
+				
 				new Thread() {
 
 					@Override
 					public void run() {
 
-						txtAreaVista.setText(" ");
-						tiempoDeCarga.setText(" ");
-						img.setVisible(true);
-
 						long startTime = System.currentTimeMillis();
-
+						String tiempo="";
+						
 						if (!txtFldLimSoluciones.getText().equals("") &&
-								!comboBoxFldPorcDisco.getSelectedItem().toString().equals("Seleccione Porcentaje")) {
+								!comboBoxFldPorcDisco.getValue().toString().equals("Seleccione Porcentaje")) {
 
 							int numSol=Integer.parseInt(txtFldLimSoluciones.getText());
-							int porc=Integer.parseInt(comboBoxFldPorcDisco.getSelectedItem().toString().split("%")[0]);
+							int porc=Integer.parseInt(comboBoxFldPorcDisco.getValue().toString().split("%")[0]);
 
 							solver.modeloInicial(numSol, chkRestSoftwareDepartamento.isSelected(), 
 									chkRestSoftwareRAM.isSelected(), chkRestSostwareSistemaOperativo.isSelected(),
@@ -456,7 +499,7 @@ public class VentanaPpal extends JFrame {
 									chkRestSoftwareSalaNombre.isSelected(), porc);
 						}
 						else if (!txtFldLimSoluciones.getText().equals("") &&
-								comboBoxFldPorcDisco.getSelectedItem().toString().equals("Seleccione Porcentaje")) {
+								comboBoxFldPorcDisco.getValue().toString().equals("Seleccione Porcentaje")) {
 
 							int numSol=Integer.parseInt(txtFldLimSoluciones.getText());
 							int porc=70;
@@ -467,11 +510,11 @@ public class VentanaPpal extends JFrame {
 									chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), 
 									chkRestSoftwareSalaNombre.isSelected(), porc);
 						}
-						else if (txtFldLimSoluciones.getText().equals("") &&
-								!comboBoxFldPorcDisco.getSelectedItem().toString().equals("Seleccione Porcentaje")) {
+						else if (txtFldLimSoluciones.getText().equals("") && comboBoxFldPorcDisco.getValue() != null &&
+								!comboBoxFldPorcDisco.getValue().toString().equals("Seleccione Porcentaje")) {
 
 							int numSol=10;
-							int porc=Integer.parseInt(comboBoxFldPorcDisco.getSelectedItem().toString().split("%")[0]);
+							int porc=Integer.parseInt(comboBoxFldPorcDisco.getValue().toString().split("%")[0]);
 
 							solver.modeloInicial(numSol, chkRestSoftwareDepartamento.isSelected(), 
 									chkRestSoftwareRAM.isSelected(), chkRestSostwareSistemaOperativo.isSelected(),
@@ -496,23 +539,23 @@ public class VentanaPpal extends JFrame {
 							e.printStackTrace();
 						}
 
-						img.setVisible(false);
-						
+						imageView.setVisible(false);
+
 						long endTime = System.currentTimeMillis() - startTime;
 						int tiempoSegundos = (int) (endTime/1000.0); 
 						int tiempoMinutos = (int) (tiempoSegundos/60.0);
 
 						if (tiempoMinutos != 0) {
 							int diferenciaSegundos = (int) (tiempoSegundos - 60.0); 
-							tiempoDeCarga.setText("Tiempo de Carga: 0"+tiempoMinutos+":"+diferenciaSegundos);							
+							tiempo="Tiempo de Carga: 0"+tiempoMinutos+":"+diferenciaSegundos;							
 						}else {
 
-							tiempoDeCarga.setText("Tiempo de Carga: 0"+tiempoMinutos+":"+tiempoSegundos);
+							tiempo="Tiempo de Carga: 0"+tiempoMinutos+":"+tiempoSegundos;
 						}
 
-						txtAreaVista.append(solver.getReporte()+"\n"+tiempoDeCarga.getText());
-						
-						comboSoft.setEnabled(true);
+						txtAreaVista.setText(solver.getReporte()+"\n"+tiempo);
+
+						comboSoft.setDisable(false);
 
 						//												Collections.sort(solver.getNombreSoftware(), new Comparator<Software>() {
 						//													public int compare(Software obj1, Software obj2) {
@@ -522,17 +565,17 @@ public class VentanaPpal extends JFrame {
 						//													}
 						//												});
 
-						if (comboSoft.getItemCount() > 1) {
+						if (comboSoft.getItems().size() > 1) {
 
-							comboSoft.removeAllItems();
+							comboSoft.getItems().clear();
 
 						}
 
 						Collections.sort(solver.getNombreSoftware());
 
-						comboSoft.addItem("Seleccionar un Software");
+						comboSoft.getItems().add("Seleccionar un Software");
 						for (int i = 0; i < solver.getNombreSoftware().size(); i++) {
-							comboSoft.addItem(solver.getNombreSoftware().get(i).toString());
+							comboSoft.getItems().add(solver.getNombreSoftware().get(i).toString());
 
 						}
 
@@ -543,12 +586,12 @@ public class VentanaPpal extends JFrame {
 			}
 		});
 
-		comboSoft.addActionListener(new ActionListener() {
+		comboSoft.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void handle(ActionEvent event) {
 				try {
 
-					String item_seleccionado = comboSoft.getSelectedItem().toString();
+					String item_seleccionado = comboSoft.getValue().toString();
 					if (item_seleccionado.equals("Seleccionar un Software")) {
 						consultaSoft.setText("Por favor seleccione una herramienta de software");
 					}else {
@@ -611,86 +654,86 @@ public class VentanaPpal extends JFrame {
 			}
 		});
 
-		btnExportTxt.addActionListener(new ActionListener() {
+		btnExportTxt.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void handle(ActionEvent event) {
 
-				JFileChooser directorio = new JFileChooser();
-				FileNameExtensionFilter filtro = new FileNameExtensionFilter(
-						"txt", "txt");
-				directorio.setFileFilter(filtro);
-
-				String ruta = "";
-				int respuesta = directorio.showOpenDialog(frame);
-				if (respuesta == JFileChooser.APPROVE_OPTION) {
-					File escogido = directorio.getSelectedFile();
-					ruta = escogido.getAbsolutePath();
-
-					try {
-						solver.exportarReporteTxt(ruta);
-
-						JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
-								+ruta,
-								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
-
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
+				//					JFileChooser directorio = new JFileChooser();
+				//					FileNameExtensionFilter filtro = new FileNameExtensionFilter(
+				//							"txt", "txt");
+				//					directorio.setFileFilter(filtro);
+				//	
+				//					String ruta = "";
+				//					int respuesta = directorio.showOpenDialog(frame);
+				//					if (respuesta == JFileChooser.APPROVE_OPTION) {
+				//						File escogido = directorio.getSelectedFile();
+				//						ruta = escogido.getAbsolutePath();
+				//	
+				//						try {
+				//							solver.exportarReporteTxt(ruta);
+				//	
+				//							JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
+				//									+ruta,
+				//									"Mensaje", JOptionPane.INFORMATION_MESSAGE);
+				//	
+				//						} catch (FileNotFoundException e1) {
+				//							// TODO Auto-generated catch block
+				//							e1.printStackTrace();
+				//	
+				//						} catch (Exception e1) {
+				//							// TODO Auto-generated catch block
+				//							e1.printStackTrace();
+				//						}
+				//					}
 			}
 		});
+		//	
+		//			btnExportPdf.setOnAction(new EventHandler<ActionEvent>() {
+		//				@Override
+		//				public void handle(ActionEvent event) {
+		//	
+		//					JFileChooser directorio = new JFileChooser();
+		//					FileNameExtensionFilter filtro = new FileNameExtensionFilter(
+		//							"pdf", "pdf");
+		//					directorio.setFileFilter(filtro);
+		//	
+		//					String ruta = "";
+		//					int respuesta = directorio.showOpenDialog(frame);
+		//					if (respuesta == JFileChooser.APPROVE_OPTION) {
+		//						File escogido = directorio.getSelectedFile();
+		//						ruta = escogido.getAbsolutePath();
+		//	
+		//						//					try {
+		//						//						solver.exportarReporteTxt(ruta);
+		//						//						
+		//						//						JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
+		//						//								+ruta,
+		//						//								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
+		//						//						
+		//						//					} catch (FileNotFoundException e1) {
+		//						//						// TODO Auto-generated catch block
+		//						//						e1.printStackTrace();
+		//						//
+		//						//					} catch (Exception e1) {
+		//						//						// TODO Auto-generated catch block
+		//						//						e1.printStackTrace();
+		//						//					}
+		//					}
+		//	
+		//				}
+		//			});
+		//	
+		//			btnExportCsv.setOnAction(new EventHandler<ActionEvent>() {
+		//				@Override
+		//				public void handle(ActionEvent event) {
+		//	
+		//				}
+		//			});
+		//	
+		chkRestSelecTodas.setOnAction(new EventHandler<ActionEvent>() {
 
-		btnExportPdf.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				JFileChooser directorio = new JFileChooser();
-				FileNameExtensionFilter filtro = new FileNameExtensionFilter(
-						"pdf", "pdf");
-				directorio.setFileFilter(filtro);
-
-				String ruta = "";
-				int respuesta = directorio.showOpenDialog(frame);
-				if (respuesta == JFileChooser.APPROVE_OPTION) {
-					File escogido = directorio.getSelectedFile();
-					ruta = escogido.getAbsolutePath();
-
-					//					try {
-					//						solver.exportarReporteTxt(ruta);
-					//						
-					//						JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
-					//								+ruta,
-					//								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
-					//						
-					//					} catch (FileNotFoundException e1) {
-					//						// TODO Auto-generated catch block
-					//						e1.printStackTrace();
-					//
-					//					} catch (Exception e1) {
-					//						// TODO Auto-generated catch block
-					//						e1.printStackTrace();
-					//					}
-				}
-
-			}
-		});
-
-		btnExportCsv.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-
-		chkRestSelecTodas.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 
 				if (chkRestSelecTodas.isSelected()) {
@@ -718,42 +761,5 @@ public class VentanaPpal extends JFrame {
 		});
 	}
 
-//		@Override
-//		public void start(Stage stage) throws Exception {
-//			// TODO Auto-generated method stub
-//		     TitledPane firstTitledPane = new TitledPane();
-//		      firstTitledPane.setText("Java");
-//		 
-//		      VBox content1 = new VBox();
-//		      content1.getChildren().add(new Label("Java Swing Tutorial"));
-//		      content1.getChildren().add(new Label("JavaFx Tutorial"));
-//		      content1.getChildren().add(new Label("Java IO Tutorial"));
-//		 
-//		      firstTitledPane.setContent(content1);
-//		 
-//		      // Create Second TitledPane.
-//		      TitledPane secondTitledPane = new TitledPane();
-//		      secondTitledPane.setText("CShape");
-//		 
-//		      VBox content2 = new VBox();
-//		      content2.getChildren().add(new Label("CShape Tutorial for Beginners"));
-//		      content2.getChildren().add(new Label("CShape Enums Tutorial"));
-//		      Button buttonAccept = new Button("Accept");
-//		      buttonAccept.getStyleClass().add("boton");
-//		      content2.getChildren().add(buttonAccept);
-//		 
-//		      secondTitledPane.setContent(content2);
-//		 
-//		    
-//		      Accordion root= new Accordion();      
-//		      root.getPanes().addAll(firstTitledPane, secondTitledPane);
-//		    
-//		      Scene scene = new Scene(root, 300, 200);
-//		      File f = new File("css/styles.css");
-//		      scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
-//		      stage.setTitle("Accordion (o7planning.org)");
-//		      stage.setScene(scene);
-//		      stage.show();
-//			
-//		}
+
 }
