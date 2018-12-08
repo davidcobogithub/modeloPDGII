@@ -5,12 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -37,7 +30,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import modelo.Software;
+import modelo.LectorDeArchivos;
+import modelo.Reporte;
 import modelo.SolverProject;
 
 public class VentanaPpal extends Application {
@@ -68,14 +62,17 @@ public class VentanaPpal extends Application {
 	private TextArea  consultaSoft;
 
 	private static SolverProject solver;
-	private static VentanaPpal frame;
+	private static LectorDeArchivos lector;
+	private static Reporte reportes;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 
+		lector= new LectorDeArchivos();
 		solver = new SolverProject();
+		reportes=new Reporte();
 		Application.launch(args);
 
 	}
@@ -92,8 +89,8 @@ public class VentanaPpal extends Application {
 
 		Label lblTitulo = new Label("Distribuci\u00F3n de Software Icesi");
 		lblTitulo.getStyleClass().add("titulo");
-		lblTitulo.setLayoutX(550);
-		lblTitulo.setLayoutY(20);
+		lblTitulo.setLayoutX(520);
+		lblTitulo.setLayoutY(10);
 		lblTitulo.setPrefWidth(397);
 		lblTitulo.setPrefHeight(15);
 
@@ -411,14 +408,14 @@ public class VentanaPpal extends Application {
 				if (item_seleccionado.equals("Seleccione una Sala")) {
 					consultaSala.setText("Por favor seleccione una sala");
 				}else {
-					for (int i = 0; i < solver.getSalas().size(); i++) {
-						if(item_seleccionado.equals(solver.getSalas().get(i).getNombre())) {
-							consultaSala.setText("Nombre de la Sala: "+ solver.getSalas().get(i).getNombre()+"\n"+
-									"Departamento de la Sala: "+ solver.getSalas().get(i).getTipo()+"\n"+
-									"Nº de computadores de la Sala: "+ solver.getSalas().get(i).getCapacidad()+"\n"+
-									"Sistema Operativo de Computadores: "+ solver.getSalas().get(i).getComputadores().getSistemaOperativo()+"\n"+
-									"Disco Duro de Computadores: "+ solver.getSalas().get(i).getComputadores().getDiscoDuro()+" GB"+"\n"+
-									"Memoria RAM de Computadores: "+ solver.getSalas().get(i).getComputadores().getMemoriaRAM()+" GB"+"\n");
+					for (int i = 0; i < lector.getSalas().size(); i++) {
+						if(item_seleccionado.equals(lector.getSalas().get(i).getNombre())) {
+							consultaSala.setText("Nombre de la Sala: "+ lector.getSalas().get(i).getNombre()+"\n"+
+									"Departamento de la Sala: "+ lector.getSalas().get(i).getTipo()+"\n"+
+									"Nº de computadores de la Sala: "+ lector.getSalas().get(i).getCapacidad()+"\n"+
+									"Sistema Operativo de Computadores: "+ lector.getSalas().get(i).getComputadores().getSistemaOperativo()+"\n"+
+									"Disco Duro de Computadores: "+ lector.getSalas().get(i).getComputadores().getDiscoDuro()+" GB"+"\n"+
+									"Memoria RAM de Computadores: "+ lector.getSalas().get(i).getComputadores().getMemoriaRAM()+" GB"+"\n");
 						}
 					}
 				}
@@ -449,7 +446,7 @@ public class VentanaPpal extends Application {
 
 					try {
 
-						solver.leerCSVSoftware(escogido.getAbsolutePath());
+						lector.leerCSVSoftware(escogido.getAbsolutePath());
 						txtAreaVista.setText(" ");
 						Alert alert = new Alert(AlertType.INFORMATION, 
 								"Se ha importado correctamente el archivo");
@@ -477,7 +474,7 @@ public class VentanaPpal extends Application {
 				txtAreaVista.setText(" ");
 				tiempoDeCarga.setText(" ");
 				imageView.setVisible(true);
-				
+
 				new Thread() {
 
 					@Override
@@ -485,9 +482,10 @@ public class VentanaPpal extends Application {
 
 						long startTime = System.currentTimeMillis();
 						String tiempo="";
-						
+
 						if (!txtFldLimSoluciones.getText().equals("") &&
-								!comboBoxFldPorcDisco.getValue().toString().equals("Seleccione Porcentaje")) {
+								!comboBoxFldPorcDisco.getValue().toString().equals("Seleccione Porcentaje") 
+								&& comboBoxFldPorcDisco.getValue() != null) {
 
 							int numSol=Integer.parseInt(txtFldLimSoluciones.getText());
 							int porc=Integer.parseInt(comboBoxFldPorcDisco.getValue().toString().split("%")[0]);
@@ -542,18 +540,22 @@ public class VentanaPpal extends Application {
 						imageView.setVisible(false);
 
 						long endTime = System.currentTimeMillis() - startTime;
-						int tiempoSegundos = (int) (endTime/1000.0); 
-						int tiempoMinutos = (int) (tiempoSegundos/60.0);
-
-						if (tiempoMinutos != 0) {
-							int diferenciaSegundos = (int) (tiempoSegundos - 60.0); 
-							tiempo="Tiempo de Carga: 0"+tiempoMinutos+":"+diferenciaSegundos;							
+						
+						int tiempoMinutos = (int) (endTime/60000);
+						int restoMinutos = (int) (endTime%60000);
+						int tiempoSegundos = (int) (restoMinutos/1000);
+						int restoSegundos = (int) (restoMinutos%1000);
+						//tiempo="Tiempo de Carga: 0"+tiempoMinutos+":"+tiempoSegundos;	
+						
+						if (tiempoSegundos != 0) {
+							
+							tiempo="Tiempo de Carga: 0"+tiempoMinutos+":"+tiempoSegundos;							
 						}else {
-
-							tiempo="Tiempo de Carga: 0"+tiempoMinutos+":"+tiempoSegundos;
+							
+							tiempo="Tiempo de Carga: 0"+tiempoMinutos+":0"+restoSegundos;
 						}
 
-						txtAreaVista.setText(solver.getReporte()+"\n"+tiempo);
+						txtAreaVista.setText(solver.getReporteDistribucion()+"\n"+tiempo);
 
 						comboSoft.setDisable(false);
 
@@ -603,24 +605,24 @@ public class VentanaPpal extends Application {
 						int disco=0;
 						int ram=0;
 						String report="";
-						for (int i = 0; i < solver.getSalas().size(); i++) {
-							for (int j = 0; j < solver.getToolSoftware().size(); j++) {
+						for (int i = 0; i < lector.getSalas().size(); i++) {
+							for (int j = 0; j < lector.getToolSoftware().size(); j++) {
 
-								if(item_seleccionado.equals(solver.getToolSoftware().get(j).getNombre())) {
+								if(item_seleccionado.equals(lector.getToolSoftware().get(j).getNombre())) {
 
-									nombre=solver.getToolSoftware().get(j).getNombre();
-									dpto=solver.getToolSoftware().get(j).getTipoDepartamento();
-									sisOpe=solver.getToolSoftware().get(j).getSistemaOperativo();
-									disco=solver.getToolSoftware().get(j).getDiscoDuro();
-									ram=solver.getToolSoftware().get(j).getMemoriaRAM();
+									nombre=lector.getToolSoftware().get(j).getNombre();
+									dpto=lector.getToolSoftware().get(j).getTipoDepartamento();
+									sisOpe=lector.getToolSoftware().get(j).getSistemaOperativo();
+									disco=lector.getToolSoftware().get(j).getDiscoDuro();
+									ram=lector.getToolSoftware().get(j).getMemoriaRAM();
 
-									if (!materias.contains(solver.getToolSoftware().get(j).getNombreMateria())){
-										materias.add(solver.getToolSoftware().get(j).getNombreMateria());
+									if (!materias.contains(lector.getToolSoftware().get(j).getNombreMateria())){
+										materias.add(lector.getToolSoftware().get(j).getNombreMateria());
 									}
 
-									if (!salas.contains(solver.getToolSoftware().get(j).getNombreSala()) && 
-											!solver.getToolSoftware().get(j).getNombreSala().contains("L")){
-										salas.add(solver.getToolSoftware().get(j).getNombreSala());
+									if (!salas.contains(lector.getToolSoftware().get(j).getNombreSala()) && 
+											!lector.getToolSoftware().get(j).getNombreSala().contains("L")){
+										salas.add(lector.getToolSoftware().get(j).getNombreSala());
 									}
 								}
 							}
@@ -658,33 +660,41 @@ public class VentanaPpal extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 
-				//					JFileChooser directorio = new JFileChooser();
-				//					FileNameExtensionFilter filtro = new FileNameExtensionFilter(
-				//							"txt", "txt");
-				//					directorio.setFileFilter(filtro);
-				//	
-				//					String ruta = "";
-				//					int respuesta = directorio.showOpenDialog(frame);
-				//					if (respuesta == JFileChooser.APPROVE_OPTION) {
-				//						File escogido = directorio.getSelectedFile();
-				//						ruta = escogido.getAbsolutePath();
-				//	
-				//						try {
-				//							solver.exportarReporteTxt(ruta);
-				//	
-				//							JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
-				//									+ruta,
-				//									"Mensaje", JOptionPane.INFORMATION_MESSAGE);
-				//	
-				//						} catch (FileNotFoundException e1) {
-				//							// TODO Auto-generated catch block
-				//							e1.printStackTrace();
-				//	
-				//						} catch (Exception e1) {
-				//							// TODO Auto-generated catch block
-				//							e1.printStackTrace();
-				//						}
-				//					}
+				String ruta = "";
+
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Abrir Archivo");
+				//fileChooser.setInitialDirectory(new File("docs/")); 
+				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("txt", "*.txt"));
+				File escogido = fileChooser.showSaveDialog(stage);
+
+				if (escogido != null) {
+					try {
+
+						ruta = escogido.getAbsolutePath();
+
+						reportes.exportarReporteTxt(ruta, txtAreaVista.getText());
+
+						Alert alert = new Alert(AlertType.INFORMATION, 
+								"Se ha exportado correctamente el archivo en la ruta " +ruta);
+						alert.show();
+						
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						Alert alert = new Alert(AlertType.ERROR, 
+								"Archivo no encontrado");
+						alert.show();
+						e1.printStackTrace();
+
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						Alert alert = new Alert(AlertType.ERROR, 
+								"No se ha exportado correctamente el archivo");
+						alert.show();
+						e1.printStackTrace();
+					}
+				}
+
 			}
 		});
 		//	

@@ -1,9 +1,16 @@
 .boton {
 
-    -fx-background-color: #AEB6BF;
+    -fx-background-color: #FAEBD7;
     -fx-margin-left: 100px;
 }
 
 .titulo{
+
+	-fx-font-size:30px;
+	
+}
+
+.carga{
+	-fx-padding-left:200px;
 	
 }
