@@ -136,6 +136,9 @@ public class SolverProject {
 		System.out.println("Soluciones encontradas: "+list.size()+"\n");
 		reporteDistribucion+="Soluciones encontradas: "+list.size()+"\n"+"\n";
 
+		System.out.println("Porcentaje De Disco: "+ porcDisco+" %"+"\n");
+		reporteDistribucion+="Porcentaje De Disco: "+porcDisco+" %"+"\n"+"\n";
+		
 		int nSol=1;
 		for(Solution s:list){
 

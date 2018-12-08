@@ -7,10 +7,10 @@
 .titulo{
 
 	-fx-font-size:30px;
-	
+
 }
 
-.carga{
-	-fx-padding-left:200px;
+.cargando{
 	
+	-fx-font-size:20px;
 }
