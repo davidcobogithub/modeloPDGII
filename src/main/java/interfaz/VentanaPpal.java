@@ -90,7 +90,7 @@ public class VentanaPpal extends Application {
 		stage.getIcons().add(new Image(inputstreamIcon)); 
 		Scene scene = new Scene(new Group(), 1200, 660);
 		scene.setFill(Color.GHOSTWHITE);
-		
+
 		File f = new File("css/styles.css");
 		scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
 
@@ -138,7 +138,7 @@ public class VentanaPpal extends Application {
 				+ "instalación de las herramientas de software en las salas");
 		comboBoxFldPorcDisco.setTooltip(tooltipBoxPorcDisc);
 		comboBoxFldPorcDisco.setValue("Seleccione Porcentaje");
-		
+
 		GridPane grid = new GridPane();
 		grid.setLayoutY(35);
 		grid.setVgap(4);
@@ -573,7 +573,7 @@ public class VentanaPpal extends Application {
 							if (!txtFldLimSoluciones.getText().equals("") 
 									&& !comboBoxFldPorcDisco.getValue().toString().equals("Seleccione Porcentaje") 
 									) {
-							
+
 								int numSol=Integer.parseInt(txtFldLimSoluciones.getText());
 								int porc=Integer.parseInt(comboBoxFldPorcDisco.getValue().toString().split("%")[0]);
 
@@ -653,16 +653,10 @@ public class VentanaPpal extends Application {
 							//													}
 							//												});
 
-							try {
-								
-						
 							if (comboSoft.getItems().size() > 1) {
 
 								comboSoft.getItems().removeAll(comboSoft.getItems());
 
-							}
-							} catch (Exception e) {
-								// TODO: handle exception
 							}
 
 							Collections.sort(solver.getNombreSoftware());
@@ -700,13 +694,14 @@ public class VentanaPpal extends Application {
 					}else {
 						ArrayList<String> materias=new ArrayList<>();
 						ArrayList<String> salas=new ArrayList<>();
-						
+
 						ArrayList<Software> listaSoftware=new ArrayList<>();
 						listaSoftware=lector.getToolSoftware();
 						listaSoftware.addAll(SolverProject.getToolSoftwareBasico());
 						String nombre="";
 						String dpto="";
 						String sisOpe="";
+						int licencias=0;
 						int disco=0;
 						int ram=0;
 						String report="";
@@ -720,7 +715,7 @@ public class VentanaPpal extends Application {
 									sisOpe=listaSoftware.get(j).getSistemaOperativo();
 									disco=listaSoftware.get(j).getDiscoDuro();
 									ram=listaSoftware.get(j).getMemoriaRAM();
-
+									licencias=listaSoftware.get(j).getCantLicencias();
 									if (!materias.contains(listaSoftware.get(j).getNombreMateria())){
 										materias.add(listaSoftware.get(j).getNombreMateria());
 									}
@@ -734,7 +729,8 @@ public class VentanaPpal extends Application {
 						}
 
 						report+="Nombre del software: "+ nombre+"\n"+
-								"Departamento asociado: "+ dpto+"\n"+"\n"+
+								"Departamento asociado: "+ dpto+"\n"+
+								"Cantidad de Licencias: "+ licencias+"\n"+"\n"+
 								"Disco Duro: "+ disco+" GB"+"\n"+
 								"Memoria RAM: "+ ram+" GB"+"\n"+
 								"Sistema Operativo: "+ sisOpe+"\n"+"\n"+
