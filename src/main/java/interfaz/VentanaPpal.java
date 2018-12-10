@@ -1,14 +1,10 @@
 package interfaz;
 
-import java.awt.image.ImageProducer;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
-
-import javax.swing.JLabel;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -38,6 +34,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import modelo.LectorDeArchivos;
 import modelo.Reporte;
+import modelo.Software;
 import modelo.SolverProject;
 
 public class VentanaPpal extends Application {
@@ -533,6 +530,7 @@ public class VentanaPpal extends Application {
 
 						lector.leerCSVSoftware(escogido.getAbsolutePath());
 						txtAreaVista.setText(" ");
+						tiempoDeCarga.setText(" ");
 						Alert alert = new Alert(AlertType.INFORMATION, 
 								"Se ha importado correctamente el archivo");
 						alert.show();
@@ -655,10 +653,16 @@ public class VentanaPpal extends Application {
 							//													}
 							//												});
 
+							try {
+								
+						
 							if (comboSoft.getItems().size() > 1) {
 
-								comboSoft.getItems().clear();
+								comboSoft.getItems().removeAll(comboSoft.getItems());
 
+							}
+							} catch (Exception e) {
+								// TODO: handle exception
 							}
 
 							Collections.sort(solver.getNombreSoftware());
@@ -696,6 +700,10 @@ public class VentanaPpal extends Application {
 					}else {
 						ArrayList<String> materias=new ArrayList<>();
 						ArrayList<String> salas=new ArrayList<>();
+						
+						ArrayList<Software> listaSoftware=new ArrayList<>();
+						listaSoftware=lector.getToolSoftware();
+						listaSoftware.addAll(SolverProject.getToolSoftwareBasico());
 						String nombre="";
 						String dpto="";
 						String sisOpe="";
@@ -703,23 +711,23 @@ public class VentanaPpal extends Application {
 						int ram=0;
 						String report="";
 						for (int i = 0; i < lector.getSalas().size(); i++) {
-							for (int j = 0; j < lector.getToolSoftware().size(); j++) {
+							for (int j = 0; j < listaSoftware.size(); j++) {
 
-								if(item_seleccionado.equals(lector.getToolSoftware().get(j).getNombre())) {
+								if(item_seleccionado.equals(listaSoftware.get(j).getNombre())) {
 
-									nombre=lector.getToolSoftware().get(j).getNombre();
-									dpto=lector.getToolSoftware().get(j).getTipoDepartamento();
-									sisOpe=lector.getToolSoftware().get(j).getSistemaOperativo();
-									disco=lector.getToolSoftware().get(j).getDiscoDuro();
-									ram=lector.getToolSoftware().get(j).getMemoriaRAM();
+									nombre=listaSoftware.get(j).getNombre();
+									dpto=listaSoftware.get(j).getTipoDepartamento();
+									sisOpe=listaSoftware.get(j).getSistemaOperativo();
+									disco=listaSoftware.get(j).getDiscoDuro();
+									ram=listaSoftware.get(j).getMemoriaRAM();
 
-									if (!materias.contains(lector.getToolSoftware().get(j).getNombreMateria())){
-										materias.add(lector.getToolSoftware().get(j).getNombreMateria());
+									if (!materias.contains(listaSoftware.get(j).getNombreMateria())){
+										materias.add(listaSoftware.get(j).getNombreMateria());
 									}
 
-									if (!salas.contains(lector.getToolSoftware().get(j).getNombreSala()) && 
-											!lector.getToolSoftware().get(j).getNombreSala().contains("L")){
-										salas.add(lector.getToolSoftware().get(j).getNombreSala());
+									if (!salas.contains(listaSoftware.get(j).getNombreSala()) && 
+											!listaSoftware.get(j).getNombreSala().contains("L")){
+										salas.add(listaSoftware.get(j).getNombreSala());
 									}
 								}
 							}
