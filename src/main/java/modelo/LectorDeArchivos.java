@@ -7,7 +7,8 @@ import java.util.ArrayList;
 public class LectorDeArchivos {
 
 	public static final String SEPARATOR=";";
-
+	public static final int AJUSTE_DISTRIBUCION=3;
+	
 	private ArrayList<Sala> salas;
 	
 	private static ArrayList<Software> toolSoftware;
@@ -128,8 +129,8 @@ public class LectorDeArchivos {
 						double velocidadProcesador=0.0d;
 						String arquitectura=fields[15];
 						String sistemaOperativo=fields[16];
-						int memoriaRAM=Integer.parseInt(fields[17].trim().charAt(0)+"");
-						int discoDuro=Integer.parseInt(fields[18].trim().charAt(0)+"");
+						int memoriaRAM=Integer.parseInt(fields[17].trim());
+						int discoDuro=Integer.parseInt(fields[18].trim());
 						String version=fields[6];
 						int cantLicencias=0;
 						boolean ejecutable=false;
@@ -192,13 +193,13 @@ public class LectorDeArchivos {
 					String procesador=fields[4];
 					String arquitectura=fields[5];
 					String sistemaOperativo=fields[6];
-					int memoriaRAM=Integer.parseInt(fields[3].trim().split(" ")[0]);
+					int memoriaRAM=Integer.parseInt(fields[3].trim().split(" ")[0])*1024;
 					int discoDuro=0;
 
 
 					if (fields[2].trim().contains("TB")) {
 
-						discoDuro=1000;
+						discoDuro=1048576*AJUSTE_DISTRIBUCION;
 
 						Computador computadorSala= new Computador(procesador,arquitectura, sistemaOperativo, memoriaRAM, discoDuro);
 
@@ -206,7 +207,7 @@ public class LectorDeArchivos {
 
 					}else {
 
-						discoDuro=Integer.parseInt(fields[2].trim().split(" ")[0]);
+						discoDuro=Integer.parseInt(fields[2].trim().split(" ")[0])*(1024*AJUSTE_DISTRIBUCION);
 
 						Computador computadorSala= new Computador(procesador,arquitectura, sistemaOperativo, memoriaRAM, discoDuro);
 

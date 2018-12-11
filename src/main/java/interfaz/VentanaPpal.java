@@ -45,7 +45,7 @@ public class VentanaPpal extends Application {
 	private CheckBox chkRestSoftwareDepartamento;
 	private CheckBox chkRestSostwareSistemaOperativo;
 	private CheckBox chkRestSoftwareRAM;
-	private CheckBox chkRestSoftwareDemandaCapacidad;
+	//private CheckBox chkRestSoftwareDemandaCapacidad;
 	private CheckBox chkRestSoftwareDiscoDuro;
 	private CheckBox chkRestSoftwareBasico;
 	private CheckBox chkRestSoftwareNumeroLicencias;
@@ -202,13 +202,13 @@ public class VentanaPpal extends Application {
 		chkRestSoftwareRAM.setTooltip(tooltipSoftRam);
 		vBoxRestricciones.getChildren().add(chkRestSoftwareRAM);
 
-		chkRestSoftwareDemandaCapacidad =  new CheckBox("Demanda y Capacidad de las Salas");
-		Tooltip tooltipSoftDemanda= new Tooltip();
-		tooltipSoftDemanda.setText("Consiste en instalar las herramientas de software entre un porcentaje mínimo y máximo \n"
-				+ "dependiendo del número de demanda de cada software. La demanda se clasifica entre \n "
-				+ "ALTA, MEDIA Y BAJA, siendo la Alta referente a que en mayor cantidad de salas se instalará el software");
-		chkRestSoftwareDemandaCapacidad.setTooltip(tooltipSoftDemanda);
-		vBoxRestricciones.getChildren().add(chkRestSoftwareDemandaCapacidad);
+//		chkRestSoftwareDemandaCapacidad =  new CheckBox("Demanda y Capacidad de las Salas");
+//		Tooltip tooltipSoftDemanda= new Tooltip();
+//		tooltipSoftDemanda.setText("Consiste en instalar las herramientas de software entre un porcentaje mínimo y máximo \n"
+//				+ "dependiendo del número de demanda de cada software. La demanda se clasifica entre \n "
+//				+ "ALTA, MEDIA Y BAJA, siendo la Alta referente a que en mayor cantidad de salas se instalará el software");
+//		chkRestSoftwareDemandaCapacidad.setTooltip(tooltipSoftDemanda);
+//		vBoxRestricciones.getChildren().add(chkRestSoftwareDemandaCapacidad);
 
 		chkRestSoftwareBasico =  new CheckBox("Instalación de Software Básico");
 		Tooltip tooltipSoftBasico = new Tooltip();
@@ -421,7 +421,7 @@ public class VentanaPpal extends Application {
 		chkRestSoftwareDepartamento.setDisable(false);
 		chkRestSostwareSistemaOperativo.setDisable(false);
 		chkRestSoftwareRAM.setDisable(false);
-		chkRestSoftwareDemandaCapacidad.setDisable(false);
+//		chkRestSoftwareDemandaCapacidad.setDisable(false);
 		chkRestSoftwareDiscoDuro.setDisable(false);
 		chkRestSoftwareBasico.setDisable(false);
 		chkRestSoftwareNumeroLicencias.setDisable(false);
@@ -441,7 +441,7 @@ public class VentanaPpal extends Application {
 		chkRestSoftwareDepartamento.setDisable(true);
 		chkRestSostwareSistemaOperativo.setDisable(true);
 		chkRestSoftwareRAM.setDisable(true);
-		chkRestSoftwareDemandaCapacidad.setDisable(true);
+//		chkRestSoftwareDemandaCapacidad.setDisable(true);
 		chkRestSoftwareDiscoDuro.setDisable(true);
 		chkRestSoftwareBasico.setDisable(true);
 		chkRestSoftwareNumeroLicencias.setDisable(true);
@@ -473,7 +473,7 @@ public class VentanaPpal extends Application {
 				chkRestSoftwareDepartamento.setSelected(false);
 				chkRestSostwareSistemaOperativo.setSelected(false);
 				chkRestSoftwareRAM.setSelected(false);
-				chkRestSoftwareDemandaCapacidad.setSelected(false);
+//				chkRestSoftwareDemandaCapacidad.setSelected(false);
 				chkRestSoftwareDiscoDuro.setSelected(false);
 				chkRestSoftwareBasico.setSelected(false);
 				chkRestSoftwareNumeroLicencias.setSelected(false);
@@ -496,8 +496,8 @@ public class VentanaPpal extends Application {
 									"Departamento de la Sala: "+ lector.getSalas().get(i).getTipo()+"\n"+
 									"Nº de computadores de la Sala: "+ lector.getSalas().get(i).getCapacidad()+"\n"+
 									"Sistema Operativo de Computadores: "+ lector.getSalas().get(i).getComputadores().getSistemaOperativo()+"\n"+
-									"Disco Duro de Computadores: "+ lector.getSalas().get(i).getComputadores().getDiscoDuro()+" GB"+"\n"+
-									"Memoria RAM de Computadores: "+ lector.getSalas().get(i).getComputadores().getMemoriaRAM()+" GB"+"\n");
+									"Disco Duro de Computadores: "+ lector.getSalas().get(i).getComputadores().getDiscoDuro()+" MB = "+((double)lector.getSalas().get(i).getComputadores().getDiscoDuro()/1024)+" GB"+"\n"+
+									"Memoria RAM de Computadores: "+ lector.getSalas().get(i).getComputadores().getMemoriaRAM()+" MB = "+ ((double)lector.getSalas().get(i).getComputadores().getMemoriaRAM()/1024)+" GB"+"\n");
 						}
 					}
 				}
@@ -579,7 +579,7 @@ public class VentanaPpal extends Application {
 
 								solver.modeloInicial(numSol, chkRestSoftwareDepartamento.isSelected(), 
 										chkRestSoftwareRAM.isSelected(), chkRestSostwareSistemaOperativo.isSelected(),
-										chkRestSoftwareDiscoDuro.isSelected(), chkRestSoftwareDemandaCapacidad.isSelected(),
+										chkRestSoftwareDiscoDuro.isSelected(), 
 										chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), 
 										chkRestSoftwareSalaNombre.isSelected(), porc);
 							}
@@ -591,7 +591,7 @@ public class VentanaPpal extends Application {
 
 								solver.modeloInicial(numSol, chkRestSoftwareDepartamento.isSelected(), 
 										chkRestSoftwareRAM.isSelected(), chkRestSostwareSistemaOperativo.isSelected(),
-										chkRestSoftwareDiscoDuro.isSelected(), chkRestSoftwareDemandaCapacidad.isSelected(),
+										chkRestSoftwareDiscoDuro.isSelected(), 
 										chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), 
 										chkRestSoftwareSalaNombre.isSelected(), porc);
 							}
@@ -603,7 +603,7 @@ public class VentanaPpal extends Application {
 
 								solver.modeloInicial(numSol, chkRestSoftwareDepartamento.isSelected(), 
 										chkRestSoftwareRAM.isSelected(), chkRestSostwareSistemaOperativo.isSelected(),
-										chkRestSoftwareDiscoDuro.isSelected(), chkRestSoftwareDemandaCapacidad.isSelected(),
+										chkRestSoftwareDiscoDuro.isSelected(),
 										chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), 
 										chkRestSoftwareSalaNombre.isSelected(), porc);
 							}else {
@@ -611,7 +611,7 @@ public class VentanaPpal extends Application {
 								int porc=70;
 								solver.modeloInicial(numSol, chkRestSoftwareDepartamento.isSelected(), 
 										chkRestSoftwareRAM.isSelected(), chkRestSostwareSistemaOperativo.isSelected(),
-										chkRestSoftwareDiscoDuro.isSelected(), chkRestSoftwareDemandaCapacidad.isSelected(),
+										chkRestSoftwareDiscoDuro.isSelected(), 
 										chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(),
 										chkRestSoftwareSalaNombre.isSelected(), porc);
 							}
@@ -721,7 +721,9 @@ public class VentanaPpal extends Application {
 									}
 
 									if (!salas.contains(listaSoftware.get(j).getNombreSala()) && 
-											!listaSoftware.get(j).getNombreSala().contains("L")){
+											!listaSoftware.get(j).getNombreSala().contains("L") &&
+											!listaSoftware.get(j).getNombreSala().contains("B")
+											&& !listaSoftware.get(j).getNombreSala().contains("/")){
 										salas.add(listaSoftware.get(j).getNombreSala());
 									}
 								}
@@ -731,8 +733,8 @@ public class VentanaPpal extends Application {
 						report+="Nombre del software: "+ nombre+"\n"+
 								"Departamento asociado: "+ dpto+"\n"+
 								"Cantidad de Licencias: "+ licencias+"\n"+"\n"+
-								"Disco Duro: "+ disco+" GB"+"\n"+
-								"Memoria RAM: "+ ram+" GB"+"\n"+
+								"Disco Duro: "+ disco+" MB = "+((double)disco/1024)+ " GB"+"\n"+
+								"Memoria RAM: "+ ram+" MB = "+((double)ram/1024)+ " GB"+"\n"+
 								"Sistema Operativo: "+ sisOpe+"\n"+"\n"+
 								"Materia que la utiliza:"+"\n";
 
@@ -851,7 +853,7 @@ public class VentanaPpal extends Application {
 					chkRestSoftwareDepartamento.setSelected(true);
 					chkRestSostwareSistemaOperativo.setSelected(true);
 					chkRestSoftwareRAM.setSelected(true);
-					chkRestSoftwareDemandaCapacidad.setSelected(true);
+//					chkRestSoftwareDemandaCapacidad.setSelected(true);
 					chkRestSoftwareDiscoDuro.setSelected(true);
 					chkRestSoftwareBasico.setSelected(true);
 					chkRestSoftwareNumeroLicencias.setSelected(true);
@@ -862,7 +864,7 @@ public class VentanaPpal extends Application {
 					chkRestSoftwareDepartamento.setSelected(false);
 					chkRestSostwareSistemaOperativo.setSelected(false);
 					chkRestSoftwareRAM.setSelected(false);
-					chkRestSoftwareDemandaCapacidad.setSelected(false);
+//					chkRestSoftwareDemandaCapacidad.setSelected(false);
 					chkRestSoftwareDiscoDuro.setSelected(false);
 					chkRestSoftwareBasico.setSelected(false);
 					chkRestSoftwareNumeroLicencias.setSelected(false);

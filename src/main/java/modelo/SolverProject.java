@@ -61,8 +61,8 @@ public class SolverProject {
 	}
 
 	public void modeloInicial(int numSoluciones, boolean restrSoftDepartamento,
-			boolean restrSoftRAM, boolean restrSistemaOperativo, boolean restrDiscoDuro, 
-			boolean restrDemandaCapacidad, boolean restrSoftBasico, boolean restrNumLicencias,
+			boolean restrSoftRAM, boolean restrSistemaOperativo, boolean restrDiscoDuro,
+			boolean restrSoftBasico, boolean restrNumLicencias,
 			boolean restrSoftwareSalaNombre, int porcDisco) {
 
 		Model model= new Model();
@@ -85,9 +85,9 @@ public class SolverProject {
 
 			for (int j = 0; j < toolSoftware.size(); j++) {
 
-				if (toolSoftware.get(j).getNombre().equals("Office") && !salas.get(i).getTipo().equals(TIPO_DISENO)) {
+				if (toolSoftware.get(j).getNombre().equals("Office") && salas.get(i).getTipo().equals(TIPO_DISENO)) {
 
-					model.arithm(carreraMatrizResultado[i][j], "=",1).post();
+					model.arithm(carreraMatrizResultado[i][j], "=",0).post();
 				}
 
 				else if(toolSoftware.get(j).getSistemaOperativo().toUpperCase().contains("MAC") &&
@@ -97,16 +97,16 @@ public class SolverProject {
 					model.arithm(carreraMatrizResultado[i][j], "=",1).post();
 				}
 
-				else  if (!salas.get(i).getTipo().contains(toolSoftware.get(j).getTipoDepartamento()) &&
+				else  if (salas.get(i).getTipo().contains(toolSoftware.get(j).getTipoDepartamento()) &&
 						restrSoftDepartamento == true) {
 
-					model.arithm(carreraMatrizResultado[i][j], "=",0).post();
+					model.arithm(carreraMatrizResultado[i][j], "=",1).post();
 				}
 
-				else  if (toolSoftware.get(j).getMemoriaRAM() <= salas.get(i).getComputadores().getMemoriaRAM() &&
+				else  if (toolSoftware.get(j).getMemoriaRAM() >= salas.get(i).getComputadores().getMemoriaRAM() &&
 						restrSoftRAM == true) {
 
-					model.arithm(carreraMatrizResultado[i][j], "=",1).post();
+					model.arithm(carreraMatrizResultado[i][j], "=",0).post();
 				}
 
 				else if(toolSoftware.get(j).getNombreSala().equals(salas.get(i).getNombre()) &&
@@ -114,11 +114,11 @@ public class SolverProject {
 
 					model.arithm(carreraMatrizResultado[i][j], "=",1).post();
 				}
-				else if(toolSoftware.get(j).getCantLicencias() != 0 && 
-						toolSoftware.get(j).getCantLicencias()<= salas.get(i).getCapacidad() && 
+				else if(toolSoftware.get(j).getCantLicencias() == 0 && 
+						toolSoftware.get(j).getCantLicencias() >= salas.get(i).getCapacidad() && 
 						restrNumLicencias == true) {
 
-					model.arithm(carreraMatrizResultado[i][j], "=",1).post();
+					model.arithm(carreraMatrizResultado[i][j], "=",0).post();
 				}
 			}
 		}
@@ -139,7 +139,7 @@ public class SolverProject {
 		System.out.println("Porcentaje De Disco: "+ porcDisco+" %"+"\n");
 		reporteDistribucion+="Porcentaje De Disco: "+porcDisco+" %"+"\n"+"\n";
 
-		if (restrDiscoDuro != true && restrDemandaCapacidad != true) {
+		if (restrDiscoDuro != true) {
 
 			System.out.println("Soluciones encontradas: "+list.size()+"\n");
 			reporteDistribucion+="Soluciones encontradas: "+list.size()+"\n"+"\n";
@@ -160,19 +160,19 @@ public class SolverProject {
 
 		}
 		else if(restrDiscoDuro == true) {
-			restriccionesDeDisco(carreraMatrizResultado,solutionRecord, restrDiscoDuro,
-					restrDemandaCapacidad, restrSoftBasico, porcDisco, salas, toolSoftware, numSoluciones);
+			restriccionesDeDisco(carreraMatrizResultado,solutionRecord, restrDiscoDuro
+					, restrSoftBasico, porcDisco, salas, toolSoftware, numSoluciones);
 		}
-		else if(restrDemandaCapacidad == true) {
-
-			restriccionDemandaCapacidadSalas(carreraMatrizResultado, solutionRecord, restrDemandaCapacidad,
-					restrSoftBasico, salas, toolSoftware, numSoluciones);
-		}
+//		else if(restrDemandaCapacidad == true) {
+//
+//			restriccionDemandaCapacidadSalas(carreraMatrizResultado, solutionRecord, restrDemandaCapacidad,
+//					restrSoftBasico, salas, toolSoftware, numSoluciones);
+//		}
 
 	}
 
 	public void restriccionesDeDisco(IntVar[][] matrizCarreras, Solution solucionAnterior, 
-			boolean restrDisco , boolean demandaCapacidad, boolean softBasic,
+			boolean restrDisco, boolean softBasic,
 			int porcentajeDisco, ArrayList<Sala> salas, ArrayList<Software> toolSoftware,int numSoluciones) {
 
 		Model model= new Model();
@@ -205,11 +205,19 @@ public class SolverProject {
 			}
 
 			for (int j = 0; j < toolSoftware.size(); j++) {
-
+	
 				if (pesoPorSala>=(salas.get(i).getComputadores().getDiscoDuro()*porcentajeDisco)/100 &&
 						restrDisco == true) {
 
 					model.arithm(matrizResultado[i][j], "=", 0).post();
+					
+//					System.out.println(pesoPorSala + " | "+ (salas.get(i).getComputadores().getDiscoDuro()*porcentajeDisco)/100
+//							+" Ojo, en la sala " +salas.get(i).getNombre()
+//							+" la cantidad de espacio de disco de software supera la capacidad de disco del computador ");
+
+//					reporte+=pesoPorSala + " | "+ (salas.get(i).getComputadores().getDiscoDuro()*PORCENTAJE_DISPONIBLE)/100
+//							+" Ojo, en la sala " +salas.get(i).getNombre()
+//							+" la cantidad de espacio de disco de software supera la capacidad de disco del computador "+"\n";
 				} 
 
 				else if (matrizPesos[i][j].getValue() != 0 && restrDisco == true) {
@@ -235,7 +243,7 @@ public class SolverProject {
 		//		System.out.println("Porcentaje De Disco: "+ porcDisco+" %"+"\n");
 		//		reporteDistribucion+="Porcentaje De Disco: "+porcDisco+" %"+"\n"+"\n";
 
-		if (demandaCapacidad != true) {
+	
 
 			System.out.println("Soluciones encontradas: "+list.size()+"\n");
 			reporteDistribucion+="Soluciones encontradas: "+list.size()+"\n"+"\n";
@@ -254,11 +262,12 @@ public class SolverProject {
 			System.out.println("0 = No se puede instalar"+"\n"+ "1 = Si instalar"+"\n");
 			reporteDistribucion+="0 = No se puede instalar"+"\n"+ "1 = Si instalar"+"\n"+"\n";
 
-		}else {
-
-			restriccionDemandaCapacidadSalas(matrizCopia, solutionRecord, demandaCapacidad
-					, softBasic, salas, toolSoftware, numSoluciones);
-		}
+		
+//		else {
+//
+//			restriccionDemandaCapacidadSalas(matrizCopia, solutionRecord,
+//					softBasic, salas, toolSoftware, numSoluciones);
+//		}
 	}
 
 	public void restriccionDemandaCapacidadSalas(IntVar[][] matrizCarreras, Solution solucionAnterior, 
