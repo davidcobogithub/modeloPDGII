@@ -1,7 +1,9 @@
 package modelo;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class LectorDeArchivos {
@@ -23,14 +25,12 @@ public class LectorDeArchivos {
 
 	}
 
-	public void leerCSVSoftware(String path) {
+	public void leerCSVSoftware(String path) throws IOException {
 
 		toolSoftware= new ArrayList<Software>();
 		reporte="Archivo Cargado: " + path+"\n"+"\n";
 
 		BufferedReader br = null;
-
-		try {
 
 			br =new BufferedReader(new FileReader(path));
 			String line = br.readLine();
@@ -162,11 +162,7 @@ public class LectorDeArchivos {
 			}
 			
 			br.close();
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-
+	
 	}
 
 	public void leerCSVSalas() {

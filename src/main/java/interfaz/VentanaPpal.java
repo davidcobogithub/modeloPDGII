@@ -3,20 +3,29 @@ package interfaz;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
@@ -45,7 +54,6 @@ public class VentanaPpal extends Application {
 	private CheckBox chkRestSoftwareDepartamento;
 	private CheckBox chkRestSostwareSistemaOperativo;
 	private CheckBox chkRestSoftwareRAM;
-	//private CheckBox chkRestSoftwareDemandaCapacidad;
 	private CheckBox chkRestSoftwareDiscoDuro;
 	private CheckBox chkRestSoftwareBasico;
 	private CheckBox chkRestSoftwareNumeroLicencias;
@@ -54,8 +62,7 @@ public class VentanaPpal extends Application {
 	private Button btnLimpiar;
 	private Button btnImportar;
 	private Button btnExportTxt;
-	private Button btnExportPdf;
-	private Button btnExportCsv;
+	//private Button btnExportPdf;
 	private TextArea txtAreaVista;
 	private ImageView imageView;
 	private Text tiempoDeCarga;
@@ -64,10 +71,12 @@ public class VentanaPpal extends Application {
 	private TextArea  consultaSala;
 	private ComboBox<String> comboSoft;
 	private TextArea  consultaSoft;
-
+	private VBox vBoxDistribucion;
 	private static SolverProject solver;
 	private static LectorDeArchivos lector;
 	private static Reporte reportes;
+	private static int solucionSeleccionada;
+	private static String numeroSolucion;
 
 	/**
 	 * Launch the application.
@@ -77,6 +86,7 @@ public class VentanaPpal extends Application {
 		lector= new LectorDeArchivos();
 		solver = new SolverProject();
 		reportes=new Reporte();
+
 		Application.launch(args);
 
 	}
@@ -86,11 +96,12 @@ public class VentanaPpal extends Application {
 		// TODO Auto-generated method stub
 
 		stage.setTitle("Distribución de Software Icesi"); 
+		stage.setResizable(false);
 		FileInputStream inputstreamIcon = new FileInputStream("img/icono.jpeg");
 		stage.getIcons().add(new Image(inputstreamIcon)); 
 		Scene scene = new Scene(new Group(), 1200, 660);
 		scene.setFill(Color.GHOSTWHITE);
-
+		
 		File f = new File("css/styles.css");
 		scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
 
@@ -113,7 +124,6 @@ public class VentanaPpal extends Application {
 		HBox hBox = new HBox();
 
 		btnImportar  = new Button("Importar");
-		//btnImportar.getStyleClass().add("boton");
 		btnImportar.setPrefWidth(90);
 		btnImportar.setPrefHeight(23);
 		hBox.setMargin(btnImportar, new Insets(10, 0, 0, 135));
@@ -143,9 +153,9 @@ public class VentanaPpal extends Application {
 		grid.setLayoutY(35);
 		grid.setVgap(4);
 		grid.setPadding(new Insets(5, 5, 5, 5));
-		grid.add(new Label("N° Soluciones Parciales: "), 0, 0);
+		grid.add(new Label("N° de Soluciones: "), 0, 0);
 		grid.add(txtFldLimSoluciones, 1, 0);
-		grid.add(new Label("Porcentaje de Disco: "), 0, 1);
+		grid.add(new Label("% Máximo en Disco: "), 0, 1);
 		grid.add(comboBoxFldPorcDisco, 1, 1);
 
 		vBox.getChildren().add(hBox);
@@ -202,14 +212,6 @@ public class VentanaPpal extends Application {
 		chkRestSoftwareRAM.setTooltip(tooltipSoftRam);
 		vBoxRestricciones.getChildren().add(chkRestSoftwareRAM);
 
-//		chkRestSoftwareDemandaCapacidad =  new CheckBox("Demanda y Capacidad de las Salas");
-//		Tooltip tooltipSoftDemanda= new Tooltip();
-//		tooltipSoftDemanda.setText("Consiste en instalar las herramientas de software entre un porcentaje mínimo y máximo \n"
-//				+ "dependiendo del número de demanda de cada software. La demanda se clasifica entre \n "
-//				+ "ALTA, MEDIA Y BAJA, siendo la Alta referente a que en mayor cantidad de salas se instalará el software");
-//		chkRestSoftwareDemandaCapacidad.setTooltip(tooltipSoftDemanda);
-//		vBoxRestricciones.getChildren().add(chkRestSoftwareDemandaCapacidad);
-
 		chkRestSoftwareBasico =  new CheckBox("Instalación de Software Básico");
 		Tooltip tooltipSoftBasico = new Tooltip();
 		tooltipSoftBasico.setText("Se instalará en todas las salas la imagen de herramientas \n"
@@ -260,28 +262,13 @@ public class VentanaPpal extends Application {
 		HBox hBoxExportar = new HBox(25);
 
 		btnExportTxt = new Button("TXT");
-		btnExportTxt.setPrefWidth(90);
+		btnExportTxt.setPrefWidth(155);
 		Tooltip tooltipBtnExpTxt = new Tooltip();
 		tooltipBtnExpTxt.setText("Permite guardar el reporte de distribución \n"
 				+ "en un archivo con extensión .txt");
 		btnExportTxt.setTooltip(tooltipBtnExpTxt);
 		hBoxExportar.getChildren().add(btnExportTxt);
-
-		btnExportPdf = new Button("PDF");
-		btnExportPdf.setPrefWidth(90);
-		Tooltip tooltipBtnExpPdf = new Tooltip();
-		tooltipBtnExpPdf.setText("Permite guardar el reporte de distribución \n" + 
-				"en un archivo con extensión .pdf");
-		btnExportPdf.setTooltip(tooltipBtnExpPdf);
-		hBoxExportar.getChildren().add(btnExportPdf);
-
-		btnExportCsv = new Button("CSV");
-		btnExportCsv.setPrefWidth(90);
-		hBoxExportar.getChildren().add(btnExportCsv);
-
-		hBoxExportar.setMargin(btnExportTxt, new Insets(10, 0, 0, 0));
-		hBoxExportar.setMargin(btnExportPdf, new Insets(10, 0, 0, 0));
-		hBoxExportar.setMargin(btnExportCsv, new Insets(10, 0, 0, 0));
+		hBoxExportar.setMargin(btnExportTxt, new Insets(10, 0, 0, 80));
 
 		panelExportacion.setContent(hBoxExportar);
 
@@ -302,14 +289,26 @@ public class VentanaPpal extends Application {
 		tab1.setText("Distribución");
 		tab1.setClosable(false);
 
-		VBox vBoxDistribucion = new VBox();
+		GridPane gridPane = new GridPane();    
+		gridPane.setVgap(5); 
+		gridPane.setHgap(5);       
+
 		txtAreaVista = new TextArea();
-		txtAreaVista.setPrefHeight(450);
+		txtAreaVista.setPrefHeight(400);
+		txtAreaVista.setPrefWidth(550);
 		txtAreaVista.setEditable(false);
 
-		vBoxDistribucion.getChildren().add(txtAreaVista);
+		vBoxDistribucion = new VBox();
+		ScrollPane sp = new ScrollPane();
+		sp.setPrefWidth(250);
 
-		tab1.setContent(vBoxDistribucion);
+		sp.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		sp.setContent(vBoxDistribucion);
+
+		gridPane.add(sp, 0, 0); 
+		gridPane.add(txtAreaVista, 1, 0); 
+
+		tab1.setContent(gridPane);
 
 		Tab tab2 = new Tab();
 		tab2.setText("Consultas");
@@ -381,8 +380,6 @@ public class VentanaPpal extends Application {
 		FileInputStream inputstream = new FileInputStream("img/Cargando2.gif");
 		Image image = new Image(inputstream);
 		imageView = new ImageView(image); 
-		//		imageView.setFitWidth(350); 
-		//		imageView.setFitHeight(70);
 		imageView.setFitWidth(70); 
 		imageView.setFitHeight(70); 
 		imageView.setVisible(false);
@@ -421,15 +418,12 @@ public class VentanaPpal extends Application {
 		chkRestSoftwareDepartamento.setDisable(false);
 		chkRestSostwareSistemaOperativo.setDisable(false);
 		chkRestSoftwareRAM.setDisable(false);
-//		chkRestSoftwareDemandaCapacidad.setDisable(false);
 		chkRestSoftwareDiscoDuro.setDisable(false);
 		chkRestSoftwareBasico.setDisable(false);
 		chkRestSoftwareNumeroLicencias.setDisable(false);
 		chkRestSoftwareSalaNombre.setDisable(false);
 		btnGenerar.setDisable(false);
 		btnLimpiar.setDisable(false);
-		btnExportCsv.setDisable(false);
-		btnExportPdf.setDisable(false);
 		btnExportTxt.setDisable(false);
 	}
 
@@ -441,23 +435,17 @@ public class VentanaPpal extends Application {
 		chkRestSoftwareDepartamento.setDisable(true);
 		chkRestSostwareSistemaOperativo.setDisable(true);
 		chkRestSoftwareRAM.setDisable(true);
-//		chkRestSoftwareDemandaCapacidad.setDisable(true);
 		chkRestSoftwareDiscoDuro.setDisable(true);
 		chkRestSoftwareBasico.setDisable(true);
 		chkRestSoftwareNumeroLicencias.setDisable(true);
 		chkRestSoftwareSalaNombre.setDisable(true);
 		btnGenerar.setDisable(true);
 		btnLimpiar.setDisable(true);
-		btnExportCsv.setDisable(true);
-		btnExportPdf.setDisable(true);
 		btnExportTxt.setDisable(true);
 		comboSoft.setDisable(true);
 	}
 
 	public void adicionarEventos(Stage stage) {
-
-		//			solver.modeloInicial(10);
-
 
 		btnLimpiar.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -473,7 +461,6 @@ public class VentanaPpal extends Application {
 				chkRestSoftwareDepartamento.setSelected(false);
 				chkRestSostwareSistemaOperativo.setSelected(false);
 				chkRestSoftwareRAM.setSelected(false);
-//				chkRestSoftwareDemandaCapacidad.setSelected(false);
 				chkRestSoftwareDiscoDuro.setSelected(false);
 				chkRestSoftwareBasico.setSelected(false);
 				chkRestSoftwareNumeroLicencias.setSelected(false);
@@ -496,8 +483,8 @@ public class VentanaPpal extends Application {
 									"Departamento de la Sala: "+ lector.getSalas().get(i).getTipo()+"\n"+
 									"Nº de computadores de la Sala: "+ lector.getSalas().get(i).getCapacidad()+"\n"+
 									"Sistema Operativo de Computadores: "+ lector.getSalas().get(i).getComputadores().getSistemaOperativo()+"\n"+
-									"Disco Duro de Computadores: "+ lector.getSalas().get(i).getComputadores().getDiscoDuro()+" MB = "+((double)lector.getSalas().get(i).getComputadores().getDiscoDuro()/1024)+" GB"+"\n"+
-									"Memoria RAM de Computadores: "+ lector.getSalas().get(i).getComputadores().getMemoriaRAM()+" MB = "+ ((double)lector.getSalas().get(i).getComputadores().getMemoriaRAM()/1024)+" GB"+"\n");
+									"Disco Duro de Computadores: "+ (lector.getSalas().get(i).getComputadores().getDiscoDuro())/3+" MB = "+((double)lector.getSalas().get(i).getComputadores().getDiscoDuro()/1024)/3+" GB"+"\n"+
+									"Memoria RAM de Computadores: "+ (lector.getSalas().get(i).getComputadores().getMemoriaRAM())/3+" MB = "+ ((double)lector.getSalas().get(i).getComputadores().getMemoriaRAM()/1024)/3+" GB"+"\n");
 						}
 					}
 				}
@@ -537,12 +524,18 @@ public class VentanaPpal extends Application {
 						habilitarComponentes();
 						chkRestSoftwareDepartamento.setSelected(true);
 
-					} catch (Exception e1) {
+					} 
+					catch (IOException e1) {
 						// TODO Auto-generated catch block
 						Alert alert = new Alert(AlertType.ERROR, 
 								"No se ha importado correctamente el archivo");
 						alert.show();
-						e1.printStackTrace();
+
+					}catch (Exception e1) {
+						// TODO Auto-generated catch block
+						Alert alert = new Alert(AlertType.ERROR, 
+								"No se ha importado correctamente el archivo");
+						alert.show();
 					}
 
 				}
@@ -582,6 +575,8 @@ public class VentanaPpal extends Application {
 										chkRestSoftwareDiscoDuro.isSelected(), 
 										chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), 
 										chkRestSoftwareSalaNombre.isSelected(), porc);
+								visualizarResultados(porc);
+
 							}
 							else if (!txtFldLimSoluciones.getText().equals("") &&
 									comboBoxFldPorcDisco.getValue().toString().equals("Seleccione Porcentaje")) {
@@ -594,6 +589,8 @@ public class VentanaPpal extends Application {
 										chkRestSoftwareDiscoDuro.isSelected(), 
 										chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), 
 										chkRestSoftwareSalaNombre.isSelected(), porc);
+
+								visualizarResultados(porc);
 							}
 							else if (txtFldLimSoluciones.getText().equals("")  &&
 									!comboBoxFldPorcDisco.getValue().toString().equals("Seleccione Porcentaje")) {
@@ -606,6 +603,9 @@ public class VentanaPpal extends Application {
 										chkRestSoftwareDiscoDuro.isSelected(),
 										chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), 
 										chkRestSoftwareSalaNombre.isSelected(), porc);
+
+								visualizarResultados(porc);
+
 							}else {
 								int numSol=10;
 								int porc=70;
@@ -614,6 +614,8 @@ public class VentanaPpal extends Application {
 										chkRestSoftwareDiscoDuro.isSelected(), 
 										chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(),
 										chkRestSoftwareSalaNombre.isSelected(), porc);
+								visualizarResultados(porc);
+
 							}
 
 							try {
@@ -641,17 +643,7 @@ public class VentanaPpal extends Application {
 								tiempoDeCarga.setText("Tiempo de Carga: 0"+tiempoMinutos+":0"+restoSegundos);
 							}
 
-							txtAreaVista.setText(solver.getReporteDistribucion()+"\n"+tiempoDeCarga.getText());
-
 							comboSoft.setDisable(false);
-
-							//												Collections.sort(solver.getNombreSoftware(), new Comparator<Software>() {
-							//													public int compare(Software obj1, Software obj2) {
-							//													
-							//															return obj1.getNombre().compareTo(obj2.getNombre());								
-							//														
-							//													}
-							//												});
 
 							if (comboSoft.getItems().size() > 1) {
 
@@ -721,6 +713,8 @@ public class VentanaPpal extends Application {
 									}
 
 									if (!salas.contains(listaSoftware.get(j).getNombreSala()) && 
+											!listaSoftware.get(j).getNombreSala().equals("") &&
+											!listaSoftware.get(j).getNombreSala().equals(" ") &&
 											!listaSoftware.get(j).getNombreSala().contains("L") &&
 											!listaSoftware.get(j).getNombreSala().contains("B")
 											&& !listaSoftware.get(j).getNombreSala().contains("/")){
@@ -776,20 +770,22 @@ public class VentanaPpal extends Application {
 
 						ruta = escogido.getAbsolutePath();
 
-						reportes.exportarReporteTxt(ruta, txtAreaVista.getText());
+						reportes.exportarReporteTxt(ruta, solver.getReporteDistribucion());
 
 						Alert alert = new Alert(AlertType.INFORMATION, 
 								"Se ha exportado correctamente el archivo en la ruta " +ruta);
 						alert.show();
 
-					} catch (FileNotFoundException e1) {
+					} 
+					catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						Alert alert = new Alert(AlertType.ERROR, 
 								"Archivo no encontrado");
 						alert.show();
 						e1.printStackTrace();
 
-					} catch (Exception e1) {
+					} 
+					catch (Exception e1) {
 						// TODO Auto-generated catch block
 						Alert alert = new Alert(AlertType.ERROR, 
 								"No se ha exportado correctamente el archivo");
@@ -800,49 +796,7 @@ public class VentanaPpal extends Application {
 
 			}
 		});
-		//	
-		//			btnExportPdf.setOnAction(new EventHandler<ActionEvent>() {
-		//				@Override
-		//				public void handle(ActionEvent event) {
-		//	
-		//					JFileChooser directorio = new JFileChooser();
-		//					FileNameExtensionFilter filtro = new FileNameExtensionFilter(
-		//							"pdf", "pdf");
-		//					directorio.setFileFilter(filtro);
-		//	
-		//					String ruta = "";
-		//					int respuesta = directorio.showOpenDialog(frame);
-		//					if (respuesta == JFileChooser.APPROVE_OPTION) {
-		//						File escogido = directorio.getSelectedFile();
-		//						ruta = escogido.getAbsolutePath();
-		//	
-		//						//					try {
-		//						//						solver.exportarReporteTxt(ruta);
-		//						//						
-		//						//						JOptionPane.showMessageDialog(null, "Se ha exportado correctamente el archivo en la ruta "
-		//						//								+ruta,
-		//						//								"Mensaje", JOptionPane.INFORMATION_MESSAGE);
-		//						//						
-		//						//					} catch (FileNotFoundException e1) {
-		//						//						// TODO Auto-generated catch block
-		//						//						e1.printStackTrace();
-		//						//
-		//						//					} catch (Exception e1) {
-		//						//						// TODO Auto-generated catch block
-		//						//						e1.printStackTrace();
-		//						//					}
-		//					}
-		//	
-		//				}
-		//			});
-		//	
-		//			btnExportCsv.setOnAction(new EventHandler<ActionEvent>() {
-		//				@Override
-		//				public void handle(ActionEvent event) {
-		//	
-		//				}
-		//			});
-		//	
+
 		chkRestSelecTodas.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -853,7 +807,6 @@ public class VentanaPpal extends Application {
 					chkRestSoftwareDepartamento.setSelected(true);
 					chkRestSostwareSistemaOperativo.setSelected(true);
 					chkRestSoftwareRAM.setSelected(true);
-//					chkRestSoftwareDemandaCapacidad.setSelected(true);
 					chkRestSoftwareDiscoDuro.setSelected(true);
 					chkRestSoftwareBasico.setSelected(true);
 					chkRestSoftwareNumeroLicencias.setSelected(true);
@@ -864,7 +817,6 @@ public class VentanaPpal extends Application {
 					chkRestSoftwareDepartamento.setSelected(false);
 					chkRestSostwareSistemaOperativo.setSelected(false);
 					chkRestSoftwareRAM.setSelected(false);
-//					chkRestSoftwareDemandaCapacidad.setSelected(false);
 					chkRestSoftwareDiscoDuro.setSelected(false);
 					chkRestSoftwareBasico.setSelected(false);
 					chkRestSoftwareNumeroLicencias.setSelected(false);
@@ -874,5 +826,153 @@ public class VentanaPpal extends Application {
 		});
 	}
 
+	public void visualizarResultados(int porc) {
+
+		solucionSeleccionada=0;
+		numeroSolucion="";
+
+		if (chkRestSoftwareDiscoDuro.isSelected() != true) {
+
+			Platform.runLater(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+
+					vBoxDistribucion.getChildren().clear();
+					TitledPane[] panelDistribucion = new TitledPane[solver.getListSolution().size()];
+					Accordion accordion = new Accordion();  
+
+					for (int i = 0; i < solver.getListSolution().size(); i++) {
+
+						panelDistribucion[i] = new TitledPane();
+						panelDistribucion[i].setText("Solución "+(i+1));
+						panelDistribucion[i].setPrefWidth(220);
+						panelDistribucion[i].setExpanded(false);
+
+						ListView<String> listView=new ListView<>();
+						listView.setPrefHeight(180);
+
+						for (int j = 0; j < solver.getNombreSalas().size(); j++) {
+							listView.getItems().add(solver.getNombreSalas().get(j).toString());
+						}
+
+						panelDistribucion[i].setContent(listView);
+
+						listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+
+							@Override
+							public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+								// TODO Auto-generated method stub
+
+								txtAreaVista.setText("");
+
+								solver.imprimirMatrizConSolucionVista(solver.getMatrizSolucionesIniciales(), 
+										solver.getListSolution().get(solucionSeleccionada), chkRestSoftwareBasico.isSelected(), lector.getSalas(), 
+										lector.getToolSoftware(), newValue, porc);
+
+								txtAreaVista.setText(solver.getReporteDistribucionVista()+numeroSolucion+"\n"+"\n"+tiempoDeCarga.getText());
+							}
+						});
+
+					}
+
+					accordion.getPanes().addAll(panelDistribucion);    
+					vBoxDistribucion.getChildren().add(accordion);
+
+					accordion.expandedPaneProperty().addListener(new ChangeListener<TitledPane>() {
+						public void changed(ObservableValue<? extends TitledPane> ov,
+								TitledPane old_val, TitledPane new_val) {
+
+							if (new_val != null) {
+
+								for (int i = 0; i < panelDistribucion.length; i++) {
+
+									if (panelDistribucion[i].getText().equals(new_val.getText())) {
+
+										solucionSeleccionada=i;	
+										numeroSolucion=new_val.getText();
+
+
+									}
+
+								}
+							}
+						}
+					});
+
+				}
+			});
+		}
+		else {
+			//			txtAreaVista.setText(solver.getReporteDistribucion()+"\n"+tiempoDeCarga.getText());
+
+			Platform.runLater(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+
+					vBoxDistribucion.getChildren().clear();
+					TitledPane[] panelDistribucionDisco = new TitledPane[solver.getListSolutionDisco().size()];
+					Accordion accordionDisco = new Accordion();  
+
+					for (int i = 0; i < solver.getListSolutionDisco().size(); i++) {
+
+						panelDistribucionDisco[i] = new TitledPane();
+						panelDistribucionDisco[i].setText("Solución "+(i+1));
+						panelDistribucionDisco[i].setPrefWidth(220);
+						panelDistribucionDisco[i].setExpanded(false);
+
+						ListView<String> listViewSalas=new ListView<>();
+						listViewSalas.setPrefHeight(180);
+
+						for (int j = 0; j < solver.getNombreSalas().size(); j++) {
+							listViewSalas.getItems().add(solver.getNombreSalas().get(j).toString());
+						}
+
+						panelDistribucionDisco[i].setContent(listViewSalas);
+						listViewSalas.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+
+							@Override
+							public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+								// TODO Auto-generated method stub
+
+								txtAreaVista.setText("");
+								solver.imprimirMatrizConSolucionVista(solver.getMatrizSolucionesDisco(), 										solver.getListSolutionDisco().get(solucionSeleccionada), chkRestSoftwareBasico.isSelected(), lector.getSalas(), 										lector.getToolSoftware(), newValue, porc);								txtAreaVista.setText(solver.getReporteDistribucionVista()+numeroSolucion+"\n"+"\n"+tiempoDeCarga.getText());
+							}
+						});
+
+					}
+
+					accordionDisco.getPanes().addAll(panelDistribucionDisco);    
+					vBoxDistribucion.getChildren().add(accordionDisco);
+
+					accordionDisco.expandedPaneProperty().addListener(new ChangeListener<TitledPane>() {
+						public void changed(ObservableValue<? extends TitledPane> ov,
+								TitledPane old_val, TitledPane new_val) {
+
+							if (new_val != null) {
+
+								for (int i = 0; i < panelDistribucionDisco.length; i++) {
+
+									if (panelDistribucionDisco[i].getText().equals(new_val.getText())) {
+
+										solucionSeleccionada=i;	
+										numeroSolucion=new_val.getText();
+
+
+									}
+
+								}
+							}
+						}
+					});
+				}
+			});
+
+		}
+
+	}
 
 }
