@@ -21,6 +21,12 @@ public class SolverProject {
 	public final static String TIPO_IDIOMAS="IDI";
 	public final static String TIPO_FINANZAS="FIN";
 
+	//Peso En disco duro del sistema operativo windows 10 64-bits en MegaBytes 
+	public final static int SIS_OP_DISCO_WINDOWS=20480;
+	
+	//Peso En disco duro del sistema operativo MAC en MegaBytes 
+	public final static int SIS_OP_DISCO_MAC=9216;
+	
 	//lista que almacena los nombres de las herramientas de software 
 	//usada en el comboBox de consulta de software
 	private static ArrayList<String> softwareComboBox;
@@ -324,6 +330,13 @@ public class SolverProject {
 
 			reporteDistribucionExportar+=salas.get(i).getNombre()+"\n";
 
+			if (salas.get(i).getComputadores().getSistemaOperativo().toUpperCase().contains("MAC")) {
+				pesoPorSala+=SIS_OP_DISCO_MAC;
+			}else {
+				pesoPorSala+=SIS_OP_DISCO_WINDOWS;
+			}
+			
+			
 			for (int k = 0; k < toolSoftwareBasico.size(); k++) {
 
 				if (softBasico == true) {
@@ -436,6 +449,12 @@ public class SolverProject {
 
 		for (int i = 0; i < salas.size(); i++) {
 
+			if (salas.get(i).getComputadores().getSistemaOperativo().toUpperCase().contains("MAC")) {
+				pesoPorSala+=SIS_OP_DISCO_MAC;
+			}else {
+				pesoPorSala+=SIS_OP_DISCO_WINDOWS;
+			}
+			
 			if (salaEspecifica.equals(salas.get(i).getNombre())) {
 
 				reporteDistribucionVista+=salaEspecifica+"\n";
