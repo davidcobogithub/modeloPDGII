@@ -62,7 +62,6 @@ public class VentanaPpal extends Application {
 	private Button btnLimpiar;
 	private Button btnImportar;
 	private Button btnExportTxt;
-	//private Button btnExportPdf;
 	private TextArea txtAreaVista;
 	private ImageView imageView;
 	private Text tiempoDeCarga;
@@ -572,10 +571,12 @@ public class VentanaPpal extends Application {
 
 								solver.modeloInicial(numSol, chkRestSoftwareDepartamento.isSelected(), 
 										chkRestSoftwareRAM.isSelected(), chkRestSostwareSistemaOperativo.isSelected(),
-										chkRestSoftwareDiscoDuro.isSelected(), 
-										chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), 
+										chkRestSoftwareDiscoDuro.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), 
 										chkRestSoftwareSalaNombre.isSelected(), porc);
 								visualizarResultados(porc);
+								solver.imprimirMatrizConSolucionExportar(solver.getMatrizSolucionesIniciales(), 
+										solver.getListSolution().get(solucionSeleccionada), chkRestSoftwareBasico.isSelected(), lector.getSalas(), 
+										lector.getToolSoftware(), porc, "Mejor Solución Estimada");
 
 							}
 							else if (!txtFldLimSoluciones.getText().equals("") &&
@@ -586,11 +587,13 @@ public class VentanaPpal extends Application {
 
 								solver.modeloInicial(numSol, chkRestSoftwareDepartamento.isSelected(), 
 										chkRestSoftwareRAM.isSelected(), chkRestSostwareSistemaOperativo.isSelected(),
-										chkRestSoftwareDiscoDuro.isSelected(), 
-										chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), 
+										chkRestSoftwareDiscoDuro.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), 
 										chkRestSoftwareSalaNombre.isSelected(), porc);
 
 								visualizarResultados(porc);
+								solver.imprimirMatrizConSolucionExportar(solver.getMatrizSolucionesIniciales(), 
+										solver.getListSolution().get(solucionSeleccionada), chkRestSoftwareBasico.isSelected(), lector.getSalas(), 
+										lector.getToolSoftware(), porc, "Mejor Solución Estimada");
 							}
 							else if (txtFldLimSoluciones.getText().equals("")  &&
 									!comboBoxFldPorcDisco.getValue().toString().equals("Seleccione Porcentaje")) {
@@ -600,24 +603,27 @@ public class VentanaPpal extends Application {
 
 								solver.modeloInicial(numSol, chkRestSoftwareDepartamento.isSelected(), 
 										chkRestSoftwareRAM.isSelected(), chkRestSostwareSistemaOperativo.isSelected(),
-										chkRestSoftwareDiscoDuro.isSelected(),
-										chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), 
+										chkRestSoftwareDiscoDuro.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(), 
 										chkRestSoftwareSalaNombre.isSelected(), porc);
-
+						
 								visualizarResultados(porc);
-
+								solver.imprimirMatrizConSolucionExportar(solver.getMatrizSolucionesIniciales(), 
+										solver.getListSolution().get(solucionSeleccionada), chkRestSoftwareBasico.isSelected(), lector.getSalas(), 
+										lector.getToolSoftware(), porc, "Mejor Solución Estimada");
 							}else {
 								int numSol=10;
 								int porc=70;
 								solver.modeloInicial(numSol, chkRestSoftwareDepartamento.isSelected(), 
 										chkRestSoftwareRAM.isSelected(), chkRestSostwareSistemaOperativo.isSelected(),
-										chkRestSoftwareDiscoDuro.isSelected(), 
-										chkRestSoftwareBasico.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(),
+										chkRestSoftwareDiscoDuro.isSelected(), chkRestSoftwareNumeroLicencias.isSelected(),
 										chkRestSoftwareSalaNombre.isSelected(), porc);
 								visualizarResultados(porc);
+								solver.imprimirMatrizConSolucionExportar(solver.getMatrizSolucionesIniciales(), 
+										solver.getListSolution().get(solucionSeleccionada), chkRestSoftwareBasico.isSelected(), lector.getSalas(), 
+										lector.getToolSoftware(), porc, "Mejor Solución Estimada");
 
 							}
-
+								
 							try {
 								Thread.sleep(100);
 
@@ -866,11 +872,11 @@ public class VentanaPpal extends Application {
 								// TODO Auto-generated method stub
 
 								txtAreaVista.setText("");
-
-								solver.imprimirMatrizConSolucionVista(solver.getMatrizSolucionesIniciales(), 
-										solver.getListSolution().get(solucionSeleccionada), chkRestSoftwareBasico.isSelected(), lector.getSalas(), 
-										lector.getToolSoftware(), newValue, porc);
-
+																
+									solver.imprimirMatrizConSolucionVista(solver.getMatrizSolucionesIniciales(), 
+											solver.getListSolution().get(solucionSeleccionada), chkRestSoftwareBasico.isSelected(), lector.getSalas(), 
+											lector.getToolSoftware(), newValue, porc);
+																
 								txtAreaVista.setText(solver.getReporteDistribucionVista()+numeroSolucion+"\n"+"\n"+tiempoDeCarga.getText());
 							}
 						});
@@ -886,14 +892,13 @@ public class VentanaPpal extends Application {
 
 							if (new_val != null) {
 
-								for (int i = 0; i < panelDistribucion.length; i++) {
-
+								for (int i = 0; i < panelDistribucion.length; i++) {							
+									
 									if (panelDistribucion[i].getText().equals(new_val.getText())) {
 
 										solucionSeleccionada=i;	
 										numeroSolucion=new_val.getText();
-
-
+							
 									}
 
 								}
@@ -905,7 +910,6 @@ public class VentanaPpal extends Application {
 			});
 		}
 		else {
-			//			txtAreaVista.setText(solver.getReporteDistribucion()+"\n"+tiempoDeCarga.getText());
 
 			Platform.runLater(new Runnable() {
 
@@ -931,7 +935,8 @@ public class VentanaPpal extends Application {
 							listViewSalas.getItems().add(solver.getNombreSalas().get(j).toString());
 						}
 
-						panelDistribucionDisco[i].setContent(listViewSalas);
+						panelDistribucionDisco[i].setContent(listViewSalas);
+
 						listViewSalas.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 
 							@Override
@@ -939,7 +944,12 @@ public class VentanaPpal extends Application {
 								// TODO Auto-generated method stub
 
 								txtAreaVista.setText("");
-								solver.imprimirMatrizConSolucionVista(solver.getMatrizSolucionesDisco(), 										solver.getListSolutionDisco().get(solucionSeleccionada), chkRestSoftwareBasico.isSelected(), lector.getSalas(), 										lector.getToolSoftware(), newValue, porc);								txtAreaVista.setText(solver.getReporteDistribucionVista()+numeroSolucion+"\n"+"\n"+tiempoDeCarga.getText());
+
+								solver.imprimirMatrizConSolucionVista(solver.getMatrizSolucionesDisco(), 
+										solver.getListSolutionDisco().get(solucionSeleccionada), chkRestSoftwareBasico.isSelected(), lector.getSalas(), 
+										lector.getToolSoftware(), newValue, porc);
+
+								txtAreaVista.setText(solver.getReporteDistribucionVista()+numeroSolucion+"\n"+"\n"+tiempoDeCarga.getText());
 							}
 						});
 

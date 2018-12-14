@@ -3,11 +3,7 @@ package modelo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.stream.Stream;
 
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
@@ -18,9 +14,6 @@ import org.chocosolver.util.criteria.Criterion;
 
 public class SolverProject {
 
-
-	//Constantes del Proyecto 
-
 	//Tipo de salas
 	public final static String TIPO_TICS="TIC";
 	public final static String TIPO_INDUSTRIAL="IND";
@@ -28,47 +21,32 @@ public class SolverProject {
 	public final static String TIPO_IDIOMAS="IDI";
 	public final static String TIPO_FINANZAS="FIN";
 
-	//Porcentajes de clasificacion de la demanda de software
-	public final static double PORCENTAJE_MAX_DEMANDA_ALTO=1;
-	public final static double PORCENTAJE_MIN_DEMANDA_ALTO=0.71;
-	public final static double PORCENTAJE_MAX_DEMANDA_MEDIO=0.7;
-	public final static double PORCENTAJE_MIN_DEMANDA_MEDIO=0.4;
-	public final static double PORCENTAJE_MAX_DEMANDA_BAJO=0.39;
-	public final static double PORCENTAJE_MIN_DEMANDA_BAJO=0.1;
-
 	//lista que almacena los nombres de las herramientas de software 
 	//usada en el comboBox de consulta de software
 	private static ArrayList<String> softwareComboBox;
 
 	//
-	private static ArrayList<Software> toolSoftwareBasicoOrdenado;
-
-	//
 	private static ArrayList<Software> toolSoftwareBasico;
-
-	private static List<Solution> listSolutionIniciales;
 
 	private IntVar[][] matrizSolucionesIniciales; 
 
-	private LectorDeArchivos lectorArchivos;
+	private IntVar[][] matrizSolucionesDisco; 
+
+	private List<Solution> listSolutionIniciales;
+
+	private List<Solution> listSolutionDisco;
 
 	private String reporteDistribucionExportar;
 
 	private String reporteDistribucionVista;
 
-	private static List<Solution> listSolutionDisco;
-
-	private IntVar[][] matrizSolucionesDisco; 
-
-	public static final String SEPARATOR=";";
+	private LectorDeArchivos lectorArchivos;
 
 	public SolverProject() {
 
 		lectorArchivos= new LectorDeArchivos();
-		toolSoftwareBasicoOrdenado= new ArrayList<Software>();
 		toolSoftwareBasico= new ArrayList<Software>();
 		softwareComboBox=new ArrayList<String>();
-		listSolutionIniciales= new ArrayList<>();
 
 		toolSoftwareBasico= lectorArchivos.getToolSoftwareBasico();
 
@@ -76,12 +54,9 @@ public class SolverProject {
 
 	public void modeloInicial(int numSoluciones, boolean restrSoftDepartamento,
 			boolean restrSoftRAM, boolean restrSistemaOperativo, boolean restrDiscoDuro,
-			boolean restrSoftBasico, boolean restrNumLicencias,
-			boolean restrSoftwareSalaNombre, int porcDisco) {
+			boolean restrNumLicencias, boolean restrSoftwareSalaNombre, int porcDisco) {
 
 		Model model= new Model();
-
-		reporteDistribucionExportar=lectorArchivos.getReporte();
 
 		ArrayList<Sala> salas=new ArrayList<>();
 		salas=lectorArchivos.getSalas();
@@ -89,7 +64,6 @@ public class SolverProject {
 		ArrayList<Software> toolSoftware= new ArrayList<>();
 		toolSoftware=lectorArchivos.getToolSoftware();
 
-		reporteDistribucionExportar+="Nº de salas: "+ salas.size() + " | " +"Registros de Software Cargados: "+ toolSoftware.size()+"\n"+"\n";
 
 		IntVar[][] carreraMatrizResultado = model.intVarMatrix("carrera", salas.size(), toolSoftware.size(), 0, 1);
 
@@ -136,46 +110,31 @@ public class SolverProject {
 		}
 
 		Solution solutionRecord= new Solution(model);
-	
+
 		Criterion solcpt = new SolutionCounter(model, numSoluciones);
 		List<Solution> list=model.getSolver().findAllSolutions(solcpt);
-		
-		listSolutionIniciales=list;
+		listSolutionIniciales= new ArrayList<>();
+		listSolutionIniciales.addAll(list);
 		matrizSolucionesIniciales= carreraMatrizResultado;
-				
+
 		for(Solution s:list){
 
 			solutionRecord=s;
 
 		}
 
-		reporteDistribucionExportar+="Porcentaje De Disco: "+porcDisco+" %"+"\n"+"\n";
-
-		reporteDistribucionExportar+="Soluciones encontradas: "+list.size()+"\n"+"\n";
-
-		int nSol=1;
-		for(Solution s:list){
-
-			reporteDistribucionExportar+="Solución: " + nSol+"\n";
-			
-			//imprimirMatrizConSolucion(matrizSolucionesIniciales, s, restrSoftBasico, salas, toolSoftware);
-			nSol++;
-		}
-
-		reporteDistribucionExportar+="0 = No se puede instalar"+"\n"+ "1 = Si instalar"+"\n"+"\n";
-
 		if(restrDiscoDuro == true) {
 
 			restriccionesDeDisco(carreraMatrizResultado,solutionRecord, restrDiscoDuro,
-					restrSoftBasico, porcDisco, salas, toolSoftware, numSoluciones);
+					porcDisco, salas, toolSoftware, numSoluciones);
 		}
 
 
 	}
 
 	public void restriccionesDeDisco(IntVar[][] matrizCarreras, Solution solucionAnterior, 
-			boolean restrDisco, boolean softBasic,
-			int porcentajeDisco, ArrayList<Sala> salas, ArrayList<Software> toolSoftware,int numSoluciones) {
+			boolean restrDisco, int porcentajeDisco, ArrayList<Sala> salas, 
+			ArrayList<Software> toolSoftware,int numSoluciones) {
 
 		Model model= new Model();
 
@@ -221,124 +180,231 @@ public class SolverProject {
 
 				}
 			}
+
 			pesoPorSala=0;
 		}
 
 		Criterion solcpt = new SolutionCounter(model, numSoluciones);
 		List<Solution> list=model.getSolver().findAllSolutions(solcpt);
-
-		listSolutionDisco=list;
+		listSolutionDisco= new ArrayList<>();
+		listSolutionDisco.addAll(list);
 		matrizSolucionesDisco= matrizResultado;
 
-		int nSol=1;
-		for(Solution s:listSolutionDisco){
+	}
 
-			reporteDistribucionExportar+="Solución: " + nSol+"\n";
-			//imprimirMatrizConSolucion(matrizSolucionesDisco, s, softBasic, salas, toolSoftware);
+	//	public void imprimirMatrizConSolucion(IntVar[][] matriz, Solution solut, boolean softBasico, 
+	//			ArrayList<Sala> salas, ArrayList<Software> toolSoftware) {
+	//
+	//		ArrayList<String> arreglo=new ArrayList<>();
+	//
+	//		Collections.sort(toolSoftwareBasico, new Comparator<Software>() {
+	//			public int compare(Software obj1, Software obj2) {
+	//
+	//				return obj1.getNombre().compareTo(obj2.getNombre());								
+	//
+	//			}
+	//		});
+	//
+	//		Collections.sort(toolSoftware, new Comparator<Software>() {
+	//			public int compare(Software obj1, Software obj2) {
+	//
+	//				return obj1.getNombre().compareTo(obj2.getNombre());								
+	//
+	//			}
+	//		});
+	//
+	//		for (int i = 0; i < salas.size(); i++) {
+	//
+	//			reporteDistribucionExportar+=salas.get(i).getNombre()+"\n";
+	//
+	//			for (int k = 0; k < toolSoftwareBasico.size(); k++) {
+	//
+	//				if (toolSoftwareBasico.get(k).getSistemaOperativo().toUpperCase().contains("MAC")
+	//						&& salas.get(i).getComputadores().getSistemaOperativo().toUpperCase().contains("MAC")
+	//						&& softBasico == true) {
+	//
+	//					reporteDistribucionExportar+=toolSoftwareBasico.get(k).getNombre()+"\n";
+	//					arreglo.add(toolSoftwareBasico.get(k).getNombre());
+	//
+	//					if (!softwareComboBox.contains(toolSoftwareBasico.get(k).getNombre())) {
+	//						softwareComboBox.add(toolSoftwareBasico.get(k).getNombre());
+	//
+	//					}
+	//
+	//				}
+	//				else {
+	//
+	//					if (!toolSoftwareBasico.get(k).getSistemaOperativo().toUpperCase().contains("MAC")
+	//							&& !salas.get(i).getComputadores().getSistemaOperativo().toUpperCase().contains("MAC")
+	//							&& softBasico == true) {
+	//
+	//						reporteDistribucionExportar+=toolSoftwareBasico.get(k).getNombre()+"\n";
+	//						arreglo.add(toolSoftwareBasico.get(k).getNombre());
+	//
+	//						if (!softwareComboBox.contains(toolSoftwareBasico.get(k).getNombre())) {
+	//							softwareComboBox.add(toolSoftwareBasico.get(k).getNombre());
+	//
+	//						}
+	//					}
+	//
+	//				}
+	//
+	//			}
+	//
+	//			for (int j = 0; j < toolSoftware.size(); j++) {
+	//
+	//				try {
+	//
+	//					if (solut.getIntVal(matriz[i][j])==1) {
+	//
+	//						if (!arreglo.contains(toolSoftware.get(j).getNombre())) {
+	//
+	//							arreglo.add(toolSoftware.get(j).getNombre());
+	//
+	//							reporteDistribucionExportar+=toolSoftware.get(j).getNombre()+"\n";
+	//
+	//						}
+	//						if (!softwareComboBox.contains(toolSoftware.get(j).getNombre())) {
+	//							softwareComboBox.add(toolSoftware.get(j).getNombre());
+	//
+	//						}
+	//					}
+	//				} catch (Exception e) {
+	//					// TODO: handle exception
+	//				}
+	//			}
+	//
+	//			if (arreglo.size()==0) {
+	//
+	//				reporteDistribucionExportar+="El consumo de disco duro de las herramientas de software ha "
+	//						+ "superado la capacidad de disco de los computadores en esta sala"+"\n";
+	//			}
+	//
+	//			reporteDistribucionExportar+="Cantidad total de Software a instalar en la sala "
+	//					+salas.get(i).getNombre()+": "+arreglo.size()+"\n";
+	//
+	//			reporteDistribucionExportar+="\n";
+	//			arreglo.clear();
+	//
+	//		}
+	//
+	//	}
 
-			nSol++;
+	public void imprimirMatrizConSolucionExportar(IntVar[][] matriz, Solution solut, boolean softBasico, 
+			ArrayList<Sala> salas, ArrayList<Software> toolSoftware, int porcDisco, String nombreSolucion) {
+
+		ArrayList<String> arreglo=new ArrayList<>();
+
+		reporteDistribucionExportar="";
+		reporteDistribucionExportar=lectorArchivos.getReporte();
+		reporteDistribucionExportar+="Nº de salas: "+ salas.size() + " | " +"Registros de Software Cargados: "+ toolSoftware.size()+"\n"+"\n";
+		reporteDistribucionExportar+="Porcentaje De Disco: "+porcDisco+" %"+"\n"+"\n";
+
+		Collections.sort(toolSoftwareBasico, new Comparator<Software>() {
+			public int compare(Software obj1, Software obj2) {
+
+				return obj1.getNombre().compareTo(obj2.getNombre());								
+
+			}
+		});
+
+		Collections.sort(toolSoftware, new Comparator<Software>() {
+			public int compare(Software obj1, Software obj2) {
+
+				return obj1.getNombre().compareTo(obj2.getNombre());								
+
+			}
+		});
+
+		int pesoPorSala=0;
+
+		reporteDistribucionExportar+=nombreSolucion+"\n"+"\n";
+
+		for (int i = 0; i < salas.size(); i++) {
+
+			reporteDistribucionExportar+=salas.get(i).getNombre()+"\n";
+
+			for (int k = 0; k < toolSoftwareBasico.size(); k++) {
+
+				if (softBasico == true) {
+					pesoPorSala+=toolSoftwareBasico.get(k).getDiscoDuro();
+				}
+
+				if (toolSoftwareBasico.get(k).getSistemaOperativo().toUpperCase().contains("MAC")
+						&& salas.get(i).getComputadores().getSistemaOperativo().toUpperCase().contains("MAC")
+						&& softBasico == true) {
+
+					reporteDistribucionExportar+=toolSoftwareBasico.get(k).getNombre()+"\n";
+
+					if (!softwareComboBox.contains(toolSoftwareBasico.get(k).getNombre())) {
+						softwareComboBox.add(toolSoftwareBasico.get(k).getNombre());
+
+					}
+				}
+				else {
+
+					if (!toolSoftwareBasico.get(k).getSistemaOperativo().toUpperCase().contains("MAC")
+							&& !salas.get(i).getComputadores().getSistemaOperativo().toUpperCase().contains("MAC")
+							&& softBasico == true) {
+
+						reporteDistribucionExportar+=toolSoftwareBasico.get(k).getNombre()+"\n";
+
+						//							arreglo.add(toolSoftwareBasico.get(k).getNombre());
+						//
+						if (!softwareComboBox.contains(toolSoftwareBasico.get(k).getNombre())) {
+							softwareComboBox.add(toolSoftwareBasico.get(k).getNombre());
+
+						}
+					}
+
+				}
+
+			}
+
+			for (int j = 0; j < toolSoftware.size(); j++) {
+
+				try {
+
+					if (solut.getIntVal(matriz[i][j])==1) {
+
+						pesoPorSala+=toolSoftware.get(j).getDiscoDuro();
+
+						if (!arreglo.contains(toolSoftware.get(j).getNombre())) {
+
+							arreglo.add(toolSoftware.get(j).getNombre());
+
+							reporteDistribucionExportar+=toolSoftware.get(j).getNombre()+"\n"+"\n";
+
+						}
+						if (!softwareComboBox.contains(toolSoftware.get(j).getNombre())) {
+							softwareComboBox.add(toolSoftware.get(j).getNombre());
+
+						}
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+
+			if (arreglo.size()==0) {
+
+				reporteDistribucionExportar+="El consumo de disco duro de las herramientas de software ha "
+						+ "superado la capacidad de disco de los computadores en esta sala"+"\n"+"\n";
+			}
+
+			double valor=((double)pesoPorSala/(salas.get(i).getComputadores().getDiscoDuro()/1))*100;
+			reporteDistribucionExportar+="Porcentaje utilizado de disco duro: "+ valor+"\n"+"\n";
+
+			reporteDistribucionExportar+="Cantidad total de Software a instalar en la sala "
+					+salas.get(i).getNombre()+": "+arreglo.size()+"\n"+"\n"+"\n";
+
+			arreglo.clear();
+
+			pesoPorSala=0;
 		}
 		reporteDistribucionExportar+="0 = No se puede instalar"+"\n"+ "1 = Si instalar"+"\n"+"\n";
 
 	}
-
-//	public void imprimirMatrizConSolucion(IntVar[][] matriz, Solution solut, boolean softBasico, 
-//			ArrayList<Sala> salas, ArrayList<Software> toolSoftware) {
-//
-//		ArrayList<String> arreglo=new ArrayList<>();
-//
-//		Collections.sort(toolSoftwareBasico, new Comparator<Software>() {
-//			public int compare(Software obj1, Software obj2) {
-//
-//				return obj1.getNombre().compareTo(obj2.getNombre());								
-//
-//			}
-//		});
-//
-//		Collections.sort(toolSoftware, new Comparator<Software>() {
-//			public int compare(Software obj1, Software obj2) {
-//
-//				return obj1.getNombre().compareTo(obj2.getNombre());								
-//
-//			}
-//		});
-//
-//		for (int i = 0; i < salas.size(); i++) {
-//
-//			reporteDistribucionExportar+=salas.get(i).getNombre()+"\n";
-//
-//			for (int k = 0; k < toolSoftwareBasico.size(); k++) {
-//
-//				if (toolSoftwareBasico.get(k).getSistemaOperativo().toUpperCase().contains("MAC")
-//						&& salas.get(i).getComputadores().getSistemaOperativo().toUpperCase().contains("MAC")
-//						&& softBasico == true) {
-//
-//					reporteDistribucionExportar+=toolSoftwareBasico.get(k).getNombre()+"\n";
-//					arreglo.add(toolSoftwareBasico.get(k).getNombre());
-//
-//					if (!softwareComboBox.contains(toolSoftwareBasico.get(k).getNombre())) {
-//						softwareComboBox.add(toolSoftwareBasico.get(k).getNombre());
-//
-//					}
-//
-//				}
-//				else {
-//
-//					if (!toolSoftwareBasico.get(k).getSistemaOperativo().toUpperCase().contains("MAC")
-//							&& !salas.get(i).getComputadores().getSistemaOperativo().toUpperCase().contains("MAC")
-//							&& softBasico == true) {
-//
-//						reporteDistribucionExportar+=toolSoftwareBasico.get(k).getNombre()+"\n";
-//						arreglo.add(toolSoftwareBasico.get(k).getNombre());
-//
-//						if (!softwareComboBox.contains(toolSoftwareBasico.get(k).getNombre())) {
-//							softwareComboBox.add(toolSoftwareBasico.get(k).getNombre());
-//
-//						}
-//					}
-//
-//				}
-//
-//			}
-//
-//			for (int j = 0; j < toolSoftware.size(); j++) {
-//
-//				try {
-//
-//					if (solut.getIntVal(matriz[i][j])==1) {
-//
-//						if (!arreglo.contains(toolSoftware.get(j).getNombre())) {
-//
-//							arreglo.add(toolSoftware.get(j).getNombre());
-//
-//							reporteDistribucionExportar+=toolSoftware.get(j).getNombre()+"\n";
-//
-//						}
-//						if (!softwareComboBox.contains(toolSoftware.get(j).getNombre())) {
-//							softwareComboBox.add(toolSoftware.get(j).getNombre());
-//
-//						}
-//					}
-//				} catch (Exception e) {
-//					// TODO: handle exception
-//				}
-//			}
-//
-//			if (arreglo.size()==0) {
-//
-//				reporteDistribucionExportar+="El consumo de disco duro de las herramientas de software ha "
-//						+ "superado la capacidad de disco de los computadores en esta sala"+"\n";
-//			}
-//
-//			reporteDistribucionExportar+="Cantidad total de Software a instalar en la sala "
-//					+salas.get(i).getNombre()+": "+arreglo.size()+"\n";
-//
-//			reporteDistribucionExportar+="\n";
-//			arreglo.clear();
-//
-//		}
-//
-//	}
 
 	public void imprimirMatrizConSolucionVista(IntVar[][] matriz, Solution solut, boolean softBasico, 
 			ArrayList<Sala> salas, ArrayList<Software> toolSoftware, String salaEspecifica, int porcDisco) {
@@ -366,32 +432,31 @@ public class SolverProject {
 			}
 		});
 
-		//int pesoPorSala=0;
-		
+		int pesoPorSala=0;
+
 		for (int i = 0; i < salas.size(); i++) {
 
-			reporteDistribucionExportar+=salas.get(i).getNombre()+"\n";
-			
 			if (salaEspecifica.equals(salas.get(i).getNombre())) {
 
 				reporteDistribucionVista+=salaEspecifica+"\n";
-				reporteDistribucionExportar+=salaEspecifica+"\n";
-				
+
 				for (int k = 0; k < toolSoftwareBasico.size(); k++) {
-										
+
+					if (softBasico == true) {
+						pesoPorSala+=toolSoftwareBasico.get(k).getDiscoDuro();
+					}
+
 					if (toolSoftwareBasico.get(k).getSistemaOperativo().toUpperCase().contains("MAC")
 							&& salas.get(i).getComputadores().getSistemaOperativo().toUpperCase().contains("MAC")
 							&& softBasico == true) {
 
 						reporteDistribucionVista+=toolSoftwareBasico.get(k).getNombre()+"\n";
-						reporteDistribucionExportar+=toolSoftwareBasico.get(k).getNombre()+"\n";
-						
+
 						arreglo.add(toolSoftwareBasico.get(k).getNombre());
-						//pesoPorSala+=toolSoftwareBasico.get(k).getDiscoDuro();
-						
-						if (!softwareComboBox.contains(toolSoftwareBasico.get(k).getNombre())) {
-							softwareComboBox.add(toolSoftwareBasico.get(k).getNombre());
-						}
+
+						//						if (!softwareComboBox.contains(toolSoftwareBasico.get(k).getNombre())) {
+						//							softwareComboBox.add(toolSoftwareBasico.get(k).getNombre());
+						//						}
 
 					}
 					else {
@@ -401,15 +466,13 @@ public class SolverProject {
 								&& softBasico == true) {
 
 							reporteDistribucionVista+=toolSoftwareBasico.get(k).getNombre()+"\n";
-							reporteDistribucionExportar+=toolSoftwareBasico.get(k).getNombre()+"\n";
-							
-							arreglo.add(toolSoftwareBasico.get(k).getNombre());
-							//pesoPorSala+=toolSoftwareBasico.get(k).getDiscoDuro();
-							
-							if (!softwareComboBox.contains(toolSoftwareBasico.get(k).getNombre())) {
-								softwareComboBox.add(toolSoftwareBasico.get(k).getNombre());
 
-							}
+							arreglo.add(toolSoftwareBasico.get(k).getNombre());
+
+							//							if (!softwareComboBox.contains(toolSoftwareBasico.get(k).getNombre())) {
+							//								softwareComboBox.add(toolSoftwareBasico.get(k).getNombre());
+							//
+							//							}
 						}
 
 					}
@@ -422,20 +485,19 @@ public class SolverProject {
 
 						if (solut.getIntVal(matriz[i][j])==1) {
 
-							//pesoPorSala+=toolSoftwareBasico.get(j).getDiscoDuro();
-							
+							pesoPorSala+=toolSoftware.get(j).getDiscoDuro();
+
 							if (!arreglo.contains(toolSoftware.get(j).getNombre())) {
 
 								arreglo.add(toolSoftware.get(j).getNombre());
 
 								reporteDistribucionVista+=toolSoftware.get(j).getNombre()+"\n";
-								reporteDistribucionExportar+=toolSoftware.get(j).getNombre()+"\n";
-								
-							}
-							if (!softwareComboBox.contains(toolSoftware.get(j).getNombre())) {
-								softwareComboBox.add(toolSoftware.get(j).getNombre());
 
 							}
+							//							if (!softwareComboBox.contains(toolSoftware.get(j).getNombre())) {
+							//								softwareComboBox.add(toolSoftware.get(j).getNombre());
+							//
+							//							}
 						}
 					} catch (Exception e) {
 						// TODO: handle exception
@@ -445,30 +507,19 @@ public class SolverProject {
 				if (arreglo.size()==0) {
 
 					reporteDistribucionVista+="El consumo de disco duro de las herramientas de software ha "
-							+ "superado la capacidad de disco de los computadores en esta sala"+"\n";
-					
-					reporteDistribucionExportar+="El consumo de disco duro de las herramientas de software ha "
-							+ "superado la capacidad de disco de los computadores en esta sala"+"\n";
+							+ "superado la capacidad de disco de los computadores en esta sala"+"\n"+"\n";
+
 				}
 
 				reporteDistribucionVista+="Cantidad total de Software a instalar en la sala "
-						+salaEspecifica+": "+arreglo.size()+"\n";
-//						"Porcentaje utilizado de disco duro: "
-//						+(pesoPorSala/salas.get(i).getComputadores().getDiscoDuro())+"\n";
-				
-				reporteDistribucionExportar+="Cantidad total de Software a instalar en la sala "
-						+salaEspecifica+": "+arreglo.size()+"\n";
-//						"Porcentaje utilizado de disco duro: "
-//						+(pesoPorSala/salas.get(i).getComputadores().getDiscoDuro())+"\n";
+						+salaEspecifica+": "+arreglo.size()+"\n"+"\n";
 
-				reporteDistribucionExportar+="\n";
-				reporteDistribucionVista+="\n";
+				double valor=((double)pesoPorSala/(salas.get(i).getComputadores().getDiscoDuro()/1))*100;
+				reporteDistribucionVista+="Porcentaje utilizado de disco duro: "+ valor+" % \n"+"\n";
+
 				arreglo.clear();
-
 			}
-//			pesoPorSala=0;
 		}
-//		System.out.println(reporteDistribucionExportar);
 	}
 
 	public static IntVar[][] copiarMatriz(Solution solv, IntVar[][] matriz, 
@@ -535,7 +586,7 @@ public class SolverProject {
 	}
 
 	public void setListSolution(List<Solution> listSolution) {
-		SolverProject.listSolutionIniciales = listSolution;
+		this.listSolutionIniciales = listSolution;
 	}
 
 	public IntVar[][] getMatrizSolucionesIniciales() {
@@ -551,7 +602,7 @@ public class SolverProject {
 	}
 
 	public void setListSolutionDisco(List<Solution> listSolutionDisco) {
-		SolverProject.listSolutionDisco = listSolutionDisco;
+		this.listSolutionDisco = listSolutionDisco;
 	}
 
 	public IntVar[][] getMatrizSolucionesDisco() {
