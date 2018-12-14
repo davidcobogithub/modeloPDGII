@@ -379,9 +379,9 @@ public class VentanaPpal extends Application {
 		cargando=new Text("");
 		cargando.getStyleClass().add("cargando");
 
-		
-		Image cargar = new Image(classLoader.getResourceAsStream("Cargando2.gif"));
-		imageView = new ImageView(image); 
+		ClassLoader classLoader1 = getClass().getClassLoader();
+		Image cargar = new Image(classLoader1.getResourceAsStream("Cargando2.gif"));
+		imageView = new ImageView(cargar); 
 		imageView.setFitWidth(70); 
 		imageView.setFitHeight(70); 
 		imageView.setVisible(false);
