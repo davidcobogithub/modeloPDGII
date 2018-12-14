@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -96,13 +98,14 @@ public class VentanaPpal extends Application {
 
 		stage.setTitle("Distribución de Software Icesi"); 
 		stage.setResizable(false);
-		FileInputStream inputstreamIcon = new FileInputStream("img/icono.jpeg");
-		stage.getIcons().add(new Image(inputstreamIcon)); 
+		ClassLoader classLoader = getClass().getClassLoader();
+		Image image = new Image(classLoader.getResourceAsStream("icono.jpeg")); 
+		stage.getIcons().add(image);
 		Scene scene = new Scene(new Group(), 1200, 660);
 		scene.setFill(Color.GHOSTWHITE);
 		
-		File f = new File("css/styles.css");
-		scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+		
+		scene.getStylesheets().add("styles.css");
 
 		Label lblTitulo = new Label("Distribuci\u00F3n de Software Icesi");
 		lblTitulo.getStyleClass().add("titulo");
@@ -376,8 +379,8 @@ public class VentanaPpal extends Application {
 		cargando=new Text("");
 		cargando.getStyleClass().add("cargando");
 
-		FileInputStream inputstream = new FileInputStream("img/Cargando2.gif");
-		Image image = new Image(inputstream);
+		
+		Image cargar = new Image(classLoader.getResourceAsStream("Cargando2.gif"));
 		imageView = new ImageView(image); 
 		imageView.setFitWidth(70); 
 		imageView.setFitHeight(70); 
@@ -506,7 +509,7 @@ public class VentanaPpal extends Application {
 
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.setTitle("Abrir Archivo");
-				fileChooser.setInitialDirectory(new File("docs/")); 
+				fileChooser.setInitialDirectory(new File("./")); 
 				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
 				File escogido = fileChooser.showOpenDialog(stage);
 
@@ -767,7 +770,7 @@ public class VentanaPpal extends Application {
 
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.setTitle("Abrir Archivo");
-				//fileChooser.setInitialDirectory(new File("docs/")); 
+				fileChooser.setInitialDirectory(new File("./")); 
 				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("txt", "*.txt"));
 				File escogido = fileChooser.showSaveDialog(stage);
 

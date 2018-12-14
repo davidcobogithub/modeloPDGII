@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class LectorDeArchivos {
@@ -173,7 +175,9 @@ public class LectorDeArchivos {
 
 		try {
 
-			br =new BufferedReader(new FileReader("specs/dataset-pc.csv"));
+			ClassLoader classLoader = getClass().getClassLoader();
+			URL docURL = classLoader.getResource("dataset-pc.csv");
+			br =new BufferedReader(new InputStreamReader(docURL.openStream()));
 			String line = br.readLine();
 			int numLine=1;
 			while (line != null) {
@@ -233,7 +237,10 @@ public class LectorDeArchivos {
 
 		try {
 
-			br =new BufferedReader(new FileReader("specs/software-oficinas.csv"));
+			ClassLoader classLoader = getClass().getClassLoader();
+			URL docURL = classLoader.getResource("software-oficinas.csv");
+			br =new BufferedReader(new InputStreamReader(docURL.openStream()));
+			
 			String line = br.readLine();
 			int numLine=1;
 			while (line != null) {
