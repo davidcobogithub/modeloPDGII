@@ -2,12 +2,15 @@ package modelo;
 
 public class Computador {
 
+	
+	//Atributos de  la clase Computador
 	private String procesador;
 	private String arquitectura;
 	private String sistemaOperativo;
 	private int memoriaRAM;
 	private int discoDuro;
 
+	//Constructor de  la clase Computador
 	public Computador(String proces, String arqui, String sisOpe, int ram, int disc) {
 
 		procesador=proces;

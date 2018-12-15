@@ -2,13 +2,16 @@ package modelo;
 
 public class Sala {
 
-
+	//Atributos de  la clase Sala
 	private String nombre;
 	private String tipo;
 	private int capacidad;
 	
+	//Relacion entre Sala y computador:
+	//Una sala tiene computadores con las mismas caracteristicas de hardware
 	private Computador computadores;
 
+	//Constructor de  la clase Sala
 	public Sala(String nom, String tip, int capa, Computador comp) {
 
 		nombre=nom;

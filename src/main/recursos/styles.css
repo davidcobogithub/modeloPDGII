@@ -1,0 +1,16 @@
+.boton {
+
+    -fx-background-color: #FAEBD7;
+    -fx-margin-left: 100px;
+}
+
+.titulo{
+
+	-fx-font-size:30px;
+
+}
+
+.cargando{
+	
+	-fx-font-size:20px;
+}

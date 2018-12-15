@@ -2,6 +2,8 @@ package modelo;
 
 public class Software {
 
+	
+	//Atributos de  la clase Software
 	private String nombreMateria;
 	private String nombreSala;
 	private int numeroCursos;
@@ -19,7 +21,8 @@ public class Software {
 	private int cantLicencias;
 	private boolean ejecutable;
 	private int tamanoEjecutable;
-	
+
+	//Constructor de  la clase Software
 	public Software(String nomMateria, String nomSala, int numCurso, int demanCurso, int oferCurso,
 			String nombreSoft, String tipoSoft, String proces, double velProces, String arqui, String sisOpe, 
 			int ram, int disc, String vers, int cantLicen, boolean eje, int tamEjecu) {

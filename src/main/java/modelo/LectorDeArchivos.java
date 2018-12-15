@@ -10,23 +10,36 @@ import java.util.ArrayList;
 
 public class LectorDeArchivos {
 
+	//Constante que almacena el separador del archivo csv
 	public static final String SEPARATOR=";";
+	
+	//Constante que almacena el valor de ajuste dictaminado por el 
+	//departamento de Operaciones en disco duro de los computadores de las salas
 	public static final int AJUSTE_DISTRIBUCION=3;
 	
+	//Lista que almacena todas las salas de computo previamente cargadas
 	private ArrayList<Sala> salas;
 	
+	//Lista que almacena todas las herramientas de software previamente cargadas
 	private static ArrayList<Software> toolSoftware;
+	
+	//Lista que almacena todas las herramientas de software considerado basico previamente cargadas
 	private static ArrayList<Software> toolSoftwareBasico;
 
+	//Cadena que almacena la ruta del archivo cargado por el usuario
 	private static String reporte;
 
+	//Constructor de  la clase LectorDeArchivos
 	public LectorDeArchivos() {
 
+		//Apenas se inicia la aplicacion lee los archivos de salas y software basico y los carga
 		leerCSVSalas();
 		leerSoftwareBasico();
 
 	}
 
+	//Metodo que permite leer el dataset con la informacion de las herramientas de software 
+	//en la ubicacion del archivo seleccionada
 	public void leerCSVSoftware(String path) throws IOException {
 
 		toolSoftware= new ArrayList<Software>();
@@ -34,7 +47,7 @@ public class LectorDeArchivos {
 
 		BufferedReader br = null;
 
-			br =new BufferedReader(new FileReader(path));
+			br =new BufferedReader(new FileReader(path)); // lee el archivo en la ruta especificada
 			String line = br.readLine();
 			int numLine=1;
 			while (line != null) {
@@ -43,6 +56,8 @@ public class LectorDeArchivos {
 
 					String [] fields = line.split(SEPARATOR);
 
+					//verifica si el tamaño de los campos de la linea leida es 13
+					//en caso que no se cumpla podría generar error
 					if (fields.length == 13) {
 
 						String nombreMateria=fields[3];
@@ -63,11 +78,15 @@ public class LectorDeArchivos {
 						boolean ejecutable=false;
 						int tamanoEjecutable=0;
 
+						//Crea un nuevo software con los atributos especificados y lo agrega
+						// a la lista de herramientas de software
 						toolSoftware.add(new Software(nombreMateria, nombreSala, numeroCursos, demandaCurso, 
 								ofertaCurso, nombre, tipo, procesador, velocidadProcesador,arquitectura,sistemaOperativo,
 								memoriaRAM, discoDuro, version, cantLicencias,ejecutable,tamanoEjecutable));
 					}
-
+					
+					//verifica si el tamaño de los campos de la linea leida es 16
+					//en caso que no se cumpla podría generar error
 					else if (fields.length == 16) {
 
 						String nombreMateria=fields[3];
@@ -88,11 +107,15 @@ public class LectorDeArchivos {
 						boolean ejecutable=false;
 						int tamanoEjecutable=0;
 
+						//Crea un nuevo software con los atributos especificados y lo agrega
+						// a la lista de herramientas de software
 						toolSoftware.add(new Software(nombreMateria, nombreSala, numeroCursos, demandaCurso, 
 								ofertaCurso, nombre, tipo, procesador, velocidadProcesador,arquitectura,sistemaOperativo,
 								memoriaRAM, discoDuro, version, cantLicencias,ejecutable,tamanoEjecutable));
 					}
 
+					//verifica si el tamaño de los campos de la linea leida es 17
+					//en caso que no se cumpla podría generar error
 					else if (fields.length == 17) {
 
 						String nombreMateria=fields[3];
@@ -113,6 +136,8 @@ public class LectorDeArchivos {
 						boolean ejecutable=false;
 						int tamanoEjecutable=0;
 
+						//Crea un nuevo software con los atributos especificados y lo agrega
+						// a la lista de herramientas de software
 						toolSoftware.add(new Software(nombreMateria, nombreSala, numeroCursos, demandaCurso, 
 								ofertaCurso, nombre, tipo, procesador, velocidadProcesador,arquitectura,sistemaOperativo,
 								memoriaRAM, discoDuro, version, cantLicencias,ejecutable,tamanoEjecutable));
@@ -167,6 +192,7 @@ public class LectorDeArchivos {
 	
 	}
 
+	//Metodo que permite leer el dataset con la informacion de salas de computo 
 	public void leerCSVSalas() {
 
 		salas= new ArrayList<Sala>();
@@ -229,6 +255,7 @@ public class LectorDeArchivos {
 
 	}
 
+	//Metodo que permite leer el dataset con la informacion de software basico
 	public void leerSoftwareBasico() {
 
 		toolSoftwareBasico= new ArrayList<Software>();

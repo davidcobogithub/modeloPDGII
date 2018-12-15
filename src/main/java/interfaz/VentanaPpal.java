@@ -1,11 +1,8 @@
 package interfaz;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -92,6 +89,7 @@ public class VentanaPpal extends Application {
 
 	}
 
+	//Crea la ventana principal y todos sus componentes graficos de Java FX
 	@Override
 	public void start(Stage stage) throws Exception {
 		// TODO Auto-generated method stub

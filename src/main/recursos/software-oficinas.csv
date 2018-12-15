@@ -1,0 +1,36 @@
+Software2;versión;procesador;velocidad;arquitectura;SISTEMA OPERATIVO;Ram;Disco Duro
+7Zip;18.01;;1;64 bits;MAC;1024;1024
+7Zip;18.01;;1;64 bits;WINDOWS;1024;1024
+Adobe Flash Player ;28.0.0.137;Intel Core Duo;1.83;64 bits;MAC;1024;472
+Adobe Flash Player ;28.0.0.137;Intel Pentium 4;1.4;64 bits;WINDOWS;1024;472
+Adobe Reader;201.800.920.044;Intel;1.3;64 bits;MAC;1024;358
+Adobe Reader;201.800.920.044;Intel;1.3;64 bits;WINDOWS;524;328
+Adobe Shockwave Player ;12.3.1.201;Intel;1.4;64 bits;MAC;524;328
+Adobe Shockwave Player ;12.3.1.201;Intel Pentium IV;0.6;64 bits;WINDOWS;524;512
+Adobe Digital Editions;4.5.7;Intel Core Duo;1.8;64 bits;MAC;1024;77
+Adobe Digital Editions;4.5.7;Intel Core Duo;1.8;64 bits;WINDOWS;1024;77
+Microsoft Silverlight;5;Intel Core Duo;1.8;64 bits;MAC;524;870
+Microsoft Silverlight;5;Intel Core Duo;1.8;64 bits;WINDOWS;524;870
+Eset EndPoint;6;Intel;1;64 bits;MAC;307;1024
+Eset EndPoint;6;Intel;1;64 bits;WINDOWS;307;1024
+Cliente Dameware miniremote control;9;;1;64 bits;WINDOWS;1024;1024
+Img Burn ( solo para Equipos de escritorio);2.5.8;processor with SSE2;1;64 bits;WINDOWS;20;154
+Java JRE;6up33;Pentium II;0.266;64 bits;WINDOWS;131;129
+Microsoft Office Professional Edition ;2016;processor with SSE2;1;64 bits;WINDOWS;2048;3072
+Microsoft Office Project Professional ;2016;processor with SSE2;1;64 bits;WINDOWS;2048;3072
+Microsoft Office Visio Professional ;2016;processor with SSE2;1;64 bits;MAC;1024;225
+Microsoft Office Visio Professional ;2016;processor with SSE2;1;64 bits;WINDOWS;1024;272
+Mozilla;47;processor with SSE2;1;64 bits;MAC;524;205
+Mozilla;47;processor with SSE2;1;64 bits;WINDOWS;524;205
+QuickTime;7.7.3;;1;64 bits;MAC;1024;1024
+Google Chrome;Ultima versión;processor with SSE2;1;64 bits;WINDOWS;131;102
+Google Chrome;Ultima versión;processor with SSE2;1;64 bits;MAC;131;102
+Reproductor de Windows Media;11;Intel Pentium II ;0.233;64 bits;WINDOWS;66;205
+VideoLAN VLC media player;2.0.5;;1;64 bits;WINDOWS;1024;1024
+VideoLAN VLC media player;2.0.5;;1;64 bits;MAC;1024;1024
+Windows Internet Explorer;11;processor with SSE2;1;64 bits;WINDOWS;2048;20480
+Mendeley;1.17.13;;1;64 bits;MAC;1024;1024
+Mendeley;1.17.13;;1;64 bits;WINDOWS;1024;1024
+Evisions application launcher ;1.1.0.25;;1;64 bits;WINDOWS;1024;1024
+net framework;4.7.1;processor with SSE2;1;64 bits;WINDOWS;524;4608
+Notepad ++;7.5.4;Intel Pentium 4;1;64 bits;WINDOWS;524;102

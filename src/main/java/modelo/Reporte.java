@@ -10,6 +10,7 @@ public class Reporte {
 
 	}
 
+//Metodo que permite escribir en un archivo txt el reporte de soluciones encontradas	
 	public void exportarReporteTxt(String ruta, String textoReporte) throws FileNotFoundException {
 
 		File archivo= new File(ruta);
@@ -21,15 +22,4 @@ public class Reporte {
 
 	}
 
-	public void exportarReportePDF(String ruta, String textoReporte) throws FileNotFoundException {
-
-		File archivo= new File(ruta);
-
-		PrintWriter escritor= new PrintWriter(archivo);
-
-		escritor.println(textoReporte);
-
-		escritor.close();
-
-	}
 }
